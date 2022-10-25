@@ -16,7 +16,7 @@ class MainApp{
             //log in as admin
         }
         else if (identity ==2){
-            System.out.println("i am movie goer\n");
+            System.out.println("i am movie goer jingxuan\n");
         }
         else{
             return;
