@@ -27,19 +27,19 @@ public class MainApp{
                 }
                 else{
                     System.out.println("Username is invalid, please key in again");
-                    return;
+                    username1 = scan.next();
                 }
             }
 
             System.out.println("Please enter your password");
             password1 = scan.next();
-            while (admin.verifyPassword(password1) == false){
-                if (admin.verifyPassword(password1)){
+            while (admin.verifyPassword(username1, password1) == false){
+                if (admin.verifyPassword(username1, password1)){
                     System.out.println("Password is valid");
                 }
                 else{
                     System.out.println("Password is invalid, please key in again");
-                    return;
+                    password1 = scan.next();
                 }
             }
 

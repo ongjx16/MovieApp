@@ -55,13 +55,15 @@ public class adminLogin{
     
 }
 
-public boolean verifyPassword(String passwordinput){
+public boolean verifyPassword(String usernameinput, String passwordinput){
     AdminAccount[] admins = getAdmins();
     for (int m =0; m<admins.length; m++){
-        if (passwordinput.equals(admins[m].getAdminPassword())){
-            return true;
+        if (usernameinput.equals(admins[m].getAdminUsername())){
+            if(passwordinput.equals(admins[m].getAdminPassword())){
+                return true;
+            }
+            break;
         }
-
     }
     return false;
     
