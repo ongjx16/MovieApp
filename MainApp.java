@@ -4,7 +4,7 @@ class MainApp{
     public static void main (String[] args){
         int identity;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Who are you?\n");
+        System.out.println("Who are you brother?\n");
         System.out.println("1. Admin\n");
         System.out.println("2. Movie Goer\n");
         System.out.println("3. Exit\n\n");
