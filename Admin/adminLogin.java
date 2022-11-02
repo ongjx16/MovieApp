@@ -1,15 +1,9 @@
-// public class adminLogin {
-
-    // private String username;
-    // private String password;
-
 
 
 import java.io.*;  
 public class adminLogin{
     
-    
- public AdminAcount[] getAdmins (){
+ public AdminAccount[] getAdmins (){
     AdminAccount[] admins = new AdminAccount[5];
     int i =0;
     boolean cont = true;
@@ -50,7 +44,7 @@ public class adminLogin{
  
  
  public boolean verifyUsername(String usernameinput){
-    admins = getAdmin();
+    AdminAccount[] admins = getAdmins();
     for (int m =0; m<admins.length; m++){
         if (usernameinput.equals(admins[m].getAdminUsername())){
             return true;
@@ -62,7 +56,7 @@ public class adminLogin{
 }
 
 public boolean verifyPassword(String passwordinput){
-    admins = getAdmin();
+    AdminAccount[] admins = getAdmins();
     for (int m =0; m<admins.length; m++){
         if (passwordinput.equals(admins[m].getAdminPassword())){
             return true;

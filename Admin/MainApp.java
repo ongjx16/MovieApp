@@ -1,8 +1,9 @@
+
+
 import java.util.Scanner;
 
-import Admin.adminLogin;
 
-class MainApp{
+public class MainApp{
     public static void main (String[] args){
         int identity;
         String username1;
@@ -26,6 +27,7 @@ class MainApp{
                 }
                 else{
                     System.out.println("Username is invalid, please key in again");
+                    return;
                 }
             }
 
@@ -37,6 +39,7 @@ class MainApp{
                 }
                 else{
                     System.out.println("Password is invalid, please key in again");
+                    return;
                 }
             }
 
