@@ -1,4 +1,6 @@
-public class Seat {
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     private int seatId;
     private boolean seatStatus = false; // false means unoccupied, true means occupied
 
@@ -18,6 +20,7 @@ public class Seat {
     // assign if seat empty after checking w isOccupied()
     public void assign(){
         this.seatStatus = true;
+        
     }
     
     public void unassign(){
