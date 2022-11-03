@@ -6,7 +6,7 @@ public class Cineplex {
     // One cineplex is one cinema at a location eg JEM cathay is 1 cineplex
     // each cineplex has 3 halls (cinema)
 
-    private Cinemas[] cinema = new Cinemas[3];
+    private Cinema[] cinema = new Cinema[3];
     private String cineplexName;
     private int numOfHalls;
 

@@ -1,4 +1,5 @@
 
+package Admin;
 
 import java.io.*;  
 public class adminLogin{
@@ -9,7 +10,7 @@ public class adminLogin{
     boolean cont = true;
   try{  
   //Creating stream to read the object  
-  ObjectInputStream in=new ObjectInputStream(new FileInputStream("AdminAccounts.dat")); 
+  ObjectInputStream in=new ObjectInputStream(new FileInputStream("DATFiles/AdminAccounts.dat"));
   
   while (cont){
     AdminAccount admin = null;
