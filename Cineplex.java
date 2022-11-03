@@ -10,9 +10,10 @@ public class Cineplex implements Serializable {
 
     private Cinema[] cinemas = new Cinema[3];
     private Movie[] movies = new Movie[5];
+    private String[] movieNames = new String[5];
     private String cineplexName;
     private int numOfHalls;
-    public String cineplexMovies=" ";
+
 
     public Cineplex(String cineplexName) {
         this.cineplexName = cineplexName;
@@ -20,16 +21,19 @@ public class Cineplex implements Serializable {
         for(int i=0;i<movies.length;i++){
             movies[i]= new Movie("Jurassic World");
         }
+        for(int j=0;j<movies.length;j++){
+            movieNames[j]= new Movie("Jurassic World").getName();
+        }
         for(int i=0;i<cinemas.length;i++){
             cinemas[i]= new Cinema(this.cineplexName+ (i + 1));
         }
     }
 
-    public String getMovies() {
+    public String[] getMovies() {
         for(int i=0;i<movies.length;i++){
-            cineplexMovies += " "+ movies[i].getName();
+            movieNames[i]=movies[i].getName();
         }
-        return cineplexMovies;
+        return movieNames;
 
     }
 

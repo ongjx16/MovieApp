@@ -17,7 +17,7 @@ public class UserAccount implements Serializable {
 
     private String bookingHistory;
 
-    private double overallRatings;
+    private int overallRatings;
 
     public String getName() {
         return name;
@@ -55,17 +55,17 @@ public class UserAccount implements Serializable {
         return overallRatings;
     }
 
-    public void setOverallRatings(double overallRatings) {
+    public void setOverallRatings(int overallRatings) {
         this.overallRatings = overallRatings;
     }
-    UserAccount(String u, String p, ){
+    UserAccount(String u, String p){
         this.username = u;
         this.password = p;
         this.bookingHistory = "3 movies seen thus far";
         this.email = "shubhangam@gmail.com";
         this.name = "Shubhangam";
         this.phoneNumber = 87805205;
-        this.overallRatings = 4.733;
+        this.overallRatings = 4;
     }
 
     public String getUserUsername(){

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import Admin.adminLogin;
 import User.UserLogin;
-import User.moviegoer;
+import User.tickets;
 
 public class MainApp{
     public static void main (String[] args){
@@ -54,7 +54,24 @@ public class MainApp{
             int option = scan.nextInt();
 
             if (option == 1){
-                System.out.println("nothing");
+                System.out.println("These are the cineplexes");
+                ReadCineplexes readCineplexes = new ReadCineplexes();
+                for(int i=0; i<readCineplexes.getCineplexes().length;i++){
+                    System.out.println("[" + (i+1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
+                }
+                System.out.println("Choose your cineplex: ");
+                int a = scan.nextInt();
+                if (a> readCineplexes.getCineplexes().length || a < 1){
+                    System.out.println("Invalid option, please choose again");
+                    a = scan.nextInt();
+                }
+                System.out.println("Your choice is: " + readCineplexes.getCineplexes()[a-1].getCineplexName());
+                Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[a-1].getCineplexName());
+                System.out.println("Choose your movie! ");
+                for(int j=0; j<userCineplex.getMovies().length;j++){
+                    System.out.println("[" + (j+1) + "] " + userCineplex.getMovies()[j] + "\n");
+                }
+
             }
 
             if (option == 2){
