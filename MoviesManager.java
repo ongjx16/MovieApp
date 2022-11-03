@@ -18,15 +18,15 @@ public class MoviesManager {
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"), true);
-            ObjectOutputStream out2= null;
-            out2 =  new ObjectOutputStream(fout);
-            AppendingObjectOutputStream out = new AppendingObjectOutputStream(out2);
+            AppendingObjectOutputStream out = new AppendingObjectOutputStream(fout);
+//            ObjectOutputStream out = new ObjectOutputStream(fout);
+
             out.writeObject(movie1);
             number++;
             out.flush();
             //closing the stream
             //out.reset();
-            fout.close();
+//            fout.close();
             out.close();
             System.out.println("success 2");
         }catch(Exception e){System.out.println(e);}
@@ -94,7 +94,7 @@ public class MoviesManager {
 
     public static class AppendingObjectOutputStream extends ObjectOutputStream {
 
-        public AppendingObjectOutputStream(ObjectOutputStream out2) throws IOException {
+        public AppendingObjectOutputStream(FileOutputStream out2) throws IOException {
             super(out2);
         }
 
@@ -103,7 +103,7 @@ public class MoviesManager {
             // do not write a header, but reset:
             // this line added after another question
             // showed a problem with the original
-            super.writeStreamHeader();
+            reset();
         }
 
     }
