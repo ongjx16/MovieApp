@@ -1,5 +1,6 @@
 import java.io.Serializable;
 
+<<<<<<< HEAD
 public class Movie  implements Serializable {
     private static final long serialVersionUID = -3185918430309702988L;
     private String name;
@@ -11,10 +12,16 @@ public class Movie  implements Serializable {
     private String synopsis;
 
     //GET METHODS
+=======
+public class Movie implements Serializable {
+    private String name;
+
+>>>>>>> f2e38669dd69f8725192748250663cf754bef35f
     public String getName() {
         return name;
     }
 
+<<<<<<< HEAD
     public String getType() {
         return type;
     }
@@ -33,10 +40,13 @@ public class Movie  implements Serializable {
 
 
     //SET METHODS
+=======
+>>>>>>> f2e38669dd69f8725192748250663cf754bef35f
     public void setName(String name) {
         this.name = name;
     }
 
+<<<<<<< HEAD
     public void setType(String type) {
         this.type = type;
     }
@@ -85,4 +95,9 @@ public class Movie  implements Serializable {
 
 
 
+=======
+    public Movie(String n){
+        this.name = n;
+    }
+>>>>>>> f2e38669dd69f8725192748250663cf754bef35f
 }
