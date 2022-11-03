@@ -1,10 +1,9 @@
 
 // need username and passwords
 // need to figure out the function that pulls the booking history from the database
-// need to figure out the function that pulls overall ratings thus far from the database
+// need to figure out the function that pulls overall ratings thus far from the databas
 package User;
-
-public class moviegoer {
+public class moviegoer{
     private String transactionID;
     private String name;
     private int phoneNumber;
