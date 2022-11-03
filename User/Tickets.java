@@ -1,6 +1,6 @@
 package User;
 
-public class tickets {
+public class Tickets {
     private String movieChosen;
     private String cinemaChosen;
     private String dateChosen;

@@ -3,7 +3,7 @@
 // need to figure out the function that pulls the booking history from the database
 // need to figure out the function that pulls overall ratings thus far from the databas
 package User;
-public class moviegoer{
+public class Moviegoer {
     private String transactionID;
     private String name;
     private int phoneNumber;
@@ -12,7 +12,7 @@ public class moviegoer{
     private String [] bookingHistory;
     private int overallRatings;
 
-    public moviegoer(String name, int phoneNumber, String email, int myAge){
+    public Moviegoer(String name, int phoneNumber, String email, int myAge){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;

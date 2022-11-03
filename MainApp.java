@@ -57,7 +57,7 @@ public class MainApp {
                     ObjectInputStream in = new ObjectInputStream(new FileInputStream("Cineplexes.dat"));
                     try {
                         Cineplex c = (Cineplex) in.readObject();
-                        System.out.println(c.getMovies() + "\n");
+                        System.out.println(c.getMovies());
                         System.out.println(c.getCineplexName());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
@@ -65,33 +65,34 @@ public class MainApp {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }
 
-                if (option == 2) {
-                    System.out.println("Please enter your username");
-                    username1 = scan.next();
+            if (option == 2) {
+                System.out.println("Please enter your username");
+                username1 = scan.next();
 
-                    while (!user.verifyUsername(username1)) {
-                        if (user.verifyUsername(username1)) {
-                            System.out.println("Username is valid");
-                        } else {
-                            System.out.println("Username is invalid, please key in again");
-                            username1 = scan.next();
-                        }
-                    }
-
-                    System.out.println("Please enter your password");
-                    password1 = scan.next();
-                    while (!user.verifyPassword(username1, password1)) {
-                        if (user.verifyPassword(username1, password1)) {
-                            System.out.println("Password is valid");
-
-                        } else {
-                            System.out.println("Password is invalid, please key in again");
-                            password1 = scan.next();
-                        }
+                while (!user.verifyUsername(username1)) {
+                    if (user.verifyUsername(username1)) {
+                        System.out.println("Username is valid");
+                    } else {
+                        System.out.println("Username is invalid, please key in again");
+                        username1 = scan.next();
                     }
                 }
-            } else {
+
+                System.out.println("Please enter your password");
+                password1 = scan.next();
+                while (!user.verifyPassword(username1, password1)) {
+                    if (user.verifyPassword(username1, password1)) {
+                        System.out.println("Password is valid");
+
+                    } else {
+                        System.out.println("Password is invalid, please key in again");
+                        password1 = scan.next();
+                    }
+                }
+            }
+            else {
                 return;
             }
 

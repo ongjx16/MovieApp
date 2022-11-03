@@ -1,5 +1,5 @@
 package User;
-public class selector {
+public class Selector {
     private String [] ticketsGenerated;
 
     public int chosenAge(){
