@@ -1,5 +1,4 @@
 package User;
-
 public class selector {
     private String [] ticketsGenerated;
 

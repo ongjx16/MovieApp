@@ -1,4 +1,5 @@
-import java.io.*;  
+package Admin;
+import java.io.*;
 
 public class createAdmin{    
  public static void main(String args[]){   
