@@ -11,7 +11,7 @@ public class createAdmin{
   AdminAccount admin4 = new AdminAccount("shubu","password2");
   AdminAccount admin5 = new AdminAccount("htut","password3");
   //Creating stream and writing the object    
-  FileOutputStream fout=new FileOutputStream("AdminAccounts.dat");    
+  FileOutputStream fout=new FileOutputStream("DATFiles/AdminAccounts.dat");
   ObjectOutputStream out=new ObjectOutputStream(fout);    
   out.writeObject(admin);  
   out.writeObject(admin2);
