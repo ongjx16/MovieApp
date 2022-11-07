@@ -139,7 +139,10 @@ public class MainApp {
                         b = scan.nextInt();
                     }
                     System.out.println("Your choice is: " + userCineplex.getMovies()[b-1]);
-                    System.out.println("Which date would you like to go and see the movie: ");
+                    Pricing newprice = new Pricing("3D", "Digital", "Student",
+                            true, "THU", true, true);
+                    float c = newprice.obtainPricing("digital", "Typical", "Student", true, true, "THU", true);
+                    System.out.println("Your pricing is: " + c);
 
                 }
 

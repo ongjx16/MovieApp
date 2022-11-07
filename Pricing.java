@@ -1,51 +1,62 @@
-public class Pricing {
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Pricing implements Serializable {
 // yet to include holiday conditional statement
     private String movietype; //3d, not 3d, etc.
     private String movieClass; //platinum or not platinum
     private String age; // student, senior citizen, adult
     private boolean blockbuster;
     private String weekday; //weekday or weekend
+
+    public Pricing(String movietype, String movieClass, String age, boolean blockbuster, String weekday, boolean holiday, boolean before6pm) {
+        this.movietype = movietype;
+        this.movieClass = movieClass;
+        this.age = age;
+        this.blockbuster = blockbuster;
+        this.weekday = weekday;
+        this.holiday = holiday;
+        this.before6pm = before6pm;
+    }
+
     private boolean holiday; //non-public holiday or public holiday
     private boolean before6pm;
     private float finalprice = 0;
     public float obtainPricing(String movietype, String movieClass, String age, boolean blockbuster,
                                boolean holiday, String weekday, boolean before6pm) {
-            if (age == "elderly" && (weekday != "SAT" || weekday != "SUN") && movietype == "normal" && holiday == false
-                    && before6pm == true) {
+            if (Objects.equals(age, "elderly") && (weekday != "SAT" || weekday != "SUN") && Objects.equals(movietype, "normal") && !holiday
+                    && before6pm) {
                 finalprice = 4.00f;
-            } else if (age == "student" && (weekday != "SAT" || weekday != "SUN") && movietype == "normal" && holiday == false
-                    && before6pm == true) {
+            } else if (Objects.equals(age, "student") && (weekday != "SAT" || weekday != "SUN") && Objects.equals(movietype, "normal") && !holiday
+                    && before6pm) {
                 finalprice = 7.00f;
-            } else if (age == "student" && (weekday != "SAT" || weekday != "SUN") && movietype == "3D" && holiday == false
-                    && before6pm == true) {
+            } else if (Objects.equals(age, "student") && (weekday != "SAT" || weekday != "SUN") && movietype == "3D" && holiday == false
+                    && before6pm) {
                 finalprice = 9.00f;
-            } else if ((weekday == "MON" || weekday == "TUE" || weekday == "WED") && movietype == "normal") {
+            } else if ((Objects.equals(weekday, "MON") || Objects.equals(weekday, "TUE") || Objects.equals(weekday, "WED")) && Objects.equals(movietype, "normal")) {
                 finalprice = 8.50f;
-            } else if (weekday == "THU" && movietype == "digital") {
+            } else if (Objects.equals(weekday, "THU") && Objects.equals(movietype, "digital")) {
                 finalprice = 9.50f;
-            } else if (weekday == "THU" && movietype == "3D") {
+            } else if (Objects.equals(weekday, "THU") && Objects.equals(movietype, "3D")) {
                 finalprice = 11.00f;
-            } else if (weekday == "FRI" && movietype == "digital" && before6pm == true) {
+            } else if (Objects.equals(weekday, "FRI") && Objects.equals(movietype, "digital") && before6pm) {
                 finalprice = 9.50f;
-            } else if (weekday == "FRI" && movietype == "3D" && before6pm == true) {
+            } else if (Objects.equals(weekday, "FRI") && Objects.equals(movietype, "3D") && before6pm) {
                 finalprice = 11.00f;
-            } else if (weekday == "FRI" && movietype == "digital" && before6pm == false) {
+            } else if (Objects.equals(weekday, "FRI") && Objects.equals(movietype, "digital") && !before6pm) {
                 finalprice = 11.00f;
-            } else if (weekday == "FRI" && movietype == "3D" && before6pm == false) {
+            } else if (Objects.equals(weekday, "FRI") && Objects.equals(movietype, "3D") && !before6pm) {
                 finalprice = 14.00f;
-            } else if ((weekday == "SAT" || weekday == "SUN") && movietype == "digital") {
+            } else if ((Objects.equals(weekday, "SAT") || Objects.equals(weekday, "SUN")) && Objects.equals(movietype, "digital")) {
                 finalprice = 11.00f;
-            } else if ((weekday == "SAT" || weekday == "SUN") && movietype == "3D") {
+            } else if ((Objects.equals(weekday, "SAT") || Objects.equals(weekday, "SUN")) && Objects.equals(movietype, "3D")) {
                 finalprice = 15.00f;
             }
-            if (blockbuster){
-                return finalprice;
-            }
-            else if (!blockbuster){
-                finalprice = finalprice + 1;
-                return finalprice;
-            }
-        return 0;
+        if (!blockbuster) {
+            finalprice = finalprice + 1;
+        }
+        return finalprice;
     }
 
     public String getMovieType() {
@@ -80,11 +91,11 @@ public class Pricing {
         this.blockbuster = blockbuster;
     }
 
-    public boolean isWeekday() {
+    public String isWeekday() {
         return weekday;
     }
 
-    public void setWeekday(boolean weekday) {
+    public void setWeekday(String weekday) {
         this.weekday = weekday;
     }
 
@@ -102,5 +113,13 @@ public class Pricing {
 
     public void setFinalprice(float finalprice) {
         this.finalprice = finalprice;
+    }
+
+    public boolean isBefore6pm() {
+        return before6pm;
+    }
+
+    public void setBefore6pm(boolean before6pm) {
+        this.before6pm = before6pm;
     }
 }
