@@ -10,26 +10,36 @@ public class Cineplex implements Serializable {
 
     private Cinema[] cinemas = new Cinema[3];
     private Movie[] movies = new Movie[5];
+    private String[] movieNames = new String[5];
     private String cineplexName;
     private int numOfHalls;
-    public String cineplexMovies=" ";
+
 
     public Cineplex(String cineplexName) {
         this.cineplexName = cineplexName;
         numOfHalls=3;
-        for(int i=0;i<movies.length;i++){
-            movies[i]= new Movie("Jurassic World");
-        }
+        movies[0]= new Movie("Jurassic World");
+        movies[1]= new Movie("Black Panther");
+        movies[2]= new Movie("The Intern");
+        movies[3]= new Movie("Avengers: End Game");
+        movies[4]= new Movie("Sully");
+
+        movieNames[0]= new Movie("Jurassic World").getName();
+        movieNames[1]= new Movie("Black Panther").getName();
+        movieNames[2]= new Movie("The Intern").getName();
+        movieNames[3]= new Movie("Avengers: End Game").getName();
+        movieNames[4]= new Movie("Sully").getName();
+
         for(int i=0;i<cinemas.length;i++){
             cinemas[i]= new Cinema(this.cineplexName+ (i + 1));
         }
     }
 
-    public String getMovies() {
+    public String[] getMovies() {
         for(int i=0;i<movies.length;i++){
-            cineplexMovies += " "+ movies[i].getName();
+            movieNames[i]=movies[i].getName();
         }
-        return cineplexMovies;
+        return movieNames;
 
     }
 

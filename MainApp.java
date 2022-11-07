@@ -106,59 +106,74 @@ public class MainApp {
                 for (int i = 0; i < k; i++) {
                     System.out.println(MoviesArray[i].getType());
                 }
-            } else if (identity == 2) {
+            } 
+        }
+            else if (identity == 2) {
                 System.out.println("You are now a user\n");
                 System.out.println("What would you like to do now \n");
                 System.out.println("(1) Book a movie\n");
                 System.out.println("(2) See History");
                 int option = scan.nextInt();
 
-                if (option == 1) {
-                    System.out.println("Here are the movies:");
-                    try {
-                        ObjectInputStream in = new ObjectInputStream(new FileInputStream("Cineplexes.dat"));
-                        try {
-                            Cineplex c = (Cineplex) in.readObject();
-                            System.out.println(c.getMovies() + "\n");
-                            System.out.println(c.getCineplexName());
-                        } catch (ClassNotFoundException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                if (option == 1){
+                    System.out.println("These are the cineplexes");
+                    ReadCineplexes readCineplexes = new ReadCineplexes();
+                    for(int i=0; i<readCineplexes.getCineplexes().length;i++){
+                        System.out.println("[" + (i+1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
                     }
-
-                    if (option == 2) {
-                        System.out.println("Please enter your username");
-                        username1 = scan.next();
-
-                        while (!user.verifyUsername(username1)) {
-                            if (user.verifyUsername(username1)) {
-                                System.out.println("Username is valid");
-                            } else {
-                                System.out.println("Username is invalid, please key in again");
-                                username1 = scan.next();
-                            }
-                        }
-
-                        System.out.println("Please enter your password");
-                        password1 = scan.next();
-                        while (!user.verifyPassword(username1, password1)) {
-                            if (user.verifyPassword(username1, password1)) {
-                                System.out.println("Password is valid");
-
-                            } else {
-                                System.out.println("Password is invalid, please key in again");
-                                password1 = scan.next();
-                            }
-                        }
+                    System.out.println("Choose your cineplex: ");
+                    int a = scan.nextInt();
+                    if (a> readCineplexes.getCineplexes().length || a < 1){
+                        System.out.println("Invalid option, please choose again");
+                        a = scan.nextInt();
                     }
-                } else {
-                    return;
+                    System.out.println("Your choice is: " + readCineplexes.getCineplexes()[a-1].getCineplexName());
+                    Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[a-1].getCineplexName());
+                    System.out.println("Choose your movie! ");
+                    for(int j=0; j<userCineplex.getMovies().length;j++){
+                        System.out.println("[" + (j+1) + "] " + userCineplex.getMovies()[j] + "\n");
+                    }
+                    int b = scan.nextInt();
+                    if (b > userCineplex.getMovies().length || b < 1){
+                        System.out.println("Invalid choice, please choose again");
+                        b = scan.nextInt();
+                    }
+                    System.out.println("Your choice is: " + userCineplex.getMovies()[b-1]);
+                    Pricing newprice = new Pricing("3D", "Digital", "Student",
+                            true, "THU", true, true);
+                    float c = newprice.obtainPricing("digital", "Typical", "Student", true, true, "THU", true);
+                    System.out.println("Your pricing is: " + c);
+
                 }
 
+                if (option == 2) {
+                    System.out.println("Please enter your username");
+                    username1 = scan.next();
 
+                    while (!user.verifyUsername(username1)) {
+                        if (user.verifyUsername(username1)) {
+                            System.out.println("Username is valid");
+                        } else {
+                            System.out.println("Username is invalid, please key in again");
+                            username1 = scan.next();
+                        }
+                    }
+
+                    System.out.println("Please enter your password");
+                    password1 = scan.next();
+                    while (!user.verifyPassword(username1, password1)) {
+                        if (user.verifyPassword(username1, password1)) {
+                            System.out.println("Password is valid");
+
+                        } else {
+                            System.out.println("Password is invalid, please key in again");
+                            password1 = scan.next();
+                        }
+                    }
+                }
+            } 
+            else {
+                return;
             }
-        }
     }
 }
