@@ -1,12 +1,15 @@
 import java.util.Scanner;
 import Admin.adminLogin;
 import User.UserLogin;
+import User.tickets;
+import Admin.AdminAccount;
 
 import java.io.*;
 
 public class MainApp {
     public static void main(String[] args) {
         int identity;
+        int choice;
         String username1;
         String password1;
         adminLogin admin = new adminLogin();
@@ -42,87 +45,78 @@ public class MainApp {
                     password1 = scan.next();
                 }
             }
+            //log in as admin
+        }
+        System.out.println("1. Create Movie\n");
+        System.out.println("2. Edit Movie\n");
+        System.out.println("3. Delete Movie\n");
+        System.out.println("4. See List of Current Movies\n\n");
+        System.out.println("Enter a number of your choice: ");
+        choice = scan.nextInt();
 
-            System.out.println("1. Create Movie\n");
-            System.out.println("2. Edit Movie\n");
-            System.out.println("3. Delete Movie\n");
-            System.out.println("4. See List of Current Movies\n\n");
-            System.out.println("Enter a number of your choice: ");
-            choice = scan.nextInt();
-
-            if (choice ==1){
-             String name;
-                String type;
-               String rating;
-                int showLength;
-              String showingStatus;
-               String director;
+        if (choice == 1) {
+            String name;
+            String type;
+            String rating;
+            int showLength;
+            String showingStatus;
+            String director;
             String synopsis;
 
-                scan.nextLine();
-                System.out.println("1. Enter Movie Name");
+            scan.nextLine();
+            System.out.println("1. Enter Movie Name");
 
-                name = scan.nextLine();
+            name = scan.nextLine();
 
-                System.out.println("2. Enter Movie Type");
+            System.out.println("2. Enter Movie Type");
 
-                type = scan.nextLine();
+            type = scan.nextLine();
 
-                System.out.println("3. Enter Movie Rating");
+            System.out.println("3. Enter Movie Rating");
 
-                rating = scan.nextLine();
+            rating = scan.nextLine();
 
-                System.out.println("4. Enter Movie Length");
+            System.out.println("4. Enter Movie Length");
 
-                showLength = scan.nextInt();
-                scan.nextLine();
-                System.out.println("5. Enter Movie Showing Status");
+            showLength = scan.nextInt();
+            scan.nextLine();
+            System.out.println("5. Enter Movie Showing Status");
 
-                showingStatus = scan.nextLine();
+            showingStatus = scan.nextLine();
 
-                System.out.println("6. Enter Movie Director");
+            System.out.println("6. Enter Movie Director");
 
-                director = scan.nextLine();
+            director = scan.nextLine();
 
-                System.out.println("7. Enter Movie Synopsis");
+            System.out.println("7. Enter Movie Synopsis");
 
-                synopsis = scan.nextLine();
+            synopsis = scan.nextLine();
 
-                MoviesManager.create(name, type, rating, showLength, showingStatus, director, synopsis);
-                System.out.println("Movie has been created!");
-                return;
+            MoviesManager.create(name, type, rating, showLength, showingStatus, director, synopsis);
+            System.out.println("Movie has been created!");
+            return;
+        } else if (choice == 2) {
+
+
+        } else if (choice == 3) {
+
+
+        } else if (choice == 4) {
+            int k = MoviesManager.getNumber();
+            Movie[] MoviesArray;
+            MoviesArray = MoviesManager.readAllMovies();
+            for (int i = 0; i < k; i++) {
+                System.out.println(MoviesArray[i].getType());
             }
-
-            else if (choice ==2){
-
-
-
-
-            }
-
-            else if (choice ==3){
-
-
-            }
-
-            else if (choice ==4){
-                int k = MoviesManager.getNumber();
-                Movie[] MoviesArray;
-                MoviesArray = MoviesManager.readAllMovies();
-                for (int i =0; i< k; i++){
-                    System.out.println(MoviesArray[i].getType());
-                }
-            }
-
-            //log in as admin
-        } else if (identity == 2) {
+        }
+        else if (identity == 2) {
             System.out.println("You are now a user\n");
             System.out.println("What would you like to do now \n");
             System.out.println("(1) Book a movie\n");
             System.out.println("(2) See History");
-            int option = scan.nextInt();
+            int option1 = scan.nextInt();
 
-            if (option == 1) {
+            if (option1 == 1) {
                 System.out.println("Here are the movies:");
                 try {
                     ObjectInputStream in = new ObjectInputStream(new FileInputStream("Cineplexes.dat"));
@@ -137,7 +131,7 @@ public class MainApp {
                     throw new RuntimeException(e);
                 }
 
-                if (option == 2) {
+                if (option1 == 2) {
                     System.out.println("Please enter your username");
                     username1 = scan.next();
 
@@ -170,3 +164,4 @@ public class MainApp {
         }
     }
 }
+
