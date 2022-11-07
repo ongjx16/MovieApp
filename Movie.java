@@ -82,13 +82,9 @@ public class Movie  implements Serializable {
         this.director = director;
         this.synopsis = synopsis;
     }
-
-
-
-
-
     public Movie(String n){
         this.name = n;
     }
+
 
 }

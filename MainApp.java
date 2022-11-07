@@ -133,6 +133,13 @@ public class MainApp {
                     for(int j=0; j<userCineplex.getMovies().length;j++){
                         System.out.println("[" + (j+1) + "] " + userCineplex.getMovies()[j] + "\n");
                     }
+                    int b = scan.nextInt();
+                    if (b > userCineplex.getMovies().length || b < 1){
+                        System.out.println("Invalid choice, please choose again");
+                        b = scan.nextInt();
+                    }
+                    System.out.println("Your choice is: " + userCineplex.getMovies()[b-1]);
+                    System.out.println("Which date would you like to go and see the movie: ");
 
                 }
 
