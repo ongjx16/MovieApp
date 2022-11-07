@@ -1,5 +1,5 @@
 public class Pricing {
-
+// yet to include holiday situation
     private String movietype; //3d, not 3d, etc.
     private String movieClass; //platinum or not platinum
     private String age; // student, senior citizen, adult
