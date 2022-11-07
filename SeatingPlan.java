@@ -24,12 +24,26 @@ public class SeatingPlan implements Serializable{
 
     public void displaySeatPlan(){
         System.out.println("Seating layout:\n");
+
+        for (int i = 0; i < col; i++) {
+            if (i == 0) {
+                System.out.print("-  " + (i+1) + "  ");
+            }
+            else{
+                System.out.print(i+1 + "  ");
+            }
+        }
+        System.out.print("\n");
+
         for(int i=0; i<row; i++){
             for(int j=0; j<col;j++){
+                if (j == 0){
+                    System.out.print((i+1) + " ");
+                }
                 if (seatPlan[i][j].isOccupied() == true){
-                    System.out.print("X"); //X = occupied
+                    System.out.print(" X "); //X = occupied
                 }else{
-                    System.out.print("O"); //O = vacant
+                    System.out.print(" O "); //O = vacant
                 }
             }
             System.out.print("\n");
