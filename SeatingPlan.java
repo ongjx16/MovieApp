@@ -28,6 +28,8 @@ public class SeatingPlan implements Serializable{
         for (int i = 0; i < col; i++) {
             if (i == 0) {
                 System.out.print("-  " + (i+1) + "  ");
+            } else if (i == (col/2)) {
+                System.out.print("  " + (i+1) + "  ");
             }
             else{
                 System.out.print(i+1 + "  ");
@@ -40,9 +42,13 @@ public class SeatingPlan implements Serializable{
                 if (j == 0){
                     System.out.print((i+1) + " ");
                 }
+                if (j == col/2){
+                    System.out.print("  ");
+                }
                 if (seatPlan[i][j].isOccupied() == true){
                     System.out.print(" X "); //X = occupied
-                }else{
+                }
+                if (seatPlan[i][j].isOccupied() == false){
                     System.out.print(" O "); //O = vacant
                 }
             }
