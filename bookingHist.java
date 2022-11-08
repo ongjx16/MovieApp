@@ -4,4 +4,3 @@ public class bookingHist {
     private long contactno; 
     
 }
-
