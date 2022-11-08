@@ -40,7 +40,7 @@ public class Cineplex implements Serializable {
         movieNames[4]= new Movie("Sully").getName();
 
         for(int i=0;i<cinemas.length;i++){
-            cinemas[i]= new Cinema(this.cineplexName+ (i + 1));
+            cinemas[i]= new Cinema(this.cineplexName+ (i + 1), new SeatingPlan(9, 9), CinemaType.STANDARD);
         }
     }
 
