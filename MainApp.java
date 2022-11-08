@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import Admin.adminLogin;
+import Admin.createAdmin;
 import User.UserLogin;
 import Admin.AdminAccount;
 
@@ -22,6 +23,7 @@ public class MainApp {
         identity = scan.nextInt();
 
         if (identity == 1) {
+            createAdmin.main();
             System.out.println("Please enter your username");
             username1 = scan.next();
 
@@ -44,6 +46,9 @@ public class MainApp {
                     password1 = scan.next();
                 }
             }
+
+            MoviesManager.initialiseMovies();
+
 
             System.out.println("1. Create Movie\n");
             System.out.println("2. Edit Movie\n");
@@ -90,7 +95,7 @@ public class MainApp {
 
                 synopsis = scan.nextLine();
 
-                MoviesManager.create(name, type, rating, showLength, showingStatus, director, synopsis);
+                MoviesManager.createMovie(name, type, rating, showLength, showingStatus, director, synopsis);
                 System.out.println("Movie has been created!");
                 return;
             } else if (choice == 2) {
@@ -100,11 +105,12 @@ public class MainApp {
 
 
             } else if (choice == 4) {
-                int k = MoviesManager.getNumber();
                 Movie[] MoviesArray;
                 MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < k; i++) {
-                    System.out.println(MoviesArray[i].getType());
+                System.out.println("array length");
+                System.out.println(MoviesArray.length);
+                for (int i = 0; i < MoviesArray.length; i++) {
+                    System.out.println(MoviesArray[i].getName());
                 }
             } 
         }

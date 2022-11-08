@@ -2,7 +2,7 @@ package Admin;
 import java.io.*;
 
 public class createAdmin{    
- public static void main(String args[]){   
+ public static void main(){
   try{    
   //Creating the object    
   AdminAccount admin =new AdminAccount("jx", "test");  
