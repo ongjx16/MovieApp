@@ -143,7 +143,20 @@ public class MainApp {
                             true, "THU", true, true);
                     float c = newprice.obtainPricing("digital", "Typical", "Student", true, true, "THU", true);
                     System.out.println("Your pricing is: " + c);
-
+                    System.out.println("How many seat do you want");
+                    int f = scan.nextInt();
+                    SeatingPlan layout = new SeatingPlan(5,5);
+                    for (int i = 0; i < f; i++) {
+                        layout.displaySeatPlan();
+                        System.out.println("input your desired row and column");
+                        System.out.println("row: ");
+                        int d = scan.nextInt();
+                        System.out.println("column ");
+                        int e = scan.nextInt();
+                        layout.assignSeat((d - 1), (e - 1));
+                        System.out.println("This is your chosen seat");
+                        layout.displaySeatPlan();
+                    }
                 }
 
                 if (option == 2) {
