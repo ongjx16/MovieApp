@@ -21,7 +21,7 @@ public class MoviesManager {
 //            Movie movie1 = new Movie(name, type, rating, showLength, showingStatus, director, synopsis);
 
             //Creating stream and writing the object
-            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"), true);
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
             ObjectOutputStream out = new ObjectOutputStream(fout);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
 
@@ -36,20 +36,20 @@ public class MoviesManager {
         }catch(Exception e){System.out.println(e);}
     }
 
-    public static void initialiseMovies(){
-        try{
-
-            //Creating the object
-
-            //Creating stream and writing the object
-            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"), true);
-            ObjectOutputStream out = new ObjectOutputStream(fout);
-            out.flush();
-            out.close();
-
-            System.out.println("intialise movies success");
-        }catch(Exception e){System.out.println(e);}
-    }
+//    public static void initialiseMovies(){
+//        try{
+//
+//            //Creating the object
+//
+//            //Creating stream and writing the object
+//            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+//            ObjectOutputStream out = new ObjectOutputStream(fout);
+//            out.flush();
+//            out.close();
+//
+//            System.out.println("intialise movies success");
+//        }catch(Exception e){System.out.println(e);}
+//    }
 
     public static ArrayList<Movie> readAllMovies (){
 //        Movie[] movieOutput = new Movie[2];
@@ -58,8 +58,7 @@ public class MoviesManager {
         boolean cont = true;
         try{
             //Creating stream to read the object
-            FileInputStream fis = new FileInputStream("DATFiles/AllMovies.dat");
-            ObjectInputStream in=new ObjectInputStream(fis);
+            ObjectInputStream in=new ObjectInputStream(new FileInputStream("DATFiles/AllMovies.dat"));
             movieOutput = (ArrayList<Movie>) in.readObject();
             System.out.println(movieOutput);
 //            while (cont){

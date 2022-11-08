@@ -48,7 +48,6 @@ public class MainApp {
                 }
             }
 
-            MoviesManager.initialiseMovies();
 
 
             System.out.println("1. Create Movie\n");
