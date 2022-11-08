@@ -5,9 +5,18 @@ public class tickets {
     private String cinemaChosen;
     private String dateChosen;
     private String timeChosen;
-    private String [] Seat;
+    private String seatId;
     private int age;
     private double price;
+
+    public tickets(String movie, String cinemaCode, String date, String time, String seatID){
+        this.movieChosen = movie;
+        this.cinemaChosen = cinemaCode;
+        this.dateChosen = date;
+        this.timeChosen = time;
+        this.seatId = seatID;
+        System.out.println("Ticket: \n" + movieChosen + "\n" + cinemaChosen + "\n" + dateChosen + "\n" + timeChosen + "\n" + seatId);
+    }
 
     public void setMovieChosen(String x){
         this.movieChosen = x;
