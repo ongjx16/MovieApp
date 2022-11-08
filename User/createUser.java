@@ -10,6 +10,8 @@ public class createUser{
             UserAccount user3 = new UserAccount("user3","test");
             UserAccount user4 = new UserAccount("user4","test");
             UserAccount user5 = new UserAccount("user5","test");
+            Booking newBooking=new Booking("name", "email", 81234567, 6.0f, "TXNid", "movieDate", "movieTime");
+            user.addBooking(newBooking);
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream("UserAccounts.dat");
             ObjectOutputStream out=new ObjectOutputStream(fout);

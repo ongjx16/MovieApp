@@ -10,14 +10,8 @@ public class Pricing implements Serializable {
     private boolean blockbuster;
     private String weekday; //weekday or weekend
 
-    public Pricing(String movietype, String movieClass, String age, boolean blockbuster, String weekday, boolean holiday, boolean before6pm) {
-        this.movietype = movietype;
-        this.movieClass = movieClass;
-        this.age = age;
-        this.blockbuster = blockbuster;
-        this.weekday = weekday;
-        this.holiday = holiday;
-        this.before6pm = before6pm;
+    public Pricing() {
+
     }
 
     private boolean holiday; //non-public holiday or public holiday

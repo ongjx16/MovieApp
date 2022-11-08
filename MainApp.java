@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import Admin.adminLogin;
 import User.UserLogin;
+import User.Booking;
 import Admin.AdminAccount;
 
 import java.io.*;
@@ -159,8 +160,7 @@ public class MainApp {
 //                    }
 //                    System.out.println("Your choice of date is: " + showmovietimings(chosen_date, chosen_movie).getshowtimings()[g-1]);
 
-                    Pricing newprice = new Pricing("3D", "Digital", "Student",
-                            true, "THU", true, true);
+                    Pricing newprice = new Pricing();
                     float c = newprice.obtainPricing("digital", "Typical", "Student", true, true, "THU", true);
                     System.out.println("Your pricing is: " + c);
                     System.out.println("How many seat do you want");
@@ -176,6 +176,10 @@ public class MainApp {
                         layout.assignSeat((d - 1), (e - 1));
                         System.out.println("This is your chosen seat");
                         layout.displaySeatPlan();
+                    }
+                    UserLogin u = new UserLogin();
+                    for(int j=0; j<u.getUsers()[0].getBookingHistory().size();j++) {
+                        System.out.println(u.getUsers()[0].getBookingHistory().get(j).getTXNid());
                     }
                 }
 
@@ -224,7 +228,7 @@ public class MainApp {
                     System.out.println("Type: " + readingMovies.getMovieDetails(h).getType());
                     System.out.println("Director: " + readingMovies.getMovieDetails(h).getDirector());
                     System.out.println("Rating: " + readingMovies.getMovieDetails(h).getRating());
-                    System.out.println("Rating: " + readingMovies.getMovieDetails(h).getShowingStatus());
+                    System.out.println("Show Status: " + readingMovies.getMovieDetails(h).getShowingStatus());
                     System.out.println("Show Length: " + readingMovies.getMovieDetails(h).getShowLength());
                     System.out.println("Synopsis: " + readingMovies.getMovieDetails(h).getSynopsis());
                 }
