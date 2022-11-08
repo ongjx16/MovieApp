@@ -2,7 +2,7 @@ import java.io.*;
 public class ReadCineplexes {
 
     public Cineplex[] getCineplexes() {
-        Cineplex[] allCineplexes = new Cineplex[2];
+        Cineplex[] allCineplexes = new Cineplex[3];
         int i = 0;
         boolean cont = true;
         try {
