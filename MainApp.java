@@ -224,7 +224,7 @@ public class MainApp {
                     System.out.println("Type: " + readingMovies.getMovieDetails(h).getType());
                     System.out.println("Director: " + readingMovies.getMovieDetails(h).getDirector());
                     System.out.println("Rating: " + readingMovies.getMovieDetails(h).getRating());
-                    System.out.println("Rating: " + readingMovies.getMovieDetails(h).getShowingStatus());
+                    System.out.println("Show Status: " + readingMovies.getMovieDetails(h).getShowingStatus());
                     System.out.println("Show Length: " + readingMovies.getMovieDetails(h).getShowLength());
                     System.out.println("Synopsis: " + readingMovies.getMovieDetails(h).getSynopsis());
                 }
