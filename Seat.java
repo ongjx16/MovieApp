@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import User.tickets;
 
 public class Seat implements Serializable {
     private int seatId;

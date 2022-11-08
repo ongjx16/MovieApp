@@ -1,4 +1,8 @@
 package User;
+
+import java.io.Serial;
+import java.io.Serializable;
+
 public class selector {
     private String [] ticketsGenerated;
 

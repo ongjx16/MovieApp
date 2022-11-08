@@ -1,12 +1,15 @@
 import java.util.Scanner;
 import Admin.adminLogin;
+import User.UserAccount;
 import User.UserLogin;
 import Admin.AdminAccount;
+import java.io.*;
+
 
 import java.io.*;
 
 public class MainApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int identity;
         int choice;
         String username1;
@@ -113,7 +116,8 @@ public class MainApp {
                 System.out.println("What would you like to do now ");
                 System.out.println("(1) Book a movie");
                 System.out.println("(2) Log In");
-                System.out.println("(3) See Movie Details");
+                System.out.println("(3) Sign Up");
+                System.out.println("(4) See Movie Details");
                 int option = scan.nextInt();
 
                 if (option == 1){
@@ -207,7 +211,31 @@ public class MainApp {
                     System.out.println("[1] View booking history");
                     System.out.println("[2] Leave a review");
                 }
+
                 if (option == 3){
+                    System.out.println("What is your username");
+                    String f = scan.next();
+                    System.out.println("What is your password");
+                    String g = scan.next();
+                    System.out.println("What is your name");
+                    String h = scan.next();
+                    System.out.println("What is your email");
+                    String i = scan.next();
+                    System.out.println("What is your phone number");
+                    int j = scan.nextInt();
+                    try {
+                        UserAccount newAccount = new UserAccount(f, g, h, i, j);
+                        FileOutputStream fout=new FileOutputStream("UserAccounts.dat");
+                        ObjectOutputStream out=new ObjectOutputStream(fout);
+                        out.writeObject(newAccount);
+                        out.flush();
+                        out.close();
+                        System.out.println("success");
+                    }catch(Exception e){System.out.println(e);}
+
+                }
+
+                if (option == 4){
                     System.out.println("Please select the movie you'd like to find out more about: ");
                     Cineplex readingMovies = new Cineplex ("Tampines");
                     for (int i = 0; i < readingMovies.getMovies().length; i++){
