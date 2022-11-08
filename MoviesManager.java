@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MoviesManager {
 
@@ -14,19 +15,22 @@ public class MoviesManager {
         try{
 
             //Creating the object
-            Movie movie1 = new Movie(name, type, rating, showLength, showingStatus, director, synopsis);
+            ArrayList<Movie> movieList = new ArrayList<Movie>();
+            movieList.add(new Movie ("jurassic world", "awfwf", "afwf", 123, "afaw","afwf","afawfew"));
+            movieList.add(new Movie ("harry potter", "awfwf", "afwf", 123, "afaw","afwf","afawfew"));
+//            Movie movie1 = new Movie(name, type, rating, showLength, showingStatus, director, synopsis);
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"), true);
-            AppendingObjectOutputStream out = new AppendingObjectOutputStream(fout);
+            ObjectOutputStream out = new ObjectOutputStream(fout);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
 
-            out.writeObject(movie1);
+            out.writeObject(movieList);
             number++;
             out.flush();
             //closing the stream
             //out.reset();
-//            fout.close();
+            fout.close();
             out.close();
             System.out.println("create movie success");
         }catch(Exception e){System.out.println(e);}
@@ -40,45 +44,58 @@ public class MoviesManager {
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"), true);
             ObjectOutputStream out = new ObjectOutputStream(fout);
-            out.reset();
+            out.flush();
+            out.close();
 
             System.out.println("intialise movies success");
         }catch(Exception e){System.out.println(e);}
     }
 
-    public static Movie[] readAllMovies (){
-        Movie[] movieOutput = new Movie[20];
-        int i =1;
+    public static ArrayList<Movie> readAllMovies (){
+//        Movie[] movieOutput = new Movie[2];
+        ArrayList<Movie> movieOutput = new ArrayList<Movie>();
+        int i =0;
         boolean cont = true;
         try{
             //Creating stream to read the object
-            ObjectInputStream in=new ObjectInputStream(new FileInputStream("DATFiles/AllMovies.dat"));
+            FileInputStream fis = new FileInputStream("DATFiles/AllMovies.dat");
+            ObjectInputStream in=new ObjectInputStream(fis);
+            movieOutput = (ArrayList<Movie>) in.readObject();
+            System.out.println(movieOutput);
+//            while (cont){
+//                Movie movie = null;
+//                try{
+//                    movie = (Movie)in.readObject();
+//                }
+//                catch(ClassNotFoundException e){
+//                    e.printStackTrace(
+//                    );
+//                }
+//                if(movie!=null){
+//                    movieOutput[i] = movie;
+//                    System.out.println(i);
+//                    System.out.println(movieOutput[i].getName());
+//                    i++;
+//
+//                }
+//                else{
+//                    cont = false;
+//                }
+//            }
+//            Movie counter = new Movie(null, null, null, i, null, null, null);
+//            movieOutput[0] = counter
 
-            while (cont){
-                Movie movie = null;
-                try{
-                    movie = (Movie)in.readObject();
-                }
-                catch(ClassNotFoundException e){
-                    e.printStackTrace(
-                    );
-                }
-                if(movie!=null){
-                    movieOutput[i] = movie;
-                    i++;
-
-                }
-                else{
-                    cont = false;
-                }
-            }
-            Movie counter = new Movie(null, null, null, i, null, null, null);
-            movieOutput[0] = counter;
 
 
             //closing the stream
             in.close();
         }catch(Exception e){System.out.println(e);}
+
+//        for (int l = 0; l < movieOutput.size(); l++) {
+//            System.out.println(l);
+//            System.out.println(movieOutput.get(l).getName());
+//        }
+        System.out.println(movieOutput);
 
         return(movieOutput);
 

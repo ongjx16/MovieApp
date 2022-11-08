@@ -3,6 +3,7 @@ import Admin.adminLogin;
 import Admin.createAdmin;
 import User.UserLogin;
 import Admin.AdminAccount;
+import java.util.ArrayList;
 
 import java.io.*;
 
@@ -105,12 +106,13 @@ public class MainApp {
 
 
             } else if (choice == 4) {
-                Movie[] MoviesArray;
+//                Movie[] MoviesArray;
+                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
                 MoviesArray = MoviesManager.readAllMovies();
                 System.out.println("array length");
-                System.out.println(MoviesArray.length);
-                for (int i = 0; i < MoviesArray.length; i++) {
-                    System.out.println(MoviesArray[i].getName());
+                System.out.println(MoviesArray.size());
+                for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println(MoviesArray.get(i).getName());
                 }
             } 
         }
