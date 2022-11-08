@@ -26,7 +26,7 @@ public class Cineplex implements Serializable {
                         "prehistoric DNA. While the park's mastermind, billionaire John Hammond " +
                         "(Richard Attenborough), assures everyone that the facility is safe, they " +
                         "find out otherwise when various ferocious predators break free and go on " +
-                        "the hunt.");
+                        "the hunt.", 1);
 
         movies[1]= new Movie("Black Panther");
         movies[2]= new Movie("The Intern");
