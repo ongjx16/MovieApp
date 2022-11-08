@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Tester {
     public static void main(String[] args) {
-        SeatingPlan layout = new SeatingPlan(5,5);
+        SeatingPlan layout = new SeatingPlan(9,9);
         layout.assignSeat(0, 0);
         layout.displaySeatPlan();
     }
