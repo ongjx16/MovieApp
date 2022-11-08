@@ -9,6 +9,7 @@ public class Movie  implements Serializable {
     private String showingStatus;
     private String director;
     private String synopsis;
+    private int movieID;
 
     //GET METHODS
 
@@ -31,6 +32,11 @@ public class Movie  implements Serializable {
     public String getShowingStatus() {
         return showingStatus;
     }
+
+    public int getMovieID() {
+        return movieID;
+    }
+
 
 
     //SET METHODS
@@ -71,9 +77,13 @@ public class Movie  implements Serializable {
         return synopsis;
     }
 
+    public void setMovieID(){
+        this.movieID = movieID;
+    }
+
     //CONSTRUCTOR
 
-    public Movie(String name, String type, String rating, int showLength, String showingStatus, String director, String synopsis) {
+    public Movie(String name, String type, String rating, int showLength, String showingStatus, String director, String synopsis, int movieID) {
         this.name = name;
         this.type = type;
         this.rating = rating;
@@ -81,6 +91,7 @@ public class Movie  implements Serializable {
         this.showingStatus = showingStatus;
         this.director = director;
         this.synopsis = synopsis;
+        this.movieID = movieID;
     }
     public Movie(String n){
         this.name = n;

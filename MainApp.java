@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import Admin.adminLogin;
+import Admin.createAdmin;
 import User.UserLogin;
 import User.Booking;
 import Admin.AdminAccount;
+import java.util.ArrayList;
 
 import java.io.*;
 
@@ -23,6 +25,7 @@ public class MainApp {
         identity = scan.nextInt();
 
         if (identity == 1) {
+            createAdmin.main();
             System.out.println("Please enter your username");
             username1 = scan.next();
 
@@ -45,6 +48,8 @@ public class MainApp {
                     password1 = scan.next();
                 }
             }
+
+
 
             System.out.println("1. Create Movie\n");
             System.out.println("2. Edit Movie\n");
@@ -91,21 +96,80 @@ public class MainApp {
 
                 synopsis = scan.nextLine();
 
-                MoviesManager.create(name, type, rating, showLength, showingStatus, director, synopsis);
+                MoviesManager.createMovie(name, type, rating, showLength, showingStatus, director, synopsis);
                 System.out.println("Movie has been created!");
                 return;
             } else if (choice == 2) {
+                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                MoviesArray = MoviesManager.readAllMovies();
+                for (int i = 0; i < MoviesArray.size(); i++) {
+                    System.out.println((i+1) +". " + MoviesArray.get(i).getName());
+                }
+                System.out.println("Select Movie To Edit");
+                int movie = scan.nextInt()-1;
+                int toChange = 0;
 
+                while (toChange!=7){
+                    System.out.println("\nWhich attribute would you like to edit?");
+                    System.out.println("1. Movie Name");
+                    System.out.println("2. Movie Type");
+                    System.out.println("3. Show Length");
+                    System.out.println("4. Showing Status");
+                    System.out.println("5. Director");
+                    System.out.println("6. Movie Synopsis");
+                    System.out.println("7. Save All Changes");
+
+                    toChange = scan.nextInt();
+                    if (toChange ==1){
+                        //name
+                        MoviesManager.editMovie(movie, "name");
+                    }
+                    else if (toChange ==2){
+                        //type
+                        MoviesManager.editMovie(movie, "type");
+                    }
+                    else if (toChange ==3){
+                        //length
+                        MoviesManager.editMovie(movie, "length");
+                    }
+                    else if (toChange ==4){
+                        //showing status
+                        MoviesManager.editMovie(movie, "status");
+                    }
+                    else if (toChange ==5){
+                        //director
+                        MoviesManager.editMovie(movie, "director");
+                    }
+                    else if (toChange ==6){
+                        //synopsis
+                        MoviesManager.editMovie(movie, "synopsis");
+                    }
+                }
 
             } else if (choice == 3) {
+                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                MoviesArray = MoviesManager.readAllMovies();
+                for (int i = 0; i < MoviesArray.size(); i++) {
+                    System.out.println((i+1) +". " + MoviesArray.get(i).getName());
+
+                }
+                System.out.println("\nSelect Movie To Delete");
+                int movie = scan.nextInt();
+                MoviesManager.deleteMovie (movie-1);
 
 
             } else if (choice == 4) {
-                int k = MoviesManager.getNumber();
-                Movie[] MoviesArray;
+//                Movie[] MoviesArray;
+                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
                 MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < k; i++) {
-                    System.out.println(MoviesArray[i].getType());
+                for (int i = 0; i < MoviesArray.size(); i++) {
+                    System.out.println("name " + MoviesArray.get(i).getName());
+                    System.out.println("id " + MoviesArray.get(i).getMovieID());
+                    System.out.println( "type " + MoviesArray.get(i).getType());
+                    System.out.println( "length " + MoviesArray.get(i).getShowLength());
+                    System.out.println("status " + MoviesArray.get(i).getShowingStatus());
+                    System.out.println("director " + MoviesArray.get(i).getDirector());
+                    System.out.println("synopsis " + MoviesArray.get(i).getSynopsis()+"\n");
                 }
             } 
         }
