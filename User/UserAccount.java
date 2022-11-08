@@ -1,5 +1,6 @@
 package User;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class UserAccount implements Serializable {
@@ -15,7 +16,7 @@ public class UserAccount implements Serializable {
 
     private String email;
 
-    private String bookingHistory;
+    private ArrayList<Booking> bookingHistory = new ArrayList<>();
 
     private int overallRatings;
 
@@ -43,13 +44,24 @@ public class UserAccount implements Serializable {
         this.email = email;
     }
 
-    public String getBookingHistory() {
+    public ArrayList<Booking> getBookingHistory() {
         return bookingHistory;
     }
 
-    public void setBookingHistory(String bookingHistory) {
-        this.bookingHistory = bookingHistory;
+    public void showBookingHistory(){
+//        for(int i=0; i<bookingHistory.size(); i++){
+//            System.out.print(bookingHistory.get(i).getTXNid());
+//        }
+
     }
+
+    public ArrayList<Booking> addBooking(Booking b){
+        bookingHistory.add(b);
+        System.out.println("Shown!");
+        return bookingHistory;
+    }
+
+
 
     public int getOverallRatings() {
         return overallRatings;
@@ -61,7 +73,6 @@ public class UserAccount implements Serializable {
     UserAccount(String u, String p){
         this.username = u;
         this.password = p;
-        this.bookingHistory = "3 movies seen thus far";
         this.email = "shubhangam@gmail.com";
         this.name = "Shubhangam";
         this.phoneNumber = 87805205;
