@@ -1,17 +1,18 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class HolidayDates implements Serializable {
 
-    private String holidayDate;
+    private LocalDate holidayDate;
 
-    HolidayDates(String date) {
+    HolidayDates(LocalDate date) {
         holidayDate = date;
     }
-    public void setDate(String holidayDate){
+    public void setDate(LocalDate holidayDate){
         this.holidayDate = holidayDate;
     }
 
-    public String getDate(){
+    public LocalDate getDate(){
         return holidayDate;
     }
 }
