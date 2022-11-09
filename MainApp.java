@@ -2,11 +2,10 @@ import java.util.Scanner;
 import Admin.adminLogin;
 import Admin.createAdmin;
 import User.UserLogin;
+import User.tickets;
 import User.Booking;
-import Admin.AdminAccount;
-import java.util.ArrayList;
 
-import java.io.*;
+import java.util.ArrayList;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -205,8 +204,9 @@ public class MainApp {
                         b = scan.nextInt();
                     }
                     System.out.println("Your choice is: " + userCineplex.getMovies()[b-1]);
+                    String movieChosen = userCineplex.getMovies()[b-1];
 
-                    System.out.println("What dates would you like to see this movie: ");
+                    System.out.println("What dates would you like to see this movie (Please enter in ddMM format): ");
                     int g = scan.nextInt();
                     //show the movie timings here.
 
@@ -230,6 +230,8 @@ public class MainApp {
                     System.out.println("How many seat do you want");
                     int f = scan.nextInt();
                     SeatingPlan layout = new SeatingPlan(5,5);
+                    ArrayList<String> SeatsArray = new ArrayList<>();
+                    // asking for seats and saving it to an array
                     for (int i = 0; i < f; i++) {
                         layout.displaySeatPlan();
                         System.out.println("input your desired row and column");
@@ -240,10 +242,58 @@ public class MainApp {
                         layout.assignSeat((d - 1), (e - 1));
                         System.out.println("This is your chosen seat");
                         layout.displaySeatPlan();
+                        int seatId = new Seat(e*100+d).getSeatId();
+                        SeatsArray.add(String.valueOf(seatId));
                     }
+                    // Generating transaction ID
+                    String txnID = new Transaction("XXX").getTransactionId();
+                    // Making a booking
+                    Booking booked = new Booking("poohy", "poohyemail", 12345678, c*SeatsArray.size(), txnID, String.valueOf(g),String.valueOf(h));
+
+                    // POP up to ask them to log in/sign up before confirming payment
+//                    System.out.println("Before you proceed, please sign in or log in" + "\n (1) Log In \n (2) Creat new account");
+//                    int bookingpopup = scan.nextInt();
+//                    switch(bookingpopup){
+//                        case 1:
+//                            System.out.println("Please enter your username");
+//                            username1 = scan.next();
+//
+//                            while (!user.verifyUsername(username1)) {
+//                                if (user.verifyUsername(username1)) {
+//                                    System.out.println("Username is valid");
+//                                } else {
+//                                    System.out.println("Username is invalid, please key in again");
+//                                    username1 = scan.next();
+//                                }
+//                            }
+//
+//                            System.out.println("Please enter your password");
+//                            password1 = scan.next();
+//                            while (!user.verifyPassword(username1, password1)) {
+//                                if (user.verifyPassword(username1, password1)) {
+//                                    System.out.println("Password is valid");
+//
+//                                } else {
+//                                    System.out.println("Password is invalid, please key in again");
+//                                    password1 = scan.next();
+//                                }
+//                            }
+//                            break;
+//
+//                        case 2:
+//                            //add code for creating new acc
+//                            break;
+//                    }
+
                     UserLogin u = new UserLogin();
                     for(int j=0; j<u.getUsers()[0].getBookingHistory().size();j++) {
                         System.out.println(u.getUsers()[0].getBookingHistory().get(j).getTXNid());
+                    }
+
+                    //generating tickets from the array
+                    for (int n = 0; n < SeatsArray.size(); n++){
+                        System.out.println("\nTicket" + ":");
+                        tickets tics = new tickets (movieChosen,"JE1", String.valueOf(g), String.valueOf(h), SeatsArray.get(n));
                     }
                 }
 

@@ -15,7 +15,7 @@ public class tickets {
         this.dateChosen = date;
         this.timeChosen = time;
         this.seatId = seatID;
-        System.out.println("Ticket: \n" + movieChosen + "\n" + cinemaChosen + "\n" + dateChosen + "\n" + timeChosen + "\n" + seatId);
+        System.out.println("Movie: " + movieChosen + "\nCinema: " + cinemaChosen + "\nDate: " + dateChosen + "\nTime: " + timeChosen + "\nSeat: " + seatId);
     }
 
     public void setMovieChosen(String x){
