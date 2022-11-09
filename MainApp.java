@@ -50,130 +50,282 @@ public class MainApp {
                     password1 = scan.next();
                 }
             }
-
-
-
-            System.out.println("1. Create Movie\n");
-            System.out.println("2. Edit Movie\n");
-            System.out.println("3. Delete Movie\n");
-            System.out.println("4. See List of Current Movies\n\n");
+            System.out.println("1. Edit Movie Details\n");
+            System.out.println("2. Edit Showtime Details\n");
             System.out.println("Enter a number of your choice: ");
-            choice = scan.nextInt();
 
-            if (choice == 1) {
-                String name;
-                String type;
-                String rating;
-                int showLength;
-                String showingStatus;
-                String director;
-                String synopsis;
+            int choose;
+            choose = scan.nextInt();
 
-                scan.nextLine();
-                System.out.println("1. Enter Movie Name");
+            if (choose ==1){
+                System.out.println("1. Create Movie\n");
+                System.out.println("2. Edit Movie\n");
+                System.out.println("3. Delete Movie\n");
+                System.out.println("4. See List of Current Movies\n\n");
+                System.out.println("Enter a number of your choice: ");
+                choice = scan.nextInt();
 
-                name = scan.nextLine();
 
-                System.out.println("2. Enter Movie Type");
+                if (choice == 1) {
+                    String name;
+                    String type;
+                    String rating;
+                    int showLength;
+                    String showingStatus;
+                    String director;
+                    String synopsis;
 
-                type = scan.nextLine();
+                    scan.nextLine();
+                    System.out.println("1. Enter Movie Name");
 
-                System.out.println("3. Enter Movie Rating");
+                    name = scan.nextLine();
 
-                rating = scan.nextLine();
+                    System.out.println("2. Enter Movie Type");
 
-                System.out.println("4. Enter Movie Length");
+                    type = scan.nextLine();
 
-                showLength = scan.nextInt();
-                scan.nextLine();
-                System.out.println("5. Enter Movie Showing Status");
+                    System.out.println("3. Enter Movie Rating");
 
-                showingStatus = scan.nextLine();
+                    rating = scan.nextLine();
 
-                System.out.println("6. Enter Movie Director");
+                    System.out.println("4. Enter Movie Length");
 
-                director = scan.nextLine();
+                    showLength = scan.nextInt();
+                    scan.nextLine();
+                    System.out.println("5. Enter Movie Showing Status");
 
-                System.out.println("7. Enter Movie Synopsis");
+                    showingStatus = scan.nextLine();
 
-                synopsis = scan.nextLine();
+                    System.out.println("6. Enter Movie Director");
 
-                MoviesManager.createMovie(name, type, rating, showLength, showingStatus, director, synopsis);
-                System.out.println("Movie has been created!");
-                return;
-            } else if (choice == 2) {
-                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < MoviesArray.size(); i++) {
-                    System.out.println((i+1) +". " + MoviesArray.get(i).getName());
-                }
-                System.out.println("Select Movie To Edit");
-                int movie = scan.nextInt()-1;
-                int toChange = 0;
+                    director = scan.nextLine();
 
-                while (toChange!=7){
-                    System.out.println("\nWhich attribute would you like to edit?");
-                    System.out.println("1. Movie Name");
-                    System.out.println("2. Movie Type");
-                    System.out.println("3. Show Length");
-                    System.out.println("4. Showing Status");
-                    System.out.println("5. Director");
-                    System.out.println("6. Movie Synopsis");
-                    System.out.println("7. Save All Changes");
+                    System.out.println("7. Enter Movie Synopsis");
 
-                    toChange = scan.nextInt();
-                    if (toChange ==1){
-                        //name
-                        MoviesManager.editMovie(movie, "name");
+                    synopsis = scan.nextLine();
+
+                    MoviesManager.createMovie(name, type, rating, showLength, showingStatus, director, synopsis);
+                    System.out.println("Movie has been created!");
+                    return;
+                } else if (choice == 2) {
+                    ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                    MoviesArray = MoviesManager.readAllMovies();
+                    for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println((i+1) +". " + MoviesArray.get(i).getName());
                     }
-                    else if (toChange ==2){
-                        //type
-                        MoviesManager.editMovie(movie, "type");
-                    }
-                    else if (toChange ==3){
-                        //length
-                        MoviesManager.editMovie(movie, "length");
-                    }
-                    else if (toChange ==4){
-                        //showing status
-                        MoviesManager.editMovie(movie, "status");
-                    }
-                    else if (toChange ==5){
-                        //director
-                        MoviesManager.editMovie(movie, "director");
-                    }
-                    else if (toChange ==6){
-                        //synopsis
-                        MoviesManager.editMovie(movie, "synopsis");
-                    }
-                }
+                    System.out.println("Select Movie To Edit");
+                    int movie = scan.nextInt()-1;
+                    int toChange = 0;
 
-            } else if (choice == 3) {
-                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < MoviesArray.size(); i++) {
-                    System.out.println((i+1) +". " + MoviesArray.get(i).getName());
+                    while (toChange!=7){
+                        System.out.println("\nWhich attribute would you like to edit?");
+                        System.out.println("1. Movie Name");
+                        System.out.println("2. Movie Type");
+                        System.out.println("3. Show Length");
+                        System.out.println("4. Showing Status");
+                        System.out.println("5. Director");
+                        System.out.println("6. Movie Synopsis");
+                        System.out.println("7. Save All Changes");
 
-                }
-                System.out.println("\nSelect Movie To Delete");
-                int movie = scan.nextInt();
-                MoviesManager.deleteMovie (movie-1);
+                        toChange = scan.nextInt();
+                        if (toChange ==1){
+                            //name
+                            MoviesManager.editMovie(movie, "name");
+                        }
+                        else if (toChange ==2){
+                            //type
+                            MoviesManager.editMovie(movie, "type");
+                        }
+                        else if (toChange ==3){
+                            //length
+                            MoviesManager.editMovie(movie, "length");
+                        }
+                        else if (toChange ==4){
+                            //showing status
+                            MoviesManager.editMovie(movie, "status");
+                        }
+                        else if (toChange ==5){
+                            //director
+                            MoviesManager.editMovie(movie, "director");
+                        }
+                        else if (toChange ==6){
+                            //synopsis
+                            MoviesManager.editMovie(movie, "synopsis");
+                        }
+                    }
+
+                } else if (choice == 3) {
+                    ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                    MoviesArray = MoviesManager.readAllMovies();
+                    for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println((i+1) +". " + MoviesArray.get(i).getName());
+
+                    }
+                    System.out.println("\nSelect Movie To Delete");
+                    int movie = scan.nextInt();
+                    MoviesManager.deleteMovie (movie-1);
 
 
-            } else if (choice == 4) {
+                } else if (choice == 4) {
 //                Movie[] MoviesArray;
-                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < MoviesArray.size(); i++) {
-                    System.out.println("name " + MoviesArray.get(i).getName());
-                    System.out.println("id " + MoviesArray.get(i).getMovieID());
-                    System.out.println( "type " + MoviesArray.get(i).getType());
-                    System.out.println( "length " + MoviesArray.get(i).getShowLength());
-                    System.out.println("status " + MoviesArray.get(i).getShowingStatus());
-                    System.out.println("director " + MoviesArray.get(i).getDirector());
-                    System.out.println("synopsis " + MoviesArray.get(i).getSynopsis()+"\n");
+                    ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                    MoviesArray = MoviesManager.readAllMovies();
+                    for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println("name " + MoviesArray.get(i).getName());
+                        System.out.println("id " + MoviesArray.get(i).getMovieID());
+                        System.out.println( "type " + MoviesArray.get(i).getType());
+                        System.out.println( "length " + MoviesArray.get(i).getShowLength());
+                        System.out.println("status " + MoviesArray.get(i).getShowingStatus());
+                        System.out.println("director " + MoviesArray.get(i).getDirector());
+                        System.out.println("synopsis " + MoviesArray.get(i).getSynopsis()+"\n");
+                    }
                 }
-            } 
+
+
+            }
+
+            else if (choose ==2){
+                ShowtimesManager.initialiser();
+
+                System.out.println("1. Create Showtime\n");
+                System.out.println("2. Edit Showtime\n");
+                System.out.println("3. Delete Showtime\n");
+                System.out.println("4. See List of Current Showtimes\n\n");
+                System.out.println("Enter a number of your choice: ");
+                choice = scan.nextInt();
+
+                if (choice == 1) {
+                    int moviechoice;
+                    String showtime = null;
+                    int movieid;
+                    String cinemaID;
+
+                    scan.nextLine();
+                    System.out.println("1. Choose Movie");
+
+                    ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
+                    for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println(Integer.toString(i+1) + ". " + MoviesArray.get(i).getName());
+                    }
+                    moviechoice = scan.nextInt();
+                    int x = moviechoice-1;
+                    String moviename = MoviesArray.get(x).getName();
+                    movieid = MoviesArray.get(x).getMovieID();
+
+                    System.out.println("2. Enter Date- DD/MM/YY: ");
+                    String date = scan.nextLine();
+                    System.out.println("Choose a showtime from the following list:\n");
+                    ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.searchShowtimes(date, movieid));
+                    // initialise an array of timings for admin to choose from
+                    String[] timings;
+                    timings = new String [5];
+                    timings[0] = "10:00";
+                    timings[1] = "12:30";
+                    timings[2] = "15:00";
+                    timings[3] = "17:30";
+                    timings[4]= "20:00";
+                    int k =1;
+                    for (int i =0; i<arrayoftimes.size(); i++){
+                        for (int j =0; j<5;j++){
+                            if (!arrayoftimes.get(i).getShowtime().substring(9).equals(timings[j])){
+                                System.out.println(Integer.toString(k)+ ". "+ timings[j]);
+                                k++;
+                            };
+                        }
+                    }
+
+                    int choiceOfTime = scan.nextInt();
+                    if (choiceOfTime ==k){
+                        showtime = date + " " + timings[k-1];
+                        System.out.println(showtime);
+                    }
+
+
+                    System.out.println("3. Enter Cinema ID: ");
+                    cinemaID = scan.nextLine();
+
+                    System.out.println(showtime);
+                    ShowtimesManager.createShowtimes(showtime, moviename, movieid, cinemaID);
+                    System.out.println("Showtime has been created!");
+                    return;
+
+                } else if (choice == 2) {
+//                    ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
+//
+//                    for (int i = 0; i < ShowtimesArray.size(); i++) {
+//                        System.out.println((i+1) +". " + ShowtimesArray.get(i).getShowtime());
+//                    }
+//                    System.out.println("Select Movie To Edit");
+//                    int showtime = scan.nextInt()-1;
+//                    int toChange = 0;
+//
+//                    while (toChange!=7){
+//                        System.out.println("\nWhich attribute would you like to edit?");
+//                        System.out.println("1. Movie Name");
+//                        System.out.println("2. Movie Type");
+//                        System.out.println("3. Show Length");
+//                        System.out.println("4. Showing Status");
+//                        System.out.println("5. Director");
+//                        System.out.println("6. Movie Synopsis");
+//                        System.out.println("7. Save All Changes");
+//
+//                        toChange = scan.nextInt();
+//                        if (toChange ==1){
+//                            //name
+//                            MoviesManager.editMovie(movie, "name");
+//                        }
+//                        else if (toChange ==2){
+//                            //type
+//                            MoviesManager.editMovie(movie, "type");
+//                        }
+//                        else if (toChange ==3){
+//                            //length
+//                            MoviesManager.editMovie(movie, "length");
+//                        }
+//                        else if (toChange ==4){
+//                            //showing status
+//                            MoviesManager.editMovie(movie, "status");
+//                        }
+//                        else if (toChange ==5){
+//                            //director
+//                            MoviesManager.editMovie(movie, "director");
+//                        }
+//                        else if (toChange ==6){
+//                            //synopsis
+//                            MoviesManager.editMovie(movie, "synopsis");
+//                        }
+//                    }
+
+                } else if (choice == 3) {
+                    ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                    MoviesArray = MoviesManager.readAllMovies();
+                    for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println((i+1) +". " + MoviesArray.get(i).getName());
+
+                    }
+                    System.out.println("\nSelect Movie To Delete");
+                    int movie = scan.nextInt();
+                    MoviesManager.deleteMovie (movie-1);
+
+
+                } else if (choice == 4) {
+//                Movie[] MoviesArray;
+                    ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                    MoviesArray = MoviesManager.readAllMovies();
+                    for (int i = 0; i < MoviesArray.size(); i++) {
+                        System.out.println("name " + MoviesArray.get(i).getName());
+                        System.out.println("id " + MoviesArray.get(i).getMovieID());
+                        System.out.println( "type " + MoviesArray.get(i).getType());
+                        System.out.println( "length " + MoviesArray.get(i).getShowLength());
+                        System.out.println("status " + MoviesArray.get(i).getShowingStatus());
+                        System.out.println("director " + MoviesArray.get(i).getDirector());
+                        System.out.println("synopsis " + MoviesArray.get(i).getSynopsis()+"\n");
+                    }
+                }
+
+            }
+
+
         }
             else if (identity == 2) {
                 System.out.println("You are now a user");
