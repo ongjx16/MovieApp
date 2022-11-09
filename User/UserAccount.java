@@ -70,6 +70,7 @@ public class UserAccount implements Serializable {
     public void setOverallRatings(int overallRatings) {
         this.overallRatings = overallRatings;
     }
+
     UserAccount(String u, String p){
         this.username = u;
         this.password = p;
@@ -77,6 +78,14 @@ public class UserAccount implements Serializable {
         this.name = "Shubhangam";
         this.phoneNumber = 87805205;
         this.overallRatings = 4;
+    }
+    public UserAccount(String u, String p, String c, String d, int e){
+        this.username = u;
+        this.password = p;
+        this.name = c;
+        this.email = d;
+        this.phoneNumber = e;
+        System.out.println("Username has been created");
     }
 
     public String getUserUsername(){
@@ -86,8 +95,5 @@ public class UserAccount implements Serializable {
     public String getUserPassword(){
         return password;
     }
-
-
-
 
 }
