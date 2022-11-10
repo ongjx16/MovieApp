@@ -1,14 +1,9 @@
-import Admin.AdminAccount;
-import User.UserAccount;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UsersManager {
 
@@ -56,7 +51,7 @@ public class UsersManager {
         return (usersOutput);
     }
 
-    public static void deleteMovie (int index) {
+    public static void deleteUser (int index) {
         try{
 
             //Creating the object
@@ -77,64 +72,26 @@ public class UsersManager {
         }catch(Exception e){}
     }
 
-//    public static void editMovie (int index, String attribute) {
-//        try{
-//
-//            //Creating the object
-//            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllUsers());
-//
-//            //Creating stream and writing the object
-//            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
-//            ObjectOutputStream out = new ObjectOutputStream(fout);
-//            Scanner scan = new Scanner(System.in);
-//
-//            if (attribute == "name"){
-//                System.out.println("Current: " + movieList.get(index).getName());
-//                System.out.println("Enter new name: ");
-//                String newName = scan.nextLine();
-//                movieList.get(index).setName(newName);
-//            }
-//            else if (attribute == "type"){
-//                System.out.println("Current: " + movieList.get(index).getType());
-//                System.out.println("Enter updated movie type: ");
-//                String newType = scan.nextLine();
-//                movieList.get(index).setType(newType);
-//            }
-//            else if (attribute == "length"){
-//                System.out.println("Current: " + movieList.get(index).getShowLength());
-//                System.out.println("Enter updated show length in minutes: ");
-//                int length = scan.nextInt();
-//                movieList.get(index).setShowLength(length);
-//            }
-//            else if (attribute == "status"){
-//                System.out.println("Current: " + movieList.get(index).getShowingStatus());
-//                System.out.println("Enter updated showing status: ");
-//                String status = scan.nextLine();
-//                movieList.get(index).setShowingStatus(status);
-//            }
-//            else if (attribute == "director"){
-//                System.out.println("Current: " + movieList.get(index).getDirector());
-//                System.out.println("Enter updated director name: ");
-//                String director = scan.nextLine();
-//                movieList.get(index).setDirector(director);
-//            }
-//            else if (attribute == "synopsis"){
-//                System.out.println("Current: " + movieList.get(index).getSynopsis());
-//                System.out.println("Enter updated synopsis: ");
-//                String synopsis = scan.nextLine();
-//                movieList.get(index).setSynopsis(synopsis);
-//            }
-//
-//            out.writeObject(movieList);
-//
-//            out.flush();
-//            //closing the stream
-//            //out.reset();
-//            fout.close();
-//            out.close();
-//            System.out.println("movie successfully removed");
-//        }catch(Exception e){}
-//    }
+    public static void editBookingHistory (int index, Booking b) {
+        try{
+
+            //Creating the object
+            ArrayList<UserAccount> usersList = new ArrayList<UserAccount>(readAllUsers());
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllUsers.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            usersList.get(index).addBooking(b);
+
+            out.writeObject(usersList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println("booking history changed");
+        }catch(Exception e){}
+    }
 
 
 
