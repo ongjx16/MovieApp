@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class MoviesManager {
 
     private static int number = 3;
-    public static void createMovie(String name, String type, String rating, int showLength, String showingStatus, String director, String synopsis){
+    public static void createMovie(String name, String type, int showLength, String showingStatus, String director, String synopsis){
         try{
 
             //Creating the object
@@ -30,7 +30,7 @@ else{
 }
 
 
-            Movie movie1 = new Movie(name, type, rating, showLength, showingStatus, director, synopsis, id);
+            Movie movie1 = new Movie(name, type, showLength, showingStatus, director, synopsis, id);
 
             movieList.add(movie1);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
@@ -138,6 +138,115 @@ else{
             System.out.println("movie successfully removed");
         }catch(Exception e){}
     }
+
+    public static void increaseSales (int MovieID, int toAdd) {
+        try{
+
+            //Creating the object
+            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllMovies());
+
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            int y;
+           for (y=0; y<movieList.size(); y++){
+               if (movieList.get(y).getMovieID() == MovieID){
+                   break;
+               }
+           }
+
+           int newSales = movieList.get(y).getSales()+toAdd;
+            movieList.get(y).setSales(newSales);
+
+            out.writeObject(movieList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println(movieList.get(y).getMovieID());
+            System.out.println("Movie Sales Successfully Updated.");
+        }catch(Exception e){}
+    }
+
+    public static void addReviews (int MovieID, String newReview) {
+        try{
+
+            //Creating the object
+            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllMovies());
+
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            int y;
+            for (y=0; y<movieList.size(); y++){
+                if (movieList.get(y).getMovieID() == MovieID){
+                    break;
+                }
+            }
+
+            ArrayList<String> reviews = new ArrayList<String>(movieList.get(y).getReviews());
+
+            reviews.add(newReview);
+
+            movieList.get(y).setReviews(reviews);
+
+            out.writeObject(movieList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println("Movie Review Successfully Added.");
+        }catch(Exception e){}
+    }
+
+    public static void updateRating (int MovieID, int newRating) {
+        try{
+
+            //Creating the object
+            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllMovies());
+
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            int y;
+            for (y=0; y<movieList.size(); y++){
+                if (movieList.get(y).getMovieID() == MovieID){
+                    break;
+                }
+            }
+
+            int[] currentRating = movieList.get(y).getRating();
+            int[] updated = new int[2];
+
+            if (currentRating[0] ==0){
+                updated[0] = 1;
+                updated[1] = newRating;
+            }
+            else{
+                //return average rating with new rating included
+                updated[0] = (currentRating[0])+1;
+                updated[1] = (currentRating[1]+newRating)/(updated[0]);
+            }
+
+            movieList.get(y).setRating(updated);
+
+            out.writeObject(movieList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println(movieList.get(y).getMovieID());
+            System.out.println("Movie Sales Successfully Updated.");
+        }catch(Exception e){}
+    }
+
+
 
 
 

@@ -16,8 +16,8 @@ public class adminLogin{
         admin = (AdminAccount)in.readObject();
     }
     catch(ClassNotFoundException e){
-        e.printStackTrace(
-            );
+//        e.printStackTrace(
+//            );
     }
     if(admin!=null){
         admins[i] = admin;
@@ -32,7 +32,9 @@ public class adminLogin{
   
   //closing the stream  
   in.close();  
-  }catch(Exception e){System.out.println(e);} 
+  }catch(Exception e){
+//      System.out.println(e);
+  }
 
   return(admins);
   
