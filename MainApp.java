@@ -184,19 +184,18 @@ public class MainApp {
                     }
 
                 } else if (choose == 2) {
-                    ShowtimesManager.initialiser();
-
                     System.out.println("1. Create Showtime\n");
                     System.out.println("2. Edit Showtime\n");
                     System.out.println("3. Delete Showtime\n");
                     System.out.println("4. See List of Current Showtimes\n\n");
+//                System.out.println("5. Seat tester");
                     System.out.println("Enter a number of your choice: ");
                     choice = scan.nextInt();
 
                     if (choice == 1) {
                         int moviechoice;
-                        String showtime = null;
-                        int movieid;
+                        //String showtime;
+                        int movieid1;
                         String cinemaID;
 
                         scan.nextLine();
@@ -206,17 +205,27 @@ public class MainApp {
                         for (int i = 0; i < MoviesArray.size(); i++) {
                             System.out.println(Integer.toString(i + 1) + ". " + MoviesArray.get(i).getName());
                         }
+
                         moviechoice = scan.nextInt();
+
                         int x = moviechoice - 1;
                         String moviename = MoviesArray.get(x).getName();
-                        movieid = MoviesArray.get(x).getMovieID();
+                        movieid1 = MoviesArray.get(x).getMovieID();
 
-                        System.out.println("2. Enter Date- DD/MM/YY: ");
+                        scan.nextLine();
+
+                        System.out.println("2. Enter Date- DD/MM/YYYY: ");
+
                         String date = scan.nextLine();
+
                         System.out.println("Choose a showtime from the following list:\n");
-                        ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.searchShowtimes(date, movieid));
-                        // initialise an array of timings for admin to choose from
+
+                        File f = new File("DATFiles/Showtimes.dat");
+
+
+//                     initialise an array of timings for admin to choose from
                         String[] timings;
+                        ArrayList<String> newTimings = new ArrayList<String>();
                         timings = new String[5];
                         timings[0] = "10:00";
                         timings[1] = "12:30";
@@ -224,28 +233,54 @@ public class MainApp {
                         timings[3] = "17:30";
                         timings[4] = "20:00";
                         int k = 1;
-                        for (int i = 0; i < arrayoftimes.size(); i++) {
+
+                        String showtime;
+                        boolean toAdd;
+
+                        if (f.exists()) {
+
+                            ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.searchShowtimes(date, movieid1));
+                            //System.out.println(arrayoftimes.size());
                             for (int j = 0; j < 5; j++) {
-                                if (!arrayoftimes.get(i).getShowtime().substring(9).equals(timings[j])) {
+                                toAdd= true;
+                                for (int i = 0; i < arrayoftimes.size(); i++ ) {
+                                    //System.out.println(arrayoftimes.get(i).getShowtime().substring(9));
+                                    if ((arrayoftimes.get(i).getShowtime().substring(11).equals(timings[j]))) {
+                                        toAdd = false;
+                                    }
+                                    ;
+                                }
+                                if (toAdd == true){
                                     System.out.println(Integer.toString(k) + ". " + timings[j]);
+                                    newTimings.add(timings[j]);
                                     k++;
                                 }
-                                ;
+
                             }
+                            int choiceoftime = scan.nextInt();
+
+                            showtime = date + " " + newTimings.get(choiceoftime - 1);
+
+                        } else {
+                            for (int j = 0; j < 5; j++) {
+                                System.out.println(Integer.toString(k) + ". " + timings[j]);
+                                k++;
+                            }
+                            int choiceoftime = scan.nextInt();
+                            showtime = date + " " + timings[choiceoftime - 1];
                         }
 
-                        int choiceOfTime = scan.nextInt();
-                        if (choiceOfTime == k) {
-                            showtime = date + " " + timings[k - 1];
-                            System.out.println(showtime);
-                        }
 
 
+
+                        //System.out.println(showtime);
+
+                        scan.nextLine();
                         System.out.println("3. Enter Cinema ID: ");
                         cinemaID = scan.nextLine();
 
-                        System.out.println(showtime);
-                        ShowtimesManager.createShowtimes(showtime, moviename, movieid, cinemaID);
+                        //ShowtimesManager.initialiser();
+                        ShowtimesManager.createShowtimes(showtime, moviename, cinemaID);
                         System.out.println("Showtime has been created!");
                         return;
 
@@ -300,30 +335,57 @@ public class MainApp {
                         ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
                         MoviesArray = MoviesManager.readAllMovies();
                         for (int i = 0; i < MoviesArray.size(); i++) {
-                            System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
+                            System.out.println((i+1) +". " + MoviesArray.get(i).getName());
 
                         }
                         System.out.println("\nSelect Movie To Delete");
                         int movie = scan.nextInt();
-                        MoviesManager.deleteMovie(movie - 1);
+                        MoviesManager.deleteMovie (movie-1);
 
 
                     } else if (choice == 4) {
-//                Movie[] MoviesArray;
-                        ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                        MoviesArray = MoviesManager.readAllMovies();
-                        for (int i = 0; i < MoviesArray.size(); i++) {
-                            System.out.println("name " + MoviesArray.get(i).getName());
-                            System.out.println("id " + MoviesArray.get(i).getMovieID());
-                            System.out.println("type " + MoviesArray.get(i).getType());
-                            System.out.println("length " + MoviesArray.get(i).getShowLength());
-                            System.out.println("status " + MoviesArray.get(i).getShowingStatus());
-                            System.out.println("director " + MoviesArray.get(i).getDirector());
-                            System.out.println("synopsis " + MoviesArray.get(i).getSynopsis() + "\n");
-                        }
 
-
+                        ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
+                        for (int i = 0; i < ShowtimesArray.size(); i++) {
+                            System.out.println("Movie Name: " + ShowtimesArray.get(i).getMoviename());
+                            System.out.println("Showtime: " + ShowtimesArray.get(i).getShowtime());
+                            System.out.println("Movie ID: " + ShowtimesArray.get(i).getMovieID());
+                            System.out.println("Cinema ID: " + ShowtimesArray.get(i).getCinemaID()+"\n");
                         }
+                    }
+
+//                else if (choice ==5){
+//
+//                    int moviechoice;
+//                    //String showtime;
+//                    int movieid1;
+//                    String cinemaID;
+//
+//                    scan.nextLine();
+//                    System.out.println("1. Choose Movie");
+//
+//                    ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
+//                    for (int i = 0; i < MoviesArray.size(); i++) {
+//                        System.out.println(Integer.toString(i + 1) + ". " + MoviesArray.get(i).getName());
+//                    }
+//
+//                    moviechoice = scan.nextInt();
+//
+//                    int x = moviechoice - 1;
+//                    String moviename = MoviesArray.get(x).getName();
+//                    movieid1 = MoviesArray.get(x).getMovieID();
+//
+//                    ShowtimesManager.searchShowtimes("25/12/2022", movieid1).get(0).getSeats().displaySeatPlan();
+//                    //ShowtimesManager.searchShowtimes("21/12/2022", movieid1).get(0).getSeats().assignSeat(5,5);
+//                    ShowtimesManager.updateSeats(ShowtimesManager.searchShowtimes("25/12/2022", movieid1).get(0).getShowtimeID());
+//                    ShowtimesManager.searchShowtimes("25/12/2022", movieid1).get(0).getSeats().displaySeatPlan();
+//
+//
+//
+//
+//
+//
+//                }
 
                 }
                 }
