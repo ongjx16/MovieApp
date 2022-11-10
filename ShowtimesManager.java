@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ShowtimesManager {
 
 
-    public static void createShowtimes(String showtime,String moviename,int movieID, String cinemaID){
+    public static void createShowtimes(String showtime,String moviename,String cinemaID){
         try{
 
             //Creating the object
@@ -31,7 +31,16 @@ public class ShowtimesManager {
                 }
             };
 
-            Showtimes showtime1 = new Showtimes(showtime, moviename, movieid, cinemaID);
+            int showtimeID =0;
+            ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
+            if(ShowtimesArray.size()>0){
+                showtimeID = ShowtimesArray.get(ShowtimesArray.size()-1).getShowtimeID() +1 ;
+            }
+            else{
+                showtimeID = 1;
+            }
+
+            Showtimes showtime1 = new Showtimes(showtime, moviename, movieid, cinemaID, showtimeID);
 
             showtimeList.add(showtime1);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
@@ -142,7 +151,8 @@ public class ShowtimesManager {
         try {
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
             for (int i =0; i< showtimeList.size(); i++){
-                if (date.equals((showtimeList.get(i).getShowtime()).substring(0,8)) && showtimeList.get(i).getMovieID() == movieid){
+                //System.out.println((showtimeList.get(i).getShowtime()).substring(0,10));
+                if (date.equals((showtimeList.get(i).getShowtime()).substring(0,10)) && showtimeList.get(i).getMovieID() == movieid){
                     arraytoadd.add(showtimeList.get(i));
                 }
             }
@@ -152,6 +162,34 @@ public class ShowtimesManager {
 
 
     }
+
+    public static void updateSeats(int showtimeID){
+        //ArrayList<Showtimes> arraytoadd = new ArrayList<Showtimes>();
+        try {
+
+            ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
+
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+
+            int i;
+            for (i =0; i< showtimeList.size(); i++){
+                //System.out.println((showtimeList.get(i).getShowtime()).substring(0,10));
+                if (showtimeList.get(i).getShowtimeID() == showtimeID){
+                    //arraytoadd.add(showtimeList.get(i));
+                    break;
+                }
+            }
+            showtimeList.get(i).getSeats().assignSeat(5,5);
+            out.writeObject(showtimeList);
+            out.close();
+        } catch (Exception e) {e.printStackTrace(
+        );}
+
+
+
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
 public class Showtimes implements Serializable {
+    private static final long serialVersionUID = -9144363532793385492L;
 
     private String showtime;
 
@@ -8,11 +9,17 @@ public class Showtimes implements Serializable {
     private int movieID;
     private String cinemaID;
 
-    public Showtimes(String showtime,String moviename, int movieID, String cinemaID) {
+    private SeatingPlan seats;
+
+    private int showtimeID;
+
+    public Showtimes(String showtime,String moviename, int movieID, String cinemaID, int showtimeID) {
         this.showtime = showtime;
         this.moviename = moviename;
         this.movieID = movieID;
         this.cinemaID = cinemaID;
+        this.seats = new SeatingPlan(15,15);
+        this.showtimeID = showtimeID;
     }
 
 
@@ -49,13 +56,15 @@ public class Showtimes implements Serializable {
         return cinemaID;
     }
 
+    public SeatingPlan getSeats(){
+        return seats;
+    }
 
+    public int getShowtimeID() {
+        return showtimeID;
+    }
 
-
-
-
-
-
-
-
+    public void setShowtimeID(int showtimeID) {
+        this.showtimeID = showtimeID;
+    }
 }
