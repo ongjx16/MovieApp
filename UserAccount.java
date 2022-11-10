@@ -1,4 +1,3 @@
-package User;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -31,15 +30,15 @@ public class UserAccount implements Serializable {
 
     public void showBookingHistory(){
         for(int i=0; i<bookingHistory.size(); i++){
-            System.out.print(bookingHistory.get(i).getTXNid());
+            System.out.print(bookingHistory.get(i).getName()+"\n");
         }
 
     }
 
-    public ArrayList<Booking> addBooking(Booking b){
+    public void addBooking(Booking b){
         bookingHistory.add(b);
         System.out.println("Shown!");
-        return bookingHistory;
+
     }
 
 

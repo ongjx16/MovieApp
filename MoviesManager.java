@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class MoviesManager {
 
-    private static int number = 3;
+
     public static void createMovie(String name, String type, int showLength, String showingStatus, String director, String synopsis){
         try{
 
@@ -35,7 +35,6 @@ else{
             movieList.add(movie1);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
             out.writeObject(movieList);
-            number++;
             out.flush();
             //closing the stream
             //out.reset();
@@ -70,7 +69,6 @@ else{
             movieList.remove(index);
 
             out.writeObject(movieList);
-            number++;
             out.flush();
             //closing the stream
             //out.reset();
