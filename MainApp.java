@@ -2,8 +2,6 @@ import java.util.Scanner;
 import Admin.adminLogin;
 import Admin.createAdmin;
 import User.tickets;
-import User.Booking;
-import User.UserAccount;
 import Admin.AdminAccount;
 import java.io.*;
 import java.util.ArrayList;
@@ -418,42 +416,41 @@ public class MainApp {
                             System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
                         }
                         System.out.println("Choose your cineplex: ");
-                        int a = scan.nextInt();
-                        if (a > readCineplexes.getCineplexes().length || a < 1) {
+                        int cineplexChoice = scan.nextInt();
+                        if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
                             System.out.println("Invalid option, please choose again");
-                            a = scan.nextInt();
+                            cineplexChoice = scan.nextInt();
                         }
-                        System.out.println("Your choice is: " + readCineplexes.getCineplexes()[a - 1].getCineplexName());
-                        Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[a - 1].getCineplexName());
+                        System.out.println("Your choice is: " + readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
+                        Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
                         System.out.println("Choose your movie! ");
-                        for (int j = 0; j < userCineplex.getMovies().length; j++) {
-                            System.out.println("[" + (j + 1) + "] " + userCineplex.getMovies()[j] + "\n");
+                        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
+                        for (int j = 0; j < movies.size(); j++) {
+                            System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
                         }
-                        int b = scan.nextInt();
-                        if (b > userCineplex.getMovies().length || b < 1) {
+                        int movieChoice = scan.nextInt();
+                        if (movieChoice >movies.size()|| movieChoice < 1) {
                             System.out.println("Invalid choice, please choose again");
-                            b = scan.nextInt();
+                            movieChoice = scan.nextInt();
                         }
-                        System.out.println("Your choice is: " + userCineplex.getMovies()[b - 1]);
-                        String movieChosen = userCineplex.getMovies()[b - 1];
+                        System.out.println("Your choice is: " + MoviesManager.getMovieNameById(movies.get(movieChoice-1)));
+                        String movieChosen = MoviesManager.getMovieNameById(movies.get(movieChoice-1));
 
-                        System.out.println("What dates would you like to see this movie (Please enter in ddMM format): ");
+                        ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movies.get(movieChoice-1)));
+                        ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable)) ;
+
+                        System.out.println("What dates would you like to see this movie (Please enter in DD/MM/YY format): ");
+                        for (int z = 0; z< datesToSelect.size(); z++){
+                            System.out.println("[" + (z + 1) + "] "+ datesToSelect.get(z) + "\n");
+                        }
                         int g = scan.nextInt();
-                        //show the movie timings here.
-
-                        //                    if (g > showmoviedates(chosen_movie).length || g < 1){
-                        //                        System.out.println("Invalid choice, please choose again");
-                        //                        g = scan.nextInt();
-                        //                    }
-                        //                    System.out.println("Your choice of date is: " + showmovietimings(chosen_movie).getshowtimings()[f-1]);
 
                         System.out.println("What timings would you like to see this movie: ");
-                        int h = scan.nextInt();
-                        //                    if (h > showmovietimings(chosen_date, chosen_movie).length || h < 1){
-                        //                        System.out.println("Invalid choice, please choose again");
-                        //                        h = scan.nextInt();
-                        //                    }
-                        //                    System.out.println("Your choice of date is: " + showmovietimings(chosen_date, chosen_movie).getshowtimings()[g-1]);
+                        for(int y=0; y<showtimesAvailable.size();y++){
+                            if(showtimesAvailable.get(y).getShowtime().substring(0,10).equals(datesToSelect.get(g-1))){
+                                System.out.println("[" + (y + 1) + "] "+showtimesAvailable.get(y).getShowtime().substring(11));
+                            }
+                        }
 
                         Pricing newprice = new Pricing();
                         float c = newprice.obtainPricing("digital", "Typical", "Student", true, true, "THU", true);
@@ -480,78 +477,78 @@ public class MainApp {
                         //generating tickets from the array
                         for (int n = 0; n < SeatsArray.size(); n++) {
                             System.out.println("\nTicket" + ":");
-                            tickets tics = new tickets(movieChosen, "JE1", String.valueOf(g), String.valueOf(h), SeatsArray.get(n));
+                            tickets tics = new tickets(movieChosen, "JE1", "hello", "test", SeatsArray.get(n));
                         }
-//
-//                        System.out.println("Please Sign up or Log in to register your booking.");
-//                        System.out.println("[1] Sign up");
-//                        System.out.println("[2] Log in");
-//                        String newUsername=" ";
-//                        int op = scan.nextInt();
-//                        scan.nextLine();
-//                        if (op == 1) {
-//                            String name;
-//                            int phoneNumber;
-//                            String email;
-//                            String username;
-//                            String password;
-//                            int userId;
-//                            scan.nextLine();
-//                            System.out.println("Please enter your name: ");
-//                            name = scan.nextLine();
-//                            System.out.println("Please enter your phone number: ");
-//                            phoneNumber = scan.nextInt();
-//                            scan.nextLine();
-//                            System.out.println("Please enter your email: ");
-//                            email = scan.nextLine();
-//                            System.out.println("Please enter your username: ");
-//                            username = scan.nextLine();
-//                            System.out.println("Please enter your password: ");
-//                            password = scan.nextLine();
-//                            UsersManager.createUser(username, password, name, phoneNumber, email);
-//                            newUsername = username;
-//                        }
-//
-//                        else if (op == 2) {
-//                            String usernameInput;
-//                            String passwordInput;
-//                            while (true) {
-//                                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
-//                                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
-//                                System.out.println("Please enter your username: ");
-//                                usernameInput = scan.nextLine();
-//                                if (UserLogin.verifyUsername(usernameInput)) {
-//                                    System.out.println("Please enter your password: ");
-//                                    passwordInput = scan.nextLine();
-//                                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
-//                                        System.out.println("Invalid password, please try again. ");
-//                                        passwordInput = scan.nextLine();
-//                                    }
-//                                    System.out.println("Welcome back " + usernameInput);
-//                                    break;
-//
-//                                } else {
-//                                    System.out.println("Username not found, please try again. ");
-//                                }
-//                            }
-//                            newUsername = usernameInput;
-//                        }
-//                        // Generating transaction ID
-//                        String txnID = new Transaction("XXX").getTransactionId();
-//                        // Making a booking
-//                        int count =0;
-//                        Booking booked = new Booking("poohy", "poohyemail", 12345678, c * SeatsArray.size(), txnID, String.valueOf(g), String.valueOf(h));
-//                        Booking booked1 = new Booking("htut", "poohyemail", 12345678, c * SeatsArray.size(), txnID, String.valueOf(g), String.valueOf(h));
-//                        ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
-//                        for(count=0; count<usersList.size(); count++){
-//                            if(usersList.get(count).getUsername().equals(newUsername)) {
-//                                UsersManager.editBookingHistory(count, booked1);
-//                                break;
-//                            }
-//
-//                        }
-//                        UsersManager.readAllUsers().get(count).showBookingHistory();
-//                    }
+
+                        System.out.println("Please Sign up or Log in to register your booking.");
+                        System.out.println("[1] Sign up");
+                        System.out.println("[2] Log in");
+                        String newUsername=" ";
+                        int op = scan.nextInt();
+                        scan.nextLine();
+                        if (op == 1) {
+                            String name;
+                            int phoneNumber;
+                            String email;
+                            String username;
+                            String password;
+                            int userId;
+                            scan.nextLine();
+                            System.out.println("Please enter your name: ");
+                            name = scan.nextLine();
+                            System.out.println("Please enter your phone number: ");
+                            phoneNumber = scan.nextInt();
+                            scan.nextLine();
+                            System.out.println("Please enter your email: ");
+                            email = scan.nextLine();
+                            System.out.println("Please enter your username: ");
+                            username = scan.nextLine();
+                            System.out.println("Please enter your password: ");
+                            password = scan.nextLine();
+                            UsersManager.createUser(username, password, name, phoneNumber, email);
+                            newUsername = username;
+                        }
+
+                        else if (op == 2) {
+                            String usernameInput;
+                            String passwordInput;
+                            while (true) {
+                                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
+                                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
+                                System.out.println("Please enter your username: ");
+                                usernameInput = scan.nextLine();
+                                if (UserLogin.verifyUsername(usernameInput)) {
+                                    System.out.println("Please enter your password: ");
+                                    passwordInput = scan.nextLine();
+                                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                                        System.out.println("Invalid password, please try again. ");
+                                        passwordInput = scan.nextLine();
+                                    }
+                                    System.out.println("Welcome back " + usernameInput);
+                                    break;
+
+                                } else {
+                                    System.out.println("Username not found, please try again. ");
+                                }
+                            }
+                            newUsername = usernameInput;
+                        }
+                        // Generating transaction ID
+                        String txnID = new Transaction("XXX").getTransactionId();
+                        // Making a booking
+                        int count =0;
+                        Booking booked = new Booking("poohy", "poohyemail", 12345678, c * SeatsArray.size(), txnID, "hello","bye");
+                        Booking booked1 = new Booking("htut", "poohyemail", 12345678, c * SeatsArray.size(), txnID, "hello","bye");
+                        ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
+                        for(count=0; count<usersList.size(); count++){
+                            if(usersList.get(count).getUsername().equals(newUsername)) {
+                                UsersManager.editBookingHistory(count, booked1);
+                                break;
+                            }
+
+                        }
+                        UsersManager.readAllUsers().get(count).showBookingHistory();
+                    }
                     }
 
                     if (option == 2){ //Search/List movies
@@ -688,4 +685,4 @@ public class MainApp {
         }
 
     }
-}
+
