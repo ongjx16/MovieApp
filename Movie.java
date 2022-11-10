@@ -1,15 +1,20 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Movie  implements Serializable {
     private static final long serialVersionUID = -3185918430309702988L;
     private String name;
     private String type;
-    private String rating;
+    private int[] rating;
     private int showLength;
     private String showingStatus;
     private String director;
     private String synopsis;
     private int movieID;
+
+    private ArrayList<String> reviews;
+
+    private int sales;
 
     //GET METHODS
 
@@ -21,7 +26,7 @@ public class Movie  implements Serializable {
         return type;
     }
 
-    public String getRating() {
+    public int[] getRating() {
         return rating;
     }
 
@@ -49,7 +54,7 @@ public class Movie  implements Serializable {
         this.type = type;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int[] rating) {
         this.rating = rating;
     }
 
@@ -81,17 +86,39 @@ public class Movie  implements Serializable {
         this.movieID = movieID;
     }
 
+    public ArrayList<String> getReviews() {
+        return reviews;
+    }
+
+    public int getSales() {
+        return sales;
+    }
+
+    public void setReviews(ArrayList<String> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setSales(int sales) {
+        this.sales = sales;
+    }
+
+    public void setMovieID(int movieID) {
+        this.movieID = movieID;
+    }
+
     //CONSTRUCTOR
 
-    public Movie(String name, String type, String rating, int showLength, String showingStatus, String director, String synopsis, int movieID) {
+    public Movie(String name, String type, int showLength, String showingStatus, String director, String synopsis, int movieID) {
         this.name = name;
         this.type = type;
-        this.rating = rating;
         this.showLength = showLength;
         this.showingStatus = showingStatus;
         this.director = director;
         this.synopsis = synopsis;
         this.movieID = movieID;
+        this.reviews=new ArrayList<String>();
+        this.sales=0;
+        this.rating = new int[]{0,0};
     }
     public Movie(String n){
         this.name = n;

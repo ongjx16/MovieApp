@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class MoviesManager {
 
-    private static int number = 3;
-    public static void createMovie(String name, String type, String rating, int showLength, String showingStatus, String director, String synopsis){
+
+    public static void createMovie(String name, String type, int showLength, String showingStatus, String director, String synopsis){
         try{
 
             //Creating the object
@@ -30,12 +30,11 @@ else{
 }
 
 
-            Movie movie1 = new Movie(name, type, rating, showLength, showingStatus, director, synopsis, id);
+            Movie movie1 = new Movie(name, type, showLength, showingStatus, director, synopsis, id);
 
             movieList.add(movie1);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
             out.writeObject(movieList);
-            number++;
             out.flush();
             //closing the stream
             //out.reset();
@@ -70,7 +69,6 @@ else{
             movieList.remove(index);
 
             out.writeObject(movieList);
-            number++;
             out.flush();
             //closing the stream
             //out.reset();
@@ -139,7 +137,141 @@ else{
         }catch(Exception e){}
     }
 
+    public static void increaseSales (int MovieID, int toAdd) {
+        try{
 
+            //Creating the object
+            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllMovies());
+
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            int y;
+           for (y=0; y<movieList.size(); y++){
+               if (movieList.get(y).getMovieID() == MovieID){
+                   break;
+               }
+           }
+
+           int newSales = movieList.get(y).getSales()+toAdd;
+            movieList.get(y).setSales(newSales);
+
+            out.writeObject(movieList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println(movieList.get(y).getMovieID());
+            System.out.println("Movie Sales Successfully Updated.");
+        }catch(Exception e){}
+    }
+
+    public static void addReviews (int MovieID, String newReview) {
+        try{
+
+            //Creating the object
+            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllMovies());
+
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            int y;
+            for (y=0; y<movieList.size(); y++){
+                if (movieList.get(y).getMovieID() == MovieID){
+                    break;
+                }
+            }
+
+            ArrayList<String> reviews = new ArrayList<String>(movieList.get(y).getReviews());
+
+            reviews.add(newReview);
+
+            movieList.get(y).setReviews(reviews);
+
+            out.writeObject(movieList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println("Movie Review Successfully Added.");
+        }catch(Exception e){}
+    }
+
+    public static void updateRating (int MovieID, int newRating) {
+        try{
+
+            //Creating the object
+            ArrayList<Movie> movieList = new ArrayList<Movie>(readAllMovies());
+
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            int y;
+            for (y=0; y<movieList.size(); y++){
+                if (movieList.get(y).getMovieID() == MovieID){
+                    break;
+                }
+            }
+
+            int[] currentRating = movieList.get(y).getRating();
+            int[] updated = new int[2];
+
+            if (currentRating[0] ==0){
+                updated[0] = 1;
+                updated[1] = newRating;
+            }
+            else{
+                //return average rating with new rating included
+                updated[0] = (currentRating[0])+1;
+                updated[1] = (currentRating[1]+newRating)/(updated[0]);
+            }
+
+            movieList.get(y).setRating(updated);
+
+            out.writeObject(movieList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println(movieList.get(y).getMovieID());
+            System.out.println("Movie Sales Successfully Updated.");
+        }catch(Exception e){}
+    }
+
+    public static void searchMovie(){
+        System.out.println("\nEnter the movie title you wish to search: ");
+        Scanner in = new Scanner(System.in);
+        String movieTitle = in.nextLine();
+        int i;
+        int index = -1;
+        ArrayList<Movie> allMovies = readAllMovies();
+        for (i = 0; i < allMovies.size(); i++) {
+            String movie = allMovies.get(i).getName().toUpperCase();
+            if (movie.equals(movieTitle.toUpperCase())) {
+                index = i;
+            }
+        }
+        System.out.println("Movie: " + allMovies.get(index).getName());
+        System.out.println("Type: " + allMovies.get(index).getType());
+        System.out.println("Director: " + allMovies.get(index).getDirector());
+        System.out.println("Rating: " + allMovies.get(index).getRating()[1]);
+        System.out.println("Status: " + allMovies.get(index).getShowingStatus());
+        System.out.println("Duration: " + allMovies.get(index).getShowLength());
+        System.out.println("Synopsis: " + allMovies.get(index).getSynopsis());
+    }
+
+    public static void printMoviedb() {
+        ArrayList<Movie> allMovies = readAllMovies();
+        for (int i = 0; i < allMovies.size(); i++) {
+            System.out.println(allMovies.get(i).getName());
+        }
+    }
 
 
 
