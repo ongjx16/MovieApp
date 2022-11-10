@@ -459,6 +459,7 @@ public class MainApp {
                     System.out.println("[1] Sign up");
                     System.out.println("[2] Log in");
                     int op = scan.nextInt();
+                    scan.nextLine();
                     if (op == 1) {
                         String name;
                         int phoneNumber;
