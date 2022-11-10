@@ -246,9 +246,34 @@ else{
         }catch(Exception e){}
     }
 
+    public static void searchMovie(){
+        System.out.println("\nEnter the movie title you wish to search: ");
+        Scanner in = new Scanner(System.in);
+        String movieTitle = in.nextLine();
+        int i;
+        int index = -1;
+        ArrayList<Movie> allMovies = readAllMovies();
+        for (i = 0; i < allMovies.size(); i++) {
+            String movie = allMovies.get(i).getName().toUpperCase();
+            if (movie.equals(movieTitle.toUpperCase())) {
+                index = i;
+            }
+        }
+        System.out.println("Movie: " + allMovies.get(index).getName());
+        System.out.println("Type: " + allMovies.get(index).getType());
+        System.out.println("Director: " + allMovies.get(index).getDirector());
+        System.out.println("Rating: " + allMovies.get(index).getRating()[1]);
+        System.out.println("Status: " + allMovies.get(index).getShowingStatus());
+        System.out.println("Duration: " + allMovies.get(index).getShowLength());
+        System.out.println("Synopsis: " + allMovies.get(index).getSynopsis());
+    }
 
-
-
+    public static void printMoviedb() {
+        ArrayList<Movie> allMovies = readAllMovies();
+        for (int i = 0; i < allMovies.size(); i++) {
+            System.out.println(allMovies.get(i).getName());
+        }
+    }
 
 
 
