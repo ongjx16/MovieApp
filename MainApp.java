@@ -1,11 +1,9 @@
 import java.util.Scanner;
 import Admin.adminLogin;
 import Admin.createAdmin;
-import User.UserLogin;
 import User.tickets;
 import User.Booking;
 import User.UserAccount;
-import User.UserLogin;
 import Admin.AdminAccount;
 import java.io.*;
 import java.util.ArrayList;
@@ -449,69 +447,104 @@ public class MainApp {
 //                            break;
 //                    }
 
-                    UserLogin u = new UserLogin();
-                    for (int j = 0; j < u.getUsers()[0].getBookingHistory().size(); j++) {
-                        System.out.println(u.getUsers()[0].getBookingHistory().get(j).getTXNid());
-                    }
+                   
 
                     //generating tickets from the array
                     for (int n = 0; n < SeatsArray.size(); n++) {
                         System.out.println("\nTicket" + ":");
                         tickets tics = new tickets(movieChosen, "JE1", String.valueOf(g), String.valueOf(h), SeatsArray.get(n));
                     }
-                }
+                    //sign up or login for user
+                    System.out.println("Please Sign up or Log in to register your booking.");
+                    System.out.println("[1] Sign up");
+                    System.out.println("[2] Log in");
+                    int op = scan.nextInt();
+                    if (op == 1) {
+                        String name;
+                        int phoneNumber;
+                        String email;
+                        String username;
+                        String password;
+                        int userId;
+                        scan.nextLine();
+                        System.out.println("Please enter your name: ");
+                        name = scan.nextLine();
+                        System.out.println("Please enter your phone number: ");
+                        phoneNumber = scan.nextInt();
+                        scan.nextLine();
+                        System.out.println("Please enter your email: ");
+                        email = scan.nextLine();
+                        System.out.println("Please enter your username: ");
+                        username = scan.nextLine();
+                        System.out.println("Please enter your password: ");
+                        password = scan.nextLine();
+                        UsersManager.createUser(username, password, name, phoneNumber, email);
+                    }
+
+                    if (op == 2) {
+                        String usernameInput; 
+                        String passwordInput;
+                        while (true) {
+                            System.out.println("Please enter your username: ");
+                            usernameInput = scan.nextLine();
+                            if (UserLogin.verifyUsername(usernameInput)) {
+                                System.out.println("Please enter your password: ");
+                                passwordInput = scan.nextLine();
+                                while(!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                                    System.out.println("Invalid password, please try again. ");
+                                    passwordInput = scan.nextLine();
+                                }
+                                System.out.println("Welcome back " + usernameInput);
+                                    break;
+
+                            } else {
+                                System.out.println("Username not found, please try again. ");
+                            }
+                        }
+                    }
 
                 if (option == 2) {
-                    System.out.println("Please enter your username");
-                    username1 = scan.next();
+                    String usernameInput; 
+                        String passwordInput;
+                        while (true) {
+                            System.out.println("Please enter your username: ");
+                            usernameInput = scan.nextLine();
+                            if (UserLogin.verifyUsername(usernameInput)) {
+                                System.out.println("Please enter your password: ");
+                                passwordInput = scan.nextLine();
+                                while(!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                                    System.out.println("Invalid password, please try again. ");
+                                    passwordInput = scan.nextLine();
+                                }
+                                System.out.println("Welcome back " + usernameInput);
+                                    break;
 
-                    while (!user.verifyUsername(username1)) {
-                        if (user.verifyUsername(username1)) {
-                            System.out.println("Username is valid");
-                        } else {
-                            System.out.println("Username is invalid, please key in again");
-                            username1 = scan.next();
+                            } else {
+                                System.out.println("Username not found, please try again. ");
+                            }
                         }
-                    }
-
-                    System.out.println("Please enter your password");
-                    password1 = scan.next();
-                    while (!user.verifyPassword(username1, password1)) {
-                        if (user.verifyPassword(username1, password1)) {
-                            System.out.println("Password is valid");
-
-                        } else {
-                            System.out.println("Password is invalid, please key in again");
-                            password1 = scan.next();
-                        }
-                    }
-                    System.out.println("What would you like to do?");
-                    System.out.println("[1] View booking history");
-                    System.out.println("[2] Leave a review");
                 }
 
                 if (option == 3) {
-                    System.out.println("What is your username");
-                    String f = scan.next();
-                    System.out.println("What is your password");
-                    String g = scan.next();
-                    System.out.println("What is your name");
-                    String h = scan.next();
-                    System.out.println("What is your email");
-                    String i = scan.next();
-                    System.out.println("What is your phone number");
-                    int j = scan.nextInt();
-                    try {
-                        UserAccount newAccount = new UserAccount(f, g, h, i, j);
-                        FileOutputStream fout = new FileOutputStream("UserAccounts.dat");
-                        ObjectOutputStream out = new ObjectOutputStream(fout);
-                        out.writeObject(newAccount);
-                        out.flush();
-                        out.close();
-                        System.out.println("success");
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
+                    String name;
+                    int phoneNumber;
+                    String email;
+                    String username;
+                    String password;
+                    int userId;
+                    scan.nextLine();
+                    System.out.println("Please enter your name: ");
+                    name = scan.nextLine();
+                    System.out.println("Please enter your phone number: ");
+                    phoneNumber = scan.nextInt();
+                    scan.nextLine();
+                    System.out.println("Please enter your email: ");
+                    email = scan.nextLine();
+                    System.out.println("Please enter your username: ");
+                    username = scan.nextLine();
+                    System.out.println("Please enter your password: ");
+                    password = scan.nextLine();
+                    UsersManager.createUser(username, password, name, phoneNumber, email);
 
                 }
 
@@ -521,23 +554,24 @@ public class MainApp {
                     for (int i = 0; i < readingMovies.getMovies().length; i++) {
                         System.out.println("[" + (i + 1) + "]" + readingMovies.getMovies()[i]);
                     }
-                    int h = scan.nextInt();
-                    if (h > readingMovies.getMovies().length || h < 1) {
+                    int movieInput = scan.nextInt();
+                    if (movieInput > readingMovies.getMovies().length || movieInput < 1) {
                         System.out.println("Invalid input, select again");
-                        h = scan.nextInt();
+                        movieInput = scan.nextInt();
                     }
-                    System.out.println("You've chosen: " + readingMovies.getMovies()[h - 1]);
+                    System.out.println("You've chosen: " + readingMovies.getMovies()[movieInput - 1]);
                     System.out.println("Here are the associated movie details!\n");
-                    System.out.println("Name: " + readingMovies.getMovieDetails(h).getName());
-                    System.out.println("Type: " + readingMovies.getMovieDetails(h).getType());
-                    System.out.println("Director: " + readingMovies.getMovieDetails(h).getDirector());
-                    System.out.println("Rating: " + readingMovies.getMovieDetails(h).getRating());
-                    System.out.println("Show Status: " + readingMovies.getMovieDetails(h).getShowingStatus());
-                    System.out.println("Show Length: " + readingMovies.getMovieDetails(h).getShowLength());
-                    System.out.println("Synopsis: " + readingMovies.getMovieDetails(h).getSynopsis());
+                    System.out.println("Name: " + readingMovies.getMovieDetails(movieInput).getName());
+                    System.out.println("Type: " + readingMovies.getMovieDetails(movieInput).getType());
+                    System.out.println("Director: " + readingMovies.getMovieDetails(movieInput).getDirector());
+                    System.out.println("Rating: " + readingMovies.getMovieDetails(movieInput).getRating());
+                    System.out.println("Show Status: " + readingMovies.getMovieDetails(movieInput).getShowingStatus());
+                    System.out.println("Show Length: " + readingMovies.getMovieDetails(movieInput).getShowLength());
+                    System.out.println("Synopsis: " + readingMovies.getMovieDetails(movieInput).getSynopsis());
                 }
             }
         }
 
     }
+}
 }
