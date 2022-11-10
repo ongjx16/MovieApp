@@ -1,4 +1,4 @@
-import User.selector;import java.io.FileInputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,7 +12,7 @@ public class UsersManager {
         try{
 
             //Creating the object
-            ArrayList<selector.UserAccount> userList = new ArrayList<selector.UserAccount>(readAllUsers());
+            ArrayList<UserAccount> userList = new ArrayList<UserAccount>(readAllUsers());
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllUsers.dat"));
@@ -25,7 +25,7 @@ public class UsersManager {
                 id = 1;
             }
 
-            selector.UserAccount user1 = new selector.UserAccount(username, password, name, phoneNumber, email, id);
+            UserAccount user1 = new UserAccount(username, password, name, phoneNumber, email, id);
 
             userList.add(user1);
 //            ObjectOutputStream out = new ObjectOutputStream(fout);
@@ -39,12 +39,12 @@ public class UsersManager {
         );}
     }
 
-    public static ArrayList<selector.UserAccount> readAllUsers () {
-        ArrayList<selector.UserAccount> usersOutput = new ArrayList<selector.UserAccount>();
+    public static ArrayList<UserAccount> readAllUsers () {
+        ArrayList<UserAccount> usersOutput = new ArrayList<UserAccount>();
         try {
             //Creating stream to read the object
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("DATFiles/AllUsers.dat"));
-            usersOutput = (ArrayList<selector.UserAccount>) in.readObject();
+            usersOutput = (ArrayList<UserAccount>) in.readObject();
             in.close();
         } catch (Exception e) {e.printStackTrace(
         );}
@@ -55,7 +55,7 @@ public class UsersManager {
         try{
 
             //Creating the object
-            ArrayList<selector.UserAccount> usersList = new ArrayList<selector.UserAccount>(readAllUsers());
+            ArrayList<UserAccount> usersList = new ArrayList<UserAccount>(readAllUsers());
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllUsers.dat"));
@@ -76,7 +76,7 @@ public class UsersManager {
         try{
 
             //Creating the object
-            ArrayList<selector.UserAccount> usersList = new ArrayList<selector.UserAccount>(readAllUsers());
+            ArrayList<UserAccount> usersList = new ArrayList<UserAccount>(readAllUsers());
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllUsers.dat"));
             ObjectOutputStream out = new ObjectOutputStream(fout);

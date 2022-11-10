@@ -2,8 +2,6 @@ import java.util.Scanner;
 import Admin.adminLogin;
 import Admin.createAdmin;
 import User.tickets;
-import User.Booking;
-import User.UserAccount;
 import Admin.AdminAccount;
 import java.io.*;
 import java.util.ArrayList;
@@ -58,7 +56,7 @@ public class MainApp {
 
                 System.out.println("1. Edit Movie Details\n");
                 System.out.println("2. Edit Showtime Details\n");
-                System.out.println("3. Edit Movie\n");
+                System.out.println("3. Edit Movie Prices\n");
                 System.out.println("4. Quit \n");
                 System.out.println("Enter a number of your choice: ");
                 choose = scan.nextInt();
@@ -531,9 +529,6 @@ public class MainApp {
                         //                    }
                         //                    System.out.println("Your choice of date is: " + showmovietimings(chosen_date, chosen_movie).getshowtimings()[g-1]);
 
-                        Pricing newprice = new Pricing();
-                        float c = newprice.obtainPricing("digital", "Typical", "Student", true, true, "THU", true);
-                        System.out.println("Your pricing is: " + c);
                         System.out.println("How many seat do you want");
                         int f = scan.nextInt();
                         SeatingPlan layout = new SeatingPlan(5, 5);
@@ -558,76 +553,76 @@ public class MainApp {
                             System.out.println("\nTicket" + ":");
                             tickets tics = new tickets(movieChosen, "JE1", String.valueOf(g), String.valueOf(h), SeatsArray.get(n));
                         }
-//
-//                        System.out.println("Please Sign up or Log in to register your booking.");
-//                        System.out.println("[1] Sign up");
-//                        System.out.println("[2] Log in");
-//                        String newUsername=" ";
-//                        int op = scan.nextInt();
-//                        scan.nextLine();
-//                        if (op == 1) {
-//                            String name;
-//                            int phoneNumber;
-//                            String email;
-//                            String username;
-//                            String password;
-//                            int userId;
-//                            scan.nextLine();
-//                            System.out.println("Please enter your name: ");
-//                            name = scan.nextLine();
-//                            System.out.println("Please enter your phone number: ");
-//                            phoneNumber = scan.nextInt();
-//                            scan.nextLine();
-//                            System.out.println("Please enter your email: ");
-//                            email = scan.nextLine();
-//                            System.out.println("Please enter your username: ");
-//                            username = scan.nextLine();
-//                            System.out.println("Please enter your password: ");
-//                            password = scan.nextLine();
-//                            UsersManager.createUser(username, password, name, phoneNumber, email);
-//                            newUsername = username;
-//                        }
-//
-//                        else if (op == 2) {
-//                            String usernameInput;
-//                            String passwordInput;
-//                            while (true) {
-//                                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
-//                                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
-//                                System.out.println("Please enter your username: ");
-//                                usernameInput = scan.nextLine();
-//                                if (UserLogin.verifyUsername(usernameInput)) {
-//                                    System.out.println("Please enter your password: ");
-//                                    passwordInput = scan.nextLine();
-//                                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
-//                                        System.out.println("Invalid password, please try again. ");
-//                                        passwordInput = scan.nextLine();
-//                                    }
-//                                    System.out.println("Welcome back " + usernameInput);
-//                                    break;
-//
-//                                } else {
-//                                    System.out.println("Username not found, please try again. ");
-//                                }
-//                            }
-//                            newUsername = usernameInput;
-//                        }
-//                        // Generating transaction ID
-//                        String txnID = new Transaction("XXX").getTransactionId();
-//                        // Making a booking
-//                        int count =0;
-//                        Booking booked = new Booking("poohy", "poohyemail", 12345678, c * SeatsArray.size(), txnID, String.valueOf(g), String.valueOf(h));
-//                        Booking booked1 = new Booking("htut", "poohyemail", 12345678, c * SeatsArray.size(), txnID, String.valueOf(g), String.valueOf(h));
-//                        ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
-//                        for(count=0; count<usersList.size(); count++){
-//                            if(usersList.get(count).getUsername().equals(newUsername)) {
-//                                UsersManager.editBookingHistory(count, booked1);
-//                                break;
-//                            }
-//
-//                        }
-//                        UsersManager.readAllUsers().get(count).showBookingHistory();
-//                    }
+
+                        System.out.println("Please Sign up or Log in to register your booking.");
+                        System.out.println("[1] Sign up");
+                        System.out.println("[2] Log in");
+                        String newUsername=" ";
+                        int op = scan.nextInt();
+                        scan.nextLine();
+                        if (op == 1) {
+                            String name;
+                            int phoneNumber;
+                            String email;
+                            String username;
+                            String password;
+                            int userId;
+                            scan.nextLine();
+                            System.out.println("Please enter your name: ");
+                            name = scan.nextLine();
+                            System.out.println("Please enter your phone number: ");
+                            phoneNumber = scan.nextInt();
+                            scan.nextLine();
+                            System.out.println("Please enter your email: ");
+                            email = scan.nextLine();
+                            System.out.println("Please enter your username: ");
+                            username = scan.nextLine();
+                            System.out.println("Please enter your password: ");
+                            password = scan.nextLine();
+                            UsersManager.createUser(username, password, name, phoneNumber, email);
+                            newUsername = username;
+                        }
+
+                        else if (op == 2) {
+                            String usernameInput;
+                            String passwordInput;
+                            while (true) {
+                                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
+                                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
+                                System.out.println("Please enter your username: ");
+                                usernameInput = scan.nextLine();
+                                if (UserLogin.verifyUsername(usernameInput)) {
+                                    System.out.println("Please enter your password: ");
+                                    passwordInput = scan.nextLine();
+                                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                                        System.out.println("Invalid password, please try again. ");
+                                        passwordInput = scan.nextLine();
+                                    }
+                                    System.out.println("Welcome back " + usernameInput);
+                                    break;
+
+                                } else {
+                                    System.out.println("Username not found, please try again. ");
+                                }
+                            }
+                            newUsername = usernameInput;
+                        }
+                        // Generating transaction ID
+                        String txnID = new Transaction("XXX").getTransactionId();
+                        // Making a booking
+                        int count =0;
+                        Booking booked = new Booking("poohy", "poohyemail", 12345678, SeatsArray.size(), txnID, String.valueOf(g), String.valueOf(h));
+                        Booking booked1 = new Booking("htut", "poohyemail", 12345678, SeatsArray.size(), txnID, String.valueOf(g), String.valueOf(h));
+                        ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
+                        for(count=0; count<usersList.size(); count++){
+                            if(usersList.get(count).getUsername().equals(newUsername)) {
+                                UsersManager.editBookingHistory(count, booked1);
+                                break;
+                            }
+
+                        }
+                        UsersManager.readAllUsers().get(count).showBookingHistory();
+                    }
                     }
 
                     if (option == 2){ //Search/List movies
@@ -764,4 +759,4 @@ public class MainApp {
         }
 
     }
-}
+
