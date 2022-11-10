@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6cec635f-eb72-4fe3-9217-86aa61f8cb85" name="Changes" comment="added booking history template">
+      <change afterPath="$PROJECT_DIR$/DATFiles/AllUsers.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UsersManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.idea/MovieApp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Admin/AdminAccount.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Admin/AdminAccounts.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Admin/adminLogin.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Admin/createAdmin.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Cinema.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/CinemaType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Cineplex.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Cineplexes.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/DATFiles/AdminAccounts.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/DATFiles/AllMovies.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/DATFiles/AllUsers.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/HolidayDates.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/HolidayManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/MainApp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Movie.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/MovieApp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/MoviesManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Pricing.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/ReadCineplexes.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Seat.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/SeatingPlan.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Tester.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/Transaction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/UpdateInfo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/User/Booking.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/User/UserAccount.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/User/moviegoer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/User/selector.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/User/tickets.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/UserLogin.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/UsersManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/createCineplex.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/MovieApp/createHoliday.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cineplexes.dat" beforeDir="false" afterPath="$PROJECT_DIR$/Cineplexes.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATFiles/AllMovies.dat" beforeDir="false" afterPath="$PROJECT_DIR$/DATFiles/AllMovies.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MoviesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/MoviesManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/UserAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/User/UserAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/UserLogin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/createUser.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2HDmOnF7nQpDitiHr8umj52a0vt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainApp" />
+      <module name="MovieApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="createUser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="User.createUser" />
+      <module name="MovieApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value=".*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApp" />
+        <item itemvalue="Application.createUser" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6cec635f-eb72-4fe3-9217-86aa61f8cb85" name="Changes" comment="" />
+      <created>1667827999733</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667827999733</updated>
+    </task>
+    <task id="LOCAL-00001" summary="small change">
+      <created>1667909842022</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667909842022</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added booking history template">
+      <created>1667918988601</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667918988601</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="small change" />
+    <MESSAGE value="added booking history template" />
+    <option name="LAST_COMMIT_MESSAGE" value="added booking history template" />
+  </component>
+</project>
