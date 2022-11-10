@@ -15,10 +15,49 @@ public class UserAccount implements Serializable {
     private int phoneNumber;
 
     private String email;
+    private int userId;
 
     private ArrayList<Booking> bookingHistory = new ArrayList<>();
 
-    private int overallRatings;
+    public UserAccount(String username, String password, String name, int phoneNumber, String email, int userId){
+        this.username=username;
+        this.password=password;
+        this.name=name;
+        this.phoneNumber=phoneNumber;
+        this.email=email;
+        this.userId=userId;
+    }
+
+
+    public void showBookingHistory(){
+        for(int i=0; i<bookingHistory.size(); i++){
+            System.out.print(bookingHistory.get(i).getTXNid());
+        }
+
+    }
+
+    public ArrayList<Booking> addBooking(Booking b){
+        bookingHistory.add(b);
+        System.out.println("Shown!");
+        return bookingHistory;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getName() {
         return name;
@@ -44,56 +83,19 @@ public class UserAccount implements Serializable {
         this.email = email;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public ArrayList<Booking> getBookingHistory() {
         return bookingHistory;
     }
 
-    public void showBookingHistory(){
-//        for(int i=0; i<bookingHistory.size(); i++){
-//            System.out.print(bookingHistory.get(i).getTXNid());
-//        }
-
+    public void setBookingHistory(ArrayList<Booking> bookingHistory) {
+        this.bookingHistory = bookingHistory;
     }
-
-    public ArrayList<Booking> addBooking(Booking b){
-        bookingHistory.add(b);
-        System.out.println("Shown!");
-        return bookingHistory;
-    }
-
-
-
-    public int getOverallRatings() {
-        return overallRatings;
-    }
-
-    public void setOverallRatings(int overallRatings) {
-        this.overallRatings = overallRatings;
-    }
-
-    UserAccount(String u, String p){
-        this.username = u;
-        this.password = p;
-        this.email = "shubhangam@gmail.com";
-        this.name = "Shubhangam";
-        this.phoneNumber = 87805205;
-        this.overallRatings = 4;
-    }
-    public UserAccount(String u, String p, String c, String d, int e){
-        this.username = u;
-        this.password = p;
-        this.name = c;
-        this.email = d;
-        this.phoneNumber = e;
-        System.out.println("Username has been created");
-    }
-
-    public String getUserUsername(){
-        return username;
-    }
-
-    public String getUserPassword(){
-        return password;
-    }
-
 }
