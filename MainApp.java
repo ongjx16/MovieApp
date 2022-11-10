@@ -166,40 +166,41 @@ public class MainApp {
                     System.out.println("director " + MoviesArray.get(i).getDirector());
                     System.out.println("synopsis " + MoviesArray.get(i).getSynopsis() + "\n");
                 }
-            }
-        } else if (identity == 2) {
-            System.out.println("You are now a user");
-            System.out.println("What would you like to do now ");
-            System.out.println("(1) Book a movie");
-            System.out.println("(2) Log In");
-            System.out.println("(3) See Movie Details");
-            int option = scan.nextInt();
+            } 
+        }
+            else if (identity == 2) {
+                System.out.println("You are now a user");
+                System.out.println("What would you like to do now ");
+                System.out.println("(1) Book a movie");
+                System.out.println("(2) Log In");
+                System.out.println("(3) See Movie Details");
+                int option = scan.nextInt();
 
-            if (option == 1) {
-                System.out.println("These are the cineplexes");
-                ReadCineplexes readCineplexes = new ReadCineplexes();
-                for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
-                    System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
-                }
-                System.out.println("Choose your cineplex: ");
-                int a = scan.nextInt();
-                if (a > readCineplexes.getCineplexes().length || a < 1) {
-                    System.out.println("Invalid option, please choose again");
-                    a = scan.nextInt();
-                }
-                System.out.println("Your choice is: " + readCineplexes.getCineplexes()[a - 1].getCineplexName());
-                Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[a - 1].getCineplexName());
-                System.out.println("Choose your movie! ");
-                for (int j = 0; j < userCineplex.getMovies().length; j++) {
-                    System.out.println("[" + (j + 1) + "] " + userCineplex.getMovies()[j] + "\n");
-                }
-                int b = scan.nextInt();
-                if (b > userCineplex.getMovies().length || b < 1) {
-                    System.out.println("Invalid choice, please choose again");
-                    b = scan.nextInt();
-                }
-                System.out.println("Your choice is: " + userCineplex.getMovies()[b - 1]);
-                String movieChosen = userCineplex.getMovies()[b - 1];
+                if (option == 1){
+                    System.out.println("These are the cineplexes");
+                    ReadCineplexes readCineplexes = new ReadCineplexes();
+                    for(int i=0; i<readCineplexes.getCineplexes().length;i++){
+                        System.out.println("[" + (i+1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
+                    }
+                    System.out.println("Choose your cineplex: ");
+                    int a = scan.nextInt();
+                    if (a> readCineplexes.getCineplexes().length || a < 1){
+                        System.out.println("Invalid option, please choose again");
+                        a = scan.nextInt();
+                    }
+                    System.out.println("Your choice is: " + readCineplexes.getCineplexes()[a-1].getCineplexName());
+                    Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[a-1].getCineplexName());
+                    System.out.println("Choose your movie! ");
+                    for(int j=0; j<userCineplex.getMovies().length;j++){
+                        System.out.println("[" + (j+1) + "] " + userCineplex.getMovies()[j] + "\n");
+                    }
+                    int b = scan.nextInt();
+                    if (b > userCineplex.getMovies().length || b < 1){
+                        System.out.println("Invalid choice, please choose again");
+                        b = scan.nextInt();
+                    }
+                    System.out.println("Your choice is: " + userCineplex.getMovies()[b-1]);
+                    String movieChosen = userCineplex.getMovies()[b-1];
 
                 System.out.println("What dates would you like to see this movie (Please enter in ddMM format): ");
                 int g = scan.nextInt();
@@ -319,12 +320,8 @@ public class MainApp {
                 }
 
                 if (op == 2) {
-                    String usernameInput;
+                    String usernameInput; 
                     String passwordInput;
-                    System.out.println(UsersManager.readAllUsers().get(1).getUsername());
-                    System.out.println(UsersManager.readAllUsers().get(1).getPassword());
-                    scan.nextLine();
-
                     while (true) {
                         System.out.println("Please enter your username: ");
                         usernameInput = scan.nextLine();
@@ -373,7 +370,31 @@ public class MainApp {
                     System.out.println("[1] View booking history");
                     System.out.println("[2] Leave a review");
                 }
+
                 else if (option == 3) {
+                    String name;
+                    int phoneNumber;
+                    String email;
+                    String username;
+                    String password;
+                    int userId;
+                    scan.nextLine();
+                    System.out.println("Please enter your name: ");
+                    name = scan.nextLine();
+                    System.out.println("Please enter your phone number: ");
+                    phoneNumber = scan.nextInt();
+                    scan.nextLine();
+                    System.out.println("Please enter your email: ");
+                    email = scan.nextLine();
+                    System.out.println("Please enter your username: ");
+                    username = scan.nextLine();
+                    System.out.println("Please enter your password: ");
+                    password = scan.nextLine();
+                    UsersManager.createUser(username, password, name, phoneNumber, email);
+
+                }
+
+                if (option == 4){
                     System.out.println("Please select the movie you'd like to find out more about: ");
                     Cineplex readingMovies = new Cineplex("Tampines");
                     for (int i = 0; i < readingMovies.getMovies().length; i++) {
