@@ -448,7 +448,7 @@ public class MainApp {
                         System.out.println("What timings would you like to see this movie: ");
                         for(int y=0; y<showtimesAvailable.size();y++){
                             if(showtimesAvailable.get(y).getShowtime().substring(0,10).equals(datesToSelect.get(g-1))){
-                                System.out.println("[" + (y + 1) + "] "+showtimesAvailable.get(y).getShowtime().substring(11));
+                                System.out.println("[" + (y + 1) + "] "+1showtimesAvailable.get(y).getShowtime().substring(11));
                             }
                         }
 
