@@ -597,19 +597,29 @@ public class MainApp {
                         for (int i = 0; i < noOfSeats; i++) {
                             layout = showtimesAvailable.get(showtimeChoice-1).getSeats();
                             layout.displaySeatPlan();
+                            scan.nextLine();
                             System.out.println("input your desired row and column");
                             System.out.println("row (input number): ");
-                            int d = scan.nextInt();
+                            row = scan.nextLine();
+                            while(row.charAt(0)<49 || row.charAt(0)>53){
+                                System.out.println("Invalid row number, please input again: ");
+                                row = scan.nextLine();
+                            }
                             System.out.println("column (input letter): ");
-                            String e = scan.next();
-                            layout.assignSeat((d - 1), (e));
-                            String seatyea = e + String.valueOf(d);
+                            col = scan.nextLine();
+                            while(col.charAt(0)>101 || col.charAt(0)<65){
+                                System.out.println("Invalid column letter, please input again: ");
+                                col=scan.nextLine();
+                            }
+                            layout.assignSeat((row.charAt(0)-49), (col));
+                            String seatyea = col + String.valueOf(row);
                             String seatId = new Seat(seatyea).getSeatId();
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
                             SeatsArray.add(String.valueOf(seatId));
                             System.out.println("This is your chosen seat: " + seatId);
-                            ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(d-1),(e));
+                            ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(row.charAt(0)-49), (col));
+
                         }
                         if (seatprice == 0f || seatprice == 1f){ // situation where your movie selection is not premium, holiday or weekend
                             seatprice = seatprice*noOfSeats;
@@ -736,8 +746,9 @@ public class MainApp {
                             }
                         }
                         System.out.println(usersList.get(count).getUsername());
-                        System.out.println(col);
+                        System.out.println("col" +col);
                         Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),4.5f,txnID,showtimesAvailable.get(showtimeChoice-1).getMoviename(),showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(0,10),showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(11));
+                        System.out.println(row.charAt(0)-49);
                         ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),((row.charAt(0)-49)),(col));
                         UsersManager.editBookingHistory(count, booked1);
                     }
