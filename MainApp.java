@@ -447,12 +447,11 @@ public class MainApp {
 
                 while (option != 8) {
                     if (option == 1) { // Book a movie
-                        System.out.println("These are the cineplexes");
+                        System.out.println("Choose your cineplex: ");
                         ReadCineplexes readCineplexes = new ReadCineplexes();
                         for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
                             System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
                         }
-                        System.out.println("Choose your cineplex: ");
                         int cineplexChoice = scan.nextInt();
                         if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
                             System.out.println("Invalid option, please choose again");
@@ -462,6 +461,7 @@ public class MainApp {
                         Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
                         System.out.println("Choose your movie! ");
                         ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
+                        System.out.println("movies in that cineplex" + movies.size());
                         for (int j = 0; j < movies.size(); j++) {
                             System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
                         }
@@ -476,25 +476,27 @@ public class MainApp {
                         ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movies.get(movieChoice - 1)));
                         ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
-                        System.out.println("What dates would you like to see this movie (Please enter in DD/MM/YY format): ");
+                        System.out.println("What dates would you like to see this movie?  ");
                         for (int z = 0; z < datesToSelect.size(); z++) {
                             System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
                         }
-                        int g = scan.nextInt();
+                        int dateChoice = scan.nextInt();
 
                         System.out.println("What timings would you like to see this movie: ");
                         for (int y = 0; y < showtimesAvailable.size(); y++) {
-                            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(g - 1))) {
+                            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
                                 System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
                             }
                         }
+                        int showtimeChoice = scan.nextInt();
 
-                        System.out.println("How many seat do you want");
-                        int f = scan.nextInt();
-                        SeatingPlan layout = new SeatingPlan(5, 5);
+                        System.out.println("How many seats do you want?");
+                        int noOfSeats = scan.nextInt();
                         ArrayList<String> SeatsArray = new ArrayList<>();
                         // asking for seats and saving it to an array
-                        for (int i = 0; i < f; i++) {
+                        for (int i = 0; i < noOfSeats; i++) {
+                            SeatingPlan layout= new SeatingPlan(5,5);
+                            layout = showtimesAvailable.get(showtimeChoice-1).getSeats();
                             layout.displaySeatPlan();
                             System.out.println("input your desired row and column");
                             System.out.println("row (input number): ");
@@ -506,7 +508,9 @@ public class MainApp {
                             String seatId = new Seat(seatyea).getSeatId();
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
-                            SeatsArray.add(seatId);
+                            SeatsArray.add(String.valueOf(seatId));
+                            System.out.println("This is your chosen seat: " + seatId);
+                            ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(d-1),(e));
                         }
 
                         //generating tickets from the array
@@ -574,21 +578,19 @@ public class MainApp {
                             newUsername = usernameInput;
                         }
                         // Generating transaction ID
-                        String txnID = new Transaction("XXX").getTransactionId();
+                        String txnID = new Transaction(showtimesAvailable.get(showtimeChoice-1).getCinemaID()).getTransactionId();
+                        System.out.println("txnID"+txnID);
                         // Making a booking
-                        int count = 0;
-                        Booking booked = new Booking("poohy", "poohyemail", 12345678, SeatsArray.size(), txnID, "hello", "bye");
-                        Booking booked1 = new Booking("htut", "poohyemail", 12345678, SeatsArray.size(), txnID, "hello", "bye");
                         ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
+                        int count = 0;
                         for (count = 0; count < usersList.size(); count++) {
                             if (usersList.get(count).getUsername().equals(newUsername)) {
-                                UsersManager.editBookingHistory(count, booked1);
                                 break;
                             }
-
                         }
+                        Booking booked1 = new Booking(usersList.get(count).getName(),usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),4.5f,txnID,showtimesAvailable.get(showtimeChoice).getShowtime().substring(0,10),showtimesAvailable.get(showtimeChoice).getShowtime().substring(11));
+                        UsersManager.editBookingHistory(count, booked1);
 
-                        UsersManager.readAllUsers().get(count).showBookingHistory();
                     }
 
 
@@ -618,28 +620,69 @@ public class MainApp {
 
                     if (option == 3) { //View movie details
                         System.out.println("Please select the movie you'd like to find out more about: ");
-                        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
-                        for (int i = 0; i < allMovies.size(); i++) {
-                            System.out.println("(" + (i + 1) + ")" + allMovies.get(i).getName());
+                        ArrayList<Movie> moviesList = new ArrayList<Movie>(MoviesManager.readAllMovies());
+                        for (int i = 0; i < moviesList.size(); i++) {
+                            System.out.println("[" + (i + 1) + "]" + moviesList.get(i).getName());
                         }
                         int movieSelection = scan.nextInt();
-
-                        if (movieSelection > allMovies.size() || movieSelection < 1) {
+                        if (movieSelection > moviesList.size() || movieSelection < 1) {
                             System.out.println("Invalid input, select again");
                             movieSelection = scan.nextInt();
                         }
-                        System.out.println("You've chosen: " + allMovies.get(movieSelection-1).getName());
+                        System.out.println("You've chosen: " + moviesList.get(movieSelection - 1));
                         System.out.println("Here are the associated movie details!\n");
-                        System.out.println("Movie: " + allMovies.get(movieSelection-1).getName());
-                        System.out.println("Type: " + allMovies.get(movieSelection-1).getType());
-                        System.out.println("Director: " + allMovies.get(movieSelection-1).getDirector());
-                        System.out.println("Rating: " + allMovies.get(movieSelection-1).getRating()[1]);
-                        System.out.println("Status: " + allMovies.get(movieSelection-1).getShowingStatus());
-                        System.out.println("Duration: " + allMovies.get(movieSelection-1).getShowLength());
-                        System.out.println("Synopsis: " + allMovies.get(movieSelection-1).getSynopsis());
+                        System.out.println("Name: " + moviesList.get(movieSelection - 1).getName());
+                        System.out.println("Type: " + moviesList.get(movieSelection - 1).getType());
+                        System.out.println("Director: " + moviesList.get(movieSelection - 1).getDirector());
+                        System.out.println("Rating: " + moviesList.get(movieSelection - 1).getRating()[1]);
+                        System.out.println("Show Status: " + moviesList.get(movieSelection - 1).getShowingStatus());
+                        System.out.println("Show Length: " + moviesList.get(movieSelection - 1).getShowLength());
+                        System.out.println("Synopsis: " + moviesList.get(movieSelection - 1).getSynopsis());
                     }
 
                     if (option == 4) { //Check Seat availability
+                        System.out.println("Choose your cineplex: ");
+                        ReadCineplexes readCineplexes = new ReadCineplexes();
+                        for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
+                            System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
+                        }
+                        int cineplexChoice = scan.nextInt();
+                        if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
+                            System.out.println("Invalid option, please choose again");
+                            cineplexChoice = scan.nextInt();
+                        }
+                        System.out.println("Your choice is: " + readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
+                        Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
+                        System.out.println("Choose the movie you wish to check: ");
+                        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
+                        for (int j = 0; j < movies.size(); j++) {
+                            System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
+                        }
+                        int movieChoice = scan.nextInt();
+                        if (movieChoice > movies.size() || movieChoice < 1) {
+                            System.out.println("Invalid choice, please choose again");
+                            movieChoice = scan.nextInt();
+                        }
+                        System.out.println("Your choice is: " + MoviesManager.getMovieNameById(movies.get(movieChoice - 1)));
+                        String movieChosen = MoviesManager.getMovieNameById(movies.get(movieChoice - 1));
+
+                        ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movies.get(movieChoice - 1)));
+                        ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
+
+                        System.out.println("Choose the date you wish to check: ");
+                        for (int z = 0; z < datesToSelect.size(); z++) {
+                            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
+                        }
+                        int dateChoice = scan.nextInt();
+
+                        System.out.println("Choose the timing you wish to check: ");
+                        for (int y = 0; y < showtimesAvailable.size(); y++) {
+                            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
+                                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
+                            }
+                        }
+                        int showtimeChoice = scan.nextInt();
+                        showtimesAvailable.get(showtimeChoice-1).getSeats().displaySeatPlan();
 
                     }
 
@@ -705,3 +748,6 @@ public class MainApp {
         }
     }
 }
+
+
+
