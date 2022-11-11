@@ -273,6 +273,16 @@ else{
         }
     }
 
+    public static String getMovieNameById(int id){
+        ArrayList<Movie> allMovies = readAllMovies();
+        for (int i = 0; i < allMovies.size(); i++) {
+            if(allMovies.get(i).getMovieID()==id){
+                return allMovies.get(i).getName();
+            }
+        }
+        return "no movie found";
+    }
+
 
 
 
