@@ -705,5 +705,3 @@ public class MainApp {
         }
     }
 }
-
-
