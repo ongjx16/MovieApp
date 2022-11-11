@@ -56,7 +56,7 @@ public class MainApp {
 
                     System.out.println("1. Edit Movie Details\n");
                     System.out.println("2. Edit Showtime Details\n");
-                    System.out.println("3. Edit Movie Prices\n");
+                    System.out.println("3. Edit System Settings\n");
                     System.out.println("4. Quit \n");
                     System.out.println("Enter a number of your choice: ");
                     choose = scan.nextInt();
@@ -75,35 +75,79 @@ public class MainApp {
                             choice = scan.nextInt();
 
 
-                            if (choice == 1) {
-                                String name;
-                                String type;
-                                String rating;
-                                int showLength;
-                                String showingStatus;
-                                String director;
-                                String synopsis;
+                        if (choice == 1) {
+                            String name;
+                            MovieType type;
+                            String rating;
+                            int showLength;
+                            MovieStatus showingStatus;
+                            String director;
+                            String synopsis;
 
                                 scan.nextLine();
                                 System.out.println("1. Enter Movie Name");
 
                                 name = scan.nextLine();
 
-                                System.out.println("2. Enter Movie Type");
+                            System.out.println("2. Choose Movie Type");
 
-                                type = scan.nextLine();
+                            System.out.println("[1] " + MovieType.DIGITAL2D.toString());
+                            System.out.println("[2] " + MovieType.DIGITAL3D.toString());
+                            System.out.println("[3] " + MovieType.BLOCKBUSTER2D.toString());
+                            System.out.println("[4] " + MovieType.BLOCKBUSTER3D.toString());
+
+                            int typeChoice = scan.nextInt();
+
+                            while(typeChoice<1 && typeChoice>4){
+                                System.out.println("Invalid Choice. Choose Again.");
+                                typeChoice = scan.nextInt();
+                            }
+
+                            if (typeChoice == 1){
+                                type = MovieType.DIGITAL2D;
+                            }
+                            else if (typeChoice == 2){
+                                type = MovieType.DIGITAL3D;
+                            }
+                            else if (typeChoice == 3){
+                                type = MovieType.BLOCKBUSTER2D;
+                            }
+                            else {
+                                type = MovieType.BLOCKBUSTER3D;
+                            }
+
 
                                 System.out.println("3. Enter Movie Length (in minutes)");
 
-                                showLength = scan.nextInt();
-                                scan.nextLine();
-                                System.out.println("4. Enter Movie Showing Status");
+                            showLength = scan.nextInt();
+                            scan.nextLine();
+                            System.out.println("4. Choose Movie Showing Status");
 
-                                showingStatus = scan.nextLine();
+                            System.out.println("[1] " + MovieStatus.COMING_SOON.toString());
+                            System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
+                            System.out.println("[3] " + MovieStatus.END_OF_SHOW.toString());
+
+                            int statusChoice = scan.nextInt();
+
+                            while(statusChoice<1 && statusChoice>3){
+                                System.out.println("Invalid Choice. Choose Again.");
+                                statusChoice = scan.nextInt();
+                            }
+
+                            if (statusChoice == 1){
+                                showingStatus = MovieStatus.COMING_SOON;
+                            }
+                            else if (statusChoice == 2){
+                                showingStatus = MovieStatus.NOW_SHOWING;
+                            }
+                            else {
+                                showingStatus = MovieStatus.END_OF_SHOW;
+                            }
 
                                 System.out.println("5. Enter Movie Director");
 
-                                director = scan.nextLine();
+                            scan.nextLine();
+                            director = scan.nextLine();
 
                                 System.out.println("6. Enter Movie Synopsis");
 
@@ -166,21 +210,21 @@ public class MainApp {
                                 MoviesManager.deleteMovie(movie - 1);
 
 
-                            } else if (choice == 4) {
-//                Movie[] MoviesArray;
-                                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                                MoviesArray = MoviesManager.readAllMovies();
-                                for (int i = 0; i < MoviesArray.size(); i++) {
-                                    System.out.println("Name: " + MoviesArray.get(i).getName());
-                                    System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
-                                    System.out.println("Type: " + MoviesArray.get(i).getType());
-                                    System.out.println("Length: " + MoviesArray.get(i).getShowLength());
-                                    System.out.println("Status: " + MoviesArray.get(i).getShowingStatus());
-                                    System.out.println("Director: " + MoviesArray.get(i).getDirector());
-                                    System.out.println("Synopsis: " + MoviesArray.get(i).getSynopsis() + "\n");
-                                }
+                        } else if (choice == 4) {
+                            // Movie[] MoviesArray;
+                            ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                            MoviesArray = MoviesManager.readAllMovies();
+                            for (int i = 0; i < MoviesArray.size(); i++) {
+                                System.out.println("Name: " + MoviesArray.get(i).getName());
+                                System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
+                                System.out.println("Type: " + MoviesArray.get(i).getType().toString());
+                                System.out.println("Length: " + MoviesArray.get(i).getShowLength());
+                                System.out.println("Status: " + MoviesArray.get(i).getShowingStatus().toString());
+                                System.out.println("Director: " + MoviesArray.get(i).getDirector());
+                                System.out.println("Synopsis: " + MoviesArray.get(i).getSynopsis() + "\n");
                             }
                         }
+                    }
 
                     } else if (choose == 2) {
                         System.out.println("1. Create Showtime\n");
@@ -329,6 +373,7 @@ public class MainApp {
 //                    }
 
                         } else if (choice == 3) {
+
                             ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
                             MoviesArray = MoviesManager.readAllMovies();
                             for (int i = 0; i < MoviesArray.size(); i++) {
@@ -351,121 +396,41 @@ public class MainApp {
                             }
                         }
 
-//                else if (choice ==5){
-//
-//                    int moviechoice;
-//                    //String showtime;
-//                    int movieid1;
-//                    String cinemaID;
-//
-//                    scan.nextLine();
-//                    System.out.println("1. Choose Movie");
-//
-//                    ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
-//                    for (int i = 0; i < MoviesArray.size(); i++) {
-//                        System.out.println(Integer.toString(i + 1) + ". " + MoviesArray.get(i).getName());
-//                    }
-//
-//                    moviechoice = scan.nextInt();
-//
-//                    int x = moviechoice - 1;
-//                    String moviename = MoviesArray.get(x).getName();
-//                    movieid1 = MoviesArray.get(x).getMovieID();
-//
-//                    ShowtimesManager.searchShowtimes("25/12/2022", movieid1).get(0).getSeats().displaySeatPlan();
-//                    //ShowtimesManager.searchShowtimes("21/12/2022", movieid1).get(0).getSeats().assignSeat(5,5);
-//                    ShowtimesManager.updateSeats(ShowtimesManager.searchShowtimes("25/12/2022", movieid1).get(0).getShowtimeID());
-//                    ShowtimesManager.searchShowtimes("25/12/2022", movieid1).get(0).getSeats().displaySeatPlan();
-//
-//
-//
-//
-//
-//
-//                }
 
                     }
                     if (choose == 3) {
-                        System.out.println("Choose which price category you'd like to add: ");
-                        System.out.println("1. Blockbuster movies");
-                        System.out.println("2. Premium cinemas");
-                        System.out.println("3. Adult prices");
-                        System.out.println("4. Student prices");
-                        System.out.println("5. Senior citizen prices");
-                        int mainPriceOption = scan.nextInt();
-                        if (mainPriceOption == 1) {
-                            PricingManager.editPricing(0, "blockbuster");
-                            System.out.println("Blockbuster price has been set to: " + PricingManager.readAllPricing().get(0).getBlockbuster());
+
+                       int settingsChoice = 0;
+
+                        while (settingsChoice != 4) {
+
+                            System.out.println("1. Edit Movie Prices\n");
+                            System.out.println("2. Edit Holiday Dates\n");
+                            System.out.println("3. Edit Top 5 Movie Filters\n");
+                            System.out.println("4. Back\n");
+                            System.out.println("Enter a number of your choice: ");
+                            settingsChoice = scan.nextInt();
+
+
+                        if (settingsChoice ==1 ){
+                           //edit pricing
+                            SystemSettings.editPricing();
                         }
-                        if (mainPriceOption == 2) {
-                            PricingManager.editPricing(0, "premium");
-                            System.out.println("Premium price has been set to: " + PricingManager.readAllPricing().get(0).getPremium());
+                        else if (settingsChoice ==2){
+                            //change holiday dates
+                            SystemSettings.editHolidayDates();
                         }
-                        if (mainPriceOption == 3) {
-                            System.out.println("Which day would you like to change prices for");
-                            System.out.println("1. Adult Mon-Wed 2D");
-                            System.out.println("2. Adult Mon-Wed 3D");
-                            System.out.println("3. Adult Thurs 2D");
-                            System.out.println("4. Adult Thurs 3D");
-                            System.out.println("5. Adult Fri (Before 6pm) 2D");
-                            System.out.println("6. Adult Fri (Before 6pm) 3D");
-                            System.out.println("7. Adult Fri(6pm onwards) - Weekend 2D");
-                            System.out.println("8. Adult Fri(6pm onwards) - Weekend 2D");
-                            System.out.println("What is your choice: ");
-                            int adultpriceoption = scan.nextInt();
-                            if (adultpriceoption == 1) {
-                                PricingManager.editPricing(0, "AdultMonWedStandard2D");
-                                System.out.println("Adult mon-wed 2D price has been set to: " + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D());
-                            }
-                            if (adultpriceoption == 2) {
-                                PricingManager.editPricing(0, "AdultMonWedStandard3D");
-                                System.out.println("Adult mon-wed 3D price has been set to: " + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D());
-                            }
-                            if (adultpriceoption == 3) {
-                                PricingManager.editPricing(0, "AdultThuStandard2D");
-                                System.out.println("Adult Thur 2D price has been set to: " + PricingManager.readAllPricing().get(0).getAdultThursStandard2D());
-                            }
-                            if (adultpriceoption == 4) {
-                                PricingManager.editPricing(0, "AdultThuStandard3D");
-                                System.out.println("Adult Thur 3D price has been set to: " + PricingManager.readAllPricing().get(0).getAdultThursStandard3D());
-                            }
-                            if (adultpriceoption == 5) {
-                                PricingManager.editPricing(0, "AdultFriStandard2D");
-                                System.out.println("Adult Fri (Before 6pm) 2D price has been set to: " + PricingManager.readAllPricing().get(0).getAdultFriStandard2D());
-                            }
-                            if (adultpriceoption == 6) {
-                                PricingManager.editPricing(0, "AdultFriStandard3D");
-                                System.out.println("Adult Fri (Before 6pm) 3D price has been set to: " + PricingManager.readAllPricing().get(0).getAdultFriStandard3D());
-                            }
-                            if (adultpriceoption == 7) {
-                                PricingManager.editPricing(0, "AdultWeekendStandard2D");
-                                System.out.println("Adult Fri (Aft 6pm) - Weekend 2D has been set to: " + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
-                            }
-                            if (adultpriceoption == 8) {
-                                PricingManager.editPricing(0, "AdultWeekendStandard3D");
-                                System.out.println("Adult Fri (Aft 6pm) - Weekend 3D has been set to: " + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
-                            }
-                        } else if (mainPriceOption == 4) {
-                            System.out.println("Which student price would you like to adjust");
-                            System.out.println("1. Student 2D");
-                            System.out.println("2. Student 3D");
-                            int studentoption = scan.nextInt();
-                            if (studentoption == 1) {
-                                PricingManager.editPricing(0, "StudentStandard2D");
-                                System.out.println("Student 2D price has been set to: " + PricingManager.readAllPricing().get(0).getStudentStandard2D());
-                            }
-                            if (studentoption == 2) {
-                                PricingManager.editPricing(0, "StudentStandard3D");
-                                System.out.println("Student 3D price has been set to: " + PricingManager.readAllPricing().get(0).getStudentStandard3D());
-                            }
-                        } else if (mainPriceOption == 5) {
-                            PricingManager.editPricing(0, "SeniorStandard2D");
-                            System.out.println("Senior 2D price has been set to: " + PricingManager.readAllPricing().get(0).getSeniorStandard2D());
+                        else if (settingsChoice ==3){
+                            //change filtering of top 5 movies
+                            SystemSettings.editTop5Filtering();
                         }
+
                     }
+
                 }
                 return;
-            } else if (identity == 2) {
+            } }
+            else if (identity == 2) {
                 System.out.println("You are now a user");
                 System.out.println("What would you like to do now ");
                 System.out.println("(1) Book a movie");
@@ -496,6 +461,7 @@ public class MainApp {
                         Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
                         System.out.println("Choose your movie! ");
                         ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
+                        System.out.println("movies in that cineplex" + movies.size());
                         for (int j = 0; j < movies.size(); j++) {
                             System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
                         }
@@ -532,25 +498,19 @@ public class MainApp {
                             SeatingPlan layout= new SeatingPlan(5,5);
                             layout = showtimesAvailable.get(showtimeChoice-1).getSeats();
                             layout.displaySeatPlan();
-                            System.out.println("Input your desired row and column");
-                            System.out.println("row: ");
+                            System.out.println("input your desired row and column");
+                            System.out.println("row (input number): ");
                             int d = scan.nextInt();
-                            System.out.println("column: ");
-                            int e = scan.nextInt();
-                            if(layout.getSeatPlan()[d-1][e-1].isOccupied()){
-                                System.out.println("Sorry, seat is taken. Please choose again: ");
-                                System.out.println("input your desired row and column");
-                                System.out.println("row: ");
-                                d = scan.nextInt();
-                                System.out.println("column: ");
-                                e = scan.nextInt();
-                            }
-                            layout.assignSeat((d - 1), (e - 1));
-                            int seatId = new Seat(e * 100 + d).getSeatId();
+                            System.out.println("column (input letter): ");
+                            String e = scan.next();
+                            layout.assignSeat((d - 1), (e));
+                            String seatyea = e + String.valueOf(d);
+                            String seatId = new Seat(seatyea).getSeatId();
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
                             SeatsArray.add(String.valueOf(seatId));
-                            ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(d-1),(e-1));
+                            System.out.println("This is your chosen seat: " + seatId);
+                            ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(d-1),(e));
                         }
 
                         //generating tickets from the array
@@ -726,30 +686,21 @@ public class MainApp {
 
                     }
 
-                    if (option == 5) { //List top 5 movies
+                    if (option == 5){ //List top 5 movies
+                        boolean power = true;
+                        while (power) {
+                            System.out.println("Would you like to list the top 5 movies according to:");
+                            System.out.println("(1) Ratings");
+                            System.out.println("(2) Ticket Sales");
+                            System.out.println("(3) Exit");
+                            int listingMovies = scan.nextInt();
 
-                        System.out.println("Would you like to list the top 5 movies according to:");
-                        System.out.println("(1) Ratings");
-                        System.out.println("(2) Ticket Sales");
-                        System.out.println("(3) Exit");
-                        int listingMovies = scan.nextInt();
-                        int i;
-
-                        if (listingMovies == 1) {
-                            ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
-                            ArrayList<Integer> allRatings = new ArrayList<Integer>();
-                            for (i = 0; i < allMovies.size(); i++) {
-                                allRatings.add(allMovies.get(i).getRating()[1]);
-                            }
-                            for (i = 0; i < allRatings.size(); i++) {
-                                System.out.println(allRatings.get(i));
-                                for (int j = 0; j < allRatings.size(); j++) {
-                                    if (allRatings.get(j) > allRatings.get(j + 1)) {
-                                        int temp = allRatings.get(j);
-                                        allRatings.set(j, allRatings.get(j + 1));
-                                        allRatings.set(j + 1, temp);
-                                    }
-                                }
+                            if (listingMovies == 1) {
+                                ListTop5MoviesUI.sortByRatings();
+                            } else if (listingMovies == 2) {
+                                ListTop5MoviesUI.sortBySales();
+                            } else if (listingMovies == 3) {
+                                power = false;
                             }
                         }
                     }
@@ -781,29 +732,16 @@ public class MainApp {
                         // add code for viewing booking history
                     }
 
-                    if (option == 7) {
-//                        System.out.println("What is your username");
-//                        String f = scan.next();
-//                        System.out.println("What is your password");
-//                        String g = scan.next();
-//                        System.out.println("What is your name");
-//                        String h = scan.next();
-//                        System.out.println("What is your email");
-//                        String i = scan.next();
-//                        System.out.println("What is your phone number");
-//                        int j = scan.nextInt();
-//                        try {
-//                            UserAccount newAccount = new UserAccount(f, g, h, i, j);
-//                            FileOutputStream fout = new FileOutputStream("UserAccounts.dat");
-//                            ObjectOutputStream out = new ObjectOutputStream(fout);
-//                            out.writeObject(newAccount);
-//                            out.flush();
-//                            out.close();
-//                            System.out.println("success");
-//                        } catch (Exception e) {
-//                            System.out.println(e);
-//                        }
-
+                    if (option == 7) { // Rate Movies
+                        System.out.println("Which movie would you like to rate?");
+                        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
+                        for (int i = 0; i < allMovies.size(); i++){
+                            System.out.println("(" + i+1 + ")" + allMovies.get(i).getName());
+                        }
+                        int movieToRate = scan.nextInt();
+                        System.out.println("What is your new rating?");
+                        int newRating = scan.nextInt();
+                        MoviesManager.updateRating(movieToRate,newRating);
                     }
                 }
             }
