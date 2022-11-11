@@ -4,10 +4,10 @@ import java.util.ArrayList;
 public class Movie  implements Serializable {
     private static final long serialVersionUID = -3185918430309702988L;
     private String name;
-    private String type;
+    private MovieType type;
     private int[] rating;
     private int showLength;
-    private String showingStatus;
+    private MovieStatus showingStatus;
     private String director;
     private String synopsis;
     private int movieID;
@@ -22,7 +22,7 @@ public class Movie  implements Serializable {
         return name;
     }
 
-    public String getType() {
+    public MovieType getType() {
         return type;
     }
 
@@ -34,7 +34,7 @@ public class Movie  implements Serializable {
         return showLength;
     }
 
-    public String getShowingStatus() {
+    public MovieStatus getShowingStatus() {
         return showingStatus;
     }
 
@@ -50,7 +50,7 @@ public class Movie  implements Serializable {
         this.name = name;
     }
 
-    public void setType(String type) {
+    public void setType(MovieType type) {
         this.type = type;
     }
 
@@ -62,7 +62,7 @@ public class Movie  implements Serializable {
         this.showLength = showLength;
     }
 
-    public void setShowingStatus(String showingStatus) {
+    public void setShowingStatus(MovieStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
 
@@ -108,7 +108,7 @@ public class Movie  implements Serializable {
 
     //CONSTRUCTOR
 
-    public Movie(String name, String type, int showLength, String showingStatus, String director, String synopsis, int movieID) {
+    public Movie(String name, MovieType type, int showLength, MovieStatus showingStatus, String director, String synopsis, int movieID) {
         this.name = name;
         this.type = type;
         this.showLength = showLength;

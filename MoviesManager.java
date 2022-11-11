@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class MoviesManager {
 
 
-    public static void createMovie(String name, String type, int showLength, String showingStatus, String director, String synopsis){
+    public static void createMovie(String name, MovieType type, int showLength, MovieStatus showingStatus, String director, String synopsis){
         try{
 
             //Creating the object
@@ -98,8 +98,32 @@ else{
             else if (attribute == "type"){
                 System.out.println("Current: " + movieList.get(index).getType());
                 System.out.println("Enter updated movie type: ");
-                String newType = scan.nextLine();
-                movieList.get(index).setType(newType);
+                System.out.println("[1] " + MovieType.DIGITAL2D.toString());
+                System.out.println("[2] " + MovieType.DIGITAL3D.toString());
+                System.out.println("[3] " + MovieType.BLOCKBUSTER2D.toString());
+                System.out.println("[4] " + MovieType.BLOCKBUSTER3D.toString());
+
+                int typeChoice = scan.nextInt();
+                MovieType type;
+
+                while(typeChoice<1 && typeChoice>4){
+                    System.out.println("Invalid Choice. Choose Again.");
+                    typeChoice = scan.nextInt();
+                }
+
+                if (typeChoice == 1){
+                    type = MovieType.DIGITAL2D;
+                }
+                else if (typeChoice == 2){
+                    type = MovieType.DIGITAL3D;
+                }
+                else if (typeChoice == 3){
+                    type = MovieType.BLOCKBUSTER2D;
+                }
+                else {
+                    type = MovieType.BLOCKBUSTER3D;
+                }
+                movieList.get(index).setType(type);
             }
             else if (attribute == "length"){
                 System.out.println("Current: " + movieList.get(index).getShowLength());
@@ -110,7 +134,27 @@ else{
             else if (attribute == "status"){
                 System.out.println("Current: " + movieList.get(index).getShowingStatus());
                 System.out.println("Enter updated showing status: ");
-                String status = scan.nextLine();
+                System.out.println("[1] " + MovieStatus.COMING_SOON.toString());
+                System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
+                System.out.println("[3] " + MovieStatus.END_OF_SHOW.toString());
+
+                int statusChoice = scan.nextInt();
+                MovieStatus status;
+
+                while(statusChoice<1 && statusChoice>3){
+                    System.out.println("Invalid Choice. Choose Again.");
+                    statusChoice = scan.nextInt();
+                }
+
+                if (statusChoice == 1){
+                    status = MovieStatus.COMING_SOON;
+                }
+                else if (statusChoice == 2){
+                    status = MovieStatus.NOW_SHOWING;
+                }
+                else {
+                    status = MovieStatus.END_OF_SHOW;
+                }
                 movieList.get(index).setShowingStatus(status);
             }
             else if (attribute == "director"){
@@ -135,6 +179,34 @@ else{
             out.close();
             System.out.println("movie successfully removed");
         }catch(Exception e){}
+    }
+
+    public static ArrayList<Movie> filterByStatus (MovieStatus status) {
+        ArrayList<Movie> movieOutput = new ArrayList<Movie>(readAllMovies());
+        ArrayList<Movie> filteredOutput = new ArrayList<Movie>();
+
+        for (int i = 0; i<movieOutput.size(); i++){
+            if (movieOutput.get(i).getShowingStatus() == status){
+                filteredOutput.add(movieOutput.get(i));
+            }
+        }
+
+
+        return (filteredOutput);
+    }
+
+    public static Movie getMoviebyID (int MovieID) {
+        ArrayList<Movie> movieOutput = new ArrayList<Movie>(readAllMovies());
+        Movie outputMovie = null;
+
+        for (int i = 0; i<movieOutput.size(); i++){
+            if (movieOutput.get(i).getMovieID() == MovieID){
+                outputMovie = movieOutput.get(i);
+                return outputMovie;
+            }
+        }
+
+        return (outputMovie);
     }
 
     public static void increaseSales (int MovieID, int toAdd) {
