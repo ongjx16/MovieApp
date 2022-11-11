@@ -31,14 +31,14 @@ public class DateFormatter {
     }
 
     public boolean is3D(Movie y){
-        if (y.getType().toUpperCase().contains("3D")){
+        if (y.getType().toString().toUpperCase().contains("3D")){
             return true;
         }
         return false;
     }
 
     public boolean isBlockbuster(Movie y){
-        if (y.getType().toUpperCase().contains("BLOCKBUSTER")){
+        if (y.getType().toString().toUpperCase().contains("BLOCKBUSTER")){
             return true;
         }
         return false;
