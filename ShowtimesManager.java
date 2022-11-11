@@ -50,8 +50,10 @@ public class ShowtimesManager {
             //out.reset();
             out.close();
             System.out.println("create showtime success");
-        }catch(Exception e){e.printStackTrace(
-        );}
+        }catch(Exception e){
+        //     e.printStackTrace(
+        // );
+    }
     }
 
     public static ArrayList<Showtimes> readAllShowtimes () {
@@ -73,8 +75,10 @@ public class ShowtimesManager {
             //Creating stream to read the object
             ObjectOutputStream in = new ObjectOutputStream(new FileOutputStream("DATFiles/Showtimes.dat"));
             in.close();
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {
+        //     e.printStackTrace(
+        // )
+        ;}
     }
 
     public static void deleteShowtimes (int index) {
@@ -103,37 +107,157 @@ public class ShowtimesManager {
 
             //Creating the object
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
-
+            ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));
             ObjectOutputStream out = new ObjectOutputStream(fout);
+            String date;
             Scanner scan = new Scanner(System.in);
+            int indexForShowtimes =1;
 
             if (attribute == "showtime"){
-                System.out.println("Current: " + showtimeList.get(index).getShowtime());
-                System.out.println("Enter new showtime in this format- DD/MM/YYYY HH:mm: ");
-                String newShowtime = scan.nextLine();
-                showtimeList.get(index).setShowtime(newShowtime);
-            }
-            else if (attribute == "moviename"){
-                System.out.println("Current: " + showtimeList.get(index).getMoviename());
-                System.out.println("Enter updated movie name: ");
-                String newName = scan.nextLine();
-                showtimeList.get(index).setMoviename(newName);
-            }
-            else if (attribute == "movieID"){
-                System.out.println("Current: " + showtimeList.get(index).getMovieID());
-                System.out.println("Enter updated movie ID ");
-                int newmovieID = scan.nextInt();
-                showtimeList.get(index).setMovieID(newmovieID);
-            }
-            else if (attribute == "cinemaID"){
-                System.out.println("Current: " + showtimeList.get(index).getCinemaID());
-                System.out.println("Enter updated cinema ID: ");
-                String status = scan.nextLine();
-                showtimeList.get(index).setCinemaID(status);
+                System.out.println("Current: ");
+                //System.out.println(showtimeList.size());
+                for (int i =0; i<showtimeList.size(); i++){
+                    //System.out.println(showtimeList.get(i).getShowtime());
+                    if(MoviesArray.get(index).getMovieID()==(showtimeList.get(i).getMovieID())){
+                        System.out.println(Integer.toString(indexForShowtimes) +". "+ MoviesArray.get(index).getName()+ " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
+                        indexForShowtimes++;
+                    }
+                    else {
+                        //System.out.println("No Showtime for Movie found!");
+                        //return;
+                    }
+                }
+
+                System.out.println("Choose which Showtime you want to edit: ");
+                int showtimeChoice = scan.nextInt() - 1;
+
+//                System.out.println("Enter new showtime in this format- DD/MM/YYYY HH:mm: ");
+//                scan.nextLine();
+//                String newShowtime = scan.nextLine();
+
+
+
+                System.out.println("Enter Date in this format- DD/MM/YYYY: ");
+                scan.nextLine();
+                date = scan.nextLine();
+
+
+                System.out.println("Choose a showtime from the following list:\n");
+
+
+//                     initialise an array of timings for admin to choose from
+                String[] timings;
+                ArrayList<String> newTimings = new ArrayList<String>();
+                timings = new String[5];
+                timings[0] = "10:00";
+                timings[1] = "12:30";
+                timings[2] = "15:00";
+                timings[3] = "17:30";
+                timings[4] = "20:00";
+                int k = 1;
+
+                boolean toAdd;
+
+                    ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.searchShowtimes(date, 1));
+                    for (int j = 0; j < 5; j++) {
+                        toAdd= true;
+                        for (int i = 0; i < arrayoftimes.size(); i++ ) {
+                            if ((arrayoftimes.get(i).getShowtime().substring(11).equals(timings[j]))) { // arrayoftimes.get(i).getShowtime().substring(0,11).equals(showtimeList.get(index).getShowtime().substring(0,11))
+                                toAdd = false;
+                            }
+                            ;
+                        }
+                        if (toAdd == true){
+                            System.out.println(Integer.toString(k) + ". " + timings[j]);
+                            newTimings.add(timings[j]);
+                            k++;
+                        }
+
+                    }
+                    int choiceoftime = scan.nextInt();
+
+
+                    String newShowtime = date + " " + newTimings.get(choiceoftime - 1);
+
+
+                showtimeList.get(showtimeChoice).setShowtime(newShowtime);
+//                for (int i =0; i<showtimeList.size(); i++){
+//                    System.out.println(showtimeList.get(i).getShowtime());
+//                }
             }
 
+
+
+            else if (attribute == "cinemaID"){
+                System.out.println("Current Cineplex ID: " + showtimeList.get(index).getCinemaID().substring(0,2));
+                System.out.println("Current Showtimes for Selected Cineplex: " );
+                for (int i =0; i<showtimeList.size(); i++){
+                    if(showtimeList.get(index).getCinemaID().substring(0,2).equals((showtimeList.get(i).getCinemaID()).substring(0,2))){
+                        System.out.println(Integer.toString(i+1)+ ". "+ showtimeList.get(i).getMoviename()+ " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
+                    }
+                    else {
+                            System.out.println("No Showtime for Cineplex ID found!");
+                            //return;
+                    }
+                }
+
+                System.out.println("Choose which showtime you would like to change the Cinema ID for:  ");
+                int showtimeChoice = scan.nextInt() -1 ;
+
+
+
+
+                System.out.println("Select New Cinema ID to Change To: \n");
+                String[] CIDs;
+                CIDs = new String[9];
+                CIDs[0] = "1C1";
+                CIDs[1] = "1C2";
+                CIDs[2] = "1C3";
+                CIDs[3] = "2C1";
+                CIDs[4] = "2C2";
+                CIDs[5] = "2C3";
+                CIDs[6] = "3C1";
+                CIDs[7] = "3C2";
+                CIDs[8] = "3C3";
+
+                for (int i =0; i < CIDs.length; i++){
+                    System.out.println(Integer.toString(i+1)+ ". " + CIDs[i]);
+                }
+
+                int cinemareplace = scan.nextInt() - 1;
+                String newCinema = CIDs[cinemareplace];
+                showtimeList.get(showtimeChoice).setCinemaID(newCinema);
+                System.out.println("Cinema you have changed to is: "+ newCinema);
+
+            }
+
+            else if (attribute == "showtime2"){
+                System.out.println("Current: ");
+                //System.out.println(showtimeList.size());
+                for (int i =0; i<showtimeList.size(); i++){
+                    //System.out.println(showtimeList.get(i).getShowtime());
+                    //if(MoviesArray.get(index).getMovieID()==(showtimeList.get(i).getMovieID())){
+                    if (showtimeList.get(index).getCinemaID().equals(showtimeList.get(i).getCinemaID())){
+                        System.out.println(Integer.toString(i + 1) +". "+ showtimeList.get(i).getMoviename()+ " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
+                    }
+                    //}
+//                    else {
+//                        //System.out.println("No Showtime for Movie found!");
+//                        return;
+//                    }
+                }
+                System.out.println("Choose which Showtime you want to edit: ");
+                int showtimeChoice = scan.nextInt() - 1;
+                System.out.println("Enter new showtime in this format- DD/MM/YYYY HH:mm: ");
+                scan.nextLine();
+                String newShowtime = scan.nextLine();
+                showtimeList.get(showtimeChoice).setShowtime(newShowtime);
+//                for (int i =0; i<showtimeList.size(); i++){
+//                    System.out.println(showtimeList.get(i).getShowtime());
+//                }
+            }
 
             out.writeObject(showtimeList);
 
@@ -142,7 +266,7 @@ public class ShowtimesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("showtime successfully removed");
+            System.out.println("showtime successfully edited");
         }catch(Exception e){}
     }
 
@@ -156,8 +280,10 @@ public class ShowtimesManager {
                     arraytoadd.add(showtimeList.get(i));
                 }
             }
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {
+        //     e.printStackTrace(
+        // );
+    }
         return arraytoadd;
 
 
@@ -183,8 +309,10 @@ public class ShowtimesManager {
             showtimeList.get(i).getSeats().assignSeat(row,col);
             out.writeObject(showtimeList);
             out.close();
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {
+        //     e.printStackTrace(
+        // );
+    }
 
 
 

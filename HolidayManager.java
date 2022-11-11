@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class HolidayManager {
+public class HolidayManager implements Serializable {
 
     public static void createHolidays(LocalDate holidayDate) {
         try {
@@ -26,10 +26,10 @@ public class HolidayManager {
             //closing the stream
 
             out.close();
-            System.out.println("create holidays success");
+            System.out.println("Created Holiday Successfully.");
         } catch (Exception e) {
-            e.printStackTrace(
-            );
+            // e.printStackTrace(
+            // );
         }
     }
 
@@ -49,7 +49,7 @@ public class HolidayManager {
 
     // enter date of holiday to be deleted
     public static void deleteHoliday(LocalDate hol) {
-        ArrayList<HolidayDates> allHols = readHolidays();
+        ArrayList<HolidayDates> allHols = new ArrayList<HolidayDates>(readHolidays());
         ArrayList<HolidayDates> returnHols = new ArrayList<HolidayDates>();
         for (int n = 0; n < allHols.size(); n++) {
             HolidayDates holNo = allHols.get(n);
@@ -69,24 +69,16 @@ public class HolidayManager {
     }
 
     // enter date to replace the specific date with another
-    public static void replaceHoliday(LocalDate hol) {
-        Scanner in = new Scanner(System.in);
-        ArrayList<HolidayDates> allHols = readHolidays();
+    public static void replaceHoliday(LocalDate hol1, LocalDate hol2) {
+        ArrayList<HolidayDates> allHols = new ArrayList<HolidayDates>(readHolidays());
         ArrayList<HolidayDates> returnHols = new ArrayList<HolidayDates>();
+        HolidayDates replacement = new HolidayDates(hol2);
         for (int n = 0; n < allHols.size(); n++) {
-            HolidayDates holNo = allHols.get(n);
-            if (!(holNo.getDate().equals(hol))) {
-                returnHols.add(holNo);
+            if (!(allHols.get(n).getDate().equals(hol1))) {
+                returnHols.add(allHols.get(n));
             }
             else{
-                System.out.println("Enter new year:");
-                int year = in.nextInt();
-                System.out.println("Enter new month:");
-                int month = in.nextInt();
-                System.out.println("Enter new day:");
-                int day = in.nextInt();
-                HolidayDates hol1 = new HolidayDates(LocalDate.of(year, month, day));
-                returnHols.add(hol1);
+                returnHols.add(replacement);
             }
         }
 

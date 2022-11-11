@@ -25,10 +25,8 @@
 
 public class Tester {
     public static void main (String[] args){
-        SeatingPlan x  = new SeatingPlan(9,9);
-        x.displaySeatPlan();
-        x.assignSeat(1,"B");
-        x.displaySeatPlan();
-
+        PricingManager.createPricing(1f, 25f, 7f, 9f,
+                4f, 8.5f, 11f, 9.5f, 11f,
+                9.5f, 15f, 11f, 15f);
     }
 }
