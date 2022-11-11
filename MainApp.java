@@ -498,7 +498,7 @@ public class MainApp {
                             seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
                         }
                         // blockbuster always adds 1 so check on top
-                        if (newDate.isBlockbuster(){ //include user's movie of type movie
+                        if (newDate.isBlockbuster(MoviesManager.getMoviebyID(MoviesManager.readAllMovies().get(movieChoice-1).getMovieID()))){ //include user's movie of type movie
                             seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
                         }
                         if (newDate.isHoliday()){ //include user's timing selected, pulled from showtimes available
