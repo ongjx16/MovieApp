@@ -22,9 +22,13 @@ public class DateFormatter {
         String finalDay = format2.format(dt1);
         return finalDay;
     }
-    public boolean isPremium(String a){ // need to pull from enum movietype
-        a = a.toLowerCase();
-        if (a.contains("premium")){
+    public int HourConverter(String x){
+        String inputHr = x.substring(11,13);
+        int a = Integer.parseInt(inputHr);
+        return a;
+    }
+    public boolean isPremium(Cinema a){ // need to pull from enum movietype
+        if (a.getType().toString().toUpperCase().contains("PREMIUM")){
             return true;
         }
         return false;
@@ -81,6 +85,14 @@ public class DateFormatter {
             if (ds2.equals(x)){
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean Fri6pm (String a){
+        int x = HourConverter(a);
+        if (x < 6){
+            return true;
         }
         return false;
     }
