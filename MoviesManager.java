@@ -177,16 +177,16 @@ else{
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("movie successfully removed");
+            System.out.println("Movie has been successfully deleted!");
         }catch(Exception e){}
     }
 
-    public static ArrayList<Movie> filterByStatus (MovieStatus status) {
+    public static ArrayList<Movie> filterByStatus () {
         ArrayList<Movie> movieOutput = new ArrayList<Movie>(readAllMovies());
         ArrayList<Movie> filteredOutput = new ArrayList<Movie>();
 
         for (int i = 0; i<movieOutput.size(); i++){
-            if (movieOutput.get(i).getShowingStatus() == status){
+            if (!movieOutput.get(i).getShowingStatus().equals(MovieStatus.END_OF_SHOW)){
                 filteredOutput.add(movieOutput.get(i));
             }
         }
@@ -311,37 +311,52 @@ else{
             //out.reset();
             fout.close();
             out.close();
-            System.out.println(movieList.get(y).getMovieID());
-            System.out.println("Movie Sales Successfully Updated.");
+//            System.out.println(movieList.get(y).getMovieID());
+            System.out.println("Movie reviews successfully updated!");
         }catch(Exception e){}
     }
+
+
 
     public static void searchMovie(){
         System.out.println("\nEnter the movie title you wish to search: ");
         Scanner in = new Scanner(System.in);
         String movieTitle = in.nextLine();
         int i;
-        int index = -1;
+        int index = 0;
         ArrayList<Movie> allMovies = readAllMovies();
-        for (i = 0; i < allMovies.size(); i++) {
-            String movie = allMovies.get(i).getName().toUpperCase();
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
+        for (i = 0; i< allMovies.size(); i++){
+            filteredMovies = MoviesManager.filterByStatus();
+        }
+
+        for (i = 0; i < filteredMovies.size(); i++) {
+            String movie = filteredMovies.get(i).getName().toUpperCase();
             if (movie.equals(movieTitle.toUpperCase())) {
-                index = i;
+                System.out.println("Movie: " + filteredMovies.get(i).getName());
+                System.out.println("Type: " + filteredMovies.get(i).getType());
+                System.out.println("Director: " + filteredMovies.get(i).getDirector());
+                System.out.println("Rating: " + filteredMovies.get(i).getRating()[1]);
+                System.out.println("Status: " + filteredMovies.get(i).getShowingStatus());
+                System.out.println("Duration: " + filteredMovies.get(i).getShowLength());
+                System.out.println("Synopsis: " + filteredMovies.get(i).getSynopsis());
+                index++;
             }
         }
-        System.out.println("Movie: " + allMovies.get(index).getName());
-        System.out.println("Type: " + allMovies.get(index).getType());
-        System.out.println("Director: " + allMovies.get(index).getDirector());
-        System.out.println("Rating: " + allMovies.get(index).getRating()[1]);
-        System.out.println("Status: " + allMovies.get(index).getShowingStatus());
-        System.out.println("Duration: " + allMovies.get(index).getShowLength());
-        System.out.println("Synopsis: " + allMovies.get(index).getSynopsis());
+        if (index == 0){
+            System.out.println("Invalid input, please try again");
+        }
     }
 
     public static void printMoviedb() {
         ArrayList<Movie> allMovies = readAllMovies();
-        for (int i = 0; i < allMovies.size(); i++) {
-            System.out.println(allMovies.get(i).getName());
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
+        for (int i = 0; i< allMovies.size(); i++){
+            filteredMovies = MoviesManager.filterByStatus();
+        }
+
+        for (int i = 0; i < filteredMovies.size(); i++) {
+            System.out.println((i+1) + ". " + filteredMovies.get(i).getName());
         }
     }
 
