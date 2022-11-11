@@ -1,4 +1,6 @@
-public enum MovieStatus {
+import java.io.Serializable;
+
+public enum MovieStatus implements Serializable{
     NOW_SHOWING {
         public String toString() {
             return "Now Showing";

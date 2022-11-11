@@ -1,4 +1,5 @@
-public enum MovieType {
+import java.io.Serializable;
+public enum MovieType implements Serializable{
     DIGITAL2D {
         public String toString() {
             return "Digital 2D";
