@@ -18,7 +18,7 @@ public class Showtimes implements Serializable {
         this.moviename = moviename;
         this.movieID = movieID;
         this.cinemaID = cinemaID;
-        this.seats = new SeatingPlan(15,15);
+        this.seats = new SeatingPlan(5,5);
         this.showtimeID = showtimeID;
     }
 
@@ -41,6 +41,10 @@ public class Showtimes implements Serializable {
 
     public int getMovieID() {
         return movieID;
+    }
+
+    public void setSeats(SeatingPlan seats) {
+        this.seats = seats;
     }
 
     public void setMovieID(int movieID) {

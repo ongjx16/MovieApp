@@ -163,7 +163,7 @@ public class ShowtimesManager {
 
     }
 
-    public static void updateSeats(int showtimeID){
+    public static void updateSeats(int showtimeID, int row, String col){
         //ArrayList<Showtimes> arraytoadd = new ArrayList<Showtimes>();
         try {
 
@@ -180,7 +180,7 @@ public class ShowtimesManager {
                     break;
                 }
             }
-            showtimeList.get(i).getSeats().assignSeat(5,"B");
+            showtimeList.get(i).getSeats().assignSeat(4,"B");
             out.writeObject(showtimeList);
             out.close();
         } catch (Exception e) {e.printStackTrace(
@@ -257,12 +257,6 @@ public class ShowtimesManager {
 
 
     }
-
-
-
-
-
-
 
 
 
