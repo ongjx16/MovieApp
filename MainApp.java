@@ -580,7 +580,7 @@ public class MainApp {
                             int d = scan.nextInt();
                             System.out.println("column: ");
                             int e = scan.nextInt();
-                            layout.assignSeat((d - 1), (e - 1));
+                            layout.assignSeat((d - 1), "a");
                             int seatId = new Seat(e * 100 + d).getSeatId();
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
@@ -767,29 +767,16 @@ public class MainApp {
                         // add code for viewing booking history
                     }
 
-                    if (option == 7) {
-//                        System.out.println("What is your username");
-//                        String f = scan.next();
-//                        System.out.println("What is your password");
-//                        String g = scan.next();
-//                        System.out.println("What is your name");
-//                        String h = scan.next();
-//                        System.out.println("What is your email");
-//                        String i = scan.next();
-//                        System.out.println("What is your phone number");
-//                        int j = scan.nextInt();
-//                        try {
-//                            UserAccount newAccount = new UserAccount(f, g, h, i, j);
-//                            FileOutputStream fout = new FileOutputStream("UserAccounts.dat");
-//                            ObjectOutputStream out = new ObjectOutputStream(fout);
-//                            out.writeObject(newAccount);
-//                            out.flush();
-//                            out.close();
-//                            System.out.println("success");
-//                        } catch (Exception e) {
-//                            System.out.println(e);
-//                        }
-
+                    if (option == 7) { // Rate Movies
+                        System.out.println("Which movie would you like to rate?");
+                        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
+                        for (int i = 0; i < allMovies.size(); i++){
+                            System.out.println("(" + i+1 + ")" + allMovies.get(i).getName());
+                        }
+                        int movieToRate = scan.nextInt();
+                        System.out.println("What is your new rating?");
+                        int newRating = scan.nextInt();
+                        MoviesManager.updateRating(movieToRate,newRating);
                     }
                 }
             }
