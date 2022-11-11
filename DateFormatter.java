@@ -75,6 +75,18 @@ public class DateFormatter {
         }
         return false;
     }
+    public boolean isFri6pm(String x, String y){
+        if (Objects.equals(x, "Friday")){
+            String hour = y.substring(0,2);
+            int hours = Integer.parseInt(hour);
+            if (hours >= 18){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public boolean isHoliday(String x) throws ParseException {
         for (int i = 0; i < HolidayManager.readHolidays().size(); i++){
             String ds1 = HolidayManager.readHolidays().get(0).getDate().toString();
