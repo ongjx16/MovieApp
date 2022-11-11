@@ -188,7 +188,76 @@ public class ShowtimesManager {
 
 
 
+
+
     }
+
+    public static ArrayList<Integer> moviesByCineplex(int cineplex){
+        ArrayList<Showtimes> filterarray = new ArrayList<Showtimes>();
+        ArrayList<Integer> moviesarray = new ArrayList<Integer>();
+        try {
+            ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
+            for (int i =0; i< showtimeList.size(); i++){
+                //System.out.println((showtimeList.get(i).getShowtime()).substring(0,10));
+                if (String.valueOf(showtimeList.get(i).getCinemaID().charAt(0)).equals(String.valueOf(cineplex))){
+                    filterarray.add(showtimeList.get(i));
+                }
+            }
+
+            for (int y = 0; y< filterarray.size(); y++){
+                if (!moviesarray.contains(filterarray.get(y).getMovieID())){
+                    moviesarray.add(filterarray.get(y).getMovieID());
+                }
+            }
+
+        } catch (Exception e) {e.printStackTrace(
+        );}
+        return moviesarray;
+
+
+    }
+    public static ArrayList<Showtimes> showtimesByMovieAndCineplex(int cineplex, int movieId){
+
+        ArrayList<Showtimes> filteredShowtimes = new ArrayList<Showtimes>();
+        try {
+            ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
+            for (int i =0; i< showtimeList.size(); i++){
+                //System.out.println((showtimeList.get(i).getShowtime()).substring(0,10));
+                if (showtimeList.get(i).getMovieID()==movieId && String.valueOf(showtimeList.get(i).getCinemaID().charAt(0)).equals(String.valueOf(cineplex))){
+                    filteredShowtimes.add(showtimeList.get(i));
+                }
+            }
+
+        } catch (Exception e) {e.printStackTrace(
+        );}
+        return filteredShowtimes;
+
+
+    }
+
+    public static ArrayList<String> showtimeDates(ArrayList<Showtimes> showtimesAvailable ){
+
+        ArrayList<String> dates = new ArrayList<String>();
+
+        for (int i =0; i< showtimesAvailable.size(); i++){
+            boolean repeat = false;
+            for (int y = 0; y<dates.size(); y++){
+                if ((showtimesAvailable.get(i).getShowtime().substring(0,10)).equals(dates.get(y))){
+                    repeat = true;
+                }
+            }
+
+            if (repeat == false){
+                dates.add(showtimesAvailable.get(i).getShowtime().substring(0,10));
+            }
+
+        }
+
+        return dates;
+
+
+    }
+
 
 
 
