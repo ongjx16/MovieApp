@@ -500,7 +500,7 @@ public class MainApp {
                 System.out.println("(4) Check seat availability"); // needs to be updated
                 System.out.println("(5) List top 5 movies");
                 System.out.println("(6) View Booking History"); // need to log in
-                System.out.println("(7) Rate movies");
+                System.out.println("(7) Rate/Review movies");
                 System.out.println("(8) Exit");
                 int option = scan.nextInt();
 
@@ -740,7 +740,7 @@ public class MainApp {
 
                     if (option == 2) { //Search/List movies
                         int searchOrList = 0;
-                        while (true) {
+                        while (searchOrList != 3) {
                             System.out.println("What would you like to do?");
                             System.out.println("(1) Search movie by title");
                             System.out.println("(2) List all movies");
@@ -752,41 +752,20 @@ public class MainApp {
                                 MoviesManager.searchMovie();
                             } else if (searchOrList == 2) {
                                 MoviesManager.printMoviedb();
-                            }else if (searchOrList==3) {
-                                break;
                             }
-
                         }
 
                     }
 
                     if (option == 3) { //View movie details
-                        System.out.println("Please select the movie you'd like to find out more about: ");
-                        ArrayList<Movie> moviesList = new ArrayList<Movie>(MoviesManager.readAllMovies());
-                        for (int i = 0; i < moviesList.size(); i++) {
-                            System.out.println("[" + (i + 1) + "]" + moviesList.get(i).getName());
-                        }
-                        int movieSelection = scan.nextInt();
-                        if (movieSelection > moviesList.size() || movieSelection < 1) {
-                            System.out.println("Invalid input, select again");
-                            movieSelection = scan.nextInt();
-                        }
-                        System.out.println("You've chosen: " + moviesList.get(movieSelection - 1));
-                        System.out.println("Here are the associated movie details!\n");
-                        System.out.println("Name: " + moviesList.get(movieSelection - 1).getName());
-                        System.out.println("Type: " + moviesList.get(movieSelection - 1).getType());
-                        System.out.println("Director: " + moviesList.get(movieSelection - 1).getDirector());
-                        System.out.println("Rating: " + moviesList.get(movieSelection - 1).getRating()[1]);
-                        System.out.println("Show Status: " + moviesList.get(movieSelection - 1).getShowingStatus());
-                        System.out.println("Show Length: " + moviesList.get(movieSelection - 1).getShowLength());
-                        System.out.println("Synopsis: " + moviesList.get(movieSelection - 1).getSynopsis());
+                        ViewMovieDetailsUI.viewMovieDetails();
                     }
 
                     if (option == 4) { //Check Seat availability
                         System.out.println("Choose your cineplex: ");
                         ReadCineplexes readCineplexes = new ReadCineplexes();
                         for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
-                            System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
+                            System.out.println("(" + (i + 1) + ") " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
                         }
                         int cineplexChoice = scan.nextInt();
                         if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
@@ -798,7 +777,7 @@ public class MainApp {
                         System.out.println("Choose the movie you wish to check: ");
                         ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
                         for (int j = 0; j < movies.size(); j++) {
-                            System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
+                            System.out.println("(" + (j + 1) + ") " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
                         }
                         int movieChoice = scan.nextInt();
                         if (movieChoice > movies.size() || movieChoice < 1) {
@@ -813,14 +792,14 @@ public class MainApp {
 
                         System.out.println("Choose the date you wish to check: ");
                         for (int z = 0; z < datesToSelect.size(); z++) {
-                            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
+                            System.out.println("(" + (z + 1) + ") " + datesToSelect.get(z) + "\n");
                         }
                         int dateChoice = scan.nextInt();
 
                         System.out.println("Choose the timing you wish to check: ");
                         for (int y = 0; y < showtimesAvailable.size(); y++) {
                             if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
-                                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
+                                System.out.println("(" + (y + 1) + ") " + showtimesAvailable.get(y).getShowtime().substring(11));
                             }
                         }
                         int showtimeChoice = scan.nextInt();
@@ -829,20 +808,18 @@ public class MainApp {
                     }
 
                     if (option == 5){ //List top 5 movies
-                        boolean power = true;
-                        while (power) {
+                        int listingMovies = 0;
+                        while (listingMovies != 3) {
                             System.out.println("Would you like to list the top 5 movies according to:");
                             System.out.println("(1) Ratings");
                             System.out.println("(2) Ticket Sales");
                             System.out.println("(3) Exit");
-                            int listingMovies = scan.nextInt();
+                            listingMovies = scan.nextInt();
 
                             if (listingMovies == 1) {
                                 ListTop5MoviesUI.sortByRatings();
                             } else if (listingMovies == 2) {
                                 ListTop5MoviesUI.sortBySales();
-                            } else if (listingMovies == 3) {
-                                power = false;
                             }
                         }
                     }
@@ -888,16 +865,22 @@ public class MainApp {
 
                     }
 
-                    if (option == 7) { // Rate Movies
-                        System.out.println("Which movie would you like to rate?");
-                        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
-                        for (int i = 0; i < allMovies.size(); i++){
-                            System.out.println("(" + i+1 + ")" + allMovies.get(i).getName());
+                    if (option == 7) { // Rate/Review Movies
+                        int rateOrReview = 0;
+                        while (rateOrReview != 3){
+                            System.out.println("Would you like to rate or review movies?");
+                            System.out.println("(1) Rate Movie");
+                            System.out.println("(2) Review Movie");
+                            System.out.println("(3) Exit");
+                            rateOrReview = scan.nextInt();;
+
+                            if (rateOrReview == 1){
+                                RateReviewMoviesUI.rateMovies();
+                            }else if (rateOrReview == 2){
+                                RateReviewMoviesUI.reviewMovies();
+                            }
                         }
-                        int movieToRate = scan.nextInt();
-                        System.out.println("What is your new rating?");
-                        int newRating = scan.nextInt();
-                        MoviesManager.updateRating(movieToRate,newRating);
+
                     }
                 }
             }
