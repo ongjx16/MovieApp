@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class SystemSettings {
 
-    public static void editPricing(){
+
+    public static void editPricing() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose which price category you'd like to edit: ");
         System.out.println("1. Blockbuster movies");
@@ -83,11 +84,206 @@ public class SystemSettings {
     }
 
 
-    public static void editHolidayDates(){
+    public static void editHolidayDates() {
 
     }
 
-    public static void editTop5Filtering(){
+    public static void editTop5Filtering() {
 
+
+        Scanner scan = new Scanner(System.in);
+        int filterChoice = 0;
+
+        System.out.println("Choose your function: ");
+        System.out.println("1. View Top 5 Movies");
+        System.out.println("2. Edit Filter Controls For User");
+        System.out.println("3. Back");
+        filterChoice = scan.nextInt();
+
+//        boolean chooseFunctions = true;
+
+        while (filterChoice!=3) {
+
+            if (filterChoice == 1) {
+                //view top 5 by filter
+                int secondFilterChoice = 0;
+
+                System.out.println("Choose filter: ");
+                System.out.println("1. See Top 5 Movies by Sales");
+                System.out.println("2. See Top 5 Movies by Ratings");
+                System.out.println("3. Back");
+
+                while (true) {
+                    secondFilterChoice = scan.nextInt();
+                    if (secondFilterChoice < 1 && secondFilterChoice > 3) {
+                        System.out.println("Invalid Input. Choose Again");
+                        filterChoice = scan.nextInt();
+                    }
+                    if (secondFilterChoice ==1){
+                        ListTop5MoviesUI.sortBySales();
+                    }
+                    else if (secondFilterChoice ==2){
+                        ListTop5MoviesUI.sortByRatings();
+                    }
+                    else if (secondFilterChoice ==3){
+                        break;
+                    }
+
+                }
+
+            } else if (filterChoice == 2) {
+                int secondFilterChoice = 0;
+
+                System.out.println("Choose your function: ");
+                System.out.println("1. Edit Default Display For Users ");
+                System.out.println("2. Edit Filter Controls For User");
+                System.out.println("3. Back");
+
+                while (true) {
+                    secondFilterChoice = scan.nextInt();
+                    if (secondFilterChoice < 1 && secondFilterChoice > 3) {
+                        System.out.println("Invalid Input. Choose Again");
+                        filterChoice = scan.nextInt();
+                    }
+
+                    if (secondFilterChoice == 1) {
+                        //change default filter
+                        RatingFilterType nonDefaultFilter;
+                        System.out.println("Current Default Filter: " + FilterPermissions.getDefaultFilter());
+                        if (FilterPermissions.getDefaultFilter() == RatingFilterType.RATINGS) {
+                            ListTop5MoviesUI.sortByRatings();
+                            nonDefaultFilter = RatingFilterType.SALES;
+                        } else {
+                            ListTop5MoviesUI.sortBySales();
+                            nonDefaultFilter = RatingFilterType.RATINGS;
+
+                        }
+
+                        //ask if use wants to change
+                        int approveSwitch = 0 ;
+
+                        while (true){
+                            System.out.println("Would you like to switch the filter to: Sorting " + nonDefaultFilter.toString() + "?");
+                            System.out.println("1. Yes");
+                            System.out.println("2. Back");
+
+                            if (approveSwitch !=1 && approveSwitch !=2) {
+                                approveSwitch = scan.nextInt();
+                                System.out.println("Invalid Input. Choose Again");
+                                filterChoice = scan.nextInt();
+                            }
+
+                            if (approveSwitch==1){
+                                FilterPermissions.setDefaultFilter(nonDefaultFilter);
+                                System.out.println("Default Filter Set To: Filter " + nonDefaultFilter.toString());
+                            }
+                            else if (approveSwitch==2){
+                                break;
+                            }
+                        }
+
+
+                    }
+                    else if (secondFilterChoice==2){
+                        //edit permissions for user to see top 5 by various filters
+                        System.out.println("Current User Permissions:");
+                        if(FilterPermissions.isAccessRatingsFilter()){
+                            System.out.println("Filter by Ratings: Allowed");
+                        }
+                        else{
+                            System.out.println("Filter by Ratings: Blocked");
+                        }
+                        if(FilterPermissions.isAccessSalesFilter()){
+                            System.out.println("Filter by Sales: Allowed");
+                        }
+                        else{
+                            System.out.println("Filter by Sales: Blocked");
+                        }
+
+
+
+                        int editChoice = 0 ;
+
+                        while (true){
+                            System.out.println("\n1. Edit User Access to Ratings Filter");
+                            System.out.println("\n2. Edit User Access to Sales Filter");
+                            System.out.println("\n3. Back");
+
+                            if (editChoice==1){
+                                //edit ratings Filter
+                                if(FilterPermissions.isAccessRatingsFilter()){
+                                    System.out.println("Current Filter by Ratings: Allowed");
+                                }
+                                else{
+                                    System.out.println("Current Filter by Ratings: Blocked");
+                                }
+
+                                System.out.println("Confirm Change in Access?");
+                                System.out.println("1. Yes");
+                                System.out.println("2. Back");
+                                int cfmChoice = scan.nextInt();
+                                if (cfmChoice ==1){
+                                    FilterPermissions.setAccessRatingsFilter(!FilterPermissions.isAccessRatingsFilter());
+                                    if(FilterPermissions.isAccessRatingsFilter()){
+                                        System.out.println("Ratings filter successfully enabled.");
+                                    }
+                                    else{
+                                        System.out.println("Ratings filter successfully disabled.");
+                                    }
+                                }
+                                else{
+                                    // if cfmChoice not =1 return
+                                    break;
+                                }
+
+                            }
+
+                            else if (editChoice==2) {
+                                //edit sales filter
+                                if(FilterPermissions.isAccessSalesFilter()){
+                                    System.out.println("Current Filter by Sales: Allowed");
+                                }
+                                else{
+                                    System.out.println("Current Filter by Sales: Blocked");
+                                }
+
+                                System.out.println("Confirm Change in Access?");
+                                System.out.println("1. Yes");
+                                System.out.println("2. Back");
+                                int cfmChoice = scan.nextInt();
+                                if (cfmChoice ==1){
+                                    FilterPermissions.setAccessSalesFilter(!FilterPermissions.isAccessSalesFilter());
+                                    if(FilterPermissions.isAccessSalesFilter()){
+                                        System.out.println("Sales filter successfully enabled.");
+                                    }
+                                    else{
+                                        System.out.println("Sales filter successfully disabled.");
+                                    }
+                                }
+                                else{
+                                    //if cfmChoice not == 1, return
+                                    return;
+                                }
+
+                            }
+                            else if (editChoice ==3){
+                                break;
+                            }
+
+                            }
+
+
+                        }
+                    else if (secondFilterChoice==3){
+                        break;
+                    }
+
+                }
+            }
+
+
+        }
     }
+
+
 }
