@@ -316,26 +316,31 @@ else{
         }catch(Exception e){}
     }
 
+
+
     public static void searchMovie(){
         System.out.println("\nEnter the movie title you wish to search: ");
         Scanner in = new Scanner(System.in);
         String movieTitle = in.nextLine();
         int i;
-        int index = -1;
+        int index = 0;
         ArrayList<Movie> allMovies = readAllMovies();
         for (i = 0; i < allMovies.size(); i++) {
             String movie = allMovies.get(i).getName().toUpperCase();
             if (movie.equals(movieTitle.toUpperCase())) {
-                index = i;
+                System.out.println("Movie: " + allMovies.get(i).getName());
+                System.out.println("Type: " + allMovies.get(i).getType());
+                System.out.println("Director: " + allMovies.get(i).getDirector());
+                System.out.println("Rating: " + allMovies.get(i).getRating()[1]);
+                System.out.println("Status: " + allMovies.get(i).getShowingStatus());
+                System.out.println("Duration: " + allMovies.get(i).getShowLength());
+                System.out.println("Synopsis: " + allMovies.get(i).getSynopsis());
+                index++;
             }
         }
-        System.out.println("Movie: " + allMovies.get(index).getName());
-        System.out.println("Type: " + allMovies.get(index).getType());
-        System.out.println("Director: " + allMovies.get(index).getDirector());
-        System.out.println("Rating: " + allMovies.get(index).getRating()[1]);
-        System.out.println("Status: " + allMovies.get(index).getShowingStatus());
-        System.out.println("Duration: " + allMovies.get(index).getShowLength());
-        System.out.println("Synopsis: " + allMovies.get(index).getSynopsis());
+        if (index == 0){
+            System.out.println("Invalid input, please try again");
+        }
     }
 
     public static void printMoviedb() {

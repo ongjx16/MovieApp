@@ -595,9 +595,8 @@ public class MainApp {
 
 
                     if (option == 2) { //Search/List movies
-//                        boolean exit = true;
                         int searchOrList = 0;
-                        while (searchOrList != 3) {
+                        while (true) {
                             System.out.println("What would you like to do?");
                             System.out.println("(1) Search movie by title");
                             System.out.println("(2) List all movies");
@@ -609,10 +608,10 @@ public class MainApp {
                                 MoviesManager.searchMovie();
                             } else if (searchOrList == 2) {
                                 MoviesManager.printMoviedb();
+                            }else if (searchOrList==3) {
+                                System.out.println("gello");
+                                break;
                             }
-//                            }else if (searchOrList == 3){
-//                                return;
-//                            }
 
                         }
 
