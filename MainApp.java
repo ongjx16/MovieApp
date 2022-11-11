@@ -663,30 +663,71 @@ public class MainApp {
                     }
 
                     if (option == 6) { //View Booking History
-//                        System.out.println("Please enter your username");
-//                        username1 = scan.next();
-//
-//                        while (!user.verifyUsername(username1)) {
-//                            if (user.verifyUsername(username1)) {
-//                                System.out.println("Username is valid");
-//                            } else {
-//                                System.out.println("Username is invalid, please key in again");
-//                                username1 = scan.next();
-//                            }
-//                        }
-//
-//                        System.out.println("Please enter your password");
-//                        password1 = scan.next();
-//                        while (!user.verifyPassword(username1, password1)) {
-//                            if (user.verifyPassword(username1, password1)) {
-//                                System.out.println("Password is valid");
-//
-//                            } else {
-//                                System.out.println("Password is invalid, please key in again");
-//                                password1 = scan.next();
-//                            }
-//                        }
-                        // add code for viewing booking history
+                        System.out.println("Please Sign up or Log in to register your booking.");
+                        System.out.println("[1] Sign up");
+                        System.out.println("[2] Log in");
+                        String newUsername = " ";
+                        int op = scan.nextInt();
+                        scan.nextLine();
+                        if (op == 1) {
+                            String name;
+                            int phoneNumber;
+                            String email;
+                            String username;
+                            String password;
+                            int userId;
+                            scan.nextLine();
+                            System.out.println("Please enter your name: ");
+                            name = scan.nextLine();
+                            System.out.println("Please enter your phone number: ");
+                            phoneNumber = scan.nextInt();
+                            scan.nextLine();
+                            System.out.println("Please enter your email: ");
+                            email = scan.nextLine();
+                            System.out.println("Please enter your username: ");
+                            username = scan.nextLine();
+                            for(int x = 0; x<UsersManager.readAllUsers().size();x++){
+                                if(UsersManager.readAllUsers().get(x).getUsername().equals(username)){
+                                    System.out.println("Sorry, username has been taken. \nPlease key in new username: ");
+                                    username = scan.nextLine();
+                                    break;
+                                }
+                            }
+                            System.out.println("Please enter your password: ");
+                            password = scan.nextLine();
+                            UsersManager.createUser(username, password, name, phoneNumber, email);
+                            newUsername = username;
+                        } else if (op == 2) {
+                            String usernameInput;
+                            String passwordInput;
+                            while (true) {
+                                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
+                                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
+                                System.out.println("Please enter your username: ");
+                                usernameInput = scan.nextLine();
+                                if (UserLogin.verifyUsername(usernameInput)) {
+                                    System.out.println("Please enter your password: ");
+                                    passwordInput = scan.nextLine();
+                                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                                        System.out.println("Invalid password, please try again. ");
+                                        passwordInput = scan.nextLine();
+                                    }
+                                    System.out.println("Welcome back " + usernameInput);
+                                    break;
+
+                                } else {
+                                    System.out.println("Username not found, please try again. ");
+                                }
+                            }
+                            newUsername = usernameInput;
+                        }
+                        ArrayList<UserAccount> userArray = UsersManager.readAllUsers();
+                        for (int i = 0; i < userArray.size(); i++){
+                            if (userArray.get(i).equals(newUsername)){
+                                userArray.get(i).showBookingHistory();
+                            }
+                        }
+
                     }
 
                     if (option == 7) { // Rate Movies
