@@ -25,10 +25,6 @@
 
 public class Tester {
     public static void main (String[] args){
-        SeatingPlan x  = new SeatingPlan(9,9);
-        x.displaySeatPlan();
-        x.assignSeat(1,"B");
-        x.displaySeatPlan();
 
     }
 }

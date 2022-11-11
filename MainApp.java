@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Scanner;
 import Admin.adminLogin;
 import Admin.createAdmin;
@@ -489,6 +490,36 @@ public class MainApp {
                             }
                         }
 
+                        float seatprice = 0f;
+                        DateFormatter newDate = new DateFormatter();
+
+                        // premium is always 25 so check on top
+                        if (newDate.isPremium(){ //include user's cinema of type cinema
+                            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
+                        }
+                        // blockbuster always adds 1 so check on top
+                        if (newDate.isBlockbuster(){ //include user's movie of type movie
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
+                        }
+                        if (newDate.isHoliday()){ //include user's timing selected, pulled from showtimes available
+                            if (newDate.is3D()){ //include user's movie of type movie
+                                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+                            }
+                            else{
+                                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+                            }
+                        } else {
+                            // weekend means its either 2d or 3d so account first
+                            if (newDate.isWeekend(){ //include user's date and time selected, pulled from showtimes available
+                                if (newDate.is3D()){ //include user's movie of type movie
+                                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+                                }
+                                else{
+                                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+                                }
+                            }
+                        }
+
                         System.out.println("How many seat do you want");
                         int f = scan.nextInt();
                         SeatingPlan layout = new SeatingPlan(5, 5);
@@ -508,6 +539,52 @@ public class MainApp {
                             layout.displaySeatPlan();
                             SeatsArray.add(seatId);
                         }
+                        if (seatprice == 0f || seatprice == 1f){ // situation where your movie selection is not premium, holiday or weekend
+                            seatprice = seatprice*f;
+                            for (int i = 0; i < f; i++) {
+                                System.out.println("What type of ticket are you looking for");
+                                System.out.println("1. Student");
+                                System.out.println("2. Adult");
+                                if (!newDate.is3D()) { //include user's movie of type movie
+                                    System.out.println("3. Adult");
+                                }
+                                int selection = scan.nextInt();
+                                if (selection == 1){
+                                    if (newDate.is3D()) { //include user's date and time selected, pulled from showtimes available
+                                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard3D();
+                                    } else{
+                                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard2D()
+                                    }
+                                } else if (selection == 2) {
+                                    if (newDate.isMonWed()){//include user's date and time selected, pulled from showtimes available
+                                        if (newDate.is3D()){//include user's date and time selected, pulled from showtimes available
+                                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D();
+                                        } else {
+                                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D();
+                                        }
+                                    } else if (newDate.isThur()) {//include user's date and time selected, pulled from showtimes available
+                                        if (newDate.is3D()){//include user's date and time selected, pulled from showtimes available
+                                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard3D();
+                                        } else {
+                                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard2D();
+                                        }
+                                    } else if (newDate.isFri()) {//include user's date and time selected, pulled from showtimes available
+                                        if (newDate.is3D()){//include user's date and time selected, pulled from showtimes available
+                                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard3D();
+                                        } else {
+                                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard2D();
+                                        }
+                                    }
+                                } else if (selection == 3) {
+                                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getSeniorStandard2D();
+                                }
+                            }
+
+                        }
+                        else{
+                            seatprice = seatprice*f;
+                        }
+
 
                         //generating tickets from the array
                         for (int n = 0; n < SeatsArray.size(); n++) {
