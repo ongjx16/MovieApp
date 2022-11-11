@@ -1,4 +1,8 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class SeatingPlan implements Serializable{
 
@@ -65,6 +69,7 @@ public class SeatingPlan implements Serializable{
         }
     }
 
+
     public void assignSeat(int a, int b){
         if (seatPlan[a][b].isOccupied() == false){
             seatPlan[a][b].assign();
@@ -80,5 +85,6 @@ public class SeatingPlan implements Serializable{
             System.out.println("Seat is unoccupied");
         }
     }
+
 
 }

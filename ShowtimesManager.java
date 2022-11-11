@@ -258,6 +258,35 @@ public class ShowtimesManager {
 
     }
 
+    public static void saveSeatingPlan (SeatingPlan newSeatingPlan, String cinemaId, String showtime) {
+        try{
+
+            //Creating the object
+            ArrayList<Showtimes> showtimesList = new ArrayList<Showtimes>(ShowtimesManager.readAllShowtimes());
+            for(int i=0; i<showtimesList.size(); i++){
+                if(showtimesList.get(i).getCinemaID().equals(cinemaId)){
+                    if(showtimesList.get(i).getShowtime().equals(showtime)){
+                        showtimesList.get(i).setSeats(newSeatingPlan);
+                        break;
+                    }
+                }
+            }
+            //Creating stream and writing the object
+            FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+
+            out.writeObject(showtimesList);
+
+            out.flush();
+            //closing the stream
+            //out.reset();
+            fout.close();
+            out.close();
+            System.out.println("seating plan saved");
+        }catch(Exception e){}
+    }
+
+
 
 
 

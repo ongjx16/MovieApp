@@ -515,21 +515,22 @@ public class MainApp {
                         for (int z = 0; z < datesToSelect.size(); z++) {
                             System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
                         }
-                        int g = scan.nextInt();
+                        int dateChoice = scan.nextInt();
 
                         System.out.println("What timings would you like to see this movie: ");
                         for (int y = 0; y < showtimesAvailable.size(); y++) {
-                            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(g - 1))) {
+                            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
                                 System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
                             }
                         }
+                        int showtimeChoice = scan.nextInt();
 
-                        System.out.println("How many seat do you want");
-                        int f = scan.nextInt();
+                        System.out.println("How many seats do you want");
+                        int noOfSeats = scan.nextInt();
                         SeatingPlan layout = new SeatingPlan(5, 5);
                         ArrayList<String> SeatsArray = new ArrayList<>();
                         // asking for seats and saving it to an array
-                        for (int i = 0; i < f; i++) {
+                        for (int i = 0; i < noOfSeats; i++) {
                             layout.displaySeatPlan();
                             System.out.println("input your desired row and column");
                             System.out.println("row: ");
@@ -541,6 +542,7 @@ public class MainApp {
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
                             SeatsArray.add(String.valueOf(seatId));
+                            ShowtimesManager.saveSeatingPlan(layout, showtimesAvailable.get(showtimeChoice-1).getCinemaID(), showtimesAvailable.get(showtimeChoice-1).getShowtime());
                         }
 
                         //generating tickets from the array
