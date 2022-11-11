@@ -225,6 +225,7 @@ public class MainApp {
                             }
                         }
                     }
+                        choose = scan.nextInt();
 
                     } else if (choose == 2) {
                         System.out.println("1. Create Showtime\n");
