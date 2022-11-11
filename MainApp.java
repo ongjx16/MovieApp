@@ -642,7 +642,7 @@ public class MainApp {
                                         } else {
                                             seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard2D();
                                         }
-                                    } else if (newDate.isFri(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()), newDate.HourConverter(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime())))) {//include user's date and time selected, pulled from showtimes available
+                                    } else if (newDate.isFri(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()), newDate.HourConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()))) {//include user's date and time selected, pulled from showtimes available
                                         if (newDate.is3D(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){//include user's date and time selected, pulled from showtimes available
                                             seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard3D();
                                         } else {
