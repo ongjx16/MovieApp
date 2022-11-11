@@ -6,11 +6,16 @@ public class ListTop5MoviesUI {
         int i;
         int size = 0;
         ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
+        for (i = 0; i< allMovies.size(); i++){
+            filteredMovies = MoviesManager.filterByStatus();
+        }
+
         ArrayList<Integer> allRatings = new ArrayList<Integer>();
 
         // adding the ratings of all movies into an array
-        for (i=0; i<allMovies.size(); i++){
-            allRatings.add(allMovies.get(i).getRating()[1]);
+        for (i=0; i<filteredMovies.size(); i++){
+            allRatings.add(filteredMovies.get(i).getRating()[1]);
         }
         // sorting ratings from highest to lowest
         for (i=0; i<allRatings.size(); i++){
@@ -32,10 +37,10 @@ public class ListTop5MoviesUI {
 
         // iterate through allMovies array to print movies with the top 5 rating
         for (i = 0; i< size; i++){
-            if (allRatings.get(i).equals(allMovies.get(0).getRating()[1])){
+            if (allRatings.get(i).equals(filteredMovies.get(0).getRating()[1])){
                 int numbering = i+1;
-                System.out.println(numbering + ": " + allMovies.get(0).getName() + ", Rating: " + allMovies.get(0).getRating()[1]);
-                allMovies.remove(0);
+                System.out.println(numbering + ": " + filteredMovies.get(0).getName() + ", Rating: " + filteredMovies.get(0).getRating()[1]);
+                filteredMovies.remove(0);
             }
         }
     }
@@ -44,11 +49,16 @@ public class ListTop5MoviesUI {
         int i;
         int size = 0;
         ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
+        for (i = 0; i< allMovies.size(); i++){
+            filteredMovies = MoviesManager.filterByStatus();
+        }
+
         ArrayList<Integer> allSales = new ArrayList<Integer>();
 
         // adding the ratings of all movies into an array
-        for (i=0; i<allMovies.size(); i++){
-            allSales.add(allMovies.get(i).getSales());
+        for (i=0; i<filteredMovies.size(); i++){
+            allSales.add(filteredMovies.get(i).getSales());
         }
         // sorting ratings from highest to lowest
         for (i=0; i<allSales.size(); i++){
@@ -70,10 +80,10 @@ public class ListTop5MoviesUI {
 
         // iterate through allMovies array to print movies with the top 5 rating
         for (i = 0; i< size; i++){
-            if (allSales.get(i).equals(allMovies.get(0).getSales())){
+            if (allSales.get(i).equals(filteredMovies.get(0).getSales())){
                 int numbering = i+1;
-                System.out.println(numbering + ": " + allMovies.get(0).getName() + ", Sales: " + allMovies.get(0).getSales());
-                allMovies.remove(0);
+                System.out.println(numbering + ": " + filteredMovies.get(0).getName() + ", Sales: " + filteredMovies.get(0).getSales());
+                filteredMovies.remove(0);
             }
         }
     }
