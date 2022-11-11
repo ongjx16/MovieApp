@@ -652,54 +652,46 @@ public class MainApp {
 
                     if (option == 3) { //View movie details
                         System.out.println("Please select the movie you'd like to find out more about: ");
-                        Cineplex readingMovies = new Cineplex("Tampines");
-                        for (int i = 0; i < readingMovies.getMovies().length; i++) {
-                            System.out.println("[" + (i + 1) + "]" + readingMovies.getMovies()[i]);
+                        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
+                        for (int i = 0; i < allMovies.size(); i++) {
+                            System.out.println("(" + (i + 1) + ")" + allMovies.get(i).getName());
                         }
                         int movieSelection = scan.nextInt();
-                        if (movieSelection > readingMovies.getMovies().length || movieSelection < 1) {
+
+                        if (movieSelection > allMovies.size() || movieSelection < 1) {
                             System.out.println("Invalid input, select again");
                             movieSelection = scan.nextInt();
                         }
-                        System.out.println("You've chosen: " + readingMovies.getMovies()[movieSelection - 1]);
+                        System.out.println("You've chosen: " + allMovies.get(movieSelection-1).getName());
                         System.out.println("Here are the associated movie details!\n");
-                        System.out.println("Name: " + readingMovies.getMovieDetails(movieSelection).getName());
-                        System.out.println("Type: " + readingMovies.getMovieDetails(movieSelection).getType());
-                        System.out.println("Director: " + readingMovies.getMovieDetails(movieSelection).getDirector());
-                        System.out.println("Rating: " + readingMovies.getMovieDetails(movieSelection).getRating());
-                        System.out.println("Show Status: " + readingMovies.getMovieDetails(movieSelection).getShowingStatus());
-                        System.out.println("Show Length: " + readingMovies.getMovieDetails(movieSelection).getShowLength());
-                        System.out.println("Synopsis: " + readingMovies.getMovieDetails(movieSelection).getSynopsis());
+                        System.out.println("Movie: " + allMovies.get(movieSelection-1).getName());
+                        System.out.println("Type: " + allMovies.get(movieSelection-1).getType());
+                        System.out.println("Director: " + allMovies.get(movieSelection-1).getDirector());
+                        System.out.println("Rating: " + allMovies.get(movieSelection-1).getRating()[1]);
+                        System.out.println("Status: " + allMovies.get(movieSelection-1).getShowingStatus());
+                        System.out.println("Duration: " + allMovies.get(movieSelection-1).getShowLength());
+                        System.out.println("Synopsis: " + allMovies.get(movieSelection-1).getSynopsis());
                     }
 
                     if (option == 4) { //Check Seat availability
 
                     }
 
-                    if (option == 5) { //List top 5 movies
+                    if (option == 5){ //List top 5 movies
+                        boolean power = true;
+                        while (power) {
+                            System.out.println("Would you like to list the top 5 movies according to:");
+                            System.out.println("(1) Ratings");
+                            System.out.println("(2) Ticket Sales");
+                            System.out.println("(3) Exit");
+                            int listingMovies = scan.nextInt();
 
-                        System.out.println("Would you like to list the top 5 movies according to:");
-                        System.out.println("(1) Ratings");
-                        System.out.println("(2) Ticket Sales");
-                        System.out.println("(3) Exit");
-                        int listingMovies = scan.nextInt();
-                        int i;
-
-                        if (listingMovies == 1) {
-                            ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
-                            ArrayList<Integer> allRatings = new ArrayList<Integer>();
-                            for (i = 0; i < allMovies.size(); i++) {
-                                allRatings.add(allMovies.get(i).getRating()[1]);
-                            }
-                            for (i = 0; i < allRatings.size(); i++) {
-                                System.out.println(allRatings.get(i));
-                                for (int j = 0; j < allRatings.size(); j++) {
-                                    if (allRatings.get(j) > allRatings.get(j + 1)) {
-                                        int temp = allRatings.get(j);
-                                        allRatings.set(j, allRatings.get(j + 1));
-                                        allRatings.set(j + 1, temp);
-                                    }
-                                }
+                            if (listingMovies == 1) {
+                                ListTop5MoviesUI.sortByRatings();
+                            } else if (listingMovies == 2) {
+                                ListTop5MoviesUI.sortBySales();
+                            } else if (listingMovies == 3) {
+                                power = false;
                             }
                         }
                     }
