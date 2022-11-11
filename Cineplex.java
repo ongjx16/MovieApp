@@ -10,6 +10,11 @@ public class Cineplex implements Serializable {
 
     private Cinema[] cinemas = new Cinema[3];
     private Movie[] movies = new Movie[5];
+
+    public Cinema[] getCinemas() {
+        return cinemas;
+    }
+
     private String[] movieNames = new String[5];
     private String cineplexName;
     private int numOfHalls;
