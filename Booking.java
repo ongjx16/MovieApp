@@ -1,27 +1,70 @@
 import java.io.Serializable;
 
 public class Booking implements Serializable {
+    private static final long serialVersionUID = 1752384005199823622L;
     private String name; 
     private String email; 
     private long contactno;
     private float totalPrice;
+    private String movieName;
     private String TXNid;
     private String movieDate;
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
     private String movieTime;
 
     public Booking(){}
-    public Booking(String name, String email, long contactno, float totalPrice, String TXNid, String movieDate, String movieTime){
+    public Booking(String name, String email, long contactno, float totalPrice, String TXNid, String movieName, String movieDate, String movieTime){
         this.name=name;
         this.email=email;
         this.contactno=contactno;
         this.totalPrice=totalPrice;
         this.TXNid=TXNid;
+        this.movieName=movieName;
         this.movieDate=movieDate;
         this.movieTime=movieTime;
     }
 
+    public static String getCineplexByBooking(String txnId){
+        String cineplex = txnId.substring(0,1);
+        System.out.println("hello"+cineplex);
+        if(cineplex.equals("1")){
+            return "Jem";
+        }
+        else if (cineplex.equals("2")){
+            return "Parkway Parade";
+        }
+        else{
+            return "Tampines";
+        }
+
+
+    }
     public String getName() {
         return name;
+    }
+
+    public String getMovieDate() {
+        return movieDate;
+    }
+
+    public void setMovieDate(String movieDate) {
+        this.movieDate = movieDate;
+    }
+
+    public String getMovieTime() {
+        return movieTime;
+    }
+
+    public void setMovieTime(String movieTime) {
+        this.movieTime = movieTime;
     }
 
     public void setName(String name) {
@@ -60,4 +103,5 @@ public class Booking implements Serializable {
         this.totalPrice = totalPrice;
     }
 }
+
 
