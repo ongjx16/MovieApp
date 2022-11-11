@@ -56,11 +56,11 @@ public class ListTop5MoviesUI {
 
         ArrayList<Integer> allSales = new ArrayList<Integer>();
 
-        // adding the ratings of all movies into an array
+        // adding the sales of all movies into an array
         for (i=0; i<filteredMovies.size(); i++){
             allSales.add(filteredMovies.get(i).getSales());
         }
-        // sorting ratings from highest to lowest
+        // sorting sales from highest to lowest
         for (i=0; i<allSales.size(); i++){
             for (int j=0; j<allSales.size() - i - 1; j++){
                 if (allSales.get(j) < allSales.get(j+1)){
@@ -78,7 +78,7 @@ public class ListTop5MoviesUI {
             size = 5;
         }
 
-        // iterate through allMovies array to print movies with the top 5 rating
+        // iterate through allMovies array to print movies with the top 5 sales
         for (i = 0; i< size; i++){
             if (allSales.get(i).equals(filteredMovies.get(0).getSales())){
                 int numbering = i+1;
