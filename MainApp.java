@@ -482,12 +482,11 @@ public class MainApp {
 
                 while (option != 8) {
                     if (option == 1) { // Book a movie
-                        System.out.println("These are the cineplexes");
+                        System.out.println("Choose your cineplex: ");
                         ReadCineplexes readCineplexes = new ReadCineplexes();
                         for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
                             System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
                         }
-                        System.out.println("Choose your cineplex: ");
                         int cineplexChoice = scan.nextInt();
                         if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
                             System.out.println("Invalid option, please choose again");
@@ -682,12 +681,11 @@ public class MainApp {
                     }
 
                     if (option == 4) { //Check Seat availability
-                        System.out.println("These are the cineplexes");
+                        System.out.println("Choose your cineplex: ");
                         ReadCineplexes readCineplexes = new ReadCineplexes();
                         for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
                             System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
                         }
-                        System.out.println("Choose your cineplex: ");
                         int cineplexChoice = scan.nextInt();
                         if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
                             System.out.println("Invalid option, please choose again");
