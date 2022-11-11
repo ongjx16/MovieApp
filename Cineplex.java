@@ -18,7 +18,7 @@ public class Cineplex implements Serializable {
     public Cineplex(String cineplexName) {
         this.cineplexName = cineplexName;
         numOfHalls=3;
-        movies[0]= new Movie("Jurassic Park", "Blockbuster", 3, "Showing", "Steven Spielberg",
+        movies[0]= new Movie("Jurassic Park", MovieType.BLOCKBUSTER2D, 3, MovieStatus.NOW_SHOWING, "Steven Spielberg",
                 "In Steven Spielberg's massive blockbuster, " +
                         "paleontologists Alan Grant (Sam Neill) and Ellie Sattler (Laura Dern) " +
                         "and mathematician Ian Malcolm (Jeff Goldblum) are among a select group " +

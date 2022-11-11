@@ -75,35 +75,79 @@ public class MainApp {
                             choice = scan.nextInt();
 
 
-                            if (choice == 1) {
-                                String name;
-                                String type;
-                                String rating;
-                                int showLength;
-                                String showingStatus;
-                                String director;
-                                String synopsis;
+                        if (choice == 1) {
+                            String name;
+                            MovieType type;
+                            String rating;
+                            int showLength;
+                            MovieStatus showingStatus;
+                            String director;
+                            String synopsis;
 
                                 scan.nextLine();
                                 System.out.println("1. Enter Movie Name");
 
                                 name = scan.nextLine();
 
-                                System.out.println("2. Enter Movie Type");
+                            System.out.println("2. Choose Movie Type");
 
-                                type = scan.nextLine();
+                            System.out.println("[1] " + MovieType.DIGITAL2D.toString());
+                            System.out.println("[2] " + MovieType.DIGITAL3D.toString());
+                            System.out.println("[3] " + MovieType.BLOCKBUSTER2D.toString());
+                            System.out.println("[4] " + MovieType.BLOCKBUSTER3D.toString());
+
+                            int typeChoice = scan.nextInt();
+
+                            while(typeChoice<1 && typeChoice>4){
+                                System.out.println("Invalid Choice. Choose Again.");
+                                typeChoice = scan.nextInt();
+                            }
+
+                            if (typeChoice == 1){
+                                type = MovieType.DIGITAL2D;
+                            }
+                            else if (typeChoice == 2){
+                                type = MovieType.DIGITAL3D;
+                            }
+                            else if (typeChoice == 3){
+                                type = MovieType.BLOCKBUSTER2D;
+                            }
+                            else {
+                                type = MovieType.BLOCKBUSTER3D;
+                            }
+
 
                                 System.out.println("3. Enter Movie Length (in minutes)");
 
-                                showLength = scan.nextInt();
-                                scan.nextLine();
-                                System.out.println("4. Enter Movie Showing Status");
+                            showLength = scan.nextInt();
+                            scan.nextLine();
+                            System.out.println("4. Choose Movie Showing Status");
 
-                                showingStatus = scan.nextLine();
+                            System.out.println("[1] " + MovieStatus.COMING_SOON.toString());
+                            System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
+                            System.out.println("[3] " + MovieStatus.END_OF_SHOW.toString());
+
+                            int statusChoice = scan.nextInt();
+
+                            while(statusChoice<1 && statusChoice>3){
+                                System.out.println("Invalid Choice. Choose Again.");
+                                statusChoice = scan.nextInt();
+                            }
+
+                            if (statusChoice == 1){
+                                showingStatus = MovieStatus.COMING_SOON;
+                            }
+                            else if (statusChoice == 2){
+                                showingStatus = MovieStatus.NOW_SHOWING;
+                            }
+                            else {
+                                showingStatus = MovieStatus.END_OF_SHOW;
+                            }
 
                                 System.out.println("5. Enter Movie Director");
 
-                                director = scan.nextLine();
+                            scan.nextLine();
+                            director = scan.nextLine();
 
                                 System.out.println("6. Enter Movie Synopsis");
 
@@ -166,21 +210,21 @@ public class MainApp {
                                 MoviesManager.deleteMovie(movie - 1);
 
 
-                            } else if (choice == 4) {
-//                Movie[] MoviesArray;
-                                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                                MoviesArray = MoviesManager.readAllMovies();
-                                for (int i = 0; i < MoviesArray.size(); i++) {
-                                    System.out.println("Name: " + MoviesArray.get(i).getName());
-                                    System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
-                                    System.out.println("Type: " + MoviesArray.get(i).getType());
-                                    System.out.println("Length: " + MoviesArray.get(i).getShowLength());
-                                    System.out.println("Status: " + MoviesArray.get(i).getShowingStatus());
-                                    System.out.println("Director: " + MoviesArray.get(i).getDirector());
-                                    System.out.println("Synopsis: " + MoviesArray.get(i).getSynopsis() + "\n");
-                                }
+                        } else if (choice == 4) {
+                            // Movie[] MoviesArray;
+                            ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+                            MoviesArray = MoviesManager.readAllMovies();
+                            for (int i = 0; i < MoviesArray.size(); i++) {
+                                System.out.println("Name: " + MoviesArray.get(i).getName());
+                                System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
+                                System.out.println("Type: " + MoviesArray.get(i).getType().toString());
+                                System.out.println("Length: " + MoviesArray.get(i).getShowLength());
+                                System.out.println("Status: " + MoviesArray.get(i).getShowingStatus().toString());
+                                System.out.println("Director: " + MoviesArray.get(i).getDirector());
+                                System.out.println("Synopsis: " + MoviesArray.get(i).getSynopsis() + "\n");
                             }
                         }
+                    }
 
                     } else if (choose == 2) {
                         System.out.println("1. Create Showtime\n");
