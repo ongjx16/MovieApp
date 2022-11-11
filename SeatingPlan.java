@@ -2,6 +2,8 @@ import java.io.Serializable;
 
 public class SeatingPlan implements Serializable{
 
+    private static final long serialVersionUID = -5501512317806849925L;
+
     // seat plan will be shown in matrix: X if occupied, O if not
     // seat ID will be (j*100)+i
     
@@ -17,7 +19,9 @@ public class SeatingPlan implements Serializable{
         seatPlan = new Seat[row][col];
         for(int i=0; i<row; i++){
             for(int j=0; j<col;j++){
-                seatPlan[i][j] = new Seat(j*100+i);
+                char x = (char)(j + 65);
+                String seatyea = x + String.valueOf(i);
+                seatPlan[i][j] = new Seat(seatyea);
             }
         }
     }
