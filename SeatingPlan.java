@@ -65,17 +65,25 @@ public class SeatingPlan implements Serializable{
         }
     }
 
-    public void assignSeat(int a, int b){
-        if (seatPlan[a][b].isOccupied() == false){
-            seatPlan[a][b].assign();
+    public void assignSeat(int a, String b){
+        b = b.toUpperCase();
+        char aa = b.charAt(0);
+        System.out.println(aa);
+        int conv = (int) aa - 65;
+        if (seatPlan[a][conv].isOccupied() == false){
+            seatPlan[a][conv].assign();
         }else{
             System.out.println("Sorry seat taken");
         }
     }
 
-    public void unassignSeat(int a, int b){
-        if (seatPlan[a][b].isOccupied() == true){
-            seatPlan[a][b].unassign();
+    public void unassignSeat(int a, String b){
+        b = b.toUpperCase();
+        char aa = b.charAt(0);
+        System.out.println(aa);
+        int conv = (int) aa - 65;
+        if (seatPlan[a][conv].isOccupied() == true){
+            seatPlan[a][conv].unassign();
         }else{
             System.out.println("Seat is unoccupied");
         }
