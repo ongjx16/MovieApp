@@ -506,19 +506,20 @@ public class MainApp {
                 while (option != 8) {
                     if (option == 1) { // Book a movie
                         System.out.println("Choose your cineplex: ");
-                        ReadCineplexes readCineplexes = new ReadCineplexes();
-                        for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
-                            System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
+                        ArrayList<Cineplex> readCineplexes = new ArrayList<Cineplex>(CineplexManager.readAllCineplexes());
+                        for (int i = 0; i < readCineplexes.size(); i++) {
+                            System.out.println("[" + (i + 1) + "] " + readCineplexes.get(i).getCineplexName() + "\n");
                         }
                         int cineplexChoice = scan.nextInt();
-                        if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
+                        //error handling
+                        if (cineplexChoice > readCineplexes.size() || cineplexChoice < 1) {
                             System.out.println("Invalid option, please choose again");
                             cineplexChoice = scan.nextInt();
                         }
-                        System.out.println("Your choice is: " + readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
-                        Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
+                        System.out.println("Your choice is: " + readCineplexes.get(cineplexChoice - 1).getCineplexName());
+                        
                         System.out.println("Choose your movie! ");
-                        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
+                        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(readCineplexes.get(cineplexChoice - 1).getCineplexID()));
                         System.out.println("movies in that cineplex" + movies.size());
                         for (int j = 0; j < movies.size(); j++) {
                             System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
@@ -778,19 +779,21 @@ public class MainApp {
 
                     if (option == 4) { //Check Seat availability
                         System.out.println("Choose your cineplex: ");
-                        ReadCineplexes readCineplexes = new ReadCineplexes();
-                        for (int i = 0; i < readCineplexes.getCineplexes().length; i++) {
-                            System.out.println("[" + (i + 1) + "] " + readCineplexes.getCineplexes()[i].getCineplexName() + "\n");
+                        ArrayList<Cineplex> readCineplexes = new ArrayList<Cineplex>(CineplexManager.readAllCineplexes());
+                        for (int i = 0; i < readCineplexes.size(); i++) {
+                            System.out.println("[" + (i + 1) + "] " + readCineplexes.get(i).getCineplexName() + "\n");
                         }
                         int cineplexChoice = scan.nextInt();
-                        if (cineplexChoice > readCineplexes.getCineplexes().length || cineplexChoice < 1) {
+                        //error handling
+                        if (cineplexChoice > readCineplexes.size() || cineplexChoice < 1) {
                             System.out.println("Invalid option, please choose again");
                             cineplexChoice = scan.nextInt();
                         }
-                        System.out.println("Your choice is: " + readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
-                        Cineplex userCineplex = new Cineplex(readCineplexes.getCineplexes()[cineplexChoice - 1].getCineplexName());
-                        System.out.println("Choose the movie you wish to check: ");
-                        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(cineplexChoice));
+                        System.out.println("Your choice is: " + readCineplexes.get(cineplexChoice - 1).getCineplexName());
+                        
+                        System.out.println("Choose your movie! ");
+                        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(readCineplexes.get(cineplexChoice - 1).getCineplexID()));
+                        
                         for (int j = 0; j < movies.size(); j++) {
                             System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
                         }
