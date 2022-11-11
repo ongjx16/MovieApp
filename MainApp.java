@@ -7,6 +7,7 @@ import Admin.AdminAccount;
 import java.io.*;
 import java.util.ArrayList;
 
+
 public class MainApp {
     public static void main(String[] args) throws ParseException {
         int identity = 0;
@@ -583,21 +584,24 @@ public class MainApp {
                         int noOfSeats = scan.nextInt();
                         ArrayList<String> SeatsArray = new ArrayList<>();
                         SeatingPlan layout;
+                        String row="";
+                        String col="";
                         // asking for seats and saving it to an array
                         for (int i = 0; i < noOfSeats; i++) {
                             layout = showtimesAvailable.get(showtimeChoice-1).getSeats();
                             layout.displaySeatPlan();
                             System.out.println("input your desired row and column");
-                            System.out.println("column (input letter): ");
-                            String e = scan.next();
                             System.out.println("row (input number): ");
                             int d = scan.nextInt();
+                            System.out.println("column (input letter): ");
+                            String e = scan.next();
                             layout.assignSeat((d - 1), (e));
                             String seatyea = e + String.valueOf(d);
                             String seatId = new Seat(seatyea).getSeatId();
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
                             SeatsArray.add(String.valueOf(seatId));
+                            System.out.println("This is your chosen seat: " + seatId);
                             ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(d-1),(e));
                         }
                         if (seatprice == 0f || seatprice == 1f){ // situation where your movie selection is not premium, holiday or weekend
@@ -724,16 +728,19 @@ public class MainApp {
                                 break;
                             }
                         }
-                        Booking booked1 = new Booking(usersList.get(count).getName(),usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),4.5f,txnID,showtimesAvailable.get(showtimeChoice).getShowtime().substring(0,10),showtimesAvailable.get(showtimeChoice).getShowtime().substring(11));
+                        System.out.println(usersList.get(count).getUsername());
+                        System.out.println(col);
+                        Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),4.5f,txnID,showtimesAvailable.get(showtimeChoice-1).getMoviename(),showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(0,10),showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(11));
+                        ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),((row.charAt(0)-49)),(col));
                         UsersManager.editBookingHistory(count, booked1);
+
 
                     }
 
 
                     if (option == 2) { //Search/List movies
-//                        boolean exit = true;
                         int searchOrList = 0;
-                        while (searchOrList != 3) {
+                        while (true) {
                             System.out.println("What would you like to do?");
                             System.out.println("(1) Search movie by title");
                             System.out.println("(2) List all movies");
@@ -745,10 +752,9 @@ public class MainApp {
                                 MoviesManager.searchMovie();
                             } else if (searchOrList == 2) {
                                 MoviesManager.printMoviedb();
+                            }else if (searchOrList==3) {
+                                break;
                             }
-//                            }else if (searchOrList == 3){
-//                                return;
-//                            }
 
                         }
 
@@ -841,31 +847,45 @@ public class MainApp {
                         }
                     }
 
-                    if (option == 6) { //View Booking History
-//                        System.out.println("Please enter your username");
-//                        username1 = scan.next();
-//
-//                        while (!user.verifyUsername(username1)) {
-//                            if (user.verifyUsername(username1)) {
-//                                System.out.println("Username is valid");
-//                            } else {
-//                                System.out.println("Username is invalid, please key in again");
-//                                username1 = scan.next();
-//                            }
-//                        }
-//
-//                        System.out.println("Please enter your password");
-//                        password1 = scan.next();
-//                        while (!user.verifyPassword(username1, password1)) {
-//                            if (user.verifyPassword(username1, password1)) {
-//                                System.out.println("Password is valid");
-//
-//                            } else {
-//                                System.out.println("Password is invalid, please key in again");
-//                                password1 = scan.next();
-//                            }
-//                        }
+                    //View Booking History
+                    if (option == 6) {
+                        String usernameInput, passwordInput;
+                        while(true) {
+                            scan.nextLine();
+                            System.out.println("Please enter your username: ");
+                            usernameInput = scan.nextLine();
+                            if (UserLogin.verifyUsername(usernameInput)) {
+                                System.out.println("Please enter your password: ");
+                                passwordInput = scan.nextLine();
+                                while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                                    System.out.println("Invalid password, please try again. ");
+                                    passwordInput = scan.nextLine();
+                                }
+                                System.out.println("Welcome back " + usernameInput);
+                                break;
+
+                            } else {
+                                System.out.println("Username not found, please try again. ");
+                            }
+                        }
                         // add code for viewing booking history
+                        int i, j;
+                        for(i=0; i<UsersManager.readAllUsers().size(); i++){
+                            if(UsersManager.readAllUsers().get(i).getUsername().equals(usernameInput)){
+                                break;
+                            }
+                        }
+                        System.out.println("Choose date to view booking history: ");
+                        for(j=0; j<UsersManager.readAllUsers().get(i).getBookingHistory().size();j++){
+                            System.out.println("["+(j+1)+"] "+UsersManager.readAllUsers().get(i).getBookingHistory().get(j).getMovieDate());
+                        }
+                        int historyChoice=scan.nextInt();
+                        System.out.println("Transaction ID: " +UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getTXNid() );
+                        System.out.println("Location: " + Booking.getCineplexByBooking(UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getTXNid()) );
+                        System.out.println("Movie Name: "+UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getMovieName());
+                        System.out.println("Movie Date: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getMovieDate());
+                        System.out.println("Movie Time: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getMovieTime());
+
                     }
 
                     if (option == 7) { // Rate Movies

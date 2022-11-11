@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class HolidayManager {
+public class HolidayManager implements Serializable {
 
     public static void createHolidays(LocalDate holidayDate) {
         try {
