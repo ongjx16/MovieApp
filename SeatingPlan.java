@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SeatingPlan implements Serializable{
+    private static final long serialVersionUID = -5501512317806849925L;
 
     // seat plan will be shown in matrix: X if occupied, O if not
     // seat ID will be (j*100)+i
@@ -86,5 +87,27 @@ public class SeatingPlan implements Serializable{
         }
     }
 
+    public Seat[][] getSeatPlan() {
+        return seatPlan;
+    }
 
+    public void setSeatPlan(Seat[][] seatPlan) {
+        this.seatPlan = seatPlan;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
 }
