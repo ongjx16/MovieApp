@@ -572,6 +572,13 @@ public class MainApp {
                             email = scan.nextLine();
                             System.out.println("Please enter your username: ");
                             username = scan.nextLine();
+                            for(int x = 0; x<UsersManager.readAllUsers().size();x++){
+                                if(UsersManager.readAllUsers().get(x).getUsername().equals(username)){
+                                    System.out.println("Sorry, username has been taken. \nPlease key in new username: ");
+                                    username = scan.nextLine();
+                                    break;
+                                }
+                            }
                             System.out.println("Please enter your password: ");
                             password = scan.nextLine();
                             UsersManager.createUser(username, password, name, phoneNumber, email);
