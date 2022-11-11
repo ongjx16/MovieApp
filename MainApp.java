@@ -234,8 +234,8 @@ public class MainApp {
                             System.out.println("1. Create Showtime\n");
                             System.out.println("2. Edit Showtime\n");
                             System.out.println("3. Delete Showtime\n");
-                            System.out.println("4. See List of Current Showtimes\n\n");
-                            System.out.println("5. Go back");
+                            System.out.println("4. See List of Current Showtimes\n");
+                            System.out.println("5. Go back\n\n");
 //                System.out.println("5. Seat tester");
                             System.out.println("Enter a number of your choice: ");
                             choice = scan.nextInt();
@@ -512,7 +512,16 @@ public class MainApp {
                             else{
                                 seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
                             }
-                        } else {
+                        }
+                        else {
+                            if (newDate.isFri6pm(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()), newDate.HourConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()))){
+                                if (newDate.is3D(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){ //include user's movie of type movie
+                                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+                                }
+                                else{
+                                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+                                }
+                            }
                             // weekend means its either 2d or 3d so account first
                             if (newDate.isWeekend(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()))){ //include user's date and time selected, pulled from showtimes available
                                 if (newDate.is3D(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){ //include user's movie of type movie
@@ -575,7 +584,7 @@ public class MainApp {
                                         } else {
                                             seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard2D();
                                         }
-                                    } else if (newDate.isFri(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()), newDate.HourConverter(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime())))) {//include user's date and time selected, pulled from showtimes available
+                                    } else if (newDate.isFri(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()), newDate.HourConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()))) {//include user's date and time selected, pulled from showtimes available
                                         if (newDate.is3D(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){//include user's date and time selected, pulled from showtimes available
                                             seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard3D();
                                         } else {
