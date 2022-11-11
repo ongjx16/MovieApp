@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class MainApp {
     public static void main(String[] args) {
+        ShowtimesManager.createShowtimes("27/11/2022 10:12", "Harry Potter", "1C1");
         int identity = 0;
         int choice;
         String username1;
@@ -576,15 +577,16 @@ public class MainApp {
                         for (int i = 0; i < f; i++) {
                             layout.displaySeatPlan();
                             System.out.println("input your desired row and column");
-                            System.out.println("row: ");
+                            System.out.println("row (input number): ");
                             int d = scan.nextInt();
-                            System.out.println("column: ");
-                            int e = scan.nextInt();
-                            layout.assignSeat((d - 1), (e - 1));
-                            int seatId = new Seat(e * 100 + d).getSeatId();
+                            System.out.println("column (input letter): ");
+                            String e = scan.next();
+                            layout.assignSeat((d - 1), (e));
+                            String seatyea = e + String.valueOf(d);
+                            String seatId = new Seat(seatyea).getSeatId();
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
-                            SeatsArray.add(String.valueOf(seatId));
+                            SeatsArray.add(seatId);
                         }
 
                         //generating tickets from the array

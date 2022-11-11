@@ -180,7 +180,7 @@ public class ShowtimesManager {
                     break;
                 }
             }
-            showtimeList.get(i).getSeats().assignSeat(5,5);
+            showtimeList.get(i).getSeats().assignSeat(5,"B");
             out.writeObject(showtimeList);
             out.close();
         } catch (Exception e) {e.printStackTrace(

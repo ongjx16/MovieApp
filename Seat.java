@@ -1,14 +1,16 @@
 import java.io.Serializable;
 
 public class Seat implements Serializable {
-    private int seatId;
+    private static final long serialVersionUID = -920862172244708410L;
+
+    private String seatId;
     private boolean seatStatus = false; // false means unoccupied, true means occupied
 
-    public Seat(int seatId){
+    public Seat(String seatId){
         this.seatId = seatId;
     }
 
-    public int getSeatId(){
+    public String getSeatId(){
         return seatId;
     }
 

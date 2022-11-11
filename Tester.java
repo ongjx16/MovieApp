@@ -1,23 +1,34 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+//import javax.swing.text.DateFormatter;
+//import java.text.DateFormat;
+//import java.text.ParseException;
+//import java.text.SimpleDateFormat;
+//import java.time.LocalDate;
+//import java.util.ArrayList;
+//import java.util.Date;
+//import java.util.Scanner;
+//
+//public class Tester {
+//    public static void main(String[] args) throws ParseException {
+//        DateFormatter d1 = new DateFormatter();
+//        System.out.println(d1.DayConverter("11/11/2022 10:12"));
+//
+//        String x = "Jewel Changi premiu Movies";
+//        System.out.println(d1.isPremium(x));
+//
+//        String ds1 = HolidayManager.readHolidays().get(0).getDate().toString();
+//        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+//        String ds2 = sdf2.format(sdf1.parse(ds1));
+//        System.out.println(ds2);
+//    }
+//}
 
 public class Tester {
-    public static void main(String[] args) throws ParseException {
-        DateFormatter d1 = new DateFormatter();
-        System.out.println(d1.DayConverter("11/11/2022 10:12"));
+    public static void main (String[] args){
+        SeatingPlan x  = new SeatingPlan(9,9);
+        x.displaySeatPlan();
+        x.assignSeat(1,"B");
+        x.displaySeatPlan();
 
-        String x = "Jewel Changi premiu Movies";
-        System.out.println(d1.isPremium(x));
-
-        String ds1 = HolidayManager.readHolidays().get(0).getDate().toString();
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-        String ds2 = sdf2.format(sdf1.parse(ds1));
-        System.out.println(ds2);
     }
 }
