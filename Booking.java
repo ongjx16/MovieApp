@@ -34,7 +34,6 @@ public class Booking implements Serializable {
 
     public static String getCineplexByBooking(String txnId){
         String cineplex = txnId.substring(0,1);
-        System.out.println("hello"+cineplex);
         if(cineplex.equals("1")){
             return "Jem";
         }
