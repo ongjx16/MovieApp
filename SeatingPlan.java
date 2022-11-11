@@ -25,22 +25,31 @@ public class SeatingPlan implements Serializable{
     public void displaySeatPlan(){
         System.out.println("Seating layout:\n");
 
+        System.out.println("==============================");
+        System.out.println("        SCREEN IS HERE        ");
+        System.out.println("==============================");
+
         for (int i = 0; i < col; i++) {
+            char c = (char)(i + 65);
             if (i == 0) {
-                System.out.print("-  " + (i+1) + "  ");
+                System.out.print("-  " + " " + c + " ");
             } else if (i == (col/2)) {
-                System.out.print("  " + (i+1) + "  ");
+                System.out.print("  " + " " + c + " " + "");
             }
             else{
-                System.out.print(i+1 + "  ");
+                System.out.print(" " + c + " ");
             }
         }
         System.out.print("\n");
 
         for(int i=0; i<row; i++){
+            if (i == 0){
+                System.out.println("-------------------------------");
+
+            }
             for(int j=0; j<col;j++){
                 if (j == 0){
-                    System.out.print((i+1) + " ");
+                    System.out.print((i+1) + "| ");
                 }
                 if (j == col/2){
                     System.out.print("  ");
