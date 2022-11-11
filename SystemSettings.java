@@ -113,7 +113,7 @@ public class SystemSettings {
             if (editChoice == 1) {
                 // create new holiday
                 String holiday;
-                System.out.println("Enter new holiday date in DD/MM/YYY: ");
+                System.out.println("Enter new holiday date in DD/MM/YYYY: ");
                 scan1.nextLine();
                 holiday = scan1.nextLine();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

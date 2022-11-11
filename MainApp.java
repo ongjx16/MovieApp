@@ -567,7 +567,16 @@ public class MainApp {
                             else{
                                 seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
                             }
-                        } else {
+                        }
+                        else {
+                            if (newDate.isFri6pm(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()), newDate.HourConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()))){
+                                if (newDate.is3D(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){ //include user's movie of type movie
+                                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+                                }
+                                else{
+                                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+                                }
+                            }
                             // weekend means its either 2d or 3d so account first
                             if (newDate.isWeekend(newDate.DayConverter(showtimesAvailable.get(showtimeChoice-1).getShowtime()))){ //include user's date and time selected, pulled from showtimes available
                                 if (newDate.is3D(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){ //include user's movie of type movie
