@@ -527,10 +527,11 @@ public class MainApp {
 
                         System.out.println("How many seats do you want");
                         int noOfSeats = scan.nextInt();
-                        SeatingPlan layout = new SeatingPlan(5, 5);
                         ArrayList<String> SeatsArray = new ArrayList<>();
                         // asking for seats and saving it to an array
                         for (int i = 0; i < noOfSeats; i++) {
+                            SeatingPlan layout= new SeatingPlan(5,5);
+                            layout = showtimesAvailable.get(showtimeChoice-1).getSeats();
                             layout.displaySeatPlan();
                             System.out.println("input your desired row and column");
                             System.out.println("row: ");
@@ -542,7 +543,7 @@ public class MainApp {
                             System.out.println("This is your chosen seat: " + seatId);
                             layout.displaySeatPlan();
                             SeatsArray.add(String.valueOf(seatId));
-                            ShowtimesManager.saveSeatingPlan(layout, showtimesAvailable.get(showtimeChoice-1).getCinemaID(), showtimesAvailable.get(showtimeChoice-1).getShowtime());
+                            ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(d-1),(e-1));
                         }
 
                         //generating tickets from the array
