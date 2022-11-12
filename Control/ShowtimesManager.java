@@ -18,7 +18,6 @@ public class ShowtimesManager {
 
             //Creating the object
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
-            System.out.println("hello33" + showtimeList.size());
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));
@@ -52,7 +51,7 @@ public class ShowtimesManager {
             //closing the stream
             //out.reset();
             out.close();
-            System.out.println("create showtime success");
+            System.out.println("Showtime created!");
         }catch(Exception e){
         //     e.printStackTrace(
         // );
@@ -366,20 +365,20 @@ public class ShowtimesManager {
 
     }
 
-    public static ArrayList<String> showtimeDates(ArrayList<Showtimes> showtimesAvailable ){
+    public static ArrayList<Showtimes> showtimeDates(ArrayList<Showtimes> showtimesAvailable ){
 
-        ArrayList<String> dates = new ArrayList<String>();
+        ArrayList<Showtimes> dates = new ArrayList<Showtimes>();
 
         for (int i =0; i< showtimesAvailable.size(); i++){
             boolean repeat = false;
             for (int y = 0; y<dates.size(); y++){
-                if ((showtimesAvailable.get(i).getShowtime().substring(0,10)).equals(dates.get(y))){
+                if ((showtimesAvailable.get(i).getShowtime().substring(0,10)).equals(dates.get(y).getShowtime().substring(0,10))){
                     repeat = true;
                 }
             }
 
             if (repeat == false){
-                dates.add(showtimesAvailable.get(i).getShowtime().substring(0,10));
+                dates.add(showtimesAvailable.get(i));
             }
 
         }

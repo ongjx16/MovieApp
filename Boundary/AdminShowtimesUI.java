@@ -1,7 +1,11 @@
 package Boundary;
 
+import Control.CinemaManager;
+import Control.CineplexManager;
 import Control.MoviesManager;
 import Control.ShowtimesManager;
+import Entity.Cinema;
+import Entity.Cineplex;
 import Entity.Movie;
 import Entity.Showtimes;
 
@@ -50,7 +54,6 @@ public class AdminShowtimesUI {
                 System.out.println("Showtime: " + ShowtimesArray.get(i).getShowtime());
                 System.out.println("Movie ID: " + ShowtimesArray.get(i).getMovieID());
                 System.out.println("Cinema ID: " + ShowtimesArray.get(i).getCinemaID()+"\n");
-                System.out.println(ShowtimesArray.get(i).getShowtimeID());
             }
         }
     }
@@ -138,12 +141,29 @@ public class AdminShowtimesUI {
 
         //System.out.println(showtime);
 
-        scan.nextLine();
-        System.out.println("3. Enter Cinema ID: ");
-        cinemaID = scan.nextLine();
+        System.out.println("Please choose the cineplex to assign the showtime: ");
+        ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>(CineplexManager.readAllCineplexes());
+        ArrayList<Cinema> cinemas = new ArrayList<Cinema>(CinemaManager.readAllCinemas());
+        ArrayList<Cinema> cinemasInChosenCineplex = new ArrayList<Cinema>();
+        for(int i=0; i< CineplexManager.readAllCineplexes().size();i++){
+            System.out.println("["+(i+1)+"]"+ cineplexes.get(i).getCineplexName());
+        }
+        int cineplexChoice = scan.nextInt();
+
+        for(int i=0; i< CinemaManager.readAllCinemas().size();i++){
+            if(cinemas.get(i).getCineplexName().equals( cineplexes.get(cineplexChoice-1).getCineplexName())){
+                cinemasInChosenCineplex.add(cinemas.get(i));
+            }
+        }
+
+        System.out.println("Please choose cinema to assign the showtime: ");
+        for(int i=0; i<cinemasInChosenCineplex.size();i++){
+            System.out.println("["+(i+1)+"]"+cinemasInChosenCineplex.get(i).getCinemaId());
+        }
+        int cinemaChoice = scan.nextInt();
 
         //src.Control.ShowtimesManager.initialiser();
-        ShowtimesManager.createShowtimes(showtime, moviename, cinemaID);
+        ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice).getCinemaId());
         System.out.println("Showtime has been created!");
     }
 

@@ -99,17 +99,17 @@ public class UserBookingUI {
         String movieChosen = filteredMovies.get(movieChoice-1).getName();
 
         ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movieIDs.get(movieChoice - 1)));
-        ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
+        ArrayList<Showtimes> datesToSelect = new ArrayList<Showtimes>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
         System.out.println("What dates would you like to see this movie?  ");
         for (int z = 0; z < datesToSelect.size(); z++) {
-            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
+            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z).getShowtime().substring(0,10) + "\n");
         }
         int dateChoice = scan.nextInt();
 
         System.out.println("What timings would you like to see this movie: ");
         for (int y = 0; y < showtimesAvailable.size(); y++) {
-            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
+            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1).getShowtime().substring(0, 10))) {
                 System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
             }
         }
