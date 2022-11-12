@@ -25,7 +25,7 @@ public class ShowtimesManager {
 
 
             int movieid =0;
-            ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
+            ArrayList<Movie> MoviesArray = new ArrayList<Movie>(MoviesManager.readAllMovies());
             for (int i = 0; i < MoviesArray.size(); i++) {
                 if (moviename.equals(MoviesArray.get(i).getName())){
                     movieid = MoviesArray.get(i).getMovieID();

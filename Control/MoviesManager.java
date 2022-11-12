@@ -25,12 +25,12 @@ public class MoviesManager {
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/AllMovies.dat"));
             ObjectOutputStream out = new ObjectOutputStream(fout);
             int id;
-if(movieList.size()>0){
-    id = movieList.get(movieList.size()-1).getMovieID() +1 ;
-}
-else{
-    id = 1;
-}
+        if(movieList.size()>0){
+            id = movieList.get(movieList.size()-1).getMovieID() +1 ;
+        }
+        else{
+            id = 1;
+        }
 
 
             Movie movie1 = new Movie(name, type, showLength, showingStatus, director, synopsis, id);
@@ -184,16 +184,14 @@ else{
         }catch(Exception e){}
     }
 
-    public static ArrayList<Movie> filterByStatus () {
-        ArrayList<Movie> movieOutput = new ArrayList<Movie>(readAllMovies());
+    public static ArrayList<Movie> filterByStatus (ArrayList<Movie>moviesInput) {
         ArrayList<Movie> filteredOutput = new ArrayList<Movie>();
-
-        for (int i = 0; i<movieOutput.size(); i++){
-            if (!movieOutput.get(i).getShowingStatus().equals(MovieStatus.END_OF_SHOW)){
-                filteredOutput.add(movieOutput.get(i));
+        for(int i =0; i<moviesInput.size();i++){
+            if(!moviesInput.get(i).getShowingStatus().equals(MovieStatus.END_OF_SHOW)){
+                filteredOutput.add(moviesInput.get(i));
             }
-        }
 
+        }
 
         return (filteredOutput);
     }
@@ -330,7 +328,7 @@ else{
         ArrayList<Movie> allMovies = readAllMovies();
         ArrayList<Movie> filteredMovies = new ArrayList<>();
         for (i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
+            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
         }
 
         for (i = 0; i < filteredMovies.size(); i++) {
@@ -355,7 +353,7 @@ else{
         ArrayList<Movie> allMovies = readAllMovies();
         ArrayList<Movie> filteredMovies = new ArrayList<>();
         for (int i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
+            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
         }
 
         for (int i = 0; i < filteredMovies.size(); i++) {

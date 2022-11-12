@@ -13,6 +13,15 @@ public class Booking implements Serializable {
     private String movieName;
     private String TXNid;
     private String movieDate;
+    private int noOfSeats;
+
+    public int getNoOfSeats() {
+        return noOfSeats;
+    }
+
+    public void setNoOfSeats(int noOfSeats) {
+        this.noOfSeats = noOfSeats;
+    }
 
     public String getMovieName() {
         return movieName;
@@ -25,7 +34,7 @@ public class Booking implements Serializable {
     private String movieTime;
 
     public Booking(){}
-    public Booking(String name, String email, long contactno, float totalPrice, String TXNid, String movieName, String movieDate, String movieTime){
+    public Booking(String name, String email, long contactno, float totalPrice, String TXNid, String movieName, String movieDate, String movieTime, int noOfSeats){
         this.name=name;
         this.email=email;
         this.contactno=contactno;
@@ -34,6 +43,7 @@ public class Booking implements Serializable {
         this.movieName=movieName;
         this.movieDate=movieDate;
         this.movieTime=movieTime;
+        this.noOfSeats=noOfSeats;
     }
 
 //    public static String getCineplexByBooking(String txnId){

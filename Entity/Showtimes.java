@@ -20,7 +20,7 @@ public class Showtimes implements Serializable {
         this.moviename = moviename;
         this.movieID = movieID;
         this.cinemaID = cinemaID;
-        this.seats = new SeatingPlan(5,5);
+        this.seats = new SeatingPlan(16,16);
         this.showtimeID = showtimeID;
     }
 

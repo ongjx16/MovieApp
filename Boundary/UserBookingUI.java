@@ -36,10 +36,13 @@ public class UserBookingUI {
 
 
         //generating tickets from the array
+        System.out.println("These are your tickets: ");
         for (int n = 0; n < SeatsArray.size(); n++) {
-            System.out.println("\nTicket" + ":");
-            Tickets tics = new Tickets(MoviesManager.getMovieNameById(showtimeToBook.getMovieID()), "JE1", "hello", "test", SeatsArray.get(n));
+            System.out.println("---------------------");
+            Tickets tics = new Tickets(showtimeToBook.getMoviename(), showtimeToBook.getCinemaID(),CinemaManager.getCinemabyID(showtimeToBook.getCinemaID().toUpperCase()).getType(), showtimeToBook.getShowtime().substring(0,10), showtimeToBook.getShowtime().substring(11), SeatsArray.get(n));
+            System.out.println("---------------------");
         }
+
         //get user details
         String newUsername = userLogin();
 
@@ -54,14 +57,9 @@ public class UserBookingUI {
                 break;
             }
         }
-        // doesnt make sense? its only updating the last seat
 
-//        System.out.println(usersList.get(count).getUsername());
-//        System.out.println("col" +col);
-//        Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),4.5f,txnID,showtimeToBook.getMoviename(),showtimeToBook.getShowtime().substring(0,10),showtimeToBook.getShowtime().substring(11));
-//        System.out.println(row.charAt(0)-49);
-//        ShowtimesManager.updateSeats(showtimeToBook.getShowtimeID(),((row.charAt(0)-49)),(col));
-//        UsersManager.editBookingHistory(count, booked1);
+        Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),updatedTicketPrice,txnID,showtimeToBook.getMoviename(),showtimeToBook.getShowtime().substring(0,10),showtimeToBook.getShowtime().substring(11),noOfSeats);
+        UsersManager.editBookingHistory(count, booked1);
     }
 
     //return showtime object chosen
@@ -81,20 +79,26 @@ public class UserBookingUI {
         System.out.println("Your choice is: " + readCineplexes.get(cineplexChoice - 1).getCineplexName());
 
         System.out.println("Choose your movie! ");
-        ArrayList<Integer> movies = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(readCineplexes.get(cineplexChoice - 1).getCineplexID()));
-        System.out.println("movies in that cineplex" + movies.size());
-        for (int j = 0; j < movies.size(); j++) {
-            System.out.println("[" + (j + 1) + "] " + MoviesManager.getMovieNameById(movies.get(j)) + "\n");
+        ArrayList<Integer> movieIDs = new ArrayList<Integer>(ShowtimesManager.moviesByCineplex(readCineplexes.get(cineplexChoice - 1).getCineplexID()));
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        for (int j = 0; j < movieIDs.size(); j++) {
+            movies.add(MoviesManager.getMoviebyID(movieIDs.get(j)));
         }
+        ArrayList<Movie>filteredMovies = new ArrayList<Movie>();
+        filteredMovies=MoviesManager.filterByStatus(movies);
+        for(int i=0; i<filteredMovies.size();i++){
+            System.out.println("["+(i+1)+"]"+filteredMovies.get(i).getName()+ " || " + filteredMovies.get(i).getType().toString() + "\n");
+        }
+
         int movieChoice = scan.nextInt();
-        if (movieChoice > movies.size() || movieChoice < 1) {
+        if (movieChoice > filteredMovies.size() || movieChoice < 1) {
             System.out.println("Invalid choice, please choose again");
             movieChoice = scan.nextInt();
         }
-        System.out.println("Your choice is: " + MoviesManager.getMovieNameById(movies.get(movieChoice - 1)));
-        String movieChosen = MoviesManager.getMovieNameById(movies.get(movieChoice - 1));
+        System.out.println("Your choice is: " + filteredMovies.get(movieChoice-1).getName());
+        String movieChosen = filteredMovies.get(movieChoice-1).getName();
 
-        ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movies.get(movieChoice - 1)));
+        ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movieIDs.get(movieChoice - 1)));
         ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
         System.out.println("What dates would you like to see this movie?  ");
@@ -106,7 +110,7 @@ public class UserBookingUI {
         System.out.println("What timings would you like to see this movie: ");
         for (int y = 0; y < showtimesAvailable.size(); y++) {
             if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
-                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
+                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11) + " || " + CinemaManager.getCinemabyID(showtimesAvailable.get(y).getCinemaID()).getType().toString());
             }
         }
         int showtimeChoice = scan.nextInt();
@@ -180,21 +184,22 @@ public class UserBookingUI {
 
     public static float getPreliminaryPrice (DateFormatter newDate, Showtimes showtimeToBook, float seatprice){
         // premium is always 25 so check on top
-//                        if (newDate.isPremium(){ //include user's cinema of type cinema
-//                            seatprice = src.Control.PricingManager.readAllPricing().get(0).getPremium() + seatprice;
-//                        }
-        // blockbuster always adds 1 so check on top
         if (newDate.isBlockbuster(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
             seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
         }
-//        if (newDate.isHoliday(newDate.DayConverter(showtimeToBook.getShowtime()))){ //include user's timing selected, pulled from showtimes available
-//            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-//                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
-//            }
-//            else{
-//                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
-//            }
-//        }
+
+        if (newDate.isPremium(CinemaManager.getCinemabyID(showtimeToBook.getCinemaID()))){ //include user's cinema of type cinema
+            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
+        }
+        else if (newDate.isHoliday(showtimeToBook.getShowtime().substring(0,10))){ //include user's timing selected, pulled from showtimes available
+            System.out.println("Holiday was implemented");
+            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+            }
+            else{
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+            }
+        }
         else {
             if (newDate.isFri6pm(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))){
                 if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
@@ -312,6 +317,7 @@ public class UserBookingUI {
 
             System.out.println("This is your chosen seat: " + seatId);
             SeatsArray.add(String.valueOf(seatId));
+            System.out.println(showtimeToBook.getShowtimeID());
             ShowtimesManager.updateSeats(showtimeToBook.getShowtimeID(),(row.charAt(0)-49), (col));
 
         }

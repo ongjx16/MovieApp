@@ -125,6 +125,7 @@ int option = 0;
                 System.out.println("Movie Name: "+UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieName());
                 System.out.println("Movie Date: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieDate());
                 System.out.println("Movie Time: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieTime());
+                System.out.println("No. of seats booked: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getNoOfSeats()+"\n");
 
             }
 
