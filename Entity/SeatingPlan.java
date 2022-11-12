@@ -59,15 +59,31 @@ public class SeatingPlan implements Serializable{
                 if (j == col/2){
                     System.out.print("  ");
                 }
+                
                 if (seatPlan[i][j].isOccupied() == true){
-                    System.out.print(" X "); //X = occupied
+                    if (i == row-1 && j%2 == 0){
+                        System.out.print("  X");
+                    }
+                    else if ((i == row-1 && j%2 != 0)){
+                        System.out.print("X  ");
+                    }
+                    else{
+                    System.out.print(" X ");} //X = occupied
                 }
                 if (seatPlan[i][j].isOccupied() == false){
-                    System.out.print(" O "); //O = vacant
+                    if ((i == row-1 && j%2 == 0)){
+                        System.out.print("  O");
+                    }
+                    else if ((i == row-1 && j%2 != 0)){
+                        System.out.print("O  ");
+                    }
+                    else {System.out.print(" O ");} //O = vacant
                 }
             }
             System.out.print("\n");
         }
+        System.out.println("Legend:");
+        System.out.println("(X) Occupied, (O) Empty, (XX) Couple Seat Occupied, (OO) Couple Seat Empty");
     }
 
     public void assignSeat(int a, String b){
