@@ -78,67 +78,6 @@ public class AdminShowtimesUI {
 
         scan.nextLine();
 
-        System.out.println("2. Enter Date- DD/MM/YYYY: ");
-
-        String date = scan.nextLine();
-
-        System.out.println("Choose a showtime from the following list:\n");
-
-        File f = new File("DATFiles/Showtimes.dat");
-
-
-//                     initialise an array of timings for admin to choose from
-        String[] timings;
-        ArrayList<String> newTimings = new ArrayList<String>();
-        timings = new String[5];
-        timings[0] = "10:00";
-        timings[1] = "12:30";
-        timings[2] = "15:00";
-        timings[3] = "17:30";
-        timings[4] = "20:00";
-        int k = 1;
-
-        String showtime;
-        boolean toAdd;
-
-        if (f.exists()) {
-
-            ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.searchShowtimes(date, movieid1));
-            //System.out.println(arrayoftimes.size());
-            for (int j = 0; j < 5; j++) {
-                toAdd= true;
-                for (int i = 0; i < arrayoftimes.size(); i++ ) {
-                    //System.out.println(arrayoftimes.get(i).getShowtime().substring(9));
-                    if ((arrayoftimes.get(i).getShowtime().substring(11).equals(timings[j]))) {
-                        toAdd = false;
-                    }
-                    ;
-                }
-                if (toAdd == true){
-                    System.out.println(Integer.toString(k) + ". " + timings[j]);
-                    newTimings.add(timings[j]);
-                    k++;
-                }
-
-            }
-            int choiceoftime = scan.nextInt();
-
-            showtime = date + " " + newTimings.get(choiceoftime - 1);
-
-        } else {
-            for (int j = 0; j < 5; j++) {
-                System.out.println(Integer.toString(k) + ". " + timings[j]);
-                k++;
-            }
-            int choiceoftime = scan.nextInt();
-            showtime = date + " " + timings[choiceoftime - 1];
-        }
-
-
-
-
-        //System.out.println(showtime);
-
         System.out.println("Please choose the cineplex to assign the showtime: ");
         ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>(CineplexManager.readAllCineplexes());
         ArrayList<Cinema> cinemas = new ArrayList<Cinema>(CinemaManager.readAllCinemas());
@@ -148,6 +87,31 @@ public class AdminShowtimesUI {
         }
         int cineplexChoice = scan.nextInt();
 
+        System.out.println("2. Enter Date- DD/MM/YYYY: ");
+
+        String date = scan.nextLine();
+
+        System.out.println("Choose a showtime from the following list:\n");
+
+
+//                     initialise an array of timings for admin to choose from
+        String[] timings;
+        timings = new String[5];
+        timings[0] = "10:00";
+        timings[1] = "12:30";
+        timings[2] = "15:00";
+        timings[3] = "17:30";
+        timings[4] = "20:00";
+        for(int i=0; i< timings.length; i++){
+            System.out.println(timings[i]);
+        }
+        String timing = scan.nextLine();
+
+
+        //System.out.println(showtime);
+
+
+
         for(int i=0; i< CinemaManager.readAllCinemas().size();i++){
             if(cinemas.get(i).getCineplexName().equals( cineplexes.get(cineplexChoice-1).getCineplexName())){
                 cinemasInChosenCineplex.add(cinemas.get(i));
@@ -156,6 +120,7 @@ public class AdminShowtimesUI {
 
         System.out.println("Please choose cinema to assign the showtime: ");
         for(int i=0; i<cinemasInChosenCineplex.size();i++){
+            if(cinemasInChosenCineplex)
             System.out.println("["+(i+1)+"]"+cinemasInChosenCineplex.get(i).getCinemaId());
         }
         int cinemaChoice = scan.nextInt();
