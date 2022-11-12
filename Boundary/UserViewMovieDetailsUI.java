@@ -22,7 +22,7 @@ public class UserViewMovieDetailsUI {
 
                 // filtering movies to only show movies that have status "Preview" or "Now Showing"
                 for (int i = 0; i < moviesList.size(); i++) {
-                    filteredMovies = MoviesManager.filterByStatus();
+                    filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
                 }
 
                 // printing everything in array list
