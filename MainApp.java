@@ -22,10 +22,9 @@ public class MainApp {
         "██║░╚═╝░██║╚█████╔╝██████╦╝███████╗██║██║░╚═╝░██║██║░░██║\n" +
         "╚═╝░░░░░╚═╝░╚════╝░╚═════╝░╚══════╝╚═╝╚═╝░░░░░╚═╝╚═╝░░╚═╝");
         System.out.println("Welcome to Moblima!\n");
-            System.out.println("What is your identity?\n");
-            System.out.println("1. Admin\n");
-            System.out.println("2. Movie Goer\n");
-            System.out.println("3. Exit\n\n");
+            System.out.println("1. Admin");
+            System.out.println("2. Movie Goer");
+            System.out.println("3. Exit\n");
             System.out.println("Enter a number of your choice: ");
             identity = scan.nextInt();
 
