@@ -688,7 +688,7 @@ public class MainApp {
 
                         //generating tickets from the array
                         for (int n = 0; n < SeatsArray.size(); n++) {
-                            System.out.println("\nTicket" + ":");
+                            System.out.println("\nThese are your tickets" + ":");
                             tickets tics = new tickets(movieChosen, showtimesAvailable.get(showtimeChoice-1).getCinemaID(), showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(0,10), showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(11), SeatsArray.get(n));
                         }
 

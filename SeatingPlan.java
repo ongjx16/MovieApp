@@ -79,7 +79,7 @@ public class SeatingPlan implements Serializable{
         if (seatPlan[a][conv].isOccupied() == false){
             seatPlan[a][conv].assign();
         }else{
-            System.out.println("Sorry seat taken");
+            return;
         }
     }
 
