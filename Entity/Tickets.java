@@ -1,21 +1,25 @@
 package Entity;
 
+import Utils.CinemaType;
+
 public class Tickets {
     private String movieChosen;
     private String cinemaChosen;
     private String dateChosen;
     private String timeChosen;
+    private CinemaType type;
     private String seatId;
     private int age;
     private double price;
 
-    public Tickets(String movie, String cinemaCode, String date, String time, String seatID){
+    public Tickets(String movie, String cinemaCode, CinemaType type, String date, String time, String seatID){
         this.movieChosen = movie;
         this.cinemaChosen = cinemaCode;
+        this.type=type;
         this.dateChosen = date;
         this.timeChosen = time;
         this.seatId = seatID;
-        System.out.println("Movie: " + movieChosen + "\nCinema: " + cinemaChosen + "\nDate: " + dateChosen + "\nTime: " + timeChosen + "\nSeat: " + seatId);
+        System.out.println("Movie: " + movieChosen + "\nCinema: " + cinemaChosen +"\nCinema type: " + type.toString() + "\nDate: " + dateChosen + "\nTime: " + timeChosen + "\nSeat: " + seatId);
     }
 
     public void setMovieChosen(String x){
