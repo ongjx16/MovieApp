@@ -1,6 +1,6 @@
 package User;
 
-public class tickets {
+public class tickets extends moviegoer {
     private String movieChosen;
     private String cinemaChosen;
     private String dateChosen;

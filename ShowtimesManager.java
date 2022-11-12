@@ -64,8 +64,7 @@ public class ShowtimesManager {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("DATFiles/Showtimes.dat"));
             showtimesOutput = (ArrayList<Showtimes>) in.readObject();
             in.close();
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {}
         return (showtimesOutput);
     }
 
@@ -102,12 +101,13 @@ public class ShowtimesManager {
         }catch(Exception e){}
     }
 
-    public static void editShowtime (int index, String attribute) {
+    public static void editShowtime (int index, String attribute, int cineplexID) {
         try{
 
             //Creating the object
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
             ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
+//            ArrayList<Integer> arraykek =
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));
             ObjectOutputStream out = new ObjectOutputStream(fout);
@@ -160,7 +160,7 @@ public class ShowtimesManager {
 
                 boolean toAdd;
 
-                    ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.searchShowtimes(date, 1));
+                    ArrayList<Showtimes> arrayoftimes = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(1, 1));
                     for (int j = 0; j < 5; j++) {
                         toAdd= true;
                         for (int i = 0; i < arrayoftimes.size(); i++ ) {
@@ -338,8 +338,7 @@ public class ShowtimesManager {
                 }
             }
 
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {}
         return moviesarray;
 
 
@@ -356,8 +355,7 @@ public class ShowtimesManager {
                 }
             }
 
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {}
         return filteredShowtimes;
 
 
