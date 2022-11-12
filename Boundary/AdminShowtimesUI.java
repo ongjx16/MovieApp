@@ -63,7 +63,7 @@ public class AdminShowtimesUI {
         int movieid1;
         String cinemaID;
 
-        System.out.println("1. Choose Movie");
+        System.out.println("Choose Movie");
 
         ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
         for (int i = 0; i < MoviesArray.size(); i++) {

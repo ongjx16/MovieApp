@@ -184,7 +184,7 @@ int option = 0;
                         throw new Exception("Invalid input, please try again");
                     }
                 } else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()) {
-                    System.out.println("(1) Ticket Sales");
+                    System.out.println("(1) Ratings");
                     System.out.println("(2) Exit");
                     listingMovies = scan.nextInt();
 
