@@ -93,15 +93,15 @@ public class DateFormatter {
     }
 
 
-    public boolean isHoliday(String x) throws ParseException {
+    public boolean isHoliday(String x){
         for (int i = 0; i < HolidayManager.readHolidays().size(); i++){
             String ds1 = HolidayManager.readHolidays().get(0).getDate().toString();
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-            String ds2 = sdf2.format(sdf1.parse(ds1));
-            if (ds2.equals(x)){
-                return true;
-            }
+//            String ds2 = sdf2.format(sdf1.parse(ds1));
+//            if (ds2.equals(x)){
+//                return true;
+//            }
         }
         return false;
     }

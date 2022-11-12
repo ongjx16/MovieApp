@@ -6,7 +6,7 @@ import Entity.Movie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RateReviewMoviesUI {
+public class UserRateReviewMoviesUI {
 
     public static void rateMovies(){
         Scanner scan = new Scanner(System.in);

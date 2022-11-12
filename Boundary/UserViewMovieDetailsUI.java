@@ -6,7 +6,7 @@ import Entity.Movie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ViewMovieDetailsUI {
+public class UserViewMovieDetailsUI {
     public static void viewMovieDetails(){
         Scanner scan = new Scanner(System.in);
         int selection = 0;
