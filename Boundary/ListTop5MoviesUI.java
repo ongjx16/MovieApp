@@ -9,7 +9,7 @@ public class ListTop5MoviesUI {
     public static void sortByRatings(){
         int i;
         int size = 0;
-        ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus()) ;
+        ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus(MoviesManager.readAllMovies())) ;
 
 
         ArrayList<Integer> allRatings = new ArrayList<Integer>();
@@ -69,7 +69,7 @@ public class ListTop5MoviesUI {
     public static void sortBySales(){
         int i;
         int size = 0;
-        ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus()) ;
+        ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus(MoviesManager.readAllMovies())) ;
 
 
         ArrayList<Integer> allSales = new ArrayList<Integer>();
