@@ -21,25 +21,19 @@ public class UserBookingUI {
         //update seat price based on date, type of cinema and movie type
         seatprice = getPreliminaryPrice(newDate, showtimeToBook, seatprice);
 
+
         System.out.println("How many seats do you want?");
         int noOfSeats = scan.nextInt();
 
         //let user choose seats
         ArrayList<String> SeatsArray = choosingSeats(noOfSeats,showtimeToBook);
-        //update ticket price with no of seats booked
 
-        for(int i=0; i<SeatsArray.size(); i++){
-             String row = "";
-             String col = "";
-             if(SeatsArray.get(i).length()==2){
-                 row = SeatsArray.get(i).substring(0,1);
-             }
-             else{
-                 row=SeatsArray.get(i).substring(0,2);
-             }
-             ShowtimesManager.updateSeats(showtimeToBook.getShowtimeID(),((row.charAt(0)-48)*10+(row.charAt(1)-48)), (col));
-        }
+
+        //update ticket price with no of seats booked
         float updatedTicketPrice = getTotalPriceByNoOfSeats(seatprice, noOfSeats, showtimeToBook, newDate);
+
+
+
         System.out.println("Total price is: " + updatedTicketPrice);
 
 
@@ -57,7 +51,6 @@ public class UserBookingUI {
 
         // Generating transaction ID
         String txnID = new Transaction(showtimeToBook.getCinemaID()).getTransactionId();
-        System.out.println("txnID"+txnID);
         // Making a booking
         ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
         int count = 0;
@@ -66,8 +59,18 @@ public class UserBookingUI {
                 break;
             }
         }
+
+        for(int i=0; i<SeatsArray.size(); i++){
+            String row = "";
+            String col = "";
+            row=SeatsArray.get(i).substring(1);
+            col = SeatsArray.get(i).substring(0,1);
+            ShowtimesManager.updateSeats(showtimeToBook.getShowtimeID(),((row.charAt(0)-48)*10+(row.charAt(1)-48)), (col));
+        }
+
         Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),updatedTicketPrice,txnID,showtimeToBook.getMoviename(),showtimeToBook.getShowtime().substring(0,10),showtimeToBook.getShowtime().substring(11),noOfSeats);
         UsersManager.editBookingHistory(count, booked1);
+        System.out.println("Booking successful!\n");
     }
 
     //return showtime object chosen
@@ -235,7 +238,7 @@ public class UserBookingUI {
         if (seatprice == 0f || seatprice == 1f){ // situation where your movie selection is not premium, holiday or weekend
             seatprice = seatprice*noOfSeats;
             for (int i = 0; i < noOfSeats; i++) {
-                System.out.println("What type of ticket are you looking for (ticket " + i+1 + "):");
+                System.out.println("What type of ticket are you looking for (ticket " + (i+1) + "):");
                 System.out.println("1. Student");
                 System.out.println("2. Adult");
                 if (!newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's movie of type movie
@@ -282,13 +285,13 @@ public class UserBookingUI {
 
     public static ArrayList<String> choosingSeats (int noOfSeats, Showtimes showtimeToBook){
         Scanner scan = new Scanner(System.in);
-        ArrayList<String> SeatsArray = new ArrayList<>();
+        ArrayList<String> SeatsArray = new ArrayList<String>();
         SeatingPlan layout;
         String row="";
         String col="";
+        layout = showtimeToBook.getSeats();
         // asking for seats and saving it to an array
         for (int i = 0; i < noOfSeats; i++) {
-            layout = showtimeToBook.getSeats();
             layout.displaySeatPlan();
             System.out.println("input your desired row and column");
             System.out.println("row (input number): ");
@@ -300,6 +303,7 @@ public class UserBookingUI {
             while(((row.charAt(0)-48)*10+(row.charAt(1)-48))<1 || ((row.charAt(0)-48)*10+(row.charAt(1)-48))>16){
                 System.out.println("Invalid row number, please input again: ");
                 row = scan.nextLine();
+                System.out.println(row);
                 if(row.length()==1){
                     String init="0";
                     row = init.concat(row);
@@ -316,9 +320,17 @@ public class UserBookingUI {
                 System.out.println("Sorry seat taken, please choose again: ");
                 System.out.println("row (input number): ");
                 row = scan.nextLine();
+                if(row.length()==1){
+                    String init="0";
+                    row = init.concat(row);
+                }
                 while(((row.charAt(0)-48)*10+(row.charAt(1)-48))<1 || ((row.charAt(0)-48)*10+(row.charAt(1)-48))>16){
                     System.out.println("Invalid row number, please input again: ");
                     row = scan.nextLine();
+                    if(row.length()==1){
+                        String init="0";
+                        row = init.concat(row);
+                    }
                 }
                 System.out.println("column (input letter): ");
                 col = scan.nextLine();
@@ -327,14 +339,18 @@ public class UserBookingUI {
                     col=scan.nextLine();
                 }
             }
-            String seatyea = col + String.valueOf(row);
+            String seatyea = col + row;
             String seatId = new Seat(seatyea).getSeatId();
-            layout.assignSeat(((row.charAt(0)-48)*10+(row.charAt(1)-48)), (col));
 
+            layout.assignSeat(((row.charAt(0)-48)*10+(row.charAt(1)-48)), (col));
             System.out.println("This is your chosen seat: " + seatId);
-            SeatsArray.add(String.valueOf(seatId));
+
+            SeatsArray.add(seatyea);
+
+
 
         }
+        layout.displaySeatPlan();
         return SeatsArray;
     }
 
