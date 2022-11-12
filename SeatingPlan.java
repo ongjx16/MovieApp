@@ -75,13 +75,22 @@ public class SeatingPlan implements Serializable{
     public void assignSeat(int a, String b){
         b = b.toUpperCase();
         char aa = b.charAt(0);
-        System.out.println(aa);
         int conv = (int) aa - 65;
         if (seatPlan[a][conv].isOccupied() == false){
             seatPlan[a][conv].assign();
         }else{
             System.out.println("Sorry seat taken");
         }
+    }
+
+    public boolean checkSeatIfOccupied(int a, String b){
+        b = b.toUpperCase();
+        char aa = b.charAt(0);
+        int conv = (int) aa - 65;
+        if (seatPlan[a][conv].isOccupied() == true){
+            return true;
+        }
+        else return false;
     }
 
     public void unassignSeat(int a, String b){

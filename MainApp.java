@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.Scanner;
 import Admin.adminLogin;
@@ -611,13 +612,28 @@ public class MainApp {
                                 System.out.println("Invalid column letter, please input again: ");
                                 col=scan.nextLine();
                             }
-                            layout.assignSeat((row.charAt(0)-49), (col));
+
+                            while(layout.checkSeatIfOccupied((row.charAt(0)-49),(col))==true){
+                                System.out.println("Sorry seat taken, please choose again: ");
+                                System.out.println("row (input number): ");
+                                row = scan.nextLine();
+                                while(row.charAt(0)<49 || row.charAt(0)>53){
+                                    System.out.println("Invalid row number, please input again: ");
+                                    row = scan.nextLine();
+                                }
+                                System.out.println("column (input letter): ");
+                                col = scan.nextLine();
+                                while(col.charAt(0)>101 || col.charAt(0)<65){
+                                    System.out.println("Invalid column letter, please input again: ");
+                                    col=scan.nextLine();
+                                }
+                            }
                             String seatyea = col + String.valueOf(row);
                             String seatId = new Seat(seatyea).getSeatId();
+                            layout.assignSeat((row.charAt(0)-49), (col));
+
                             System.out.println("This is your chosen seat: " + seatId);
-                            layout.displaySeatPlan();
                             SeatsArray.add(String.valueOf(seatId));
-                            System.out.println("This is your chosen seat: " + seatId);
                             ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),(row.charAt(0)-49), (col));
 
                         }
@@ -870,16 +886,38 @@ public class MainApp {
                                 break;
                             }
                         }
-                        System.out.println("Choose date to view booking history: ");
-                        for(j=0; j<UsersManager.readAllUsers().get(i).getBookingHistory().size();j++){
-                            System.out.println("["+(j+1)+"] "+UsersManager.readAllUsers().get(i).getBookingHistory().get(j).getMovieDate());
+
+                        ArrayList<String> historyDates = new ArrayList<String>();
+                        for(int k=0; k<UsersManager.readAllUsers().get(i).getBookingHistory().size();k++){
+                            if(!historyDates.contains(UsersManager.readAllUsers().get(i).getBookingHistory().get(k).getMovieDate())){
+                                historyDates.add(UsersManager.readAllUsers().get(i).getBookingHistory().get(k).getMovieDate());
+                            }
                         }
-                        int historyChoice=scan.nextInt();
-                        System.out.println("Transaction ID: " +UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getTXNid() );
-                        System.out.println("Location: " + Booking.getCineplexByBooking(UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getTXNid()) );
-                        System.out.println("Movie Name: "+UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getMovieName());
-                        System.out.println("Movie Date: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getMovieDate());
-                        System.out.println("Movie Time: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(historyChoice-1).getMovieTime());
+                        System.out.println("Choose date to view booking history: ");
+                        for(int l=0; l<historyDates.size();l++){
+                            System.out.println("["+(l+1)+"]"+historyDates.get(l));
+                        }
+                        int histDateChoice=scan.nextInt();
+                        System.out.println("Choose movie time to view booking history: ");
+                        for(int m=0; m<UsersManager.readAllUsers().get(i).getBookingHistory().size();m++){
+                            if(UsersManager.readAllUsers().get(i).getBookingHistory().get(m).getMovieDate().equals(historyDates.get(histDateChoice-1))){
+                                System.out.println("["+(m+1)+"]"+UsersManager.readAllUsers().get(i).getBookingHistory().get(m).getMovieTime());
+                            }
+                        }
+
+                        int histTimeChoice=scan.nextInt();
+                        int n;
+                        for(n=0; n<UsersManager.readAllUsers().get(i).getBookingHistory().size();n++){
+                            if(UsersManager.readAllUsers().get(i).getBookingHistory().get(n).getMovieTime().equals(histTimeChoice)&&UsersManager.readAllUsers().get(i).getBookingHistory().get(n).getMovieDate().equals(histDateChoice)){
+                               break;
+                            }
+                        }
+                        System.out.println(n);
+                        System.out.println("Transaction ID: " +UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getTXNid() );
+                        System.out.println("Location: " + Booking.getCineplexByBooking(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getTXNid()) );
+                        System.out.println("Movie Name: "+UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieName());
+                        System.out.println("Movie Date: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieDate());
+                        System.out.println("Movie Time: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieTime());
 
                     }
 
