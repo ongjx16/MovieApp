@@ -12,7 +12,7 @@ public class ListTop5MoviesUI {
         ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus(MoviesManager.readAllMovies())) ;
 
 
-        ArrayList<Integer> allRatings = new ArrayList<Integer>();
+        ArrayList<Float> allRatings = new ArrayList<Float>();
 
         // adding the ratings of all movies into an array
         for (i=0; i<allMovies.size(); i++){
@@ -22,7 +22,7 @@ public class ListTop5MoviesUI {
         for (i=0; i<allRatings.size(); i++){
             for (int j=0; j<allRatings.size() - i - 1; j++){
                 if (allRatings.get(j) < allRatings.get(j+1)){
-                    int temp = allRatings.get(j);
+                    float temp = allRatings.get(j);
                     allRatings.set(j, allRatings.get(j+1));
                     allRatings.set(j+1, temp);
                 }
@@ -49,7 +49,7 @@ public class ListTop5MoviesUI {
 
         for (int x = 0; x< filteredMovies.size(); x++ ){
             int numbering = x + 1;
-            System.out.println(numbering + ": " + filteredMovies.get(x).getName() + ", Rating: " + filteredMovies.get(x).getRating()[1]);
+            System.out.println(numbering + ": " + filteredMovies.get(x).getName() + ", Rating: " + String.format("%.1f", filteredMovies.get(x).getRating()[1]));
         }
 
 

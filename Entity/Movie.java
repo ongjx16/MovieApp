@@ -25,7 +25,7 @@ public class Movie  implements Serializable {
     /**
      * The ratings of the movie
      */
-    private int[] rating;
+    private float[] rating;
     /**
      * The duration of the movie
      */
@@ -75,7 +75,7 @@ public class Movie  implements Serializable {
      * Gets the rating of the movie given by movie-goers
      * @return the movie rating
      */
-    public int[] getRating() {
+    public float[] getRating() {
         return rating;
     }
 
@@ -127,7 +127,7 @@ public class Movie  implements Serializable {
      * Changes the rating of the movie
      * @param rating the movie ratings given by movie-goers
      */
-    public void setRating(int[] rating) {
+    public void setRating(float[] rating) {
         this.rating = rating;
     }
 
@@ -233,7 +233,7 @@ public class Movie  implements Serializable {
         this.movieID = movieID;
         this.reviews=new ArrayList<String>();
         this.sales=0;
-        this.rating = new int[]{0,0};
+        this.rating = new float[]{0,0};
     }
 
 }

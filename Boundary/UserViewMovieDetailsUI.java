@@ -7,43 +7,35 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserViewMovieDetailsUI {
-    public static void viewMovieDetails(){
-        Scanner scan = new Scanner(System.in);
-        int selection = 0;
-        while (selection != 2) {
-            System.out.println("\n(1) Select movie to view details");
-            System.out.println("(2) Exit");
-            selection = scan.nextInt();
+    public static void viewMovieDetails(Movie movie){
 
-            if (selection == 1) {
-                System.out.println("Please select the movie you'd like to find out more about: ");
-                ArrayList<Movie> moviesList = new ArrayList<Movie>(MoviesManager.readAllMovies());
-                ArrayList<Movie> filteredMovies = new ArrayList<>();
 
-                // filtering movies to only show movies that have status "Preview" or "Now Showing"
-                for (int i = 0; i < moviesList.size(); i++) {
-                    filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
-                }
+        System.out.println("\nYou've chosen: " + movie.getName());
+        System.out.println("Here are the associated movie details!\n");
+        System.out.println("Type: " + movie.getType());
+        System.out.println("Director: " + movie.getDirector());
+        System.out.println("Duration: " + movie.getShowLength());
+        System.out.println("Synopsis: " + movie.getSynopsis());
+        System.out.println("Status: " + movie.getShowingStatus());
+        if (movie.getRating()[0]>1){
+            System.out.println("Rating: " + movie.getRating()[1]);
+        }
+        else{
+            System.out.println("Rating: No Available Ratings Yet.");
+        }
 
-                // printing everything in array list
-                for (int i = 0; i < filteredMovies.size(); i++) {
-                    System.out.println("(" + (i + 1) + ")" + filteredMovies.get(i).getName());
-                }
-                int movieSelection = scan.nextInt();
-                if (movieSelection > filteredMovies.size() || movieSelection < 1) {
-                    System.out.println("Invalid input, select again");
-                    movieSelection = scan.nextInt();
-                }
-                System.out.println("You've chosen: " + filteredMovies.get(movieSelection - 1));
-                System.out.println("Here are the associated movie details!\n");
-                System.out.println("Name: " + filteredMovies.get(movieSelection - 1).getName());
-                System.out.println("Type: " + filteredMovies.get(movieSelection - 1).getType());
-                System.out.println("Director: " + filteredMovies.get(movieSelection - 1).getDirector());
-                System.out.println("Rating: " + filteredMovies.get(movieSelection - 1).getRating()[1]);
-                System.out.println("Show Status: " + filteredMovies.get(movieSelection - 1).getShowingStatus());
-                System.out.println("Show Length: " + filteredMovies.get(movieSelection - 1).getShowLength());
-                System.out.println("Synopsis: " + filteredMovies.get(movieSelection - 1).getSynopsis());
+        ArrayList<String> reviews = new ArrayList<String>(movie.getReviews());
+
+        if (reviews.size() ==0){
+            System.out.println("Reviews: No Reviews Yet");
+        }
+        else{
+            System.out.println("All Reviews: ");
+            for (int z = 0; z< reviews.size(); z++){
+                System.out.println("Review " + (z+1) + ": "+ reviews.get(z));
             }
         }
+
+        System.out.println("\n");
     }
 }
