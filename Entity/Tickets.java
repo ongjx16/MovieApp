@@ -1,6 +1,6 @@
 package Entity;
 
-public class tickets {
+public class Tickets {
     private String movieChosen;
     private String cinemaChosen;
     private String dateChosen;
@@ -9,7 +9,7 @@ public class tickets {
     private int age;
     private double price;
 
-    public tickets(String movie, String cinemaCode, String date, String time, String seatID){
+    public Tickets(String movie, String cinemaCode, String date, String time, String seatID){
         this.movieChosen = movie;
         this.cinemaChosen = cinemaCode;
         this.dateChosen = date;

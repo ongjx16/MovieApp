@@ -38,7 +38,7 @@ public class UserBookingUI {
         //generating tickets from the array
         for (int n = 0; n < SeatsArray.size(); n++) {
             System.out.println("\nTicket" + ":");
-            tickets tics = new tickets(MoviesManager.getMovieNameById(showtimeToBook.getMovieID()), "JE1", "hello", "test", SeatsArray.get(n));
+            Tickets tics = new Tickets(MoviesManager.getMovieNameById(showtimeToBook.getMovieID()), "JE1", "hello", "test", SeatsArray.get(n));
         }
         //get user details
         String newUsername = userLogin();
