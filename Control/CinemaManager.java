@@ -85,7 +85,6 @@ public class CinemaManager {
     public static Cinema getCinemabyID(String CinemaID) {
         ArrayList<Cinema> cinemaOutput = new ArrayList<Cinema>(readAllCinemas());
         Cinema outputCinema = null;
-        System.out.println(CinemaID.toUpperCase());
         for (int i = 0; i < cinemaOutput.size(); i++) {
             if (cinemaOutput.get(i).getCinemaId().equals(CinemaID.toUpperCase())) {
                 outputCinema = cinemaOutput.get(i);

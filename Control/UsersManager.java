@@ -39,7 +39,6 @@ public class UsersManager {
             //closing the stream
             //out.reset();
             out.close();
-            System.out.println("create user success");
         }catch(Exception e){e.printStackTrace(
         );}
     }
@@ -73,7 +72,7 @@ public class UsersManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("user successfully removed");
+            System.out.println("User successfully removed");
         }catch(Exception e){}
     }
 
@@ -94,7 +93,6 @@ public class UsersManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("booking history changed");
         }catch(Exception e){}
     }
 
