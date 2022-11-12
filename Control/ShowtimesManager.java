@@ -18,7 +18,6 @@ public class ShowtimesManager {
 
             //Creating the object
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
-            System.out.println("hello33" + showtimeList.size());
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));
@@ -34,10 +33,9 @@ public class ShowtimesManager {
             };
 
             int showtimeID =0;
-            System.out.println(ShowtimesManager.readAllShowtimes().size());
-            System.out.println(showtimeList.size());
-            if(showtimeList.size()>0){
-                showtimeID = showtimeList.get(showtimeList.size()-1).getShowtimeID() +1 ;
+            ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
+            if(ShowtimesArray.size()>0){
+                showtimeID = ShowtimesArray.get(ShowtimesArray.size()-1).getShowtimeID() +1 ;
             }
             else{
                 showtimeID = 1;

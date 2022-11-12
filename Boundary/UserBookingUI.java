@@ -87,7 +87,7 @@ public class UserBookingUI {
         ArrayList<Movie>filteredMovies = new ArrayList<Movie>();
         filteredMovies=MoviesManager.filterByStatus(movies);
         for(int i=0; i<filteredMovies.size();i++){
-            System.out.println("["+(i+1)+"]"+filteredMovies.get(i).getName());
+            System.out.println("["+(i+1)+"]"+filteredMovies.get(i).getName()+ " || " + filteredMovies.get(i).getType().toString() + "\n");
         }
 
         int movieChoice = scan.nextInt();
@@ -110,7 +110,7 @@ public class UserBookingUI {
         System.out.println("What timings would you like to see this movie: ");
         for (int y = 0; y < showtimesAvailable.size(); y++) {
             if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
-                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
+                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11) + " || " + CinemaManager.getCinemabyID(showtimesAvailable.get(y).getCinemaID()).getType().toString());
             }
         }
         int showtimeChoice = scan.nextInt();
@@ -184,21 +184,22 @@ public class UserBookingUI {
 
     public static float getPreliminaryPrice (DateFormatter newDate, Showtimes showtimeToBook, float seatprice){
         // premium is always 25 so check on top
-//                        if (newDate.isPremium(){ //include user's cinema of type cinema
-//                            seatprice = src.Control.PricingManager.readAllPricing().get(0).getPremium() + seatprice;
-//                        }
-        // blockbuster always adds 1 so check on top
         if (newDate.isBlockbuster(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
             seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
         }
-//        if (newDate.isHoliday(newDate.DayConverter(showtimeToBook.getShowtime()))){ //include user's timing selected, pulled from showtimes available
-//            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-//                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
-//            }
-//            else{
-//                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
-//            }
-//        }
+
+        if (newDate.isPremium(CinemaManager.getCinemabyID(showtimeToBook.getCinemaID()))){ //include user's cinema of type cinema
+            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
+        }
+        else if (newDate.isHoliday(showtimeToBook.getShowtime().substring(0,10))){ //include user's timing selected, pulled from showtimes available
+            System.out.println("Holiday was implemented");
+            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+            }
+            else{
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+            }
+        }
         else {
             if (newDate.isFri6pm(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))){
                 if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie

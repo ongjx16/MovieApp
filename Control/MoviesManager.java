@@ -32,6 +32,7 @@ public class MoviesManager {
             id = 1;
         }
 
+
             Movie movie1 = new Movie(name, type, showLength, showingStatus, director, synopsis, id);
 
             movieList.add(movie1);
