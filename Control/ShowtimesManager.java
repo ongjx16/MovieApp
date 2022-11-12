@@ -50,7 +50,7 @@ public class ShowtimesManager {
             //closing the stream
             //out.reset();
             out.close();
-            System.out.println("create showtime success");
+            System.out.println("Showtime created!");
         }catch(Exception e){
         //     e.printStackTrace(
         // );
