@@ -97,8 +97,8 @@ public class SeatingPlan implements Serializable{
         b = b.toUpperCase();
         char aa = b.charAt(0);
         int conv = (int) aa - 65;
-        if (seatPlan[a][conv].isOccupied() == false){
-            seatPlan[a][conv].assign();
+        if (seatPlan[a-1][conv].isOccupied() == false){
+            seatPlan[a-1][conv].assign();
         }else{
             System.out.println("Sorry seat taken");
         }
@@ -108,7 +108,7 @@ public class SeatingPlan implements Serializable{
         b = b.toUpperCase();
         char aa = b.charAt(0);
         int conv = (int) aa - 65;
-        if (seatPlan[a][conv].isOccupied() == true){
+        if (seatPlan[a-1][conv].isOccupied() == true){
             return true;
         }
         else return false;
@@ -119,8 +119,8 @@ public class SeatingPlan implements Serializable{
         char aa = b.charAt(0);
         System.out.println(aa);
         int conv = (int) aa - 65;
-        if (seatPlan[a][conv].isOccupied() == true){
-            seatPlan[a][conv].unassign();
+        if (seatPlan[a-1][conv].isOccupied() == true){
+            seatPlan[a-1][conv].unassign();
         }else{
             System.out.println("src.Entity.Seat is unoccupied");
         }

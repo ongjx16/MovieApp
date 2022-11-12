@@ -26,11 +26,20 @@ public class UserBookingUI {
 
         //let user choose seats
         ArrayList<String> SeatsArray = choosingSeats(noOfSeats,showtimeToBook);
-
-
         //update ticket price with no of seats booked
-        float updatedTicketPrice = getTotalPriceByNoOfSeats(seatprice, noOfSeats, showtimeToBook, newDate);
 
+        for(int i=0; i<SeatsArray.size(); i++){
+             String row = "";
+             String col = "";
+             if(SeatsArray.get(i).length()==2){
+                 row = SeatsArray.get(i).substring(0,1);
+             }
+             else{
+                 row=SeatsArray.get(i).substring(0,2);
+             }
+             ShowtimesManager.updateSeats(showtimeToBook.getShowtimeID(),((row.charAt(0)-48)*10+(row.charAt(1)-48)), (col));
+        }
+        float updatedTicketPrice = getTotalPriceByNoOfSeats(seatprice, noOfSeats, showtimeToBook, newDate);
         System.out.println("Total price is: " + updatedTicketPrice);
 
 
@@ -57,7 +66,6 @@ public class UserBookingUI {
                 break;
             }
         }
-
         Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),updatedTicketPrice,txnID,showtimeToBook.getMoviename(),showtimeToBook.getShowtime().substring(0,10),showtimeToBook.getShowtime().substring(11),noOfSeats);
         UsersManager.editBookingHistory(count, booked1);
     }
@@ -285,9 +293,17 @@ public class UserBookingUI {
             System.out.println("input your desired row and column");
             System.out.println("row (input number): ");
             row = scan.nextLine();
-            while(row.charAt(0)<49 || row.charAt(0)>53){
+            if(row.length()==1){
+                String init="0";
+                row = init.concat(row);
+            }
+            while(((row.charAt(0)-48)*10+(row.charAt(1)-48))<1 || ((row.charAt(0)-48)*10+(row.charAt(1)-48))>16){
                 System.out.println("Invalid row number, please input again: ");
                 row = scan.nextLine();
+                if(row.length()==1){
+                    String init="0";
+                    row = init.concat(row);
+                }
             }
             System.out.println("column (input letter): ");
             col = scan.nextLine();
@@ -296,11 +312,11 @@ public class UserBookingUI {
                 col=scan.nextLine();
             }
 
-            while(layout.checkSeatIfOccupied((row.charAt(0)-49),(col))==true){
+            while(layout.checkSeatIfOccupied(((row.charAt(0)-48)*10+(row.charAt(1)-48)),(col))==true){
                 System.out.println("Sorry seat taken, please choose again: ");
                 System.out.println("row (input number): ");
                 row = scan.nextLine();
-                while(row.charAt(0)<49 || row.charAt(0)>53){
+                while(((row.charAt(0)-48)*10+(row.charAt(1)-48))<1 || ((row.charAt(0)-48)*10+(row.charAt(1)-48))>16){
                     System.out.println("Invalid row number, please input again: ");
                     row = scan.nextLine();
                 }
@@ -313,12 +329,10 @@ public class UserBookingUI {
             }
             String seatyea = col + String.valueOf(row);
             String seatId = new Seat(seatyea).getSeatId();
-            layout.assignSeat((row.charAt(0)-49), (col));
+            layout.assignSeat(((row.charAt(0)-48)*10+(row.charAt(1)-48)), (col));
 
             System.out.println("This is your chosen seat: " + seatId);
             SeatsArray.add(String.valueOf(seatId));
-            System.out.println(showtimeToBook.getShowtimeID());
-            ShowtimesManager.updateSeats(showtimeToBook.getShowtimeID(),(row.charAt(0)-49), (col));
 
         }
         return SeatsArray;
