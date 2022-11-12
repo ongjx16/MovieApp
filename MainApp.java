@@ -1,10 +1,12 @@
-import java.lang.reflect.Array;
+
 import java.text.ParseException;
 import java.util.Scanner;
-import Admin.adminLogin;
-import Admin.createAdmin;
-import User.tickets;
-import Admin.AdminAccount;
+
+import Control.*;
+import Entity.*;
+import Boundary.*;
+import Utils.*;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -28,7 +30,6 @@ public class MainApp {
             identity = scan.nextInt();
 
             if (identity == 1) {
-                createAdmin.main();
                 System.out.println("Please enter your username");
                 username1 = scan.next();
 
@@ -119,11 +120,11 @@ public class MainApp {
                                 }
 
 
-                                System.out.println("3. Enter Movie Length (in minutes)");
+                                System.out.println("3. Enter src.Entity.Movie Length (in minutes)");
 
                                 showLength = scan.nextInt();
                                 scan.nextLine();
-                                System.out.println("4. Choose Movie Showing Status");
+                                System.out.println("4. Choose src.Entity.Movie Showing Status");
 
                                 System.out.println("[1] " + MovieStatus.COMING_SOON.toString());
                                 System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
@@ -146,36 +147,36 @@ public class MainApp {
                                     showingStatus = MovieStatus.END_OF_SHOW;
                                 }
 
-                                System.out.println("5. Enter Movie Director");
+                                System.out.println("5. Enter src.Entity.Movie Director");
 
                                 scan.nextLine();
                                 director = scan.nextLine();
 
-                                System.out.println("6. Enter Movie Synopsis");
+                                System.out.println("6. Enter src.Entity.Movie Synopsis");
 
                                 synopsis = scan.nextLine();
 
                                 MoviesManager.createMovie(name, type, showLength, showingStatus, director, synopsis);
-                                System.out.println("Movie has been created!");
+                                System.out.println("src.Entity.Movie has been created!");
                             } else if (choice == 2) {
                                 ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
                                 MoviesArray = MoviesManager.readAllMovies();
                                 for (int i = 0; i < MoviesArray.size(); i++) {
                                     System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
                                 }
-                                System.out.println("Select Movie To Edit");
+                                System.out.println("Select src.Entity.Movie To Edit");
                                 int movie = scan.nextInt() - 1;
                                 int toChange = 0;
 
                                 while (toChange != 7) {
                                     System.out.println("\nEditing: " + MoviesArray.get(movie).getName());
                                     System.out.println("\nWhich attribute would you like to edit?");
-                                    System.out.println("1. Movie Name");
-                                    System.out.println("2. Movie Type");
+                                    System.out.println("1. src.Entity.Movie Name");
+                                    System.out.println("2. src.Entity.Movie Type");
                                     System.out.println("3. Show Length");
                                     System.out.println("4. Showing Status");
                                     System.out.println("5. Director");
-                                    System.out.println("6. Movie Synopsis");
+                                    System.out.println("6. src.Entity.Movie Synopsis");
                                     System.out.println("7. Save All Changes");
 
                                     toChange = scan.nextInt();
@@ -207,18 +208,18 @@ public class MainApp {
                                     System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
 
                                 }
-                                System.out.println("\nSelect Movie To Delete");
+                                System.out.println("\nSelect src.Entity.Movie To Delete");
                                 int movie = scan.nextInt();
                                 MoviesManager.deleteMovie(movie - 1);
 
 
                             } else if (choice == 4) {
-                                // Movie[] MoviesArray;
+                                // src.Entity.Movie[] MoviesArray;
                                 ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
                                 MoviesArray = MoviesManager.readAllMovies();
                                 for (int i = 0; i < MoviesArray.size(); i++) {
                                     System.out.println("Name: " + MoviesArray.get(i).getName());
-                                    System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
+                                    System.out.println("src.Entity.Movie ID: " + MoviesArray.get(i).getMovieID());
                                     System.out.println("Type: " + MoviesArray.get(i).getType().toString());
                                     System.out.println("Length: " + MoviesArray.get(i).getShowLength());
                                     System.out.println("Status: " + MoviesArray.get(i).getShowingStatus().toString());
@@ -233,8 +234,8 @@ public class MainApp {
                         System.out.println("1. Create Showtime\n");
                         System.out.println("2. Edit Showtime\n");
                         System.out.println("3. Delete Showtime\n");
-                        System.out.println("4. See List of Current Showtimes\n\n");
-//                System.out.println("5. Seat tester");
+                        System.out.println("4. See List of Current src.Entity.Showtimes\n\n");
+//                System.out.println("5. src.Entity.Seat tester");
                         System.out.println("Enter a number of your choice: ");
                         choice = scan.nextInt();
 
@@ -245,7 +246,7 @@ public class MainApp {
                             String cinemaID;
 
                             scan.nextLine();
-                            System.out.println("1. Choose Movie");
+                            System.out.println("1. Choose src.Entity.Movie");
 
                             ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
                             for (int i = 0; i < MoviesArray.size(); i++) {
@@ -322,10 +323,10 @@ public class MainApp {
                             //System.out.println(showtime);
 
                             scan.nextLine();
-                            System.out.println("3. Enter Cinema ID: ");
+                            System.out.println("3. Enter src.Entity.Cinema ID: ");
                             cinemaID = scan.nextLine();
 
-                            //ShowtimesManager.initialiser();
+                            //src.Control.ShowtimesManager.initialiser();
                             ShowtimesManager.createShowtimes(showtime, moviename, cinemaID);
                             System.out.println("Showtime has been created!");
                             return;
@@ -383,7 +384,7 @@ public class MainApp {
 
                                     ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
                                     ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
-                                    //ArrayList<Showtimes> ShowtimesArrayChecker = ShowtimesManager.readAllShowtimes();
+                                    //ArrayList<Showtimes> ShowtimesArrayChecker = src.Control.ShowtimesManager.readAllShowtimes();
                                     int counter=0;
                                     for (int i = 0; i < ShowtimesArray.size(); i++) {
                                         int j;
@@ -473,15 +474,15 @@ public class MainApp {
 
                             if (settingsChoice ==1 ){
                                 //edit pricing
-                                SystemSettings.editPricing();
+                                AdminSystemSettingsUI.editPricing();
                             }
                             else if (settingsChoice ==2){
                                 //change holiday dates
-                                SystemSettings.editHolidayDates();
+                                AdminSystemSettingsUI.editHolidayDates();
                             }
                             else if (settingsChoice ==3){
                                 //change filtering of top 5 movies
-                                SystemSettings.editTop5Filtering();
+                                AdminSystemSettingsUI.editTop5Filtering();
                             }
 
                         }
@@ -553,7 +554,7 @@ public class MainApp {
 
                         // premium is always 25 so check on top
 //                        if (newDate.isPremium(){ //include user's cinema of type cinema
-//                            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
+//                            seatprice = src.Control.PricingManager.readAllPricing().get(0).getPremium() + seatprice;
 //                        }
                         // blockbuster always adds 1 so check on top
                         if (newDate.isBlockbuster(MoviesManager.getMoviebyID(showtimesAvailable.get(showtimeChoice-1).getMovieID()))){ //include user's movie of type movie
@@ -715,7 +716,7 @@ public class MainApp {
                             email = scan.nextLine();
                             System.out.println("Please enter your username: ");
                             username = scan.nextLine();
-                            for(int x = 0; x<UsersManager.readAllUsers().size();x++){
+                            for(int x = 0; x< UsersManager.readAllUsers().size(); x++){
                                 if(UsersManager.readAllUsers().get(x).getUsername().equals(username)){
                                     System.out.println("Sorry, username has been taken. \nPlease key in new username: ");
                                     username = scan.nextLine();
