@@ -26,8 +26,8 @@ import Control.PricingManager;
 
 public class Tester {
     public static void main (String[] args){
-        PricingManager.createPricing(1f, 25f, 7f, 9f,
-                4f, 8.5f, 11f, 9.5f, 11f,
-                9.5f, 15f, 11f, 15f);
+        String row = "10";
+        System.out.println(Integer.valueOf(row));
+
     }
 }
