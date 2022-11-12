@@ -2,6 +2,12 @@ package Entity;
 
 import java.io.Serializable;
 
+/**
+ * Represents a seat in a cinema under a cineplex in the MOBLIMA app
+ * @author htut
+ * @version 1.0
+ * @since 2022-11-12
+ */
 public class Seat implements Serializable {
     private static final long serialVersionUID = -920862172244708410L;
 

@@ -1,21 +1,82 @@
 package Entity;// import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Represents a prices of the movies in the MOBLIMA app
+ * @author htut
+ * @version 1.0
+ * @since 2022-11-12
+ */
 public class Pricing implements Serializable {
+    /**
+     * The price of movie type is blockbuster
+     */
     private float blockbuster;
+    /**
+     * The price for movie type is premium
+     */
     private float premium;
+    /**
+     * The price for student movie-goer buying a ticket for Standard 2d movie
+     */
     private float StudentStandard2D;
+    /**
+     * The price for student movie-goer buying a ticket for Standard 3d movie
+     */
     private float StudentStandard3D;
+    /**
+     * The price of senior movie-goer buying a ticket for Standard 2d movie
+     */
     private float SeniorStandard2D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 2d movie on Mon to Wed
+     */
     private float AdultMonWedStandard2D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 3d movie on Mon to Wed
+     */
     private float AdultMonWedStandard3D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 2d movie on Thurs
+     */
     private float AdultThursStandard2D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 3d movie on Thurs
+     */
     private float AdultThursStandard3D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 2d movie on Fri
+     */
     private float AdultFriStandard2D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 3d movie on Fri
+     */
     private float AdultFriStandard3D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 2d movie on Weekend
+     */
     private float AdultWeekendStandard2D;
+    /**
+     * The price of adult movie-goer buying a ticket for Standard 3d movie on weekend
+     */
     private float AdultWeekendStandard3D;
 
+    /**
+     * Creates a price for a booking
+     * @param blockbuster the price for blockbuster
+     * @param premium the price for premium
+     * @param studentStandard2D The price for student movie-goer buying a ticket for Standard 3d movie
+     * @param studentStandard3D the price for student movie-goer buying a ticket for Standard 2d movie
+     * @param seniorStandard2D The price of senior movie-goer buying a ticket for Standard 2d movie
+     * @param adultMonWedStandard2D The price of adult movie-goer buying a ticket for Standard 2d movie on Mon to Wed
+     * @param adultMonWedStandard3D The price of adult movie-goer buying a ticket for Standard 3d movie on Mon to Wed
+     * @param adultThursStandard2D The price of adult movie-goer buying a ticket for Standard 2d movie on Thurs
+     * @param adultThursStandard3D The price of adult movie-goer buying a ticket for Standard 3d movie on Thurs
+     * @param adultFriStandard2D The price of adult movie-goer buying a ticket for Standard 2d movie on Fri
+     * @param adultFriStandard3D The price of adult movie-goer buying a ticket for Standard 3d movie on Fri
+     * @param adultWeekendStandard2D The price of adult movie-goer buying a ticket for Standard 2d movie on Weekend
+     * @param adultWeekendStandard3D The price of adult movie-goer buying a ticket for Standard 3d movie on weekend
+     */
     public Pricing(float blockbuster, float premium, float studentStandard2D, float studentStandard3D, float seniorStandard2D, float adultMonWedStandard2D, float adultMonWedStandard3D, float adultThursStandard2D, float adultThursStandard3D, float adultFriStandard2D, float adultFriStandard3D, float adultWeekendStandard2D, float adultWeekendStandard3D) {
         this.blockbuster = blockbuster;
         this.premium = premium;
@@ -32,6 +93,10 @@ public class Pricing implements Serializable {
         AdultWeekendStandard3D = adultWeekendStandard3D;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getBlockbuster() {
         return blockbuster;
     }
