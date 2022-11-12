@@ -32,20 +32,28 @@ public class Booking implements Serializable {
         this.movieTime=movieTime;
     }
 
-    public static String getCineplexByBooking(String txnId){
-        String cineplex = txnId.substring(0,1);
-        if(cineplex.equals("1")){
-            return "Jem";
+//    public static String getCineplexByBooking(String txnId){
+//        String cineplex = txnId.substring(0,1);
+//        if(cineplex.equals("1")){
+//            return "Jem";
+//        }
+//        else if (cineplex.equals("2")){
+//            return "Parkway Parade";
+//        }
+//        else{
+//            return "Tampines";
+//        }
+    public static String getCineplexByBooking(String txnId) {
+        char cineplex = txnId.charAt(0);
+        for (int i = 0; i < CineplexManager.readAllCineplexes().size(); i++) {
+            if (CineplexManager.readAllCineplexes().get(i).getCineplexID() == (cineplex - 49)) ;
+            return CineplexManager.readAllCineplexes().get(i).getCineplexName();
         }
-        else if (cineplex.equals("2")){
-            return "Parkway Parade";
-        }
-        else{
-            return "Tampines";
-        }
-
-
+        return "No cineplex found";
     }
+
+
+
     public String getName() {
         return name;
     }
