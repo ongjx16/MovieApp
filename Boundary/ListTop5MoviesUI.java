@@ -12,7 +12,7 @@ public class ListTop5MoviesUI {
         ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
         ArrayList<Movie> filteredMovies = new ArrayList<>();
         for (i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
+            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
         }
 
         ArrayList<Integer> allRatings = new ArrayList<Integer>();
@@ -55,7 +55,7 @@ public class ListTop5MoviesUI {
         ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
         ArrayList<Movie> filteredMovies = new ArrayList<>();
         for (i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
+            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
         }
 
         ArrayList<Integer> allSales = new ArrayList<Integer>();

@@ -72,7 +72,6 @@ public class AdminMovieDetailsUI {
 
 
         System.out.println("1. Enter Movie Name");
-        scan.nextLine();
         name = scan.nextLine();
 
         System.out.println("2. Choose Movie Type");

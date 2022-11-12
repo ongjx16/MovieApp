@@ -21,6 +21,8 @@ public class AdminShowtimesUI {
         int choice = scan.nextInt();
 
         if (choice == 1) {
+            ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
+            System.out.println("hello"+ShowtimesArray.size());
             createShowtimeUI();
         } else if (choice == 2) {
             editShowtimeUI();
@@ -48,6 +50,7 @@ public class AdminShowtimesUI {
                 System.out.println("Showtime: " + ShowtimesArray.get(i).getShowtime());
                 System.out.println("Movie ID: " + ShowtimesArray.get(i).getMovieID());
                 System.out.println("Cinema ID: " + ShowtimesArray.get(i).getCinemaID()+"\n");
+                System.out.println(ShowtimesArray.get(i).getShowtimeID());
             }
         }
     }
