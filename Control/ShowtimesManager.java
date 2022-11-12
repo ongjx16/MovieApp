@@ -65,8 +65,7 @@ public class ShowtimesManager {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("DATFiles/Showtimes.dat"));
             showtimesOutput = (ArrayList<Showtimes>) in.readObject();
             in.close();
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {}
         return (showtimesOutput);
     }
 
@@ -339,8 +338,7 @@ public class ShowtimesManager {
                 }
             }
 
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {}
         return moviesarray;
 
 
@@ -357,8 +355,7 @@ public class ShowtimesManager {
                 }
             }
 
-        } catch (Exception e) {e.printStackTrace(
-        );}
+        } catch (Exception e) {}
         return filteredShowtimes;
 
 
