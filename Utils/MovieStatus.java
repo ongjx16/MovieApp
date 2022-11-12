@@ -9,9 +9,9 @@ public enum MovieStatus implements Serializable{
         }
     },
 
-    COMING_SOON {
+    PREVIEW {
         public String toString() {
-            return "Coming Soon";
+            return "Preview";
         }
     },
 

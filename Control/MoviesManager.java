@@ -48,7 +48,7 @@ public class MoviesManager {
     }
 
     public static ArrayList<Movie> readAllMovies () {
-//        src.Entity.Movie[] movieOutput = new src.Entity.Movie[2];
+//        Movie[] movieOutput = new Movie[2];
         ArrayList<Movie> movieOutput = new ArrayList<Movie>();
         try {
             //Creating stream to read the object
@@ -137,7 +137,7 @@ public class MoviesManager {
             else if (attribute == "status"){
                 System.out.println("Current: " + movieList.get(index).getShowingStatus());
                 System.out.println("Enter updated showing status: ");
-                System.out.println("[1] " + MovieStatus.COMING_SOON.toString());
+                System.out.println("[1] " + MovieStatus.PREVIEW.toString());
                 System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
                 System.out.println("[3] " + MovieStatus.END_OF_SHOW.toString());
 
@@ -150,7 +150,7 @@ public class MoviesManager {
                 }
 
                 if (statusChoice == 1){
-                    status = MovieStatus.COMING_SOON;
+                    status = MovieStatus.PREVIEW;
                 }
                 else if (statusChoice == 2){
                     status = MovieStatus.NOW_SHOWING;
@@ -180,7 +180,7 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("src.Entity.Movie has been successfully deleted!");
+            System.out.println("Movie has been successfully deleted!");
         }catch(Exception e){}
     }
 
@@ -237,7 +237,7 @@ public class MoviesManager {
             fout.close();
             out.close();
             System.out.println(movieList.get(y).getMovieID());
-            System.out.println("src.Entity.Movie Sales Successfully Updated.");
+            System.out.println("Movie Sales Successfully Updated.");
         }catch(Exception e){}
     }
 
@@ -270,7 +270,7 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("src.Entity.Movie Review Successfully Added.");
+            System.out.println("Movie Review Successfully Added.");
         }catch(Exception e){}
     }
 
@@ -313,7 +313,7 @@ public class MoviesManager {
             fout.close();
             out.close();
 //            System.out.println(movieList.get(y).getMovieID());
-            System.out.println("src.Entity.Movie reviews successfully updated!");
+            System.out.println("Movie reviews successfully updated!");
         }catch(Exception e){}
     }
 
@@ -334,7 +334,7 @@ public class MoviesManager {
         for (i = 0; i < filteredMovies.size(); i++) {
             String movie = filteredMovies.get(i).getName().toUpperCase();
             if (movie.equals(movieTitle.toUpperCase())) {
-                System.out.println("src.Entity.Movie: " + filteredMovies.get(i).getName());
+                System.out.println("Movie: " + filteredMovies.get(i).getName());
                 System.out.println("Type: " + filteredMovies.get(i).getType());
                 System.out.println("Director: " + filteredMovies.get(i).getDirector());
                 System.out.println("Rating: " + filteredMovies.get(i).getRating()[1]);
