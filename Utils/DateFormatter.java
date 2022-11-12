@@ -1,12 +1,14 @@
 package Utils;
 
 import Control.HolidayManager;
+import Control.ShowtimesManager;
 import Entity.Cinema;
 import Entity.Movie;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -32,8 +34,8 @@ public class DateFormatter {
         String inputHr = x.substring(11,13);
         return inputHr;
     }
-    public boolean isPremium(Cinema a){ // need to pull from enum movietype
-        if (a.getType().toString().toUpperCase().contains("PREMIUM")){
+    public boolean isPremium(Cinema associatedCinema){ // need to pull from enum movietype
+        if (associatedCinema.getType() == CinemaType.PREMIUM){
             return true;
         }
         return false;
@@ -95,13 +97,11 @@ public class DateFormatter {
 
     public boolean isHoliday(String x){
         for (int i = 0; i < HolidayManager.readHolidays().size(); i++){
-            String ds1 = HolidayManager.readHolidays().get(0).getDate().toString();
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-//            String ds2 = sdf2.format(sdf1.parse(ds1));
-//            if (ds2.equals(x)){
-//                return true;
-//            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String ds1 = HolidayManager.readHolidays().get(i).getDate().format(formatter);
+            if (ds1.equals(x)){
+                return true;
+            }
         }
         return false;
     }

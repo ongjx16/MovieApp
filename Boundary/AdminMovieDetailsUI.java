@@ -108,7 +108,7 @@ public class AdminMovieDetailsUI {
         scan.nextLine();
         System.out.println("4. Choose Movie Showing Status");
 
-        System.out.println("[1] " + MovieStatus.COMING_SOON.toString());
+        System.out.println("[1] " + MovieStatus.PREVIEW.toString());
         System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
         System.out.println("[3] " + MovieStatus.END_OF_SHOW.toString());
 
@@ -120,7 +120,7 @@ public class AdminMovieDetailsUI {
         }
 
         if (statusChoice == 1){
-            showingStatus = MovieStatus.COMING_SOON;
+            showingStatus = MovieStatus.PREVIEW;
         }
         else if (statusChoice == 2){
             showingStatus = MovieStatus.NOW_SHOWING;

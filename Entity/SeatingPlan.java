@@ -30,14 +30,14 @@ public class SeatingPlan implements Serializable{
     public void displaySeatPlan(){
         System.out.println("Seating layout:\n");
 
-        System.out.println("==============================");
-        System.out.println("        SCREEN IS HERE        ");
-        System.out.println("==============================");
+        System.out.println("======================================================");
+        System.out.println("                      SCREEN IS HERE                  ");
+        System.out.println("======================================================");
 
         for (int i = 0; i < col; i++) {
             char c = (char)(i + 65);
             if (i == 0) {
-                System.out.print("-  " + " " + c + " ");
+                System.out.print("-  " + "  " + c + " ");
             } else if (i == (col/2)) {
                 System.out.print("  " + " " + c + " " + "");
             }
@@ -49,12 +49,18 @@ public class SeatingPlan implements Serializable{
 
         for(int i=0; i<row; i++){
             if (i == 0){
-                System.out.println("-------------------------------");
+                System.out.println("------------------------------------------------------");
 
             }
             for(int j=0; j<col;j++){
                 if (j == 0){
-                    System.out.print((i+1) + "| ");
+                    if (i < 9){
+                        String intbutString = "0" + String.valueOf(i+1);
+                        System.out.print((intbutString + "| "));
+                    }
+                    else{
+                        System.out.print(i+1 + "| ");
+                    }
                 }
                 if (j == col/2){
                     System.out.print("  ");
@@ -82,8 +88,9 @@ public class SeatingPlan implements Serializable{
             }
             System.out.print("\n");
         }
+        System.out.println("------------------------------------------------------");
         System.out.println("Legend:");
-        System.out.println("(X) Occupied, (O) Empty, (XX) Couple Seat Occupied, (OO) Couple Seat Empty");
+        System.out.println("(X) Occupied, (O) Empty, (XX) Couple Seat Occupied, (OO) Couple Seat Empty\n");
     }
 
     public void assignSeat(int a, String b){

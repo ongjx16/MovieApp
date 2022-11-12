@@ -99,18 +99,18 @@ public class UserBookingUI {
         String movieChosen = filteredMovies.get(movieChoice-1).getName();
 
         ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movieIDs.get(movieChoice - 1)));
-        ArrayList<Showtimes> datesToSelect = new ArrayList<Showtimes>(ShowtimesManager.showtimeDates(showtimesAvailable));
+        ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
         System.out.println("What dates would you like to see this movie?  ");
         for (int z = 0; z < datesToSelect.size(); z++) {
-            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z).getShowtime().substring(0,10) + "\n");
+            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
         }
         int dateChoice = scan.nextInt();
 
         System.out.println("What timings would you like to see this movie: ");
         for (int y = 0; y < showtimesAvailable.size(); y++) {
-            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1).getShowtime().substring(0, 10))) {
-                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11));
+            if (showtimesAvailable.get(y).getShowtime().substring(0, 10).equals(datesToSelect.get(dateChoice - 1))) {
+                System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11) + " || " + CinemaManager.getCinemabyID(showtimesAvailable.get(y).getCinemaID()).getType().toString());
             }
         }
         int showtimeChoice = scan.nextInt();
@@ -184,21 +184,22 @@ public class UserBookingUI {
 
     public static float getPreliminaryPrice (DateFormatter newDate, Showtimes showtimeToBook, float seatprice){
         // premium is always 25 so check on top
-//                        if (newDate.isPremium(){ //include user's cinema of type cinema
-//                            seatprice = src.Control.PricingManager.readAllPricing().get(0).getPremium() + seatprice;
-//                        }
-        // blockbuster always adds 1 so check on top
         if (newDate.isBlockbuster(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
             seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
         }
-//        if (newDate.isHoliday(newDate.DayConverter(showtimeToBook.getShowtime()))){ //include user's timing selected, pulled from showtimes available
-//            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-//                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
-//            }
-//            else{
-//                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
-//            }
-//        }
+
+        if (newDate.isPremium(CinemaManager.getCinemabyID(showtimeToBook.getCinemaID()))){ //include user's cinema of type cinema
+            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
+        }
+        else if (newDate.isHoliday(showtimeToBook.getShowtime().substring(0,10))){ //include user's timing selected, pulled from showtimes available
+            System.out.println("Holiday was implemented");
+            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+            }
+            else{
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+            }
+        }
         else {
             if (newDate.isFri6pm(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))){
                 if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie

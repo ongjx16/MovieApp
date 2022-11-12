@@ -1,13 +1,14 @@
 import Control.*;
-import Entity.AdminAccount;
-import Entity.Cinema;
-import Entity.Cineplex;
+import Entity.*;
 import Utils.CinemaType;
 import Utils.MovieStatus;
 import Utils.MovieType;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Initialiser {
@@ -28,7 +29,7 @@ public class Initialiser {
         MoviesManager.createMovie("The Intern", MovieType.DIGITAL3D, 150, MovieStatus.NOW_SHOWING, "Nancy Meyers", "Old man hustling");
         MoviesManager.createMovie("Toy Story", MovieType.BLOCKBUSTER2D, 120, MovieStatus.NOW_SHOWING, "John Lasseter", "Toys uniting to infinity and beyond");
         MoviesManager.createMovie("The Dictator", MovieType.BLOCKBUSTER3D, 130, MovieStatus.NOW_SHOWING, "Larry Charles", "Wadiya leader goes crazy");
-        MoviesManager.createMovie("Home Alone 20", MovieType.DIGITAL2D, 110, MovieStatus.COMING_SOON, "Chris Columbus", "The parents just suck at this point to have made 20 such movies");
+        MoviesManager.createMovie("Home Alone 20", MovieType.DIGITAL2D, 110, MovieStatus.PREVIEW, "Chris Columbus", "The parents just suck at this point to have made 20 such movies");
         MoviesManager.createMovie("Finding Nemo", MovieType.DIGITAL2D, 110, MovieStatus.END_OF_SHOW, "Andrew Stanton", "Fish father missing");
 
         ShowtimesManager.createShowtimes("20/11/2022 10:00", "Jurassic Park", "1C1");
@@ -47,6 +48,22 @@ public class Initialiser {
             System.out.println(CineplexOutput.get(y).getCineplexName());
             System.out.println("\n");
         }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        HolidayManager.createHolidays(LocalDate.parse("01/01/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("01/02/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("15/04/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("02/05/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("04/05/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("16/05/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("11/07/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("09/08/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("24/10/2022", formatter));
+        HolidayManager.createHolidays(LocalDate.parse("25/12/2022", formatter));
+
+        UsersManager.createUser("shubu", "test", "Shubu", 87805205, "shubu@gmail.com");
+        UsersManager.createUser("murong", "test", "Mu Rong", 83586561, "murong@gmail.com");
+
 //
     //populating database for cinemas
         CinemaManager.createCinema("Jem", "1", CinemaType.PREMIUM);
@@ -89,7 +106,4 @@ public class Initialiser {
                 System.out.println("success");
             }catch(Exception e){System.out.println(e);}
         }
-
-
-
 }

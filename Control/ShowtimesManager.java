@@ -33,10 +33,9 @@ public class ShowtimesManager {
             };
 
             int showtimeID =0;
-            System.out.println(ShowtimesManager.readAllShowtimes().size());
-            System.out.println(showtimeList.size());
-            if(showtimeList.size()>0){
-                showtimeID = showtimeList.get(showtimeList.size()-1).getShowtimeID() +1 ;
+            ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
+            if(ShowtimesArray.size()>0){
+                showtimeID = ShowtimesArray.get(ShowtimesArray.size()-1).getShowtimeID() +1 ;
             }
             else{
                 showtimeID = 1;
@@ -365,20 +364,20 @@ public class ShowtimesManager {
 
     }
 
-    public static ArrayList<Showtimes> showtimeDates(ArrayList<Showtimes> showtimesAvailable ){
+    public static ArrayList<String> showtimeDates(ArrayList<Showtimes> showtimesAvailable ){
 
-        ArrayList<Showtimes> dates = new ArrayList<Showtimes>();
+        ArrayList<String> dates = new ArrayList<String>();
 
         for (int i =0; i< showtimesAvailable.size(); i++){
             boolean repeat = false;
             for (int y = 0; y<dates.size(); y++){
-                if ((showtimesAvailable.get(i).getShowtime().substring(0,10)).equals(dates.get(y).getShowtime().substring(0,10))){
+                if ((showtimesAvailable.get(i).getShowtime().substring(0,10)).equals(dates.get(y))){
                     repeat = true;
                 }
             }
 
             if (repeat == false){
-                dates.add(showtimesAvailable.get(i));
+                dates.add(showtimesAvailable.get(i).getShowtime().substring(0,10));
             }
 
         }

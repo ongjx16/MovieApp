@@ -25,8 +25,6 @@ public class AdminShowtimesUI {
         int choice = scan.nextInt();
 
         if (choice == 1) {
-            ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
-            System.out.println("hello"+ShowtimesArray.size());
             createShowtimeUI();
         } else if (choice == 2) {
             editShowtimeUI();
