@@ -689,7 +689,7 @@ public class MainApp {
                         //generating tickets from the array
                         for (int n = 0; n < SeatsArray.size(); n++) {
                             System.out.println("\nTicket" + ":");
-                            tickets tics = new tickets(movieChosen, "JE1", "hello", "test", SeatsArray.get(n));
+                            tickets tics = new tickets(movieChosen, showtimesAvailable.get(showtimeChoice-1).getCinemaID(), showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(0,10), showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(11), SeatsArray.get(n));
                         }
 
                         System.out.println("Please Sign up or Log in to register your booking.");
@@ -752,19 +752,16 @@ public class MainApp {
                         }
                         // Generating transaction ID
                         String txnID = new Transaction(showtimesAvailable.get(showtimeChoice-1).getCinemaID()).getTransactionId();
-                        System.out.println("txnID"+txnID);
                         // Making a booking
                         ArrayList<UserAccount> usersList = UsersManager.readAllUsers();
-                        int count = 0;
+                        int count;
                         for (count = 0; count < usersList.size(); count++) {
                             if (usersList.get(count).getUsername().equals(newUsername)) {
                                 break;
                             }
                         }
                         System.out.println(usersList.get(count).getUsername());
-                        System.out.println("col" +col);
                         Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),4.5f,txnID,showtimesAvailable.get(showtimeChoice-1).getMoviename(),showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(0,10),showtimesAvailable.get(showtimeChoice-1).getShowtime().substring(11));
-                        System.out.println(row.charAt(0)-49);
                         ShowtimesManager.updateSeats(showtimesAvailable.get(showtimeChoice-1).getShowtimeID(),((row.charAt(0)-49)),(col));
                         UsersManager.editBookingHistory(count, booked1);
                     }
