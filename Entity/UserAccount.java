@@ -39,8 +39,6 @@ public class UserAccount implements Serializable {
 
     public void addBooking(Booking b){
         bookingHistory.add(b);
-        System.out.println("Shown!");
-
     }
 
 

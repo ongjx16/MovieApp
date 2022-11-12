@@ -19,7 +19,7 @@ public class Tickets {
         this.dateChosen = date;
         this.timeChosen = time;
         this.seatId = seatID;
-        System.out.println("Movie: " + movieChosen + "\nCinema: " + cinemaChosen +"\nCinema type: " + type.toString() + "\nDate: " + dateChosen + "\nTime: " + timeChosen + "\nSeat: " + seatId);
+        System.out.println("Movie: " + movieChosen + "\nCinema: " + cinemaChosen +"\nCinema type: " + type.toString() + "\nDate: " + dateChosen + "\nTime: " + timeChosen + "\nSeat: " + seatId.toUpperCase());
     }
 
     public void setMovieChosen(String x){
