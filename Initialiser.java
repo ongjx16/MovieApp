@@ -29,7 +29,7 @@ public class Initialiser {
         MoviesManager.createMovie("The Intern", MovieType.DIGITAL3D, 150, MovieStatus.NOW_SHOWING, "Nancy Meyers", "Old man hustling");
         MoviesManager.createMovie("Toy Story", MovieType.BLOCKBUSTER2D, 120, MovieStatus.NOW_SHOWING, "John Lasseter", "Toys uniting to infinity and beyond");
         MoviesManager.createMovie("The Dictator", MovieType.BLOCKBUSTER3D, 130, MovieStatus.NOW_SHOWING, "Larry Charles", "Wadiya leader goes crazy");
-        MoviesManager.createMovie("Home Alone 20", MovieType.DIGITAL2D, 110, MovieStatus.COMING_SOON, "Chris Columbus", "The parents just suck at this point to have made 20 such movies");
+        MoviesManager.createMovie("Home Alone 20", MovieType.DIGITAL2D, 110, MovieStatus.PREVIEW, "Chris Columbus", "The parents just suck at this point to have made 20 such movies");
         MoviesManager.createMovie("Finding Nemo", MovieType.DIGITAL2D, 110, MovieStatus.END_OF_SHOW, "Andrew Stanton", "Fish father missing");
 
         ShowtimesManager.createShowtimes("20/11/2022 10:00", "Jurassic Park", "1C1");
