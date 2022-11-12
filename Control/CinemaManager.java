@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import Entity.Cinema;
 import Utils.CinemaType;
@@ -86,9 +85,9 @@ public class CinemaManager {
     public static Cinema getCinemabyID(String CinemaID) {
         ArrayList<Cinema> cinemaOutput = new ArrayList<Cinema>(readAllCinemas());
         Cinema outputCinema = null;
-
+        System.out.println(CinemaID.toUpperCase());
         for (int i = 0; i < cinemaOutput.size(); i++) {
-            if (Objects.equals(cinemaOutput.get(i).getCinemaId(), CinemaID)) {
+            if (cinemaOutput.get(i).getCinemaId().equals(CinemaID.toUpperCase())) {
                 outputCinema = cinemaOutput.get(i);
                 return outputCinema;
             }
