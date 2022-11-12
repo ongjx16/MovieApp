@@ -9,21 +9,24 @@ import java.util.Scanner;
 public class UserUI {
 
     public static void UserFunctions(){
-        System.out.println("You are now a user");
-        System.out.println("What would you like to do now ");
-        System.out.println("(1) Book a movie");
-        System.out.println("(2) Search/List movie");
-        System.out.println("(3) View Movie Details");
-        System.out.println("(4) Check seat availability"); // needs to be updated
-        System.out.println("(5) List top 5 movies");
-        System.out.println("(6) View Booking History"); // need to log in
-        System.out.println("(7) Rate/Review movies");
-        System.out.println("(8) Exit");
-        Scanner scan = new Scanner(System.in);
-        int option = scan.nextInt();
 
+        Scanner scan = new Scanner(System.in);
+
+int option = 0;
+        System.out.println("You are now a user");
 
         while (option != 8) {
+
+            System.out.println("What would you like to do now ");
+            System.out.println("(1) Book a movie");
+            System.out.println("(2) Search/List movie");
+            System.out.println("(3) View Movie Details");
+            System.out.println("(4) Check seat availability"); // needs to be updated
+            System.out.println("(5) List top 5 movies");
+            System.out.println("(6) View Booking History"); // need to log in
+            System.out.println("(7) Rate/Review movies");
+            System.out.println("(8) Exit");
+            option = scan.nextInt();
             if (option == 1) { // Book a movie
                 UserBookingUI.UserBookingFunction();
             }
@@ -59,20 +62,7 @@ public class UserUI {
             }
 
             if (option == 5){ //List top 5 movies
-                int listingMovies = 0;
-                while (listingMovies != 3) {
-                    System.out.println("Would you like to list the top 5 movies according to:");
-                    System.out.println("(1) Ratings");
-                    System.out.println("(2) Ticket Sales");
-                    System.out.println("(3) Exit");
-                    listingMovies = scan.nextInt();
-
-                    if (listingMovies == 1) {
-                        ListTop5MoviesUI.sortByRatings();
-                    } else if (listingMovies == 2) {
-                        ListTop5MoviesUI.sortBySales();
-                    }
-                }
+                listTop5();
             }
 
             //View Booking History
@@ -155,6 +145,55 @@ public class UserUI {
                 }
 
             }
+        }
+    }
+
+    public static void listTop5(){
+        Scanner scan = new Scanner(System.in);
+        int listingMovies = 0;
+        while (true) {
+            System.out.println("Would you like to list the top 5 movies according to:");
+            if (FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()){
+                System.out.println("(1) Ratings");
+                System.out.println("(2) Ticket Sales");
+                System.out.println("(3) Exit");
+                listingMovies = scan.nextInt();
+
+                if (listingMovies == 1) {
+                    ListTop5MoviesUI.sortByRatings();
+                } else if (listingMovies == 2) {
+                    ListTop5MoviesUI.sortBySales();
+                }
+                else if (listingMovies==3){
+                    return;
+                }
+
+            }
+            else if (!FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()){
+                System.out.println("(1) Ticket Sales");
+                System.out.println("(2) Exit");
+                listingMovies = scan.nextInt();
+
+                if (listingMovies == 1) {
+                    ListTop5MoviesUI.sortBySales();
+                }
+                else if (listingMovies==2){
+                    return;
+                }
+            }
+            else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()){
+                System.out.println("(1) Ticket Sales");
+                System.out.println("(2) Exit");
+                listingMovies = scan.nextInt();
+
+                if (listingMovies == 1) {
+                    ListTop5MoviesUI.sortBySales();
+                }
+                else if (listingMovies==2){
+                    return;
+                }
+            }
+
         }
     }
 }

@@ -9,17 +9,14 @@ public class ListTop5MoviesUI {
     public static void sortByRatings(){
         int i;
         int size = 0;
-        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
-        ArrayList<Movie> filteredMovies = new ArrayList<>();
-        for (i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
-        }
+        ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus()) ;
+
 
         ArrayList<Integer> allRatings = new ArrayList<Integer>();
 
         // adding the ratings of all movies into an array
-        for (i=0; i<filteredMovies.size(); i++){
-            allRatings.add(filteredMovies.get(i).getRating()[1]);
+        for (i=0; i<allMovies.size(); i++){
+            allRatings.add(allMovies.get(i).getRating()[1]);
         }
         // sorting ratings from highest to lowest
         for (i=0; i<allRatings.size(); i++){
@@ -38,33 +35,50 @@ public class ListTop5MoviesUI {
         }else{
             size = 5;
         }
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
 
         // iterate through allMovies array to print movies with the top 5 rating
         for (i = 0; i< size; i++){
-            if (allRatings.get(i).equals(filteredMovies.get(0).getRating()[1])){
-                int numbering = i+1;
-                System.out.println(numbering + ": " + filteredMovies.get(0).getName() + ", Rating: " + filteredMovies.get(0).getRating()[1]);
-                filteredMovies.remove(0);
+            for (int y = 0; y< allMovies.size(); y++) {
+                if (allRatings.get(i).equals(allMovies.get(y).getRating()[1]) && !isRepeat(allMovies.get(y), filteredMovies)) {
+                    filteredMovies.add(allMovies.get(y));
+                    break;
+                }
             }
         }
+
+        for (int x = 0; x< filteredMovies.size(); x++ ){
+            int numbering = x + 1;
+            System.out.println(numbering + ": " + filteredMovies.get(x).getName() + ", Rating: " + filteredMovies.get(x).getRating()[1]);
+        }
+
+
+    }
+
+    public static boolean isRepeat(Movie movieToCompare, ArrayList<Movie> array){
+
+        for (int i = 0; i< array.size(); i++){
+            if (movieToCompare.equals(array.get(i))){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static void sortBySales(){
         int i;
         int size = 0;
-        ArrayList<Movie> allMovies = MoviesManager.readAllMovies();
-        ArrayList<Movie> filteredMovies = new ArrayList<>();
-        for (i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
-        }
+        ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus()) ;
+
 
         ArrayList<Integer> allSales = new ArrayList<Integer>();
 
-        // adding the sales of all movies into an array
-        for (i=0; i<filteredMovies.size(); i++){
-            allSales.add(filteredMovies.get(i).getSales());
+        // adding the ratings of all movies into an array
+        for (i=0; i<allMovies.size(); i++){
+            allSales.add(allMovies.get(i).getSales());
         }
-        // sorting sales from highest to lowest
+        // sorting ratings from highest to lowest
         for (i=0; i<allSales.size(); i++){
             for (int j=0; j<allSales.size() - i - 1; j++){
                 if (allSales.get(j) < allSales.get(j+1)){
@@ -81,14 +95,26 @@ public class ListTop5MoviesUI {
         }else{
             size = 5;
         }
+        ArrayList<Movie> filteredMovies = new ArrayList<>();
 
-        // iterate through allMovies array to print movies with the top 5 sales
+        // iterate through allMovies array to print movies with the top 5 rating
         for (i = 0; i< size; i++){
-            if (allSales.get(i).equals(filteredMovies.get(0).getSales())){
-                int numbering = i+1;
-                System.out.println(numbering + ": " + filteredMovies.get(0).getName() + ", Sales: " + filteredMovies.get(0).getSales());
-                filteredMovies.remove(0);
+            for (int y = 0; y< allMovies.size(); y++) {
+                if (allSales.get(i).equals(allMovies.get(y).getSales()) && !isRepeat(allMovies.get(y), filteredMovies)) {
+                    filteredMovies.add(allMovies.get(y));
+                    break;
+                }
             }
         }
-    }
+
+        for (int x = 0; x< filteredMovies.size(); x++ ){
+            int numbering = x + 1;
+            System.out.println(numbering + ": " + filteredMovies.get(x).getName() + ", Sales: " + filteredMovies.get(x).getSales());
+        }
+
+
+
+
+        }
+
 }
