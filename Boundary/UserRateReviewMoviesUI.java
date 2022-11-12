@@ -16,7 +16,7 @@ public class UserRateReviewMoviesUI {
 
         // only adding movies with "Preview" and "Now Showing" status into filteredMovies array
         for (int i = 0; i < allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
+            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
         }
 
         // printing out all the filteredMovies for user to choose
@@ -40,7 +40,7 @@ public class UserRateReviewMoviesUI {
 
         // only adding movies with "Preview" and "Now Showing" status into filteredMovies array
         for (int i = 0; i < allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus();
+            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
         }
 
         // printing out all the filteredMovies for user to choose
