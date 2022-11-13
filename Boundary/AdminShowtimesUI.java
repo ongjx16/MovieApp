@@ -77,7 +77,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         }
 
         ExceptionHandler check = new ExceptionHandler();
-        moviechoice = check.checkNumberInput(MoviesArray.size()+1, 5);
+        moviechoice = check.checkNumberInput(MoviesArray.size()+1, 10);
 
         int x = moviechoice - 1;
         String moviename = MoviesArray.get(x).getName();
@@ -128,7 +128,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
             }
             int choiceoftime = 0;
-            choiceoftime = check.checkNumberInput(choiceoftime, 5);
+            choiceoftime = check.checkNumberInput(choiceoftime, 10);
 
             showtime = date + " " + newTimings.get(choiceoftime - 1);
 
@@ -138,7 +138,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
                 k++;
             }
             int choiceoftime = 0;
-            choiceoftime = check.checkNumberInput(choiceoftime, 5);
+            choiceoftime = check.checkNumberInput(choiceoftime, 10);
             showtime = date + " " + timings[choiceoftime - 1];
         }
 
@@ -155,7 +155,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
             System.out.println("["+(i+1)+"]"+ cineplexes.get(i).getCineplexName());
         }
         int cineplexChoice = 0;
-        cineplexChoice = check.checkNumberInput(cineplexChoice,CineplexManager.readAllCineplexes().size()+1);
+        cineplexChoice = check.checkNumberInput(cineplexChoice,10);
 
         for(int i=0; i< CinemaManager.readAllCinemas().size();i++){
             if(cinemas.get(i).getCineplexName().equals( cineplexes.get(cineplexChoice-1).getCineplexName())){
@@ -168,7 +168,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
             System.out.println("["+(i+1)+"]"+cinemasInChosenCineplex.get(i).getCinemaId());
         }
         int cinemaChoice = 0;
-        cinemaChoice = check.checkNumberInput(cinemaChoice,CineplexManager.readAllCineplexes().size()+1);
+        cinemaChoice = check.checkNumberInput(cinemaChoice,10);
 
         //src.Control.ShowtimesManager.initialiser();
         ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice-1).getCinemaId());
@@ -191,7 +191,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         int cinema0;
         System.out.println("Enter the desired Cineplex");
         ExceptionHandler check = new ExceptionHandler();
-        cineplex0 = check.checkNumberInput(cineplex0,3);
+        cineplex0 = check.checkNumberInput(cineplex0,10);
 
 //                        System.out.println("Enter the desired Cinema");
 //                        cinema0 = scan.nextInt();
@@ -203,7 +203,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
             System.out.println("2. By Cinema and Cineplex ID");
             System.out.println("3. Save All Changes");
 
-            editByWhat = check.checkNumberInput(editByWhat,3);
+            editByWhat = check.checkNumberInput(editByWhat,10);
 
             if (editByWhat == 1){
                 ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
@@ -224,7 +224,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
                 System.out.println("Select Movie To Edit");
                 int movie = 0;
-                movie = check.checkNumberInput(movie, arraykek.size()+1);
+                movie = check.checkNumberInput(movie, 10);
                 movie = movie - 1;
 
                 int toChange = 0;
@@ -237,7 +237,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 //                                    System.out.println("2. Movie Name");
 //                                    System.out.println("3. Cinema ID");
 //                                    System.out.println("4. Save All Changes");
-                    toChange = check.checkNumberInput(toChange, 3);
+                    toChange = check.checkNumberInput(toChange, 10);
                     if (toChange ==1){
                         //name
                         ShowtimesManager.editShowtime(movie, "showtime", cineplex0);
@@ -279,7 +279,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
                 System.out.println("Select Cinema ID which you want to edit: ");
                 int cinema = 0;
-                cinema = check.checkNumberInput(cinema, ShowtimesArray.size()+1);
+                cinema = check.checkNumberInput(cinema, 20);
                 cinema = cinema - 1;
                 int toChange = 0;
 
@@ -289,7 +289,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
                     System.out.println("2. Movie Cineplex ID");
                     System.out.println("3. Save All Changes");
 //
-                    toChange = check.checkNumberInput(toChange, 3);
+                    toChange = check.checkNumberInput(toChange, 20);
                     if (toChange ==1){
                         //name
                         ShowtimesManager.editShowtime(cinema, "showtime2", cineplex0);
@@ -346,7 +346,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         System.out.println("\nSelect Showtime To Delete");
         int showtime = 0;
         ExceptionHandler check = new ExceptionHandler();
-        showtime = check.checkNumberInput(showtime, (ShowtimesArray.size()+1));
+        showtime = check.checkNumberInput(showtime, 20);
         ShowtimesManager.deleteShowtimes (showtime-1);
     }
 }
