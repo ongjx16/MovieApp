@@ -166,8 +166,8 @@ public class UserBookingUI{
         // asking for seats and saving it to an array
         for (int i = 0; i < noOfSeats; i++) {
             layout.displaySeatPlan();
-            System.out.println("input your desired row and column");
-            System.out.println("row (input number): ");
+            System.out.println("Input your desired row and column");
+            System.out.println("Row (input number): ");
             row = scan.nextLine();
             if(row.length()==1){
                 String init="0";
@@ -182,7 +182,7 @@ public class UserBookingUI{
                     row = init.concat(row);
                 }
             }
-            System.out.println("column (input letter): ");
+            System.out.println("Column (input letter): ");
             col = scan.nextLine().toUpperCase();
             while(col.charAt(0)>80 || col.charAt(0)<65){
                 System.out.println("Invalid column letter, please input again: ");
@@ -191,7 +191,7 @@ public class UserBookingUI{
 
             while(layout.checkSeatIfOccupied(((row.charAt(0)-48)*10+(row.charAt(1)-48)),(col))==true){
                 System.out.println("Sorry seat taken, please choose again: ");
-                System.out.println("row (input number): ");
+                System.out.println("Row (input number): ");
                 row = scan.nextLine();
                 if(row.length()==1){
                     String init="0";
@@ -205,7 +205,7 @@ public class UserBookingUI{
                         row = init.concat(row);
                     }
                 }
-                System.out.println("column (input letter): ");
+                System.out.println("Column (input letter): ");
                 col = scan.nextLine().toUpperCase();
                 while(col.charAt(0)>80 || col.charAt(0)<65){
                     System.out.println("Invalid column letter, please input again: ");

@@ -5,11 +5,13 @@ import java.io.*;
 
 /**
  * Login for admins
+ * AdminLogin extends from parent class Login
  */
 public class AdminLogin extends Login{
     /**
-     * Gets a list of all the admins
-     * @return list of all admins
+     * Gets a list of all the AdminAccounts
+     * Reads from AdminAccounts.dat
+     * @return list of all AdminAccounts
      */
     
  public AdminAccount[] getAdmins (){
@@ -52,22 +54,6 @@ public class AdminLogin extends Login{
 //     System.out.println(admins[k].getAdminUsername()+" "+admins[k].getAdminPassword());
 //   }
  }
-
-    /**
-     * Checks if admin username input is valid
-     * @param usernameinput
-     * @return True if username is valid
-     */
-
-
-    /**
-     * Checks if admin password input is valid
-     * @param usernameinput
-     * @param passwordinput
-     * @return True if password is valid
-     */
-
-
 
 }
 

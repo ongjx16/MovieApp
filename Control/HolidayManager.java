@@ -5,8 +5,20 @@ import java.time.LocalDate;
 import Entity.HolidayDates;
 import java.util.ArrayList;
 
+/**
+ * HolidayManager has functions that allow creation, deletion, reading and getting of all cineplexes
+ * HolidayManager reads from and writes to the HolidayDates.dat file
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class HolidayManager implements Serializable {
-
+    /**
+     * Creates HolidayDate
+     * Adds new holiday to HolidayDates.dat
+     * Admin privilege only
+     * @param holidayDate
+     */
     public static void createHolidays(LocalDate holidayDate) {
         try {
 
@@ -34,6 +46,10 @@ public class HolidayManager implements Serializable {
         }
     }
 
+    /**
+     * Gets all holidays from HolidayDates.dat
+     * @return Array list of all holiday dates
+     */
     public static ArrayList<HolidayDates> readHolidays() {
         ArrayList<HolidayDates> holDates = new ArrayList<HolidayDates>();
         try {
@@ -48,7 +64,12 @@ public class HolidayManager implements Serializable {
         return (holDates);
     }
 
-    // enter date of holiday to be deleted
+    /**
+     * Deletes holiday date
+     * Removes specific holiday date from HolidayDates.dat
+     * Admin privilege only
+     * @param hol
+     */
     public static void deleteHoliday(LocalDate hol) {
         ArrayList<HolidayDates> allHols = new ArrayList<HolidayDates>(readHolidays());
         ArrayList<HolidayDates> returnHols = new ArrayList<HolidayDates>();
@@ -69,7 +90,12 @@ public class HolidayManager implements Serializable {
         System.out.println("Deleted holiday successfully");
     }
 
-    // enter date to replace the specific date with another
+    /**
+     * Edits existing holiday date
+     * Updayes holiday date in HolidayDates.dat
+     * @param hol1 Existing holiday date to replace
+     * @param hol2 New holiday date to replace
+     */
     public static void replaceHoliday(LocalDate hol1, LocalDate hol2) {
         ArrayList<HolidayDates> allHols = new ArrayList<HolidayDates>(readHolidays());
         ArrayList<HolidayDates> returnHols = new ArrayList<HolidayDates>();
@@ -94,18 +120,22 @@ public class HolidayManager implements Serializable {
         System.out.println("Replaced holiday successfully");
     }
 
-    // checks if date entered is a holiday
+    /**
+     * Checks if holiday date input is already a holiday date in HolidayDates.dat
+     * @param date Date that needs to be checked
+     */
     public static void holidayChecker(LocalDate date) {
         ArrayList<HolidayDates> allHols = readHolidays();
         for (int i = 0; i < allHols.size(); i++) {
             if (allHols.get(i).getDate().equals(date))
                 System.out.println("True");
-//                return true;
         }
-//        return false;
         System.out.println("False");
     }
 
+    /**
+     * Prints out all holiday dates that are in HolidayDates.dat
+     */
     public static void printHolidaydb() {
         ArrayList<HolidayDates> allHols = readHolidays();
         for (int i = 0; i < allHols.size(); i++) {
@@ -114,58 +144,3 @@ public class HolidayManager implements Serializable {
     }
 }
 
-// TESTING SCRIPT
-//        src.Control.HolidayManager.deleteHoliday(LocalDate.of(2022, 2, 1));
-//        src.Control.HolidayManager.deleteHoliday(LocalDate.of(2022, 2, 2));
-//        src.Control.HolidayManager.deleteHoliday(LocalDate.of(2022, 1, 1));
-//        System.out.println("Create Holiday");
-//        src.Control.HolidayManager.createHolidays(LocalDate.of(2022, 1, 1));
-//        src.Control.HolidayManager.createHolidays(LocalDate.of(2022, 2, 1));
-//        src.Control.HolidayManager.createHolidays(LocalDate.of(2022, 2, 2));
-//        src.Control.HolidayManager.printHolidaydb();
-//        System.out.println("Delete Holiday");
-//        src.Control.HolidayManager.deleteHoliday(LocalDate.of(2022, 2, 1));
-//        src.Control.HolidayManager.printHolidaydb();
-//        System.out.println("Replace Holiday");
-//        src.Control.HolidayManager.replaceHoliday(LocalDate.of(2022, 2, 2));
-//        src.Control.HolidayManager.printHolidaydb();
-//        System.out.println("Check if isHoliday");
-//        src.Control.HolidayManager.holidayChecker(LocalDate.of(2022, 1, 1));
-//        src.Control.HolidayManager.holidayChecker(LocalDate.of(2022, 12, 12));
-//        src.Control.HolidayManager.printHolidaydb();
-
-
-//    public String[] getHoliday() {
-//        String[] holiday = new String[11];
-//        int i = 0;
-//        boolean cont = true;
-//        try {
-//            //Creating stream to read the object
-//            ObjectInputStream in = new ObjectInputStream(new FileInputStream("src.Entity.HolidayDates.dat"));
-//
-//            while (cont) {
-//                src.Entity.HolidayDates hol= null;
-//                try {
-//                    hol = (src.Entity.HolidayDates) in.readObject();
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace(
-//                    );
-//                }
-//                catch (EOFException efe){
-//                    System.out.print("");
-//                }
-//                if (hol != null) {
-//                    holiday[i] = hol.getDate();
-//                    i++;
-//
-//                } else {
-//                    cont = false;
-//                }
-//            }
-//            in.close();
-//        }catch(Exception e){System.out.println(e);}
-//
-//        return(holiday);
-//
-//    }
-//}
