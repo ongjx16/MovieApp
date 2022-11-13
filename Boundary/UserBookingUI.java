@@ -419,7 +419,6 @@ public class UserBookingUI{
             while(((row.charAt(0)-48)*10+(row.charAt(1)-48))<1 || ((row.charAt(0)-48)*10+(row.charAt(1)-48))>16){
                 System.out.println("Invalid row number, please input again: ");
                 row = scan.nextLine();
-                System.out.println(row);
                 if(row.length()==1){
                     String init="0";
                     row = init.concat(row);
