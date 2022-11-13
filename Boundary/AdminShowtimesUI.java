@@ -153,6 +153,14 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         Scanner scan = new Scanner(System.in);
         int editByWhat =0;
 
+        int cineplex0;
+        int cinema0;
+        System.out.println("Enter the desired Cineplex");
+        cineplex0 = scan.nextInt();
+//                        System.out.println("Enter the desired Cinema");
+//                        cinema0 = scan.nextInt();
+
+
         while (editByWhat !=3){
             System.out.println("How would you like to edit your Showtime?\n");
             System.out.println("1. By Movie");
@@ -163,9 +171,19 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
             if (editByWhat == 1){
                 ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
+                ArrayList<Integer> arraykek = ShowtimesManager.moviesByCineplex(cineplex0);// array containing all the movie IDs for the Cineplex in question
+//                                for (int i =0; i< arraykek.size(); i++){
+//                                    System.out.println(arraykek.get(i));
+//                                }
                 ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
-                for (int i = 0; i < MoviesArray.size(); i++) {
-                    System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
+
+//                                ArrayList<Showtimes> CineplexArray = ShowtimesManager.showtimesByMovieAndCineplex(cineplex0, arraykek.get());
+
+//                                for (int i = 0; i < MoviesArray.size(); i++) {
+//                                    System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
+//                                }
+                for (int i =0; i < arraykek.size(); i++){
+                    System.out.println((i+1) + ". " + MoviesManager.getMoviebyID(arraykek.get(i)).getName());
                 }
 
                 System.out.println("Select Movie To Edit");
@@ -184,13 +202,13 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
                     toChange = scan.nextInt();
                     if (toChange ==1){
                         //name
-                        ShowtimesManager.editShowtime(movie, "showtime");
+                        ShowtimesManager.editShowtime(movie, "showtime", cineplex0);
 
                     }
 
                     else if (toChange ==2){
 
-                        ShowtimesManager.editShowtime(movie, "cinemaID");
+                        ShowtimesManager.editShowtime(movie, "cinemaID", cineplex0);
 
                     }
 //
@@ -203,7 +221,8 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
                 ArrayList<Movie> MoviesArray = MoviesManager.readAllMovies();
                 ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
-                //ArrayList<Showtimes> ShowtimesArrayChecker = src.Control.ShowtimesManager.readAllShowtimes();
+                //ArrayList<Showtimes> ShowtimesArrayChecker = ShowtimesManager.readAllShowtimes();
+                int DesiredCinemaID =0;
                 int counter=0;
                 for (int i = 0; i < ShowtimesArray.size(); i++) {
                     int j;
@@ -212,8 +231,10 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
                             break;
                         }
                     }
-                    if (i==j){
+                    if (i==j && Integer.parseInt(ShowtimesArray.get(i).getCinemaID().substring(0,1)) == cineplex0){
                         System.out.println((counter + 1) + ". " + ShowtimesArray.get(i).getCinemaID());
+                        DesiredCinemaID = Integer.parseInt(ShowtimesArray.get(i).getCinemaID().substring(0,1));
+
                         counter++;
                     }
                 }
@@ -232,13 +253,13 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
                     toChange = scan.nextInt();
                     if (toChange ==1){
                         //name
-                        ShowtimesManager.editShowtime(cinema, "showtime2");
+                        ShowtimesManager.editShowtime(cinema, "showtime2", cineplex0);
 
                     }
 
                     else if (toChange ==2){
 
-                        ShowtimesManager.editShowtime(cinema, "cinemaID");
+                        ShowtimesManager.editShowtime(DesiredCinemaID, "cinemaID", cineplex0);
 
                     }
 //
@@ -248,6 +269,10 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
             }
 
         }
+
+
+
+
     }
 
     @Override
