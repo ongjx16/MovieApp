@@ -34,9 +34,15 @@ public class UserRateReviewMoviesUI {
             int index = i+1;
             System.out.println("(" + index + ")" + filteredMovies.get(i).getName());
         }
-        int movieToRate = scan.nextInt();
+
+        int movieToRate = 0;
+        ExceptionHandler check = new ExceptionHandler();
+        movieToRate = check.checkNumberInput(movieToRate, filteredMovies.size()+1);
+
         System.out.println("What is your rating? (1 to 10)");
-        float newRating = scan.nextFloat();
+        int newRatings = 0;
+        newRatings = check.checkNumberInput(newRatings, 10);
+        float newRating = (float)newRatings;
         // getting movie id of chosen movie to rate & rating it
         int filteredMovieId = filteredMovies.get(movieToRate-1).getMovieID();
         MoviesManager.updateRating(filteredMovieId, newRating);
@@ -63,7 +69,9 @@ public class UserRateReviewMoviesUI {
             int index = i+1;
             System.out.println("(" + index + ") " + filteredMovies.get(i).getName());
         }
-        int movieToRate = scan.nextInt();
+        int movieToRate = 0;
+        ExceptionHandler check = new ExceptionHandler();
+        movieToRate = check.checkNumberInput(movieToRate, filteredMovies.size()+1);
         System.out.println("Enter your review: ");
         String newReview = scan.nextLine();
         scan.nextLine();

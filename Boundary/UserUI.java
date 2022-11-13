@@ -20,6 +20,8 @@ public class UserUI {
     public static void UserFunctions(){
 
         Scanner scan = new Scanner(System.in);
+        ExceptionHandler check = new ExceptionHandler();
+
 
 int option = 0;
         System.out.println("You are now a user");
@@ -34,7 +36,7 @@ int option = 0;
             System.out.println("(5) View Booking History"); // need to log in
             System.out.println("(6) Rate/Review movies");
             System.out.println("(7) Exit");
-            option = scan.nextInt();
+            option = check.checkNumberInput(option, 7);
             if (option == 1) { // Book a movie
                 UserBookingUI.UserBookingFunction();
             }
@@ -47,7 +49,8 @@ int option = 0;
                     System.out.println("(1) Search movie by title");
                     System.out.println("(2) List all movies");
                     System.out.println("(3) Exit");
-                    searchOrList = scan.nextInt();
+                    searchOrList = check.checkNumberInput(searchOrList, 3);
+
 
 
                     if (searchOrList == 1) {
@@ -76,7 +79,6 @@ int option = 0;
             //View Booking History
             else if (option == 5) {
                 UserLogin UserLogin = new UserLogin();
-                scan.nextLine();
                 String usernameInput, passwordInput;
                 while(true) {
                     System.out.println("Please enter your username: ");
@@ -113,7 +115,9 @@ int option = 0;
                 for(int l=0; l<historyDates.size();l++){
                     System.out.println("["+(l+1)+"]"+historyDates.get(l));
                 }
-                int histDateChoice=scan.nextInt();
+                int histDateChoice=0;
+                histDateChoice = check.checkNumberInput(histDateChoice, historyDates.size()+1);
+
                 System.out.println("Choose movie time to view booking history: ");
                 for(int m=0; m<UsersManager.readAllUsers().get(i).getBookingHistory().size();m++){
                     if(UsersManager.readAllUsers().get(i).getBookingHistory().get(m).getMovieDate().equals(historyDates.get(histDateChoice-1))){
@@ -121,7 +125,9 @@ int option = 0;
                     }
                 }
 
-                int histTimeChoice=scan.nextInt();
+                int histTimeChoice=0;
+                histTimeChoice = check.checkNumberInput(histTimeChoice, UsersManager.readAllUsers().get(i).getBookingHistory().size()+1);
+
                 int n;
                 for(n=0; n<UsersManager.readAllUsers().get(i).getBookingHistory().size();n++){
                     if(UsersManager.readAllUsers().get(i).getBookingHistory().get(n).getMovieTime().equals(histTimeChoice)&&UsersManager.readAllUsers().get(i).getBookingHistory().get(n).getMovieDate().equals(histDateChoice)){
@@ -143,7 +149,8 @@ int option = 0;
                     System.out.println("(1) Rate Movie");
                     System.out.println("(2) Review Movie");
                     System.out.println("(3) Exit");
-                    rateOrReview = scan.nextInt();;
+                    rateOrReview = check.checkNumberInput(rateOrReview, 3);
+
 
                     if (rateOrReview == 1){
                         UserRateReviewMoviesUI.rateMovies();
@@ -171,7 +178,8 @@ int option = 0;
                     System.out.println("(1) Ratings");
                     System.out.println("(2) Ticket Sales");
                     System.out.println("(3) Exit");
-                    listingMovies = scan.nextInt();
+                    ExceptionHandler check = new ExceptionHandler();
+                    listingMovies = check.checkNumberInput(listingMovies, 3);
 
                     if (listingMovies == 1) {
                         listTop5.sortByRatings();
@@ -187,7 +195,8 @@ int option = 0;
                 } else if (!FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()) {
                     System.out.println("(1) Ticket Sales");
                     System.out.println("(2) Exit");
-                    listingMovies = scan.nextInt();
+                    ExceptionHandler check = new ExceptionHandler();
+                    listingMovies = check.checkNumberInput(listingMovies, 2);
 
                     if (listingMovies == 1) {
                         listTop5.sortBySales();
@@ -200,7 +209,8 @@ int option = 0;
                 } else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()) {
                     System.out.println("(1) Ratings");
                     System.out.println("(2) Exit");
-                    listingMovies = scan.nextInt();
+                    ExceptionHandler check = new ExceptionHandler();
+                    listingMovies = check.checkNumberInput(listingMovies, 2);
 
                     if (listingMovies == 1) {
                         listTop5.sortByRatings();
@@ -265,11 +275,10 @@ int option = 0;
                 for (int i = 0; i < filteredMovies.size(); i++) {
                     System.out.println("(" + (i + 1) + ")" + filteredMovies.get(i).getName());
                 }
-                int movieSelection = scan.nextInt();
-                if (movieSelection > filteredMovies.size() || movieSelection < 1) {
-                    System.out.println("Invalid input, select again");
-                    movieSelection = scan.nextInt();
-                }
+                ExceptionHandler check = new ExceptionHandler();
+                int movieSelection = 0;
+                movieSelection = check.checkNumberInput(movieSelection, filteredMovies.size()+1);
+
         viewMovieDetails.setMovie(filteredMovies.get(movieSelection - 1));
         viewMovieDetails.display();
 
