@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * Boundary class that movie-goer interacts with when user enters program as a movie-goer
- * @author murong
+ * @author shubham
  * @version 1.0
  * @since 2022-11-13
  */

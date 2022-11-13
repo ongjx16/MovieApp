@@ -3,7 +3,7 @@ package Entity;
 import java.io.Serializable;
 
 /** Parent class where User Account and Admin Account are inheriting from
- *@author murong
+ *@author shubham
  *@version 1.0
  *@since 2022-11-13
  */

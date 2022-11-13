@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * Represents a booking made in the MOBLIMA app
- * @author htut
+ * @author shubham
  * @version 1.0
  * @since 2022-11-12
  */

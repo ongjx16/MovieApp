@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Boundary class that admin interacts with when admin chooses to edit system settings
- * @author murong
+ * @author jingxuan
  * @version 1.0
  * @since 2022-11-13
  */

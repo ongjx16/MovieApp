@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 /**
  * Represents the holiday dates in the MOBLIMA app
- * @author htut
+ * @author somesh
  * @version 1.0
  * @since 2022-11-12
  */

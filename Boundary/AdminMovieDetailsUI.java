@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Boundary class that admin interacts with when admin chooses to edit movie details.
- * @author murong
+ * @author somesh
  * @version 1.0
  * @since 2022-11-13
  */

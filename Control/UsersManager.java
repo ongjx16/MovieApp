@@ -9,9 +9,22 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
 import java.util.ArrayList;
-
+/**
+ * control class to execute changes to movie-goer accounts
+ * used for sign up, get all registered accounts, and edit booking history of movie-goer
+ * @author jing xuan
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class UsersManager {
-
+    /**
+     * used to sign up and store data of new user
+     * @param username username of new user
+     * @param password password of new user
+     * @param name name of new user
+     * @param phoneNumber phone number of new user
+     * @param email email of new user
+     */
 
     public static void createUser(String username, String password, String name, int phoneNumber, String email){
         try{
@@ -43,6 +56,11 @@ public class UsersManager {
         );}
     }
 
+    /**
+     * called when having to check through whole database of movie-goer accounts
+     * @return array list of object type UserAccount, which comprises of all registered movie-goer accounts
+     */
+
     public static ArrayList<UserAccount> readAllUsers () {
         ArrayList<UserAccount> usersOutput = new ArrayList<UserAccount>();
         try {
@@ -54,6 +72,12 @@ public class UsersManager {
         );}
         return (usersOutput);
     }
+
+    /**
+     * to delete any specific user
+     * can be implemented in admin control panel for future improvements
+     * @param index index in array list of UserAccount that requires deletion
+     */
 
     public static void deleteUser (int index) {
         try{
@@ -75,6 +99,12 @@ public class UsersManager {
             System.out.println("User successfully removed");
         }catch(Exception e){}
     }
+
+    /**
+     * add to booking history associated to the user account
+     * @param index index in array list of UserAccount to which booking history needs edits to
+     * @param b Booking object to be added to user account
+     */
 
     public static void editBookingHistory (int index, Booking b) {
         try{
