@@ -66,9 +66,9 @@ int option = 0;
 
             //View Booking History
             else if (option == 5) {
+                scan.nextLine();
                 String usernameInput, passwordInput;
                 while(true) {
-                    scan.nextLine();
                     System.out.println("Please enter your username: ");
                     usernameInput = scan.nextLine();
                     if (UserLogin.verifyUsername(usernameInput)) {
@@ -184,7 +184,7 @@ int option = 0;
                         throw new Exception("Invalid input, please try again");
                     }
                 } else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()) {
-                    System.out.println("(1) Ticket Sales");
+                    System.out.println("(1) Ratings");
                     System.out.println("(2) Exit");
                     listingMovies = scan.nextInt();
 
