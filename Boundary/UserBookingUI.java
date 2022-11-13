@@ -25,6 +25,8 @@ public class UserBookingUI{
     private static boolean dealbreaker = false;
 
     public static void UserBookingFunction(){
+        ExceptionHandler check = new ExceptionHandler();
+
         dealbreaker = false;
         Scanner scan = new Scanner(System.in);
         Showtimes showtimeToBook = null;
@@ -44,7 +46,8 @@ public class UserBookingUI{
 
 
         System.out.println("How many seats do you want? Input 0 to exit");
-        int noOfSeats = scan.nextInt();
+        int noOfSeats = 0;
+        noOfSeats = check.checkNumberInput(noOfSeats, 100);
 
         if (noOfSeats == 0){
             dealbreaker = true;
@@ -126,24 +129,15 @@ public class UserBookingUI{
             System.out.println("[" + (i + 1) + "] " + readCineplexes.get(i).getCineplexName() + "\n");
         }
         System.out.println("[0] Exit");
-        boolean isnumber = false;
-        while (!isnumber) {
-            intermediate = scan.nextLine();
-            try {
-                cineplexChoice = Integer.parseInt(intermediate);
-                isnumber = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Input is not valid, please input a valid number");
-            }
-        }
+
+        ExceptionHandler check = new ExceptionHandler();
+        cineplexChoice = check.checkNumberInput(cineplexChoice, readCineplexes.size()+1);
+
         if (cineplexChoice == 0){
             dealbreaker = true;
             return null;
         }
-        while (cineplexChoice > readCineplexes.size() || cineplexChoice < 1) {
-            System.out.println("Invalid option, please choose again");
-            cineplexChoice = scan.nextInt();
-        }
+
         System.out.println("Your choice is: " + readCineplexes.get(cineplexChoice - 1).getCineplexName());
 
         System.out.println("Choose your movie! ");
@@ -159,21 +153,21 @@ public class UserBookingUI{
         }
         System.out.println("[0] Exit");
 
-        int movieChoice = scan.nextInt();
+        int movieChoice = 0;
+
+        movieChoice = check.checkNumberInput(movieChoice, filteredMovies.size()+1);
 
         if (movieChoice == 0){
             dealbreaker = true;
             return null;
         }
 
-        if (movieChoice > filteredMovies.size() || movieChoice < 1) {
-            System.out.println("Invalid choice, please choose again");
-            movieChoice = scan.nextInt();
-        }
         System.out.println("Your choice is: " + filteredMovies.get(movieChoice - 1).getName());
-        String movieChosen = filteredMovies.get(movieChoice - 1).getName();
 
-        ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movieIDs.get(movieChoice - 1)));
+        String movieChosen = filteredMovies.get(movieChoice - 1).getName();
+        int chosenMovieID = filteredMovies.get(movieChoice-1).getMovieID();
+
+        ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, chosenMovieID));
         ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
         System.out.println("What dates would you like to see this movie?  ");
@@ -181,7 +175,8 @@ public class UserBookingUI{
             System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
         }
         System.out.println("[0] Exit");
-        int dateChoice = scan.nextInt();
+        int dateChoice = 0;
+        dateChoice = check.checkNumberInput(dateChoice, datesToSelect.size()+1);
 
         if (dateChoice == 0){
             dealbreaker = true;
@@ -195,7 +190,9 @@ public class UserBookingUI{
             }
         }
         System.out.println("[0] Exit");
-        int showtimeChoice = scan.nextInt();
+        int showtimeChoice = 0;
+        showtimeChoice = check.checkNumberInput(showtimeChoice,  showtimesAvailable.size()+1);
+
 
         if (showtimeChoice == 0){
             dealbreaker = true;
@@ -217,8 +214,9 @@ public class UserBookingUI{
                 "Continuing with Log In/Sign Up will confirm your booking!");
         String newUsername = " ";
 
-        int op = scan.nextInt();
-        scan.nextLine();
+        int op = 0;
+        ExceptionHandler check = new ExceptionHandler();
+        op = check.checkNumberInput(op,  2);
 
         if (op == 0){
             dealbreaker = true;
@@ -348,7 +346,10 @@ public class UserBookingUI{
                     System.out.println("3. Senior Citizen");
                 }
                 System.out.println("0. Exit");
-                int selection = scan.nextInt();
+                int selection = 0;
+
+                ExceptionHandler check = new ExceptionHandler();
+                selection = check.checkNumberInput(selection, 3);
 
                 if (selection == 0){
                     dealbreaker = true;

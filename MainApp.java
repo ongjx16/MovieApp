@@ -1,10 +1,8 @@
 
-import java.text.ParseException;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
+import Boundary.ExceptionHandler;
 import Boundary.UserUI;
-import Control.*;
 import Boundary.AdminUI;
 
 
@@ -26,7 +24,9 @@ public class MainApp {
             System.out.println("2. Movie Goer");
             System.out.println("3. Exit\n");
             System.out.println("Enter a number of your choice: ");
-            identity = scan.nextInt();
+
+            ExceptionHandler check = new ExceptionHandler();
+            identity = check.checkNumberInput(identity, 3);
 
             if (identity == 1) {
                 AdminUI.AdminFunctions();

@@ -34,7 +34,8 @@ public class AdminSystemSettingsUI {
             System.out.println("5. Senior citizen prices");
             System.out.println("6. Show all current prices");
             System.out.println("7. Back");
-            mainPriceOption = scan.nextInt();
+            ExceptionHandler check = new ExceptionHandler();
+            mainPriceOption = check.checkNumberInput(mainPriceOption, 7);
             if (mainPriceOption == 1) {
                 PricingManager.editPricing(0, "blockbuster");
                 System.out.println(
@@ -55,7 +56,10 @@ public class AdminSystemSettingsUI {
                 System.out.println("7. Adult Fri(6pm onwards) - Weekend 2D");
                 System.out.println("8. Adult Fri(6pm onwards) - Weekend 2D");
                 System.out.println("What is your choice: ");
-                int adultpriceoption = scan.nextInt();
+
+                int adultpriceoption = 0;
+                adultpriceoption = check.checkNumberInput(adultpriceoption, 8);
+
                 if (adultpriceoption == 1) {
                     PricingManager.editPricing(0, "AdultMonWedStandard2D");
                     System.out.println("Adult mon-wed 2D price has been set to: "
@@ -100,7 +104,10 @@ public class AdminSystemSettingsUI {
                 System.out.println("Which student price would you like to adjust");
                 System.out.println("1. Student 2D");
                 System.out.println("2. Student 3D");
-                int studentoption = scan.nextInt();
+                int studentoption = 0;
+
+                studentoption = check.checkNumberInput(studentoption, 2);
+
                 if (studentoption == 1) {
                     PricingManager.editPricing(0, "StudentStandard2D");
                     System.out.println("Student 2D price has been set to: "
@@ -150,14 +157,16 @@ public class AdminSystemSettingsUI {
         System.out.println("3. Delete A Holiday");
         System.out.println("4. View All Holiday Dates");
         System.out.println("5. Back");
-        editChoice = scan1.nextInt();
+
+        ExceptionHandler check = new ExceptionHandler();
+        editChoice = check.checkNumberInput(editChoice, 5);
+
 
         while (editChoice != 5) {
             if (editChoice == 1) {
                 // create new holiday
                 String holiday;
                 System.out.println("Enter new holiday date in DD/MM/YYYY: ");
-                scan1.nextLine();
                 holiday = scan1.nextLine();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate holidayDate = LocalDate.parse(holiday, formatter);
@@ -172,13 +181,14 @@ public class AdminSystemSettingsUI {
                     System.out.println((i+1) + ". " + allHols.get(i).getDate().format(formatter));
                 }
 
-                int holChoice = scan1.nextInt();
+                int holChoice = 0;
+                holChoice = check.checkNumberInput(holChoice, (allHols.size()+1));
+
                 LocalDate targetDate = allHols.get(holChoice-1).getDate();
 
                 System.out.println("\nEditing: " + targetDate.format(formatter));
                 
                 System.out.println("\nEnter New Date in DD/MM/YYYY: ");
-                scan1.nextLine();
                 String newChoice = scan1.nextLine();
                 LocalDate replacementDate = LocalDate.parse(newChoice, formatter);
 
@@ -193,7 +203,9 @@ public class AdminSystemSettingsUI {
                     System.out.println((i+1) + ". " + allHols.get(i).getDate());
                 }
 
-                int holChoice = scan1.nextInt();
+                int holChoice = 0;
+                holChoice = check.checkNumberInput(holChoice, (allHols.size()+1));
+
 
                 HolidayManager.deleteHoliday(allHols.get(holChoice-1).getDate());
                 
@@ -214,8 +226,9 @@ public class AdminSystemSettingsUI {
         System.out.println("3. Delete A Holiday");
         System.out.println("4. View All Holiday Dates");
         System.out.println("5. Back\n");
-        editChoice = scan1.nextInt();
-            
+        editChoice = check.checkNumberInput(editChoice, 5);
+
+
 
         }
 
@@ -237,7 +250,8 @@ public class AdminSystemSettingsUI {
             System.out.println("1. View Top 5 Movies");
             System.out.println("2. Edit User Access to Filters");
             System.out.println("3. Back\n");
-            filterChoice = scan1.nextInt();
+            ExceptionHandler check = new ExceptionHandler();
+            filterChoice = check.checkNumberInput(filterChoice, 3);
 
             if (filterChoice == 1) {
                 // view top 5 by filter
@@ -249,7 +263,7 @@ public class AdminSystemSettingsUI {
                     System.out.println("1. See Top 5 Movies by Sales");
                     System.out.println("2. See Top 5 Movies by Ratings");
                     System.out.println("3. Back\n");
-                    secondFilterChoice = scan1.nextInt();
+                    secondFilterChoice = check.checkNumberInput(filterChoice, 3);
                     // if (secondFilterChoice < 1 && secondFilterChoice > 3) {
                     //     System.out.println("Invalid Input. Choose Again");
                     //     filterChoice = scan.nextInt();
@@ -271,7 +285,7 @@ public class AdminSystemSettingsUI {
                     System.out.println("\n1. Edit User Access to Ratings Filter");
                     System.out.println("2. Edit User Access to Sales Filter");
                     System.out.println("3. Back\n");
-                    editChoice = scan1.nextInt();
+                    editChoice = check.checkNumberInput(editChoice, 3);
 
                     if (editChoice == 1) {
                         // edit ratings Filter
@@ -284,7 +298,8 @@ public class AdminSystemSettingsUI {
                         System.out.println("\nConfirm Change in Access?");
                         System.out.println("\n1. Yes");
                         System.out.println("2. Back\n");
-                        int cfmChoice = scan1.nextInt();
+                        int cfmChoice = 0;
+                        cfmChoice = check.checkNumberInput(cfmChoice, 2);
                         if (cfmChoice == 1) {
                             FilterPermissions
                                     .setAccessRatingsFilter(!FilterPermissions.isAccessRatingsFilter());
@@ -312,7 +327,8 @@ public class AdminSystemSettingsUI {
                         System.out.println("\nConfirm Change in Access?\n");
                         System.out.println("1. Yes");
                         System.out.println("2. Back\n");
-                        int cfmChoice = scan1.nextInt();
+                        int cfmChoice = 0;
+                        cfmChoice = check.checkNumberInput(cfmChoice, 2);
                         if (cfmChoice == 1) {
                             FilterPermissions.setAccessSalesFilter(!FilterPermissions.isAccessSalesFilter());
                             if (FilterPermissions.isAccessSalesFilter()) {

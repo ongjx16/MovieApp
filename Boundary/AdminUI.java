@@ -17,7 +17,8 @@ public class AdminUI {
      * Contains functions available for admin to edit once logged in
      */
     public static void AdminFunctions(){
-        int choice;
+        ExceptionHandler check = new ExceptionHandler();
+        int choice = 0;
         String username1;
         String password1;
         AdminLogin admin = new AdminLogin();
@@ -55,7 +56,7 @@ public class AdminUI {
             System.out.println("3. Edit System Settings\n");
             System.out.println("4. Quit \n");
             System.out.println("Enter a number of your choice: ");
-            choose = scan.nextInt();
+            choose = check.checkNumberInput(choose, 4);
 
             if (choose == 1) {
                 AdminMovieDetailsUI movieDetails = new AdminMovieDetailsUI();
@@ -76,7 +77,8 @@ public class AdminUI {
                     System.out.println("3. Edit Top 5 Movie Filters\n");
                     System.out.println("4. Back\n");
                     System.out.println("Enter a number of your choice: ");
-                    settingsChoice = scan.nextInt();
+                    settingsChoice = check.checkNumberInput(settingsChoice, 4);
+
 
 
                     if (settingsChoice ==1 ){
