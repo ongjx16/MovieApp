@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User interface when movie-goer chooses to Rate/Review movies
+ * Boundary class that movie-goer interacts with when movie-goer chooses to Rate/Review movies
+ * @author shubham
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserRateReviewMoviesUI {
     /**

@@ -4,8 +4,11 @@ import Control.UsersManager;
 import Entity.Booking;
 
 /**
- * User Interface when movie-goer chooses to view booking history
+ * Boundary class that movie-goer interacts with when movie-goer chooses to view booking history
  * Implements DetailsInterface
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserViewBookingDetailsUI implements DetailsInterface{
     private Booking toBook;

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User interface shown when movie-goer chooses to view movie details
+ * Boundary class that movie-goer interacts with when movie-goer chooses to view movie details
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserViewMovieDetailsUI implements DetailsInterface{
     private Movie movie;

@@ -11,7 +11,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * User interface shown when movie-goer chooses to make booking
+ * Boundary class that movie-goer interacts with when movie-goer chooses to make booking
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserBookingUI{
     /**

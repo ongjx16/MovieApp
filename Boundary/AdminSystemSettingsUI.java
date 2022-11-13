@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * User interface when admin chooses to edit system settings
- * @author murong
+ * Boundary class that admin interacts with when admin chooses to edit system settings
+ * @author jingxuan
  * @version 1.0
  * @since 2022-11-13
  */

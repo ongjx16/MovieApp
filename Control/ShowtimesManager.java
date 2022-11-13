@@ -10,9 +10,21 @@ import java.util.Scanner;
 import Entity.Movie;
 import Entity.Showtimes;
 
+/**
+ * Control class to perform actions on the showtimes database
+ * @author jing xuan
+ * @version 1.0
+ * @since 2022-11-13
+ */
+
 public class ShowtimesManager {
 
-
+    /**
+     * function to create showtime
+     * @param showtime showtime of "DD/MM/YYYY HH:mm" format (converted to string from LocalDateTime format)
+     * @param moviename name of movie showing in that showtime
+     * @param cinemaID ID of cinema in which the movie is playing at that time
+     */
     public static void createShowtimes(String showtime,String moviename,String cinemaID){
         try{
 
@@ -64,6 +76,10 @@ public class ShowtimesManager {
     }
     }
 
+    /**
+     * used to check through all showtimes created by admin for various functions such as showing timeslots available for user to book
+     * @return ArrayList of all showtimes created by admin
+     */
     public static ArrayList<Showtimes> readAllShowtimes () {
 //        src.Entity.Movie[] movieOutput = new src.Entity.Movie[2];
         ArrayList<Showtimes> showtimesOutput = new ArrayList<Showtimes>();
@@ -76,21 +92,13 @@ public class ShowtimesManager {
         return (showtimesOutput);
     }
 
-    public static void initialiser () {
-//        src.Entity.Movie[] movieOutput = new src.Entity.Movie[2];
-        try {
-            //Creating stream to read the object
-            ObjectOutputStream in = new ObjectOutputStream(new FileOutputStream("DATFiles/Showtimes.dat"));
-            in.close();
-        } catch (Exception e) {
-        //     e.printStackTrace(
-        // )
-        ;}
-    }
+    /**
+     * To delete a showtime in the database
+     * @param index index in readAllShowtimes() ArrayList of Showtime object to be deleted
+     */
 
     public static void deleteShowtimes (int index) {
         try{
-
             //Creating the object
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
 
@@ -112,6 +120,13 @@ public class ShowtimesManager {
             System.out.println("Showtime successfully removed");
         }catch(Exception e){}
     }
+
+    /**
+     * to edit a specific showtime based
+     * @param index index of the showtime to edit in the ArrayList of showtimes called from readAllShowtimes()
+     * @param attribute admin can choose to first select the showtime then edit cinema id associated to it, or first select the cinema then change the showtime associated to it
+     * @param cineplexID if of cineplex which the showtime object belongs to
+     */
 
     public static void editShowtime (int index, String attribute, int cineplexID) {
         try{
@@ -367,8 +382,16 @@ public class ShowtimesManager {
         out.close();
         System.out.println("showtime successfully edited");
     }catch(Exception e){}
+
     }
 
+
+    /**
+     * filter all showtimes to output showtimes tied to the same movieid and date
+     * @param date date to be filtered by
+     * @param movieid id of movie to be filtered by
+     * @return ArrayList of showtimes tied to the same movieid and date
+     */
     public static ArrayList<Showtimes> searchShowtimes(String date, int movieid){
         ArrayList<Showtimes> arraytoadd = new ArrayList<Showtimes>();
         try {
@@ -387,6 +410,13 @@ public class ShowtimesManager {
 
 
     }
+
+    /**
+     * update seats to be assigned and store this assigned state in the database
+     * @param showtimeID id of showtime in which seating plan is associated to
+     * @param row row of seat to be assigned
+     * @param col column of seat to be assigned
+     */
 
     public static void updateSeats(int showtimeID, int row, String col){
         //ArrayList<src.Entity.Showtimes> arraytoadd = new ArrayList<src.Entity.Showtimes>();
@@ -419,6 +449,12 @@ public class ShowtimesManager {
 
     }
 
+    /**
+     * return movie IDs that have showtimes associated to it in that cineplex
+     * @param cineplex ID of cineplex to filter by
+     * @return ArrayList of movie IDs
+     */
+
     public static ArrayList<Integer> moviesByCineplex(int cineplex){
         ArrayList<Showtimes> filterarray = new ArrayList<Showtimes>();
         ArrayList<Integer> moviesarray = new ArrayList<Integer>();
@@ -442,6 +478,13 @@ public class ShowtimesManager {
 
 
     }
+
+    /**
+     * filter all showtimes by cineplex and movie
+     * @param cineplex id of cineplex to be filtered by
+     * @param movieId id of movie to be filtered by
+     * @return ArrayList of showtimes tied to that specific cineplex and movieID
+     */
     public static ArrayList<Showtimes> showtimesByMovieAndCineplex(int cineplex, int movieId){
 
         ArrayList<Showtimes> filteredShowtimes = new ArrayList<Showtimes>();
@@ -459,6 +502,12 @@ public class ShowtimesManager {
 
 
     }
+
+    /**
+     * filters a list of Showtimes objects to obtain all dates and times associated to it, without repeats
+     * @param showtimesAvailable takes in an array of Showtimes objects to filter through
+     * @return ArrayList of showtimes, with each showtime being a String, in the format of "DD/MM/YYYY HH:mm"
+     */
 
     public static ArrayList<String> showtimeDates(ArrayList<Showtimes> showtimesAvailable ){
 
