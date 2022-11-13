@@ -187,6 +187,7 @@ public class AdminSystemSettingsUI {
     }
 
     public static void editTop5Filtering() {
+        ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();
 
         Scanner scan1 = new Scanner(System.in);
         int filterChoice = 0;
@@ -216,9 +217,9 @@ public class AdminSystemSettingsUI {
                     //     filterChoice = scan.nextInt();
                     // } 
                    if (secondFilterChoice == 1) {
-                        ListTop5MoviesUI.sortBySales();
+                       listTop5.sortBySales();
                     } else if (secondFilterChoice == 2) {
-                        ListTop5MoviesUI.sortByRatings();
+                       listTop5.sortByRatings();
                     } else if (secondFilterChoice == 3) {
                         System.out.println("entered 3");
                         filterChoice =3;

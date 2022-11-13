@@ -6,9 +6,18 @@ import Entity.Movie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserViewMovieDetailsUI {
-    public static void viewMovieDetails(Movie movie){
+public class UserViewMovieDetailsUI implements DetailsInterface{
+    private Movie movie;
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public void display(){
 
         System.out.println("\nYou've chosen: " + movie.getName());
         System.out.println("Here are the associated movie details!\n");

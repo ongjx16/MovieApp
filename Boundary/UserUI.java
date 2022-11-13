@@ -17,7 +17,7 @@ int option = 0;
 
         while (option != 7) {
 
-            System.out.println("What would you like to do now ");
+            System.out.println("\nWhat would you like to do now ");
             System.out.println("(1) Book a movie");
             System.out.println("(2) Search/List movie");
             System.out.println("(3) Check seat availability"); // needs to be updated
@@ -118,13 +118,11 @@ int option = 0;
                         break;
                     }
                 }
+                UserViewBookingDetailsUI viewBookingDetail = new UserViewBookingDetailsUI();
+                viewBookingDetail.setToBook(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1));
+                viewBookingDetail.display();
                 System.out.println(n);
-                System.out.println("Transaction ID: " +UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getTXNid() );
-                System.out.println("Location: " + Booking.getCineplexByBooking(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getTXNid()) );
-                System.out.println("Movie Name: "+UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieName());
-                System.out.println("Movie Date: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieDate());
-                System.out.println("Movie Time: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieTime());
-                System.out.println("No. of seats booked: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getNoOfSeats()+"\n");
+
 
             }
 
@@ -149,6 +147,7 @@ int option = 0;
     }
 
     public static void listTop5(){
+        ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();
         Scanner scan = new Scanner(System.in);
         int listingMovies = 0;
             try {
@@ -160,9 +159,9 @@ int option = 0;
                     listingMovies = scan.nextInt();
 
                     if (listingMovies == 1) {
-                        ListTop5MoviesUI.sortByRatings();
+                        listTop5.sortByRatings();
                     } else if (listingMovies == 2) {
-                        ListTop5MoviesUI.sortBySales();
+                        listTop5.sortBySales();
                     } else if (listingMovies == 3) {
                         return;
                     }
@@ -176,7 +175,7 @@ int option = 0;
                     listingMovies = scan.nextInt();
 
                     if (listingMovies == 1) {
-                        ListTop5MoviesUI.sortBySales();
+                        listTop5.sortBySales();
                     } else if (listingMovies == 2) {
                         return;
                     }
@@ -189,7 +188,7 @@ int option = 0;
                     listingMovies = scan.nextInt();
 
                     if (listingMovies == 1) {
-                        ListTop5MoviesUI.sortByRatings();
+                        listTop5.sortByRatings();
                     } else if (listingMovies == 2) {
                         return;
                     }
@@ -206,6 +205,7 @@ int option = 0;
     }
 
     public static void searchMovie(){
+        UserViewMovieDetailsUI viewMovieDetails = new UserViewMovieDetailsUI();
         try{System.out.println("\nEnter the movie title you wish to search: ");
             Scanner in = new Scanner(System.in);
             String movieTitle = in.nextLine();
@@ -220,7 +220,8 @@ int option = 0;
             for (i = 0; i < filteredMovies.size(); i++) {
                 String movie = filteredMovies.get(i).getName().toUpperCase();
                 if (movie.equals(movieTitle.toUpperCase())) {
-                  UserViewMovieDetailsUI.viewMovieDetails(filteredMovies.get(i));
+                    viewMovieDetails.setMovie(filteredMovies.get(i));
+                    viewMovieDetails.display();
                     index++;
                 }
             }
@@ -234,9 +235,8 @@ int option = 0;
     }
 
     public static void selectMovie(){
+        UserViewMovieDetailsUI viewMovieDetails = new UserViewMovieDetailsUI();
         Scanner scan = new Scanner(System.in);
-
-
 
                 System.out.println("Please select the movie you'd like to find out more about: ");
                 ArrayList<Movie> filteredMovies = new ArrayList<Movie> (MoviesManager.filterByStatus((MoviesManager.readAllMovies())));
@@ -250,7 +250,8 @@ int option = 0;
                     System.out.println("Invalid input, select again");
                     movieSelection = scan.nextInt();
                 }
-                UserViewMovieDetailsUI.viewMovieDetails(filteredMovies.get(movieSelection - 1));
+        viewMovieDetails.setMovie(filteredMovies.get(movieSelection - 1));
+        viewMovieDetails.display();
 
 
     }

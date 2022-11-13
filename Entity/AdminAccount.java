@@ -11,17 +11,11 @@ import java.io.Serializable;
 public class AdminAccount extends Account implements Serializable {
 
     private static final long serialVersionUID = 4L;
-    /**
-     * The username of the admin account
-     */
-    // /**
-    //  * The password of the admin account
-    //  */
 
     /**
      * Creates an admin account with the username and password
-     * @param u This admin's username
-     * @param p This admin's password
+     * @param username This admin's username
+     * @param password This admin's password
      */
     public AdminAccount(String username, String password){
         super(username, password);

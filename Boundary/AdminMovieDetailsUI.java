@@ -8,11 +8,8 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
-/**
- * User interface for admin to edit movie details
- */
-public class AdminMovieDetailsUI {
-    public static void AdminMovieFunctions(){
+public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,DetailsInterface,EditUIInterface{
+    public void AdminMovieFunctions(){
         Scanner scan = new Scanner(System.in);
         int choice = 0;
 
@@ -28,43 +25,25 @@ public class AdminMovieDetailsUI {
 
 
             if (choice == 1) {
-                createMovieUI();
+                createNewObject();
             }
             else if (choice == 2) {
-                editMoveUI();
+                editObjectUI();
 
             } else if (choice == 3) {
                 //delete movie
-                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < MoviesArray.size(); i++) {
-                    System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
-
-                }
-                System.out.println("\nSelect Movie To Delete");
-                int movie = scan.nextInt();
-                MoviesManager.deleteMovie(movie - 1);
+                deleteObject();
 
 
             } else if (choice == 4) {
                 // Movie[] MoviesArray;
-                ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-                MoviesArray = MoviesManager.readAllMovies();
-                for (int i = 0; i < MoviesArray.size(); i++) {
-                    System.out.println("Name: " + MoviesArray.get(i).getName());
-                    System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
-                    System.out.println("Type: " + MoviesArray.get(i).getType().toString());
-                    System.out.println("Length: " + MoviesArray.get(i).getShowLength());
-                    System.out.println("Status: " + MoviesArray.get(i).getShowingStatus().toString());
-                    System.out.println("Director: " + MoviesArray.get(i).getDirector());
-                    System.out.println("Synopsis: " + MoviesArray.get(i).getSynopsis() + "\n");
-                }
+                display();
             }
         }
     }
 
 
-    public static void createMovieUI(){
+    public void createNewObject(){
         Scanner scan = new Scanner(System.in);
         String name;
         MovieType type;
@@ -145,7 +124,7 @@ public class AdminMovieDetailsUI {
         System.out.println("Movie has been created!");
     }
 
-    public static void editMoveUI(){
+    public void editObjectUI(){
         Scanner scan = new Scanner(System.in);
         ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
         MoviesArray = MoviesManager.readAllMovies();
@@ -188,5 +167,34 @@ public class AdminMovieDetailsUI {
                 MoviesManager.editMovie(movie, "synopsis");
             }
         }
+    }
+
+    @Override
+    public void display() {
+        ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+        MoviesArray = MoviesManager.readAllMovies();
+        for (int i = 0; i < MoviesArray.size(); i++) {
+            System.out.println("Name: " + MoviesArray.get(i).getName());
+            System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());
+            System.out.println("Type: " + MoviesArray.get(i).getType().toString());
+            System.out.println("Length: " + MoviesArray.get(i).getShowLength());
+            System.out.println("Status: " + MoviesArray.get(i).getShowingStatus().toString());
+            System.out.println("Director: " + MoviesArray.get(i).getDirector());
+            System.out.println("Synopsis: " + MoviesArray.get(i).getSynopsis() + "\n");
+        }
+    }
+
+    @Override
+    public void deleteObject() {
+        Scanner scan = new Scanner(System.in);
+        ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
+        MoviesArray = MoviesManager.readAllMovies();
+        for (int i = 0; i < MoviesArray.size(); i++) {
+            System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
+
+        }
+        System.out.println("\nSelect Movie To Delete");
+        int movie = scan.nextInt();
+        MoviesManager.deleteMovie(movie - 1);
     }
 }
