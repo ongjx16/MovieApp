@@ -295,7 +295,6 @@ public class UserBookingUI{
             seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
         }
         else if (newDate.isHoliday(showtimeToBook.getShowtime().substring(0,10))){ //include user's timing selected, pulled from showtimes available
-            System.out.println("Holiday was implemented");
             if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
                 seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
             }
