@@ -171,8 +171,9 @@ int option = 0;
         ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();
         Scanner scan = new Scanner(System.in);
         int listingMovies = 0;
+        loopy: while(true) {
             try {
-                System.out.println("Would you like to list the top 5 movies according to:");
+                System.out.println("\nWould you like to list the top 5 movies according to:");
                 if (FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()) {
                     System.out.println("(1) Ratings");
                     System.out.println("(2) Ticket Sales");
@@ -182,12 +183,10 @@ int option = 0;
 
                     if (listingMovies == 1) {
                         listTop5.sortByRatings();
-                    } else if (listingMovies == 2) {
-                        listTop5.sortBySales();
-                    } else if (listingMovies == 3) {
-                        return;
-                    }
-                    else{
+                    } else if (listingMovies == 2) listTop5.sortBySales();
+                    else if (listingMovies == 3) {
+                        break loopy;
+                    } else {
                         throw new Exception("Invalid input, please try again");
                     }
 
@@ -199,10 +198,10 @@ int option = 0;
 
                     if (listingMovies == 1) {
                         listTop5.sortBySales();
+
                     } else if (listingMovies == 2) {
-                        return;
-                    }
-                    else{
+                        break loopy;
+                    } else {
                         throw new Exception("Invalid input, please try again");
                     }
                 } else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()) {
@@ -214,17 +213,16 @@ int option = 0;
                     if (listingMovies == 1) {
                         listTop5.sortByRatings();
                     } else if (listingMovies == 2) {
-                        return;
-                    }
-                    else{
+                        break loopy;
+                    } else {
                         throw new Exception("Invalid input, please try again");
                     }
 
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            catch ( Exception e ) {
-                System.out.println( e.getMessage() );
-            }
+        }
 
     }
 
@@ -235,30 +233,34 @@ int option = 0;
 
     public static void searchMovie(){
         UserViewMovieDetailsUI viewMovieDetails = new UserViewMovieDetailsUI();
-        try{System.out.println("\nEnter the movie title you wish to search: ");
-            Scanner in = new Scanner(System.in);
-            String movieTitle = in.nextLine();
-            int i;
-            int index = 0;
-            ArrayList<Movie> allMovies = new ArrayList<>(MoviesManager.readAllMovies());
-            ArrayList<Movie> filteredMovies = new ArrayList<>();
-            for (i = 0; i< allMovies.size(); i++){
-                filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
-            }
-
-            for (i = 0; i < filteredMovies.size(); i++) {
-                String movie = filteredMovies.get(i).getName().toUpperCase();
-                if (movie.equals(movieTitle.toUpperCase())) {
-                    viewMovieDetails.setMovie(filteredMovies.get(i));
-                    viewMovieDetails.display();
-                    index++;
+        loop: while(true) {
+            try {
+                System.out.println("\nEnter the movie title you wish to search: ");
+                Scanner in = new Scanner(System.in);
+                String movieTitle = in.nextLine();
+                int i;
+                int index = 0;
+                ArrayList<Movie> allMovies = new ArrayList<>(MoviesManager.readAllMovies());
+                ArrayList<Movie> filteredMovies = new ArrayList<>();
+                for (i = 0; i < allMovies.size(); i++) {
+                    filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
                 }
+
+                for (i = 0; i < filteredMovies.size(); i++) {
+                    String movie = filteredMovies.get(i).getName().toUpperCase();
+                    if (movie.equals(movieTitle.toUpperCase())) {
+                        viewMovieDetails.setMovie(filteredMovies.get(i));
+                        viewMovieDetails.display();
+                        index++;
+                        break loop;
+                    }
+                }
+                if (index == 0) {
+                    throw new Exception("Invalid input, please try again");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            if (index == 0){
-                throw new Exception("Invalid input, please try again");
-            }}
-        catch ( Exception e ) {
-            System.out.println( e.getMessage() );
         }
 
     }
@@ -284,3 +286,4 @@ int option = 0;
 
     }
 }
+
