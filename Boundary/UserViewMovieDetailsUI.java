@@ -45,7 +45,7 @@ public class UserViewMovieDetailsUI implements DetailsInterface{
         System.out.println("Synopsis: " + movie.getSynopsis());
         System.out.println("Status: " + movie.getShowingStatus());
         if (movie.getRating()[0]>1){
-            System.out.println("Rating: " + movie.getRating()[1]);
+            System.out.println("Rating: " + String.format("%.1f", movie.getRating()[1]));
         }
         else{
             System.out.println("Rating: No Available Ratings Yet.");

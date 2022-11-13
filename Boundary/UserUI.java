@@ -137,7 +137,6 @@ int option = 0;
                 UserViewBookingDetailsUI viewBookingDetail = new UserViewBookingDetailsUI();
                 viewBookingDetail.setToBook(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1));
                 viewBookingDetail.display();
-                System.out.println(n);
 
 
             }

@@ -51,6 +51,9 @@ public class Initialiser {
         MoviesManager.createMovie("Home Alone 20", MovieType.DIGITAL2D, 110, MovieStatus.PREVIEW, "Chris Columbus", "The parents just suck at this point to have made 20 such movies");
         MoviesManager.createMovie("Finding Nemo", MovieType.DIGITAL2D, 110, MovieStatus.END_OF_SHOW, "Andrew Stanton", "Fish father missing");
 
+
+
+
         //populate ratings
         MoviesManager.updateRating(1, 10);
         MoviesManager.updateRating(1, 8);
@@ -77,12 +80,19 @@ public class Initialiser {
         //populating showtimes
         File showtimes= new File("DATFiles/Showtimes.dat");
         showtimes.delete();
+
+
+
         ShowtimesManager.createShowtimes("20/11/2022 10:00", "Jurassic Park", "1C1");
-        ShowtimesManager.createShowtimes("20/11/2022 17:00", "The Intern", "1C2");
+        ShowtimesManager.createShowtimes("20/11/2022 17:30", "The Intern", "1C2");
         ShowtimesManager.createShowtimes("20/11/2022 20:00", "Toy Story", "1C3");
         ShowtimesManager.createShowtimes("21/11/2022 10:00", "The Dictator", "2C1");
-        ShowtimesManager.createShowtimes("30/11/2022 17:00", "Home Alone 20", "2C2");
+        ShowtimesManager.createShowtimes("30/11/2022 17:30", "Home Alone 20", "2C2");
         ShowtimesManager.createShowtimes("10/11/2022 10:00", "Finding Nemo", "2C3");
+
+
+
+
 
         //populating holidays
         File holidays= new File("DATFiles/HolidayDates.dat");

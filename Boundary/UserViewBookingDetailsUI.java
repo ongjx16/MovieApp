@@ -37,6 +37,7 @@ public class UserViewBookingDetailsUI implements DetailsInterface{
         System.out.println("Movie Name: "+toBook.getMovieName());
         System.out.println("Movie Date: " + toBook.getMovieDate());
         System.out.println("Movie Time: " + toBook.getMovieTime());
-        System.out.println("No. of seats booked: " + toBook.getNoOfSeats()+"\n");
+        System.out.println("No. of seats booked: " + toBook.getNoOfSeats());
+        System.out.println("Total price: " + toBook.getTotalPrice()+"\n");
     }
 }
