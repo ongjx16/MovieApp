@@ -66,9 +66,9 @@ int option = 0;
 
             //View Booking History
             else if (option == 5) {
+                scan.nextLine();
                 String usernameInput, passwordInput;
                 while(true) {
-                    scan.nextLine();
                     System.out.println("Please enter your username: ");
                     usernameInput = scan.nextLine();
                     if (UserLogin.verifyUsername(usernameInput)) {
