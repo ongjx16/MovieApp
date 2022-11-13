@@ -48,21 +48,28 @@ public class ListTop5MoviesUI implements DetailsInterface{
         int size = 0;
         ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus(MoviesManager.readAllMovies())) ;
 
+        ArrayList<float[]> sortedMovies = new ArrayList<float[]>();
 
-        ArrayList<Float> allRatings = new ArrayList<Float>();
+        ArrayList<float[]> allRatings = new ArrayList<float[]>();
 
         // adding the ratings of all movies into an array
         for (i=0; i<allMovies.size(); i++){
-            allRatings.add(allMovies.get(i).getRating()[1]);
+            sortedMovies.add(allMovies.get(i).getRating());
         }
         // sorting ratings from highest to lowest
-        for (i=0; i<allRatings.size(); i++){
-            for (int j=0; j<allRatings.size() - i - 1; j++){
-                if (allRatings.get(j) < allRatings.get(j+1)){
-                    float temp = allRatings.get(j);
-                    allRatings.set(j, allRatings.get(j+1));
-                    allRatings.set(j+1, temp);
+        for (i=0; i<sortedMovies.size(); i++){
+            for (int j=0; j<sortedMovies.size() - i - 1; j++){
+                if (sortedMovies.get(j)[1] < sortedMovies.get(j+1)[1]){
+                    float[] temp = sortedMovies.get(j);
+                    sortedMovies.set(j, sortedMovies.get(j+1));
+                    sortedMovies.set(j+1, temp);
                 }
+            }
+        }
+
+        for (int y= 0; y<sortedMovies.size(); y++){
+            if (sortedMovies.get(y)[0]>1.0){
+                allRatings.add(sortedMovies.get(y));
             }
         }
 
@@ -77,10 +84,12 @@ public class ListTop5MoviesUI implements DetailsInterface{
         // iterate through allMovies array to print movies with the top 5 rating
         for (i = 0; i< size; i++){
             for (int y = 0; y< allMovies.size(); y++) {
-                if (allRatings.get(i).equals(allMovies.get(y).getRating()[1]) && !isRepeat(allMovies.get(y), filteredMovies)) {
+
+                if (allRatings.get(i).equals(allMovies.get(y).getRating()) && !isRepeat(allMovies.get(y), filteredMovies)) {
                     filteredMovies.add(allMovies.get(y));
                     break;
                 }
+
             }
         }
         setFilterType(RatingFilterType.RATINGS);
@@ -116,6 +125,8 @@ public class ListTop5MoviesUI implements DetailsInterface{
                 }
             }
         }
+
+
 
         // in case AllMovies.dat has less than 5 movies
         if (allSales.size() < 5){
@@ -168,7 +179,7 @@ public class ListTop5MoviesUI implements DetailsInterface{
             System.out.println("\nTop 5 Movies by User Ratings: ");
             for (int x = 0; x< moviesToDisplay.size(); x++ ){
                 int numbering = x + 1;
-                System.out.println(numbering + ": " + moviesToDisplay.get(x).getName() + ", No. of Ratings: " + String.format("%.1f", moviesToDisplay.get(x).getRating()[0])+ ", Average Rating: " + String.format("%.1f", moviesToDisplay.get(x).getRating()[1]));
+                System.out.println(numbering + ": " + moviesToDisplay.get(x).getName() + ", No. of Ratings: " + String.format("%.0f", moviesToDisplay.get(x).getRating()[0])+ ", Average Rating: " + String.format("%.1f", moviesToDisplay.get(x).getRating()[1]));
             }
         }
         else{
