@@ -12,15 +12,7 @@ import java.util.ArrayList;
 public class UserAccount extends Account implements Serializable {
     private static final long serialVersionUID = 4L;
     /**
-     * The username of the movie-goer
-     */
-    
-    /**
-     * The password of the movie-goer
-     */
-    
-    /**
-     * the name of movie-goer
+     * the name of the movie-goer
      */
     private String name;
     /**
@@ -76,20 +68,34 @@ public class UserAccount extends Account implements Serializable {
         bookingHistory.add(b);
     }
 
-    
+    /**
+     * Gets the username of movie-goer
+     * @return username of movie-goer
+     */
     public String getUsername() {
         return super.getUsername();
     }
-    
 
-    
+    /**
+     * Gets the password of movie-goer
+     * @return password of movie-goer
+     */
     public String getPassword() {
         return super.getPassword();
     }
 
+    /**
+     * Changes this movie-goer's password
+     * @param password movie-goer's password
+     */
     public void setPassword(String password) {
         super.setPassword(password);;
     }
+
+    /**
+     * Changes the username of the movie-goer
+     * @param username username of the movie-goer
+     */
     public void setUsername(String username) {
         super.setUsername(username);;
     }

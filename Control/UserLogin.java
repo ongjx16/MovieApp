@@ -1,7 +1,14 @@
 package Control;
 
+/**
+ * Login for users
+ */
 public class UserLogin {
-
+    /**
+     * Checks if user username input is valid
+     * @param userNameInput
+     * @return True if username is valid
+     */
 
     public static boolean verifyUsername(String userNameInput) {
         for (int m = 0; m < UsersManager.readAllUsers().size(); m++) {
@@ -13,6 +20,13 @@ public class UserLogin {
         return false;
 
     }
+
+    /**
+     * Checks if user password input is valid
+     * @param userNameInput
+     * @param passwordInput
+     * @return True if password is valid
+     */
 
     public static boolean verifyPassword(String userNameInput, String passwordInput) {
         int n = 0;

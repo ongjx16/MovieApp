@@ -17,7 +17,7 @@ public class FilterPermissions {
     /**
      * Whether the sales filters can be accessed
      */
-    private static boolean accessSalesFilter = false;
+    private static boolean accessSalesFilter = true;
 
     /**
      * Determines if the ratings filter can be accessed

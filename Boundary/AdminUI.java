@@ -1,7 +1,7 @@
 package Boundary;
 
 
-import Control.adminLogin;
+import Control.AdminLogin;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class AdminUI {
         int choice;
         String username1;
         String password1;
-        adminLogin admin = new adminLogin();
+        AdminLogin admin = new AdminLogin();
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Please enter your username");
