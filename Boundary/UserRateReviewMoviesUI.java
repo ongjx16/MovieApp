@@ -73,7 +73,6 @@ public class UserRateReviewMoviesUI {
         ExceptionHandler check = new ExceptionHandler();
         movieToRate = check.checkNumberInput(movieToRate, filteredMovies.size()+1);
         System.out.println("Enter your review: ");
-        scan.nextLine();
         String newReview = scan.nextLine();
 
         // getting movie id of chosen movie to rate & rating it

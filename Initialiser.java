@@ -53,7 +53,6 @@ public class Initialiser {
 
 
 
-
         //populate ratings
         MoviesManager.updateRating(1, 10);
         MoviesManager.updateRating(1, 8);
@@ -80,7 +79,6 @@ public class Initialiser {
         //populating showtimes
         File showtimes= new File("DATFiles/Showtimes.dat");
         showtimes.delete();
-
 
 
         ShowtimesManager.createShowtimes("20/11/2022 10:00", "Jurassic Park", "1C1");
