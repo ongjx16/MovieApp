@@ -11,8 +11,17 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * User interface when admin chooses to edit system settings
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class AdminSystemSettingsUI {
-
+    /**
+     * Allows admin to edit pricing of tickets based on price categories
+     * This includes special prices because of movie type, cinema type, type of ticket
+     */
     public static void editPricing() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose which price category you'd like to edit: ");
@@ -25,11 +34,11 @@ public class AdminSystemSettingsUI {
         if (mainPriceOption == 1) {
             PricingManager.editPricing(0, "blockbuster");
             System.out.println(
-                    "Blockbuster price has been set to: " + PricingManager.readAllPricing().get(0).getBlockbuster());
+                    "Blockbuster price has been set to: " + PricingManager.readAllPricing().get(0).getBlockbuster()+"\n");
         }
         if (mainPriceOption == 2) {
             PricingManager.editPricing(0, "premium");
-            System.out.println("Premium price has been set to: " + PricingManager.readAllPricing().get(0).getPremium());
+            System.out.println("Premium price has been set to: " + PricingManager.readAllPricing().get(0).getPremium()+"\n");
         }
         if (mainPriceOption == 3) {
             System.out.println("Which day would you like to change prices for");
@@ -46,42 +55,42 @@ public class AdminSystemSettingsUI {
             if (adultpriceoption == 1) {
                 PricingManager.editPricing(0, "AdultMonWedStandard2D");
                 System.out.println("Adult mon-wed 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D());
+                        + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D()+"\n");
             }
             if (adultpriceoption == 2) {
                 PricingManager.editPricing(0, "AdultMonWedStandard3D");
                 System.out.println("Adult mon-wed 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D());
+                        + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D()+"\n");
             }
             if (adultpriceoption == 3) {
                 PricingManager.editPricing(0, "AdultThuStandard2D");
                 System.out.println("Adult Thur 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultThursStandard2D());
+                        + PricingManager.readAllPricing().get(0).getAdultThursStandard2D()+"\n");
             }
             if (adultpriceoption == 4) {
                 PricingManager.editPricing(0, "AdultThuStandard3D");
                 System.out.println("Adult Thur 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultThursStandard3D());
+                        + PricingManager.readAllPricing().get(0).getAdultThursStandard3D()+"\n");
             }
             if (adultpriceoption == 5) {
                 PricingManager.editPricing(0, "AdultFriStandard2D");
                 System.out.println("Adult Fri (Before 6pm) 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultFriStandard2D());
+                        + PricingManager.readAllPricing().get(0).getAdultFriStandard2D()+"\n");
             }
             if (adultpriceoption == 6) {
                 PricingManager.editPricing(0, "AdultFriStandard3D");
                 System.out.println("Adult Fri (Before 6pm) 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultFriStandard3D());
+                        + PricingManager.readAllPricing().get(0).getAdultFriStandard3D()+"\n");
             }
             if (adultpriceoption == 7) {
                 PricingManager.editPricing(0, "AdultWeekendStandard2D");
                 System.out.println("Adult Fri (Aft 6pm) - Weekend 2D has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
+                        + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D()+"\n");
             }
             if (adultpriceoption == 8) {
                 PricingManager.editPricing(0, "AdultWeekendStandard3D");
                 System.out.println("Adult Fri (Aft 6pm) - Weekend 3D has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
+                        + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D()+"\n");
             }
         } else if (mainPriceOption == 4) {
             System.out.println("Which student price would you like to adjust");
@@ -91,19 +100,25 @@ public class AdminSystemSettingsUI {
             if (studentoption == 1) {
                 PricingManager.editPricing(0, "StudentStandard2D");
                 System.out.println("Student 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getStudentStandard2D());
+                        + PricingManager.readAllPricing().get(0).getStudentStandard2D()+"\n");
             }
             if (studentoption == 2) {
                 PricingManager.editPricing(0, "StudentStandard3D");
                 System.out.println("Student 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getStudentStandard3D());
+                        + PricingManager.readAllPricing().get(0).getStudentStandard3D()+"\n");
             }
         } else if (mainPriceOption == 5) {
             PricingManager.editPricing(0, "SeniorStandard2D");
             System.out.println(
-                    "Senior 2D price has been set to: " + PricingManager.readAllPricing().get(0).getSeniorStandard2D());
+                    "Senior 2D price has been set to: " + PricingManager.readAllPricing().get(0).getSeniorStandard2D()+"\n");
         }
     }
+
+    /**
+     * Allows admin to edit holiday dates
+     * Functions include creating, editing and deleting specific holiday dates
+     * Uses library for formatting of date and time
+     */
 
     public static void editHolidayDates() {
         Scanner scan1 = new Scanner(System.in);
@@ -185,6 +200,11 @@ public class AdminSystemSettingsUI {
         }
 
     }
+
+    /**
+     * Allows admin to see what top 5 movies are based on ratings and sales
+     * Allows admin to edit what top 5 rankings movie-goers can see
+     */
 
     public static void editTop5Filtering() {
         ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();

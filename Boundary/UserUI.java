@@ -6,8 +6,14 @@ import Entity.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserUI {
+/**
+ * User Interface shown when movie-goer option is chosen
+ */
 
+public class UserUI {
+    /**
+     * Functions made for the movie-goer
+     */
     public static void UserFunctions(){
 
         Scanner scan = new Scanner(System.in);
@@ -146,6 +152,11 @@ int option = 0;
         }
     }
 
+    /**
+     * Lists top 5 movies based on ratings or ticket sales
+     * Method of listing can be chosen by movie-goer
+     * Method of listing might be limited to movie-goer by admin
+     */
     public static void listTop5(){
         ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();
         Scanner scan = new Scanner(System.in);
@@ -203,6 +214,11 @@ int option = 0;
             }
 
     }
+
+    /**
+     * Movie goer can search for movie by typing in movie name
+     * Error thrown when movie name is invalid, re prompt for input
+     */
 
     public static void searchMovie(){
         UserViewMovieDetailsUI viewMovieDetails = new UserViewMovieDetailsUI();

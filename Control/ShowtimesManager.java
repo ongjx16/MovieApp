@@ -138,7 +138,7 @@ public class ShowtimesManager {
             for (int i =0; i<showtimeList.size(); i++){
                 for (int j=0; j<arrayForCinemaID.size(); j++){
                     if (showtimeList.get(i).getMovieID() == arrayForCinemaID.get(j) && showtimeList.get(i).getMovieID() == movieIdAdminWants){
-                        System.out.println(indexForShowtimes + ". " + MoviesManager.getMovieNameById(arrayForCinemaID.get(j)) + " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
+                        System.out.println(indexForShowtimes + ". " + MoviesManager.getMoviebyID(arrayForCinemaID.get(j)).getName() + " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
                         showtimeIDAdminNeeds = showtimeList.get(i).getShowtimeID();
                         ArrayOfShowtimeIDs.add(showtimeList.get(i).getShowtimeID());
                         indexForArray++;
@@ -302,7 +302,7 @@ public class ShowtimesManager {
             for (int i =0; i<showtimeList.size(); i++){
                 for (int j=0; j<arrayForCinemaID.size(); j++){
                     if (showtimeList.get(i).getMovieID() == arrayForCinemaID.get(j) && showtimeList.get(i).getMovieID() == movieIdAdminWants){
-                        System.out.println(indexForShowtimes + ". " + MoviesManager.getMovieNameById(arrayForCinemaID.get(j)) + " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
+                        System.out.println(indexForShowtimes + ". " + MoviesManager.getMoviebyID(arrayForCinemaID.get(j)).getName() + " " + showtimeList.get(i).getShowtime() + " " + showtimeList.get(i).getCinemaID());
                         showtimeIDAdminNeeds = showtimeList.get(i).getShowtimeID();
                         indexForShowtimes++;
                     }

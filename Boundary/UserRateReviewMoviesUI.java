@@ -6,8 +6,15 @@ import Entity.Movie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * User interface when movie-goer chooses to Rate/Review movies
+ */
 public class UserRateReviewMoviesUI {
-
+    /**
+     * Allows movie=goer to rate specific movie
+     * Rating give is in range [1,10]
+     * Rating updated by writing to AllMovies.dat
+     */
     public static void rateMovies(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Which movie would you like to rate?");
@@ -32,6 +39,11 @@ public class UserRateReviewMoviesUI {
         MoviesManager.updateRating(filteredMovieId, newRating);
     }
 
+    /**
+     * Allows movie-goer to leave reviews on specific movies
+     * Reviews updated to show under movie details
+     * Reviews added by writing to AllMovies.dat
+     */
     public static void reviewMovies(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Which movie would you like to review?");

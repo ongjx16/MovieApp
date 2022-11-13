@@ -5,8 +5,17 @@ import Control.AdminLogin;
 
 import java.util.Scanner;
 
+/**
+ * User interface when logged in as Admin
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class AdminUI {
-
+    /**
+     * Prompts admin to log in with username and password
+     * Contains functions available for admin to edit once logged in
+     */
     public static void AdminFunctions(){
         int choice;
         String username1;
