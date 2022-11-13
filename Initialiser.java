@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.io.File;
 
 public class Initialiser {
-    public static void main (String[] args) {
+    public static void main () {
         //populate database for pricing
         File pricing= new File("DATFiles/AllPricing.dat");
         pricing.delete();

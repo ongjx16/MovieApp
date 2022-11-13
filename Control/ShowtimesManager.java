@@ -102,9 +102,6 @@ public class ShowtimesManager {
             //Creating the object
             ArrayList<Showtimes> showtimeList = new ArrayList<Showtimes>(readAllShowtimes());
 
-            for (int i =0; i<showtimeList.size(); i++){
-                System.out.println(showtimeList.get(i).getShowtimeID());
-            }
 
             //Creating stream and writing the object
             FileOutputStream fout=new FileOutputStream(new File("DATFiles/Showtimes.dat"));

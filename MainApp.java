@@ -15,10 +15,12 @@ import Boundary.AdminUI;
 
 public class MainApp {
     /**
-     * Moblima program starts when this function is run. User can choose to use Moblima as an admin or movie-goer
+     * Moblima program starts when this function is run. An initialiser is called to populate our database when the program first starts.  User can choose to use Moblima as an admin or movie-goer
      * @param args
      */
     public static void main(String[] args) {
+
+        Initialiser initialiser = new Initialiser();
         int identity = 0;
         Scanner scan = new Scanner(System.in);
 

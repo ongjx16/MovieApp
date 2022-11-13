@@ -208,7 +208,10 @@ public class UserBookingUI{
 
     }
 
-
+    /**
+     *used to prompt user to log in or sign up so booking history can be stored in the user account
+     * @return username string
+     */
     public static String userLogin (){
         Scanner scan = new Scanner(System.in);
         System.out.println("Please Sign up or Log in to register your booking.");
@@ -257,8 +260,6 @@ public class UserBookingUI{
             String usernameInput;
             String passwordInput;
             while (true) {
-                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
-                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
                 System.out.println("Please enter your username: ");
                 usernameInput = scan.nextLine();
                 UserLogin UserLogin = new UserLogin();
