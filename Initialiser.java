@@ -75,7 +75,7 @@ public class Initialiser {
 
 
         //populating showtimes
-        File showtimes= new File("DATFiles/AllShowtimes.dat");
+        File showtimes= new File("DATFiles/Showtimes.dat");
         showtimes.delete();
         ShowtimesManager.createShowtimes("20/11/2022 10:00", "Jurassic Park", "1C1");
         ShowtimesManager.createShowtimes("20/11/2022 17:00", "The Intern", "1C2");
