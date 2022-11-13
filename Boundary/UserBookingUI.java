@@ -177,8 +177,9 @@ public class UserBookingUI{
         ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
         System.out.println("What dates would you like to see this movie?  ");
+        DateFormatter newDate = new DateFormatter();
         for (int z = 0; z < datesToSelect.size(); z++) {
-            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
+            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + " - "  + newDate.DayConverter(datesToSelect.get(z)) + "\n");
         }
         System.out.println("[0] Exit");
         int dateChoice = scan.nextInt();
