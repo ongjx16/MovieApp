@@ -286,8 +286,6 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println(movieList.get(y).getMovieID());
-            System.out.println("Movie Sales Successfully Updated.");
         }catch(Exception e){}
     }
 
