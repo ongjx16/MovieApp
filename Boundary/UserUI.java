@@ -66,6 +66,7 @@ int option = 0;
 
             //View Booking History
             else if (option == 5) {
+                UserLogin UserLogin = new UserLogin();
                 scan.nextLine();
                 String usernameInput, passwordInput;
                 while(true) {
