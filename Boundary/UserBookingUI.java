@@ -174,6 +174,7 @@ public class UserBookingUI{
                 System.out.println(UsersManager.readAllUsers().get(0).getPassword());
                 System.out.println("Please enter your username: ");
                 usernameInput = scan.nextLine();
+                UserLogin UserLogin = new UserLogin();
                 if (UserLogin.verifyUsername(usernameInput)) {
                     System.out.println("Please enter your password: ");
                     passwordInput = scan.nextLine();
