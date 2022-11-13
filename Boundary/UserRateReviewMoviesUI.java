@@ -25,7 +25,7 @@ public class UserRateReviewMoviesUI {
             System.out.println("(" + index + ")" + filteredMovies.get(i).getName());
         }
         int movieToRate = scan.nextInt();
-        System.out.println("What is your rating?");
+        System.out.println("What is your rating? (1 to 10)");
         float newRating = scan.nextFloat();
         // getting movie id of chosen movie to rate & rating it
         int filteredMovieId = filteredMovies.get(movieToRate-1).getMovieID();

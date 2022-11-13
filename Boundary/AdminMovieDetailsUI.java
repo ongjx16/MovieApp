@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
+/**
+ * User interface for admin to edit movie details
+ */
 public class AdminMovieDetailsUI {
     public static void AdminMovieFunctions(){
         Scanner scan = new Scanner(System.in);
