@@ -9,18 +9,10 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 2022-11-12
  */
-public class UserAccount implements Serializable {
+public class UserAccount extends Account implements Serializable {
     private static final long serialVersionUID = 4L;
     /**
-     * The username of the movie-goer
-     */
-    private String username;
-    /**
-     * The password of the movie-goer
-     */
-    private String password;
-    /**
-     * the name of movie-goer
+     * the name of the movie-goer
      */
     private String name;
     /**
@@ -51,8 +43,7 @@ public class UserAccount implements Serializable {
      * @param userId user ID of movie-goer
      */
     public UserAccount(String username, String password, String name, int phoneNumber, String email, int userId){
-        this.username=username;
-        this.password=password;
+        super(username,password);
         this.name=name;
         this.phoneNumber=phoneNumber;
         this.email=email;
@@ -79,34 +70,34 @@ public class UserAccount implements Serializable {
 
     /**
      * Gets the username of movie-goer
-     * @return the username of movie-goer
+     * @return username of movie-goer
      */
     public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Changes the username of movie-goer
-     * @param username the username of movie-goer
-     */
-    public void setUsername(String username) {
-        this.username = username;
+        return super.getUsername();
     }
 
     /**
      * Gets the password of movie-goer
-     * @return the password of movie-goer
+     * @return password of movie-goer
      */
     public String getPassword() {
-        return password;
+        return super.getPassword();
     }
 
     /**
-     * Changes the password of movie-goer
-     * @param password the password of movie-goer
+     * Changes this movie-goer's password
+     * @param password movie-goer's password
      */
     public void setPassword(String password) {
-        this.password = password;
+        super.setPassword(password);;
+    }
+
+    /**
+     * Changes the username of the movie-goer
+     * @param username username of the movie-goer
+     */
+    public void setUsername(String username) {
+        super.setUsername(username);;
     }
 
     /**

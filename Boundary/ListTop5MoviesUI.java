@@ -3,16 +3,35 @@ package Boundary;
 import java.util.ArrayList;
 import Entity.Movie;
 import Control.MoviesManager;
+import Utils.RatingFilterType;
 
-public class ListTop5MoviesUI {
+public class ListTop5MoviesUI implements DetailsInterface{
+    private ArrayList<Movie> moviesToDisplay;
+    private RatingFilterType filterType;
 
-    public static void sortByRatings(){
+    public ArrayList<Movie> getMoviesToDisplay() {
+        return moviesToDisplay;
+    }
+
+    public void setMoviesToDisplay(ArrayList<Movie> moviesToDisplay) {
+        this.moviesToDisplay = moviesToDisplay;
+    }
+
+    public RatingFilterType getFilterType() {
+        return filterType;
+    }
+
+    public void setFilterType(RatingFilterType filterType) {
+        this.filterType = filterType;
+    }
+
+    public void sortByRatings(){
         int i;
         int size = 0;
         ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus(MoviesManager.readAllMovies())) ;
 
 
-        ArrayList<Integer> allRatings = new ArrayList<Integer>();
+        ArrayList<Float> allRatings = new ArrayList<Float>();
 
         // adding the ratings of all movies into an array
         for (i=0; i<allMovies.size(); i++){
@@ -22,7 +41,7 @@ public class ListTop5MoviesUI {
         for (i=0; i<allRatings.size(); i++){
             for (int j=0; j<allRatings.size() - i - 1; j++){
                 if (allRatings.get(j) < allRatings.get(j+1)){
-                    int temp = allRatings.get(j);
+                    float temp = allRatings.get(j);
                     allRatings.set(j, allRatings.get(j+1));
                     allRatings.set(j+1, temp);
                 }
@@ -46,27 +65,14 @@ public class ListTop5MoviesUI {
                 }
             }
         }
-
-        for (int x = 0; x< filteredMovies.size(); x++ ){
-            int numbering = x + 1;
-            System.out.println(numbering + ": " + filteredMovies.get(x).getName() + ", Rating: " + filteredMovies.get(x).getRating()[1]);
-        }
-
+        setFilterType(RatingFilterType.RATINGS);
+        setMoviesToDisplay(filteredMovies);
+        display();
 
     }
 
-    public static boolean isRepeat(Movie movieToCompare, ArrayList<Movie> array){
 
-        for (int i = 0; i< array.size(); i++){
-            if (movieToCompare.equals(array.get(i))){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static void sortBySales(){
+    public void sortBySales(){
         int i;
         int size = 0;
         ArrayList<Movie> allMovies = new ArrayList<Movie>(MoviesManager.filterByStatus(MoviesManager.readAllMovies())) ;
@@ -107,14 +113,38 @@ public class ListTop5MoviesUI {
             }
         }
 
-        for (int x = 0; x< filteredMovies.size(); x++ ){
-            int numbering = x + 1;
-            System.out.println(numbering + ": " + filteredMovies.get(x).getName() + ", Sales: " + filteredMovies.get(x).getSales());
-        }
-
-
-
+        setFilterType(RatingFilterType.SALES);
+        setMoviesToDisplay(filteredMovies);
+        display();
 
         }
+    public boolean isRepeat(Movie movieToCompare, ArrayList<Movie> array){
 
+        for (int i = 0; i< array.size(); i++){
+            if (movieToCompare.equals(array.get(i))){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void display() {
+        if (filterType.equals(RatingFilterType.RATINGS)){
+            System.out.println("\nTop 5 Movies by User Ratings: ");
+            for (int x = 0; x< moviesToDisplay.size(); x++ ){
+                int numbering = x + 1;
+                System.out.println(numbering + ": " + moviesToDisplay.get(x).getName() + ", No. of Ratings: " + String.format("%.1f", moviesToDisplay.get(x).getRating()[0])+ ", Average Rating: " + String.format("%.1f", moviesToDisplay.get(x).getRating()[1]));
+            }
+        }
+        else{
+            System.out.println("\nTop 5 Movies by Total Sales: ");
+            for (int x = 0; x< moviesToDisplay.size(); x++ ){
+                int numbering = x + 1;
+                System.out.println(numbering + ": " + moviesToDisplay.get(x).getName() + ", Total Sales: " + moviesToDisplay.get(x).getSales());
+            }
+        }
+
+    }
 }

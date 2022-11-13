@@ -15,24 +15,23 @@ public class UserUI {
 int option = 0;
         System.out.println("You are now a user");
 
-        while (option != 8) {
+        while (option != 7) {
 
-            System.out.println("What would you like to do now ");
+            System.out.println("\nWhat would you like to do now ");
             System.out.println("(1) Book a movie");
             System.out.println("(2) Search/List movie");
-            System.out.println("(3) View Movie Details");
-            System.out.println("(4) Check seat availability"); // needs to be updated
-            System.out.println("(5) List top 5 movies");
-            System.out.println("(6) View Booking History"); // need to log in
-            System.out.println("(7) Rate/Review movies");
-            System.out.println("(8) Exit");
+            System.out.println("(3) Check seat availability"); // needs to be updated
+            System.out.println("(4) List top 5 movies");
+            System.out.println("(5) View Booking History"); // need to log in
+            System.out.println("(6) Rate/Review movies");
+            System.out.println("(7) Exit");
             option = scan.nextInt();
             if (option == 1) { // Book a movie
                 UserBookingUI.UserBookingFunction();
             }
 
 
-            if (option == 2) { //Search/List movies
+            else if (option == 2) { //Search/List movies
                 int searchOrList = 0;
                 while (searchOrList != 3) {
                     System.out.println("What would you like to do?");
@@ -43,33 +42,33 @@ int option = 0;
 
 
                     if (searchOrList == 1) {
-                        MoviesManager.searchMovie();
+                        searchMovie();
                     } else if (searchOrList == 2) {
-                        MoviesManager.printMoviedb();
+                        selectMovie();
                     }
                 }
 
             }
 
-            if (option == 3) { //View movie details
-                UserViewMovieDetailsUI.viewMovieDetails();
-            }
+//            if (option == 3) { //View movie details
+//                UserViewMovieDetailsUI.viewMovieDetails();
+//            }
 
-            if (option == 4) { //Check Seat availability
+            else if (option == 3) { //Check Seat availability
                 Showtimes showtimeChosen = UserBookingUI.chooseShowtimeByCineplex();
                 showtimeChosen.getSeats().displaySeatPlan();
 
             }
 
-            if (option == 5){ //List top 5 movies
+            else if (option == 4){ //List top 5 movies
                 listTop5();
             }
 
             //View Booking History
-            if (option == 6) {
+            else if (option == 5) {
+                scan.nextLine();
                 String usernameInput, passwordInput;
                 while(true) {
-                    scan.nextLine();
                     System.out.println("Please enter your username: ");
                     usernameInput = scan.nextLine();
                     if (UserLogin.verifyUsername(usernameInput)) {
@@ -119,17 +118,15 @@ int option = 0;
                         break;
                     }
                 }
+                UserViewBookingDetailsUI viewBookingDetail = new UserViewBookingDetailsUI();
+                viewBookingDetail.setToBook(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1));
+                viewBookingDetail.display();
                 System.out.println(n);
-                System.out.println("Transaction ID: " +UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getTXNid() );
-                System.out.println("Location: " + Booking.getCineplexByBooking(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getTXNid()) );
-                System.out.println("Movie Name: "+UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieName());
-                System.out.println("Movie Date: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieDate());
-                System.out.println("Movie Time: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getMovieTime());
-                System.out.println("No. of seats booked: " + UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1).getNoOfSeats()+"\n");
+
 
             }
 
-            if (option == 7) { // Rate/Review Movies
+            else if (option == 6) { // Rate/Review Movies
                 int rateOrReview = 0;
                 while (rateOrReview != 3){
                     System.out.println("Would you like to rate or review movies?");
@@ -150,51 +147,112 @@ int option = 0;
     }
 
     public static void listTop5(){
+        ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();
         Scanner scan = new Scanner(System.in);
         int listingMovies = 0;
-        while (true) {
-            System.out.println("Would you like to list the top 5 movies according to:");
-            if (FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()){
-                System.out.println("(1) Ratings");
-                System.out.println("(2) Ticket Sales");
-                System.out.println("(3) Exit");
-                listingMovies = scan.nextInt();
+            try {
+                System.out.println("Would you like to list the top 5 movies according to:");
+                if (FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()) {
+                    System.out.println("(1) Ratings");
+                    System.out.println("(2) Ticket Sales");
+                    System.out.println("(3) Exit");
+                    listingMovies = scan.nextInt();
 
-                if (listingMovies == 1) {
-                    ListTop5MoviesUI.sortByRatings();
-                } else if (listingMovies == 2) {
-                    ListTop5MoviesUI.sortBySales();
-                }
-                else if (listingMovies==3){
-                    return;
-                }
+                    if (listingMovies == 1) {
+                        listTop5.sortByRatings();
+                    } else if (listingMovies == 2) {
+                        listTop5.sortBySales();
+                    } else if (listingMovies == 3) {
+                        return;
+                    }
+                    else{
+                        throw new Exception("Invalid input, please try again");
+                    }
 
+                } else if (!FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()) {
+                    System.out.println("(1) Ticket Sales");
+                    System.out.println("(2) Exit");
+                    listingMovies = scan.nextInt();
+
+                    if (listingMovies == 1) {
+                        listTop5.sortBySales();
+                    } else if (listingMovies == 2) {
+                        return;
+                    }
+                    else{
+                        throw new Exception("Invalid input, please try again");
+                    }
+                } else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()) {
+                    System.out.println("(1) Ratings");
+                    System.out.println("(2) Exit");
+                    listingMovies = scan.nextInt();
+
+                    if (listingMovies == 1) {
+                        listTop5.sortByRatings();
+                    } else if (listingMovies == 2) {
+                        return;
+                    }
+                    else{
+                        throw new Exception("Invalid input, please try again");
+                    }
+
+                }
             }
-            else if (!FilterPermissions.isAccessRatingsFilter() && FilterPermissions.isAccessSalesFilter()){
-                System.out.println("(1) Ticket Sales");
-                System.out.println("(2) Exit");
-                listingMovies = scan.nextInt();
-
-                if (listingMovies == 1) {
-                    ListTop5MoviesUI.sortBySales();
-                }
-                else if (listingMovies==2){
-                    return;
-                }
-            }
-            else if (FilterPermissions.isAccessRatingsFilter() && !FilterPermissions.isAccessSalesFilter()){
-                System.out.println("(1) Ticket Sales");
-                System.out.println("(2) Exit");
-                listingMovies = scan.nextInt();
-
-                if (listingMovies == 1) {
-                    ListTop5MoviesUI.sortBySales();
-                }
-                else if (listingMovies==2){
-                    return;
-                }
+            catch ( Exception e ) {
+                System.out.println( e.getMessage() );
             }
 
+    }
+
+    public static void searchMovie(){
+        UserViewMovieDetailsUI viewMovieDetails = new UserViewMovieDetailsUI();
+        try{System.out.println("\nEnter the movie title you wish to search: ");
+            Scanner in = new Scanner(System.in);
+            String movieTitle = in.nextLine();
+            int i;
+            int index = 0;
+            ArrayList<Movie> allMovies = new ArrayList<>(MoviesManager.readAllMovies());
+            ArrayList<Movie> filteredMovies = new ArrayList<>();
+            for (i = 0; i< allMovies.size(); i++){
+                filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
+            }
+
+            for (i = 0; i < filteredMovies.size(); i++) {
+                String movie = filteredMovies.get(i).getName().toUpperCase();
+                if (movie.equals(movieTitle.toUpperCase())) {
+                    viewMovieDetails.setMovie(filteredMovies.get(i));
+                    viewMovieDetails.display();
+                    index++;
+                }
+            }
+            if (index == 0){
+                throw new Exception("Invalid input, please try again");
+            }}
+        catch ( Exception e ) {
+            System.out.println( e.getMessage() );
         }
+
+    }
+
+    public static void selectMovie(){
+        UserViewMovieDetailsUI viewMovieDetails = new UserViewMovieDetailsUI();
+        Scanner scan = new Scanner(System.in);
+
+                System.out.println("Please select the movie you'd like to find out more about: ");
+                ArrayList<Movie> filteredMovies = new ArrayList<Movie> (MoviesManager.filterByStatus((MoviesManager.readAllMovies())));
+
+                // printing everything in array list
+                for (int i = 0; i < filteredMovies.size(); i++) {
+                    System.out.println("(" + (i + 1) + ")" + filteredMovies.get(i).getName());
+                }
+                int movieSelection = scan.nextInt();
+                if (movieSelection > filteredMovies.size() || movieSelection < 1) {
+                    System.out.println("Invalid input, select again");
+                    movieSelection = scan.nextInt();
+                }
+        viewMovieDetails.setMovie(filteredMovies.get(movieSelection - 1));
+        viewMovieDetails.display();
+
+
     }
 }

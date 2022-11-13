@@ -274,7 +274,7 @@ public class MoviesManager {
         }catch(Exception e){}
     }
 
-    public static void updateRating (int MovieID, int newRating) {
+    public static void updateRating (int MovieID, float newRating) {
         try{
 
             //Creating the object
@@ -290,8 +290,8 @@ public class MoviesManager {
                 }
             }
 
-            int[] currentRating = movieList.get(y).getRating();
-            int[] updated = new int[2];
+            float[] currentRating = movieList.get(y).getRating();
+            float[] updated = new float[2];
 
             if (currentRating[0] ==0){
                 updated[0] = 1;
@@ -316,63 +316,6 @@ public class MoviesManager {
             System.out.println("Movie reviews successfully updated!");
         }catch(Exception e){}
     }
-
-
-
-    public static void searchMovie(){
-        System.out.println("\nEnter the movie title you wish to search: ");
-        Scanner in = new Scanner(System.in);
-        String movieTitle = in.nextLine();
-        int i;
-        int index = 0;
-        ArrayList<Movie> allMovies = readAllMovies();
-        ArrayList<Movie> filteredMovies = new ArrayList<>();
-        for (i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
-        }
-
-        for (i = 0; i < filteredMovies.size(); i++) {
-            String movie = filteredMovies.get(i).getName().toUpperCase();
-            if (movie.equals(movieTitle.toUpperCase())) {
-                System.out.println("Movie: " + filteredMovies.get(i).getName());
-                System.out.println("Type: " + filteredMovies.get(i).getType());
-                System.out.println("Director: " + filteredMovies.get(i).getDirector());
-                System.out.println("Rating: " + filteredMovies.get(i).getRating()[1]);
-                System.out.println("Status: " + filteredMovies.get(i).getShowingStatus());
-                System.out.println("Duration: " + filteredMovies.get(i).getShowLength());
-                System.out.println("Synopsis: " + filteredMovies.get(i).getSynopsis());
-                index++;
-            }
-        }
-        if (index == 0){
-            System.out.println("Invalid input, please try again");
-        }
-    }
-
-    public static void printMoviedb() {
-        ArrayList<Movie> allMovies = readAllMovies();
-        ArrayList<Movie> filteredMovies = new ArrayList<>();
-        for (int i = 0; i< allMovies.size(); i++){
-            filteredMovies = MoviesManager.filterByStatus(MoviesManager.readAllMovies());
-        }
-
-        for (int i = 0; i < filteredMovies.size(); i++) {
-            System.out.println((i+1) + ". " + filteredMovies.get(i).getName());
-        }
-    }
-
-    public static String getMovieNameById(int id){
-        ArrayList<Movie> allMovies = readAllMovies();
-        for (int i = 0; i < allMovies.size(); i++) {
-            if(allMovies.get(i).getMovieID()==id){
-                return allMovies.get(i).getName();
-            }
-        }
-        return "no movie found";
-    }
-
-
-
 
 
 

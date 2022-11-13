@@ -8,8 +8,7 @@ import Utils.DateFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserBookingUI {
-
+public class UserBookingUI{
 
     public static void UserBookingFunction(){
         Scanner scan = new Scanner(System.in);
@@ -70,6 +69,7 @@ public class UserBookingUI {
 
         Booking booked1 = new Booking(usersList.get(count).getName(), usersList.get(count).getEmail(),usersList.get(count).getPhoneNumber(),updatedTicketPrice,txnID,showtimeToBook.getMoviename(),showtimeToBook.getShowtime().substring(0,10),showtimeToBook.getShowtime().substring(11),noOfSeats);
         UsersManager.editBookingHistory(count, booked1);
+        MoviesManager.increaseSales(showtimeToBook.getMovieID(),noOfSeats);
         System.out.println("Booking successful!\n");
     }
 
@@ -310,10 +310,10 @@ public class UserBookingUI {
                 }
             }
             System.out.println("column (input letter): ");
-            col = scan.nextLine();
-            while(col.charAt(0)>101 || col.charAt(0)<65){
+            col = scan.nextLine().toUpperCase();
+            while(col.charAt(0)>80 || col.charAt(0)<65){
                 System.out.println("Invalid column letter, please input again: ");
-                col=scan.nextLine();
+                col=scan.nextLine().toUpperCase();
             }
 
             while(layout.checkSeatIfOccupied(((row.charAt(0)-48)*10+(row.charAt(1)-48)),(col))==true){
@@ -333,10 +333,10 @@ public class UserBookingUI {
                     }
                 }
                 System.out.println("column (input letter): ");
-                col = scan.nextLine();
-                while(col.charAt(0)>101 || col.charAt(0)<65){
+                col = scan.nextLine().toUpperCase();
+                while(col.charAt(0)>80 || col.charAt(0)<65){
                     System.out.println("Invalid column letter, please input again: ");
-                    col=scan.nextLine();
+                    col=scan.nextLine().toUpperCase();
                 }
             }
             String seatyea = col + row;
@@ -346,8 +346,6 @@ public class UserBookingUI {
             System.out.println("This is your chosen seat: " + seatId);
 
             SeatsArray.add(seatyea);
-
-
 
         }
         layout.displaySeatPlan();

@@ -8,43 +8,38 @@ import java.io.Serializable;
  * @since 2022-11-12
  */
 
-public class AdminAccount implements Serializable {
+public class AdminAccount extends Account implements Serializable {
 
     private static final long serialVersionUID = 4L;
-    /**
-     * The username of the admin account
-     */
-    private String username;
-    /**
-     * The password of the admin account
-     */
-    private String password;
 
     /**
      * Creates an admin account with the username and password
-     * @param u This admin's username
-     * @param p This admin's password
+     * @param username This admin's username
+     * @param password This admin's password
      */
-    public AdminAccount(String u, String p){
-        username = u;
-        password = p;
+    public AdminAccount(String username, String password){
+        super(username, password);
+        // this.username = username;
+        // this.password = password;
     }
 
     /**
      * Gets the username of the admin
      * @return The admin's username
      */
-    public String getAdminUsername(){
-        return username;
+    public String getUsername() {
+        return super.getUsername();
     }
+    
 
     /**
      * Gets the password of the admin
      * @return The admin's password
      */
-    public String getAdminPassword(){
-        return password;
+    public String getPassword() {
+        return super.getPassword();
     }
+    
 
 
 }

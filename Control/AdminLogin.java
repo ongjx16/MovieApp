@@ -2,7 +2,15 @@ package Control;
 import Entity.AdminAccount;
 
 import java.io.*;
-public class adminLogin{
+
+/**
+ * Login for admins
+ */
+public class AdminLogin {
+    /**
+     * Gets a list of all the admins
+     * @return list of all admins
+     */
     
  public AdminAccount[] getAdmins (){
     AdminAccount[] admins = new AdminAccount[5];
@@ -44,12 +52,17 @@ public class adminLogin{
 //     System.out.println(admins[k].getAdminUsername()+" "+admins[k].getAdminPassword());
 //   }
  }
- 
- 
+
+    /**
+     * Checks if admin username input is valid
+     * @param usernameinput
+     * @return True if username is valid
+     */
  public boolean verifyUsername(String usernameinput){
     AdminAccount[] admins = getAdmins();
+    
     for (int m =0; m<admins.length; m++){
-        if (usernameinput.equals(admins[m].getAdminUsername())){
+        if (usernameinput.equals(admins[m].getUsername())){
             return true;
         }
 
@@ -58,11 +71,17 @@ public class adminLogin{
     
 }
 
-public boolean verifyPassword(String usernameinput, String passwordinput){
+    /**
+     * Checks if admin password input is valid
+     * @param usernameinput
+     * @param passwordinput
+     * @return True if password is valid
+     */
+    public boolean verifyPassword(String usernameinput, String passwordinput){
     AdminAccount[] admins = getAdmins();
     for (int m =0; m<admins.length; m++){
-        if (usernameinput.equals(admins[m].getAdminUsername())){
-            if(passwordinput.equals(admins[m].getAdminPassword())){
+        if (usernameinput.equals(admins[m].getUsername())){
+            if(passwordinput.equals(admins[m].getPassword())){
                 return true;
             }
             break;

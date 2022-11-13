@@ -1,7 +1,7 @@
 package Boundary;
 
 
-import Control.adminLogin;
+import Control.AdminLogin;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class AdminUI {
         int choice;
         String username1;
         String password1;
-        adminLogin admin = new adminLogin();
+        AdminLogin admin = new AdminLogin();
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Please enter your username");
@@ -49,9 +49,11 @@ public class AdminUI {
             choose = scan.nextInt();
 
             if (choose == 1) {
-                AdminMovieDetailsUI.AdminMovieFunctions();
+                AdminMovieDetailsUI movieDetails = new AdminMovieDetailsUI();
+                movieDetails.AdminMovieFunctions();
 
             } else if (choose == 2) {
+                AdminShowtimesUI AdminShowtimesUI = new AdminShowtimesUI();
                 AdminShowtimesUI.ShowtimeFunctions();
             }
             if (choose == 3) {

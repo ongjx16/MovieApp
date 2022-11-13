@@ -13,7 +13,6 @@ public class MainApp {
         int identity = 0;
         Scanner scan = new Scanner(System.in);
 
-
         while (identity != 3) {
             System.out.println("\n");
             System.out.println("███╗░░░███╗░█████╗░██████╗░██╗░░░░░██╗███╗░░░███╗░█████╗░");
