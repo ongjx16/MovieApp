@@ -6,7 +6,7 @@ import java.io.*;
 /**
  * Login for admins
  */
-public class AdminLogin {
+public class AdminLogin extends Login{
     /**
      * Gets a list of all the admins
      * @return list of all admins
@@ -58,18 +58,7 @@ public class AdminLogin {
      * @param usernameinput
      * @return True if username is valid
      */
- public boolean verifyUsername(String usernameinput){
-    AdminAccount[] admins = getAdmins();
-    
-    for (int m =0; m<admins.length; m++){
-        if (usernameinput.equals(admins[m].getUsername())){
-            return true;
-        }
 
-    }
-    return false;
-    
-}
 
     /**
      * Checks if admin password input is valid
@@ -77,17 +66,8 @@ public class AdminLogin {
      * @param passwordinput
      * @return True if password is valid
      */
-    public boolean verifyPassword(String usernameinput, String passwordinput){
-    AdminAccount[] admins = getAdmins();
-    for (int m =0; m<admins.length; m++){
-        if (usernameinput.equals(admins[m].getUsername())){
-            if(passwordinput.equals(admins[m].getPassword())){
-                return true;
-            }
-            break;
-        }
-    }
-    return false;
-    
+
+
+
 }
-}  
+

@@ -24,93 +24,113 @@ public class AdminSystemSettingsUI {
      */
     public static void editPricing() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Choose which price category you'd like to edit: ");
-        System.out.println("1. Blockbuster movies");
-        System.out.println("2. Premium cinemas");
-        System.out.println("3. Adult prices");
-        System.out.println("4. Student prices");
-        System.out.println("5. Senior citizen prices");
-        int mainPriceOption = scan.nextInt();
-        if (mainPriceOption == 1) {
-            PricingManager.editPricing(0, "blockbuster");
-            System.out.println(
-                    "Blockbuster price has been set to: " + PricingManager.readAllPricing().get(0).getBlockbuster()+"\n");
-        }
-        if (mainPriceOption == 2) {
-            PricingManager.editPricing(0, "premium");
-            System.out.println("Premium price has been set to: " + PricingManager.readAllPricing().get(0).getPremium()+"\n");
-        }
-        if (mainPriceOption == 3) {
-            System.out.println("Which day would you like to change prices for");
-            System.out.println("1. Adult Mon-Wed 2D");
-            System.out.println("2. Adult Mon-Wed 3D");
-            System.out.println("3. Adult Thurs 2D");
-            System.out.println("4. Adult Thurs 3D");
-            System.out.println("5. Adult Fri (Before 6pm) 2D");
-            System.out.println("6. Adult Fri (Before 6pm) 3D");
-            System.out.println("7. Adult Fri(6pm onwards) - Weekend 2D");
-            System.out.println("8. Adult Fri(6pm onwards) - Weekend 2D");
-            System.out.println("What is your choice: ");
-            int adultpriceoption = scan.nextInt();
-            if (adultpriceoption == 1) {
-                PricingManager.editPricing(0, "AdultMonWedStandard2D");
-                System.out.println("Adult mon-wed 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D()+"\n");
+        int mainPriceOption = 0;
+        while (mainPriceOption != 7) {
+            System.out.println("Choose which price category you'd like to edit: ");
+            System.out.println("1. Blockbuster movies");
+            System.out.println("2. Premium cinemas");
+            System.out.println("3. Adult prices");
+            System.out.println("4. Student prices");
+            System.out.println("5. Senior citizen prices");
+            System.out.println("6. Show all current prices");
+            System.out.println("7. Back");
+            mainPriceOption = scan.nextInt();
+            if (mainPriceOption == 1) {
+                PricingManager.editPricing(0, "blockbuster");
+                System.out.println(
+                        "Blockbuster price has been set to: " + PricingManager.readAllPricing().get(0).getBlockbuster());
             }
-            if (adultpriceoption == 2) {
-                PricingManager.editPricing(0, "AdultMonWedStandard3D");
-                System.out.println("Adult mon-wed 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D()+"\n");
+            if (mainPriceOption == 2) {
+                PricingManager.editPricing(0, "premium");
+                System.out.println("Premium price has been set to: " + PricingManager.readAllPricing().get(0).getPremium());
             }
-            if (adultpriceoption == 3) {
-                PricingManager.editPricing(0, "AdultThuStandard2D");
-                System.out.println("Adult Thur 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultThursStandard2D()+"\n");
+            if (mainPriceOption == 3) {
+                System.out.println("Which day would you like to change prices for");
+                System.out.println("1. Adult Mon-Wed 2D");
+                System.out.println("2. Adult Mon-Wed 3D");
+                System.out.println("3. Adult Thurs 2D");
+                System.out.println("4. Adult Thurs 3D");
+                System.out.println("5. Adult Fri (Before 6pm) 2D");
+                System.out.println("6. Adult Fri (Before 6pm) 3D");
+                System.out.println("7. Adult Fri(6pm onwards) - Weekend 2D");
+                System.out.println("8. Adult Fri(6pm onwards) - Weekend 2D");
+                System.out.println("What is your choice: ");
+                int adultpriceoption = scan.nextInt();
+                if (adultpriceoption == 1) {
+                    PricingManager.editPricing(0, "AdultMonWedStandard2D");
+                    System.out.println("Adult mon-wed 2D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D());
+                }
+                if (adultpriceoption == 2) {
+                    PricingManager.editPricing(0, "AdultMonWedStandard3D");
+                    System.out.println("Adult mon-wed 3D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D());
+                }
+                if (adultpriceoption == 3) {
+                    PricingManager.editPricing(0, "AdultThuStandard2D");
+                    System.out.println("Adult Thur 2D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultThursStandard2D());
+                }
+                if (adultpriceoption == 4) {
+                    PricingManager.editPricing(0, "AdultThuStandard3D");
+                    System.out.println("Adult Thur 3D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultThursStandard3D());
+                }
+                if (adultpriceoption == 5) {
+                    PricingManager.editPricing(0, "AdultFriStandard2D");
+                    System.out.println("Adult Fri (Before 6pm) 2D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultFriStandard2D());
+                }
+                if (adultpriceoption == 6) {
+                    PricingManager.editPricing(0, "AdultFriStandard3D");
+                    System.out.println("Adult Fri (Before 6pm) 3D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultFriStandard3D());
+                }
+                if (adultpriceoption == 7) {
+                    PricingManager.editPricing(0, "AdultWeekendStandard2D");
+                    System.out.println("Adult Fri (Aft 6pm) - Weekend 2D has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
+                }
+                if (adultpriceoption == 8) {
+                    PricingManager.editPricing(0, "AdultWeekendStandard3D");
+                    System.out.println("Adult Fri (Aft 6pm) - Weekend 3D has been set to: "
+                            + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
+                }
+            } else if (mainPriceOption == 4) {
+                System.out.println("Which student price would you like to adjust");
+                System.out.println("1. Student 2D");
+                System.out.println("2. Student 3D");
+                int studentoption = scan.nextInt();
+                if (studentoption == 1) {
+                    PricingManager.editPricing(0, "StudentStandard2D");
+                    System.out.println("Student 2D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getStudentStandard2D());
+                }
+                if (studentoption == 2) {
+                    PricingManager.editPricing(0, "StudentStandard3D");
+                    System.out.println("Student 3D price has been set to: "
+                            + PricingManager.readAllPricing().get(0).getStudentStandard3D());
+                }
+            } else if (mainPriceOption == 5) {
+                PricingManager.editPricing(0, "SeniorStandard2D");
+                System.out.println(
+                        "Senior 2D price has been set to: " + PricingManager.readAllPricing().get(0).getSeniorStandard2D());
+            } else if (mainPriceOption == 6) {
+                System.out.println("Premium Cinemas: " + PricingManager.readAllPricing().get(0).getPremium());
+                System.out.println("Blockbuster Price addition: " + PricingManager.readAllPricing().get(0).getBlockbuster());
+                System.out.println("Student 2D: " + PricingManager.readAllPricing().get(0).getStudentStandard2D());
+                System.out.println("Student 3D: " + PricingManager.readAllPricing().get(0).getStudentStandard3D());
+                System.out.println("Senior 2D: " + PricingManager.readAllPricing().get(0).getSeniorStandard2D());
+                System.out.println("Fri(6pm onwards)/Weekend/Holiday 2D: " + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D());
+                System.out.println("Fri(6pm onwards)/Weekend/Holiday 3D: " + PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D());
+                System.out.println("Adult Fri(Before 6pm) 2D: " + PricingManager.readAllPricing().get(0).getAdultFriStandard2D());
+                System.out.println("Adult Fri(Before 6pm) 3D: " + PricingManager.readAllPricing().get(0).getAdultFriStandard3D());
+                System.out.println("Thursday 2D " + PricingManager.readAllPricing().get(0).getAdultThursStandard2D());
+                System.out.println("Thursday 3D: " + PricingManager.readAllPricing().get(0).getAdultThursStandard3D());
+                System.out.println("Adult Mon-Wed 2D: " + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D());
+                System.out.println("Adult Mon-Wed 3D: " + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D());
+
             }
-            if (adultpriceoption == 4) {
-                PricingManager.editPricing(0, "AdultThuStandard3D");
-                System.out.println("Adult Thur 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultThursStandard3D()+"\n");
-            }
-            if (adultpriceoption == 5) {
-                PricingManager.editPricing(0, "AdultFriStandard2D");
-                System.out.println("Adult Fri (Before 6pm) 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultFriStandard2D()+"\n");
-            }
-            if (adultpriceoption == 6) {
-                PricingManager.editPricing(0, "AdultFriStandard3D");
-                System.out.println("Adult Fri (Before 6pm) 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultFriStandard3D()+"\n");
-            }
-            if (adultpriceoption == 7) {
-                PricingManager.editPricing(0, "AdultWeekendStandard2D");
-                System.out.println("Adult Fri (Aft 6pm) - Weekend 2D has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D()+"\n");
-            }
-            if (adultpriceoption == 8) {
-                PricingManager.editPricing(0, "AdultWeekendStandard3D");
-                System.out.println("Adult Fri (Aft 6pm) - Weekend 3D has been set to: "
-                        + PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D()+"\n");
-            }
-        } else if (mainPriceOption == 4) {
-            System.out.println("Which student price would you like to adjust");
-            System.out.println("1. Student 2D");
-            System.out.println("2. Student 3D");
-            int studentoption = scan.nextInt();
-            if (studentoption == 1) {
-                PricingManager.editPricing(0, "StudentStandard2D");
-                System.out.println("Student 2D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getStudentStandard2D()+"\n");
-            }
-            if (studentoption == 2) {
-                PricingManager.editPricing(0, "StudentStandard3D");
-                System.out.println("Student 3D price has been set to: "
-                        + PricingManager.readAllPricing().get(0).getStudentStandard3D()+"\n");
-            }
-        } else if (mainPriceOption == 5) {
-            PricingManager.editPricing(0, "SeniorStandard2D");
-            System.out.println(
-                    "Senior 2D price has been set to: " + PricingManager.readAllPricing().get(0).getSeniorStandard2D()+"\n");
         }
     }
 
@@ -212,25 +232,23 @@ public class AdminSystemSettingsUI {
         Scanner scan1 = new Scanner(System.in);
         int filterChoice = 0;
 
-        System.out.println("\nChoose your function: \n");
-        System.out.println("1. View Top 5 Movies");
-        System.out.println("2. Edit User Access to Filters");
-        System.out.println("3. Back\n");
-        filterChoice = scan1.nextInt();
-
-
         while (filterChoice != 3) {
+            System.out.println("\nChoose your function: \n");
+            System.out.println("1. View Top 5 Movies");
+            System.out.println("2. Edit User Access to Filters");
+            System.out.println("3. Back\n");
+            filterChoice = scan1.nextInt();
 
             if (filterChoice == 1) {
                 // view top 5 by filter
                 int secondFilterChoice = 0;
-                System.out.println("\nChoose filter: \n");
+
+
+                while (secondFilterChoice != 3) {
+                    System.out.println("\nChoose filter: \n");
                     System.out.println("1. See Top 5 Movies by Sales");
                     System.out.println("2. See Top 5 Movies by Ratings");
                     System.out.println("3. Back\n");
-                    
-
-                while (true) {
                     secondFilterChoice = scan1.nextInt();
                     // if (secondFilterChoice < 1 && secondFilterChoice > 3) {
                     //     System.out.println("Invalid Input. Choose Again");
@@ -238,17 +256,14 @@ public class AdminSystemSettingsUI {
                     // } 
                    if (secondFilterChoice == 1) {
                        listTop5.sortBySales();
-                    } else if (secondFilterChoice == 2) {
-                       listTop5.sortByRatings();
-                    } else if (secondFilterChoice == 3) {
-                        System.out.println("entered 3");
-                        filterChoice =3;
-                        break;
                     }
-                    
+                   else if (secondFilterChoice == 2) {
+                       listTop5.sortByRatings();
+                   }
                 }
 
-            } else if (filterChoice == 2) {
+            }
+            else if (filterChoice == 2) {
                 int editChoice = 0;
 
                 while (editChoice!=3) {
@@ -306,16 +321,13 @@ public class AdminSystemSettingsUI {
                                 System.out.println("Sales filter successfully disabled.");
                             }
                         } else {
-                            return;
+                            break;
                         }
-
                     }
 
                 }
-                filterChoice = 3;
             }
-
         }
-    }
 
+    }
 }

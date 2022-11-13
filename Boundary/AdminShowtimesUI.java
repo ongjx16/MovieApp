@@ -26,28 +26,31 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
     public void ShowtimeFunctions(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("1. Create Showtime\n");
-        System.out.println("2. Edit Showtime\n");
-        System.out.println("3. Delete Showtime\n");
-        System.out.println("4. See List of Current Showtimes\n\n");
+        int choice = 0;
+        while (choice != 5) {
+            System.out.println("1. Create Showtime\n");
+            System.out.println("2. Edit Showtime\n");
+            System.out.println("3. Delete Showtime\n");
+            System.out.println("4. See List of Current Showtimes\n");
+            System.out.println("5. Back");
 //                System.out.println("5. Seat tester");
-        System.out.println("Enter a number of your choice: ");
-        int choice = scan.nextInt();
+            System.out.println("Enter a number of your choice: ");
+            choice = scan.nextInt();
 
-        if (choice == 1) {
-            createNewObject();
-        } else if (choice == 2) {
-            editObjectUI();
-        } else if (choice == 3) {
-            //delete showtime
-            deleteObject();
+            if (choice == 1) {
+                createNewObject();
+            } else if (choice == 2) {
+                editObjectUI();
+            } else if (choice == 3) {
+                //delete showtime
+                deleteObject();
 
 
+            } else if (choice == 4) {
+                //print all showtimes
+                display();
 
-        } else if (choice == 4) {
-            //print all showtimes
-            display();
-
+            } else if (choice == 5) return;
         }
     }
 
