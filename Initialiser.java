@@ -51,8 +51,7 @@ public class Initialiser {
         MoviesManager.createMovie("Home Alone 20", MovieType.DIGITAL2D, 110, MovieStatus.PREVIEW, "Chris Columbus", "The parents just suck at this point to have made 20 such movies");
         MoviesManager.createMovie("Finding Nemo", MovieType.DIGITAL2D, 110, MovieStatus.END_OF_SHOW, "Andrew Stanton", "Fish father missing");
 
-        //for video
-        MoviesManager.createMovie("Avengers", MovieType.DIGITAL2D, 110, MovieStatus.NOW_SHOWING, "Andrew Garfield", "Avengers fighting");
+
 
 
         //populate ratings
@@ -81,16 +80,10 @@ public class Initialiser {
         //populating showtimes
         File showtimes= new File("DATFiles/Showtimes.dat");
         showtimes.delete();
-        //for video
-        ShowtimesManager.createShowtimes("21/11/2022 10:00", "Jurassic Park", "1C3");
-        ShowtimesManager.createShowtimes("21/11/2022 12:30", "Jurassic Park", "1C2");
-        ShowtimesManager.createShowtimes("21/11/2022 15:00", "Jurassic Park", "1C1");
-        ShowtimesManager.createShowtimes("22/11/2022 15:00", "Jurassic Park", "1C3");
-        ShowtimesManager.createShowtimes("23/11/2022 15:00", "Jurassic Park", "1C3");
-        ShowtimesManager.createShowtimes("23/11/2022 15:00", "Avengers", "1C1");
 
 
-        ShowtimesManager.createShowtimes("22/11/2022 10:00", "Jurassic Park", "1C1"); //change date back to 20/11/2022
+
+        ShowtimesManager.createShowtimes("20/11/2022 10:00", "Jurassic Park", "1C1");
         ShowtimesManager.createShowtimes("20/11/2022 17:30", "The Intern", "1C2");
         ShowtimesManager.createShowtimes("20/11/2022 20:00", "Toy Story", "1C3");
         ShowtimesManager.createShowtimes("21/11/2022 10:00", "The Dictator", "2C1");

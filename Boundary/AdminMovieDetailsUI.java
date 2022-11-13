@@ -30,8 +30,9 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
             System.out.println("4. See List of Current Movies\n");
             System.out.println("5. Back\n\n");
             System.out.println("Enter a number of your choice: ");
-            choice = scan.nextInt();
 
+            ExceptionHandler check = new ExceptionHandler();
+            choice = check.checkNumberInput(choice, 5);
 
             if (choice == 1) {
                 createNewObject();
@@ -77,12 +78,10 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
         System.out.println("[3] " + MovieType.BLOCKBUSTER2D.toString());
         System.out.println("[4] " + MovieType.BLOCKBUSTER3D.toString());
 
-        int typeChoice = scan.nextInt();
+        int typeChoice=0;
+        ExceptionHandler check = new ExceptionHandler();
+        typeChoice = check.checkNumberInput(typeChoice, 4);
 
-        while(typeChoice<1 && typeChoice>4){
-            System.out.println("Invalid Choice. Choose Again.");
-            typeChoice = scan.nextInt();
-        }
 
         if (typeChoice == 1){
             type = MovieType.DIGITAL2D;
@@ -108,12 +107,9 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
         System.out.println("[2] " + MovieStatus.NOW_SHOWING.toString());
         System.out.println("[3] " + MovieStatus.END_OF_SHOW.toString());
 
-        int statusChoice = scan.nextInt();
+        int statusChoice = 0;
+        statusChoice = check.checkNumberInput(statusChoice, 5);
 
-        while(statusChoice<1 && statusChoice>3){
-            System.out.println("Invalid Choice. Choose Again.");
-            statusChoice = scan.nextInt();
-        }
 
         if (statusChoice == 1){
             showingStatus = MovieStatus.PREVIEW;
@@ -151,7 +147,14 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
             System.out.println((i + 1) + ". " + MoviesArray.get(i).getName());
         }
         System.out.println("Select Movie To Edit");
-        int movie = scan.nextInt() - 1;
+        int movie = 0;
+
+        ExceptionHandler check = new ExceptionHandler();
+        movie = check.checkNumberInput(movie,MoviesArray.size()+1);
+
+        movie = movie-1;
+
+
         int toChange = 0;
 
         while (toChange != 7) {
@@ -165,7 +168,7 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
             System.out.println("6. Movie Synopsis");
             System.out.println("7. Save All Changes");
 
-            toChange = scan.nextInt();
+            toChange = check.checkNumberInput(toChange, 7);
             if (toChange == 1) {
                 //name
                 MoviesManager.editMovie(movie, "name");
@@ -220,7 +223,9 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
 
         }
         System.out.println("\nSelect Movie To Delete");
-        int movie = scan.nextInt();
+        int movie = 0;
+        ExceptionHandler check = new ExceptionHandler();
+        movie = check.checkNumberInput(MoviesArray.size()+1, 5);
         MoviesManager.deleteMovie(movie - 1);
     }
 }
