@@ -6,7 +6,7 @@ import Control.AdminLogin;
 import java.util.Scanner;
 
 /**
- * User interface when logged in as Admin
+ * Boundary class that admin interacts when logged in as Admin
  * @author murong
  * @version 1.0
  * @since 2022-11-13
