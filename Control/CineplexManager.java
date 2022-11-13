@@ -9,8 +9,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Entity.Cineplex;
 
+/**
+ * CineplexManager has functions that allow creation, deletion, reading and getting of all cineplexes
+ * CineplexManager reads from and writes to the AllCineplexes.dat file
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class CineplexManager {
 
+    /**
+     * Creates cineplex
+     * Adds cineplex to AllCineplexes.dat
+     * Admin privilege only
+     * @param cineplexName
+     */
     public static void createCineplex(String cineplexName) {
         try {
 
@@ -42,7 +55,10 @@ public class CineplexManager {
         }
     }
 
-    // done
+    /**
+     * Gets all cineplexes from AllCineplexes.dat
+     * @return Array list of all cineplexes
+     */
     public static ArrayList<Cineplex> readAllCineplexes() {
         ArrayList<Cineplex> CineplexOutput = new ArrayList<Cineplex>();
         try {
@@ -55,8 +71,14 @@ public class CineplexManager {
         return (CineplexOutput);
     }
 
-    // done
-    public static void deleteCinema(int CinemaID) {
+    /**
+     * Deletes cineplex
+     * Removes cineplex from AllCineplxes.dat
+     * Admin privilege only
+     * Not used in the code but useful for extensibility of code
+     * @param CineplexID
+     */
+    public static void deleteCineplex(int CineplexID) {
         try {
 
             // Getting All Cineplexes
@@ -69,7 +91,7 @@ public class CineplexManager {
             int y;
 
             for (y = 0; y < cineplexList.size(); y++) {
-                if (cineplexList.get(y).getCineplexID() == CinemaID) {
+                if (cineplexList.get(y).getCineplexID() == CineplexID) {
                     break;
                 }
             }
@@ -87,7 +109,11 @@ public class CineplexManager {
         }
     }
 
-    // done
+    /**
+     * Gets specific cineplex by its name
+     * @param CineplexName Name of the cineplex wanted
+     * @return Cineplex object wanted
+     */
     public static int getCineplexIDByName(String CineplexName) {
         ArrayList<Cineplex> cineplexOutput = new ArrayList<Cineplex>(readAllCineplexes());
         int IDOutput = 0;

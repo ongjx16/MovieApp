@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 /**
  * Represents an account of admin in charge of the MOBILMA app
- * @author htut
+ * @author shubham
  * @version 1.0
  * @since 2022-11-12
  */

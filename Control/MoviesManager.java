@@ -12,9 +12,27 @@ import Utils.MovieStatus;
 import Utils.MovieType;
 import Entity.Movie;
 
+/**
+ * MoviesManager has functions that allow creation, deletion, reading and getting of all movies
+ * MoviesManager reads from and writes to the AllMovies.dat file
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
+
 public class MoviesManager {
 
-
+    /**
+     * Creates movie
+     * Adds movie created to AllMovies.dat
+     * Admin privilege only
+     * @param name Name of movie created
+     * @param type Movie type of movie created
+     * @param showLength Show length of movie created
+     * @param showingStatus Showing status of movie created
+     * @param director Director of movie created
+     * @param synopsis Synopsis of movie created
+     */
     public static void createMovie(String name, MovieType type, int showLength, MovieStatus showingStatus, String director, String synopsis){
         try{
 
@@ -42,7 +60,7 @@ public class MoviesManager {
             //closing the stream
             //out.reset();
             out.close();
-            System.out.println("create movie success");
+            System.out.println("Movie successfully created!");
         }catch(Exception e){e.printStackTrace(
         );}
     }
@@ -60,6 +78,12 @@ public class MoviesManager {
         return (movieOutput);
     }
 
+    /**
+     * Delete existing movie
+     * Removes movie from AllMovies.dat
+     * Admin privilege only
+     * @param index Index of movie in list of movies shown
+     */
     public static void deleteMovie (int index) {
         try{
 
@@ -77,10 +101,17 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("movie successfully removed");
+            System.out.println("Movie successfully removed");
         }catch(Exception e){}
     }
 
+    /**
+     * Edit different attributes of an existing movie
+     * Updates movie in AllMovies.dat
+     * Admin privilege only
+     * @param index Index of movie chosen in list shown
+     * @param attribute Attribute that needs to be changed
+     */
     public static void editMovie (int index, String attribute) {
         try{
 
@@ -180,10 +211,17 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("Movie has been successfully deleted!");
+            System.out.println("Movie has been successfully updated!");
         }catch(Exception e){}
     }
 
+    /**
+     * Filters movies by their showing status
+     * Only returns movies that are of status "Preview" or "Now Showing"
+     * Used for choosing which movie to show movie-goers
+     * @param moviesInput Array list of movies to filter
+     * @return Array list of flitered movies
+     */
     public static ArrayList<Movie> filterByStatus (ArrayList<Movie>moviesInput) {
         ArrayList<Movie> filteredOutput = new ArrayList<Movie>();
         for(int i =0; i<moviesInput.size();i++){
@@ -196,6 +234,11 @@ public class MoviesManager {
         return (filteredOutput);
     }
 
+    /**
+     * Gets movie by movie ID input
+     * @param MovieID Movie ID of movie that is wanted
+     * @return Movie object with corresponding movie ID input
+     */
     public static Movie getMoviebyID (int MovieID) {
         ArrayList<Movie> movieOutput = new ArrayList<Movie>(readAllMovies());
         Movie outputMovie = null;
@@ -210,6 +253,13 @@ public class MoviesManager {
         return (outputMovie);
     }
 
+    /**
+     * Increases sales for each movie everytime a booking is made
+     * Used to filter top 5 movies by sales
+     * Updates AllMovies.dat
+     * @param MovieID ID of movie booked
+     * @param toAdd Number of tickets booked
+     */
     public static void increaseSales (int MovieID, int toAdd) {
         try{
 
@@ -236,11 +286,15 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println(movieList.get(y).getMovieID());
-            System.out.println("Movie Sales Successfully Updated.");
         }catch(Exception e){}
     }
 
+    /**
+     * Allows users to add reviews to chosen movie
+     * Reviews are displayed as part of movie details
+     * @param MovieID ID of movie that is reviewed
+     * @param newReview Review input by movie-goer
+     */
     public static void addReviews (int MovieID, String newReview) {
         try{
 
@@ -274,6 +328,11 @@ public class MoviesManager {
         }catch(Exception e){}
     }
 
+    /**
+     * Updates average rating for specific movie based on movie-goers rating input
+     * @param MovieID ID of movie to be rated
+     * @param newRating New rating input by movie-goer
+     */
     public static void updateRating (int MovieID, float newRating) {
         try{
 

@@ -6,8 +6,11 @@ import Control.MoviesManager;
 import Utils.RatingFilterType;
 
 /**
- * User interface when movie-goer chooses to ListTop5Movies
+ * Boundary class that admin and user interacts with chooses to ListTop5Movies
  * Implements Details Interface
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 
 public class ListTop5MoviesUI implements DetailsInterface{

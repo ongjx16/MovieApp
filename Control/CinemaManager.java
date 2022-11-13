@@ -10,9 +10,24 @@ import java.util.Scanner;
 import Entity.Cinema;
 import Utils.CinemaType;
 
+/**
+ * CinemaManager has functions that allow creation, deletion, reading and getting of all cinemas
+ * CinemaManager reads from and writes to the AllCinemas.dat file
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
+
 public class CinemaManager {
 
-    //done
+    /**
+     * Creates cinema
+     * Updates AllCinemas.dat with the created cinema
+     * Admin privilege only
+     * @param cineplexName Name of cineplex that cinema is in
+     * @param cinemaNo CinemaID of cinema created
+     * @param cinemaType Cinema type of cinema created
+     */
     public static void createCinema(String cineplexName, String cinemaNo, CinemaType cinemaType) {
         try {
 
@@ -38,7 +53,10 @@ public class CinemaManager {
         }
     }
 
-    //done
+    /**
+     * Gets all cinemas from the AllCinemas.dat fie
+     * @return An array list of Cinema objects
+     */
     public static ArrayList<Cinema> readAllCinemas() {
         ArrayList<Cinema> CinemaOutput = new ArrayList<Cinema>();
         try {
@@ -51,7 +69,12 @@ public class CinemaManager {
         return (CinemaOutput);
     }
 
-    //done
+    /**
+     * Deletes cinema
+     * Removes cinema chosen from AllCinemas.dat
+     * Admin privilege only
+     * @param CinemaID ID of cinema that needs to be removed
+     */
     public static void deleteCinema(String CinemaID) {
         try {
 
@@ -59,7 +82,7 @@ public class CinemaManager {
             ArrayList<Cinema> cinemaList = new ArrayList<Cinema>(readAllCinemas());
 
             // Creating stream and writing the object
-            FileOutputStream fout = new FileOutputStream(new File("DATFiles/AllMovies.dat"));
+            FileOutputStream fout = new FileOutputStream(new File("DATFiles/AllCinemas.dat"));
             ObjectOutputStream out = new ObjectOutputStream(fout);
             Scanner scan = new Scanner(System.in);
             int y;
@@ -76,12 +99,15 @@ public class CinemaManager {
             // out.reset();
             fout.close();
             out.close();
-            System.out.println("src.Entity.Cinema removed succesfully.\n");
         } catch (Exception e) {
         }
     }
 
-    //done
+    /**
+     * Gets specific cinema by its ID
+     * @param CinemaID ID of cinema wanted
+     * @return Cinema object needed
+     */
     public static Cinema getCinemabyID(String CinemaID) {
         ArrayList<Cinema> cinemaOutput = new ArrayList<Cinema>(readAllCinemas());
         Cinema outputCinema = null;

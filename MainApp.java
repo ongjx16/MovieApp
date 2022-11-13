@@ -5,8 +5,19 @@ import Boundary.ExceptionHandler;
 import Boundary.UserUI;
 import Boundary.AdminUI;
 
+/**
+ * main app file to run to start program.
+ * @author jing xuan
+ * @version 1.0
+ * @since 2022-11-13
+ */
+
 
 public class MainApp {
+    /**
+     * Moblima program starts when this function is run. User can choose to use Moblima as an admin or movie-goer
+     * @param args
+     */
     public static void main(String[] args) {
         int identity = 0;
         Scanner scan = new Scanner(System.in);

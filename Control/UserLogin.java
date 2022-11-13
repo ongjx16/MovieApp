@@ -1,11 +1,14 @@
 package Control;
 
 /**
- * Login for users
+ * Login for movie-goers
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserLogin extends Login{
     /**
-     * Checks if user username input is valid
+     * Checks if user username input is valid. Overrides method in Login class since different database is being checked.
      * @param userNameInput
      * @return True if username is valid
      */
@@ -22,7 +25,7 @@ public class UserLogin extends Login{
     }
 
     /**
-     * Checks if user password input is valid
+     * Checks if user password input is valid. Overrides method in Login class since different database is being checked.
      * @param userNameInput
      * @param passwordInput
      * @return True if password is valid

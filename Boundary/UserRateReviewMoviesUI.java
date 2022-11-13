@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User interface when movie-goer chooses to Rate/Review movies
+ * Boundary class that movie-goer interacts with when movie-goer chooses to Rate/Review movies
+ * @author shubham
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserRateReviewMoviesUI {
     /**
@@ -70,8 +73,9 @@ public class UserRateReviewMoviesUI {
         ExceptionHandler check = new ExceptionHandler();
         movieToRate = check.checkNumberInput(movieToRate, filteredMovies.size()+1);
         System.out.println("Enter your review: ");
-        String newReview = scan.nextLine();
         scan.nextLine();
+        String newReview = scan.nextLine();
+
         // getting movie id of chosen movie to rate & rating it
         int filteredMovieId = filteredMovies.get(movieToRate-1).getMovieID();
         MoviesManager.addReviews(filteredMovieId, newReview);

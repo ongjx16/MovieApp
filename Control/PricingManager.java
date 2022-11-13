@@ -9,10 +9,33 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 import Entity.Pricing;
-
+/**
+ * PricingManager has functions that allow creation, deletion and editing of all movies
+ * PricingManager reads from and writes to the AllPricing.dat file
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 
 public class PricingManager {
-
+    /**
+     * Creates pricing based on cinema type, movie type, date, day, time, age
+     * Adds new pricing to AllPricing.dat
+     * Admin privilege only
+     * @param blockbuster Movie type
+     * @param premium Cinema type
+     * @param studentStandard2D Ticket type
+     * @param studentStandard3D Ticket type
+     * @param seniorStandard2D Ticket type
+     * @param adultMonWedStandard2D Ticket type
+     * @param adultMonWedStandard3D Ticket type
+     * @param adultThursStandard2D Ticket type
+     * @param adultThursStandard3D Ticket type
+     * @param adultFriStandard2D Ticket type
+     * @param adultFriStandard3D Ticket type
+     * @param adultWeekendStandard2D Ticket type
+     * @param adultWeekendStandard3D Ticket type
+     */
     public static void createPricing(float blockbuster, float premium, float studentStandard2D, float studentStandard3D, float seniorStandard2D, float adultMonWedStandard2D, float adultMonWedStandard3D, float adultThursStandard2D, float adultThursStandard3D, float adultFriStandard2D, float adultFriStandard3D, float adultWeekendStandard2D, float adultWeekendStandard3D) {
         try {
             //Creating the object
@@ -37,6 +60,10 @@ public class PricingManager {
         }
     }
 
+    /**
+     * Gets all pricing from Pricing.dat
+     * @return Array list of all prices
+     */
     public static ArrayList<Pricing> readAllPricing() {
 //        src.Entity.Movie[] movieOutput = new src.Entity.Movie[2];
         ArrayList<Pricing> pricingOutput = new ArrayList<Pricing>();
@@ -52,6 +79,12 @@ public class PricingManager {
         return (pricingOutput);
     }
 
+    /**
+     * Deletes existing pricing
+     * Removes specific pricing from AllPricing.dat based
+     * Admin privilege only
+     * @param index Index input by user based on pricing list shown
+     */
     public static void deletePricing(int index) {
         try {
 
@@ -74,6 +107,12 @@ public class PricingManager {
         }
     }
 
+    /**
+     * Edits different attributes of pricing
+     * Updates pricing in AllPricing.dat
+     * @param index Index input by user based on pricing list shown
+     * @param attribute Attribute of pricing that needs to be changed
+     */
     public static void editPricing(int index, String attribute) {
         try {
 

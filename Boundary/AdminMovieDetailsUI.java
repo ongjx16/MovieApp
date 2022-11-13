@@ -9,14 +9,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * User interface when admin chooses to edit movie details
- * @author murong
+ * Boundary class that admin interacts with when admin chooses to edit movie details.
+ * @author somesh
  * @version 1.0
  * @since 2022-11-13
  */
 public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,DetailsInterface,EditUIInterface{
     /**
-     * Contains functions admin can use to edit movies available
+     * Contains function options admin can use to edit movies available
      */
     public void AdminMovieFunctions(){
         Scanner scan = new Scanner(System.in);
@@ -55,6 +55,7 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
     /**
      * Creates a new movie
      * Implements CreateUIInterface
+     * Overrides createNewObject method in interface to create Movie objects specifically
      */
     @Override
     public void createNewObject(){
@@ -134,8 +135,8 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
     }
 
     /**
-     * Allows admin to edit specific movie
-     * Implements EditUIInterface
+     * Allows admin to edit a specific movie based on an attribute
+     * Implements EditUIInterface to edit a movie that exists in the database.
      */
     @Override
     public void editObjectUI(){
@@ -196,8 +197,7 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
      */
     @Override
     public void display() {
-        ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
-        MoviesArray = MoviesManager.readAllMovies();
+        ArrayList<Movie> MoviesArray = new ArrayList<Movie>(MoviesManager.readAllMovies());
         for (int i = 0; i < MoviesArray.size(); i++) {
             System.out.println("Name: " + MoviesArray.get(i).getName());
             System.out.println("Movie ID: " + MoviesArray.get(i).getMovieID());

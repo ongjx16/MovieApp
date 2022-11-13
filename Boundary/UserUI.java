@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User Interface shown when movie-goer option is chosen
+ * Boundary class that movie-goer interacts with when user enters program as a movie-goer
+ * @author shubham
+ * @version 1.0
+ * @since 2022-11-13
  */
 
 public class UserUI {
@@ -134,7 +137,6 @@ int option = 0;
                 UserViewBookingDetailsUI viewBookingDetail = new UserViewBookingDetailsUI();
                 viewBookingDetail.setToBook(UsersManager.readAllUsers().get(i).getBookingHistory().get(n-1));
                 viewBookingDetail.display();
-                System.out.println(n);
 
 
             }

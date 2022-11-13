@@ -11,7 +11,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * User interface shown when movie-goer chooses to make booking
+ * Boundary class that movie-goer interacts with when movie-goer chooses to make booking
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserBookingUI{
     /**
@@ -171,8 +174,9 @@ public class UserBookingUI{
         ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
 
         System.out.println("What dates would you like to see this movie?  ");
+        DateFormatter newDate = new DateFormatter();
         for (int z = 0; z < datesToSelect.size(); z++) {
-            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
+            System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + " - "  + newDate.DayConverter(datesToSelect.get(z)) + "\n");
         }
         System.out.println("[0] Exit");
         int dateChoice = 0;
@@ -419,7 +423,6 @@ public class UserBookingUI{
             while(((row.charAt(0)-48)*10+(row.charAt(1)-48))<1 || ((row.charAt(0)-48)*10+(row.charAt(1)-48))>16){
                 System.out.println("Invalid row number, please input again: ");
                 row = scan.nextLine();
-                System.out.println(row);
                 if(row.length()==1){
                     String init="0";
                     row = init.concat(row);

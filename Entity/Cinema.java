@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * Represents a cinema in one of the Cineplexes in the MOBLIMA app
- * @author htut
+ * @author shubham
  * @version 1.0
  * @since 2022-11-12
  */

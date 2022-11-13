@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User interface shown when movie-goer chooses to view movie details
+ * Boundary class that movie-goer interacts with when movie-goer chooses to view movie details
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
  */
 public class UserViewMovieDetailsUI implements DetailsInterface{
     private Movie movie;
@@ -42,7 +45,7 @@ public class UserViewMovieDetailsUI implements DetailsInterface{
         System.out.println("Synopsis: " + movie.getSynopsis());
         System.out.println("Status: " + movie.getShowingStatus());
         if (movie.getRating()[0]>1){
-            System.out.println("Rating: " + movie.getRating()[1]);
+            System.out.println("Rating: " + String.format("%.1f", movie.getRating()[1]));
         }
         else{
             System.out.println("Rating: No Available Ratings Yet.");

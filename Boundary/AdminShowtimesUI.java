@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User interface when admin chooses to edit showtime details
- * @author murong
+ * Boundary class that admin interacts with when admin chooses to edit showtime details
+ * @author somesh
  * @version 1.0
  * @since 2022-11-13
  */
@@ -58,7 +58,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
     /**
      * Creates new showtime
      * Implements CreateUIInterface
-     * Admin chooses Cineplex, enters desired date then chooses showtime and cinema
+     * Admin chooses Cineplex, enters desired date then chooses showtime and associated cinema
      */
 
     @Override
@@ -171,12 +171,12 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         cinemaChoice = check.checkNumberInput(cinemaChoice,CineplexManager.readAllCineplexes().size()+1);
 
         //src.Control.ShowtimesManager.initialiser();
-        ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice).getCinemaId());
+        ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice-1).getCinemaId());
         System.out.println("Showtime has been created!");
     }
 
     /**
-     * Allows admin to edit specific showtime
+     * Allows admin to edit specific showtime that already exists in the database
      * Implements EditUIInterface
      * Admin can edit by movie or by cinema and cineplex ID
      * Admin can edit showtime and cineplex ID
@@ -332,7 +332,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
     }
 
     /**
-     * Allows admin to delete specific showtime
+     * Allows admin to delete a specific showtime by selecting one from all showtimes
      * Implements DeleteUIInterface
      */
     @Override

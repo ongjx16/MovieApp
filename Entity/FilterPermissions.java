@@ -4,7 +4,7 @@ import Utils.RatingFilterType;
 
 /**
  * Represents a filtering algorithim in the MOBLIMA app
- * @author htut
+ * @author somesh
  * @version 1.0
  * @since 2022-11-12
  */
