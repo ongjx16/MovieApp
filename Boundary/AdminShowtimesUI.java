@@ -166,7 +166,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         int cinemaChoice = scan.nextInt();
 
         //src.Control.ShowtimesManager.initialiser();
-        ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice).getCinemaId());
+        ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice-1).getCinemaId());
         System.out.println("Showtime has been created!");
     }
 
