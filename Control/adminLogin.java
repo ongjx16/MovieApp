@@ -48,8 +48,9 @@ public class adminLogin{
  
  public boolean verifyUsername(String usernameinput){
     AdminAccount[] admins = getAdmins();
+    
     for (int m =0; m<admins.length; m++){
-        if (usernameinput.equals(admins[m].getAdminUsername())){
+        if (usernameinput.equals(admins[m].getUsername())){
             return true;
         }
 
@@ -61,8 +62,8 @@ public class adminLogin{
 public boolean verifyPassword(String usernameinput, String passwordinput){
     AdminAccount[] admins = getAdmins();
     for (int m =0; m<admins.length; m++){
-        if (usernameinput.equals(admins[m].getAdminUsername())){
-            if(passwordinput.equals(admins[m].getAdminPassword())){
+        if (usernameinput.equals(admins[m].getUsername())){
+            if(passwordinput.equals(admins[m].getPassword())){
                 return true;
             }
             break;

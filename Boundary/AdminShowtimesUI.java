@@ -164,7 +164,6 @@ public class AdminShowtimesUI {
         ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice).getCinemaId());
         System.out.println("Showtime has been created!");
     }
-
     public static void editShowtimeUI(){
         Scanner scan = new Scanner(System.in);
         int editByWhat =0;
