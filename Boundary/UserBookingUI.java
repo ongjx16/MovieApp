@@ -152,7 +152,7 @@ public class UserBookingUI{
         ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
         filteredMovies = MoviesManager.filterByStatus(movies);
         for (int i = 0; i < filteredMovies.size(); i++) {
-            System.out.println("[" + (i + 1) + "]" + filteredMovies.get(i).getName());
+            System.out.println("[" + (i + 1) + "]" + filteredMovies.get(i).getName() + " - " + filteredMovies.get(i).getType().toString());
         }
         System.out.println("[0] Exit");
 

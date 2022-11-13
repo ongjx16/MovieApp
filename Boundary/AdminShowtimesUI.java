@@ -128,7 +128,7 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
             }
             int choiceoftime = 0;
-            choiceoftime = check.checkNumberInput(choiceoftime, arrayoftimes.size()+1);
+            choiceoftime = check.checkNumberInput(choiceoftime, 5);
 
             showtime = date + " " + newTimings.get(choiceoftime - 1);
 
