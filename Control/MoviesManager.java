@@ -270,7 +270,7 @@ public class MoviesManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("Movie Review Successfully Added.");
+            System.out.println("Movie review successfully added!");
         }catch(Exception e){}
     }
 
@@ -313,7 +313,7 @@ public class MoviesManager {
             fout.close();
             out.close();
 //            System.out.println(movieList.get(y).getMovieID());
-            System.out.println("Movie reviews successfully updated!");
+            System.out.println("Movie ratings successfully updated!");
         }catch(Exception e){}
     }
 
