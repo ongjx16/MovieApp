@@ -6,13 +6,24 @@ import Utils.DateFormatter;
 
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class UserBookingUI{
+    private static boolean dealbreaker = false;
 
     public static void UserBookingFunction(){
+        dealbreaker = false;
         Scanner scan = new Scanner(System.in);
-        Showtimes showtimeToBook = chooseShowtimeByCineplex();
+        Showtimes showtimeToBook = null;
+
+        showtimeToBook = chooseShowtimeByCineplex();
+
+        if (dealbreaker){
+            return;
+        }
+
         float seatprice = 0f;
 
         DateFormatter newDate = new DateFormatter();
@@ -21,17 +32,27 @@ public class UserBookingUI{
         seatprice = getPreliminaryPrice(newDate, showtimeToBook, seatprice);
 
 
-        System.out.println("How many seats do you want?");
+        System.out.println("How many seats do you want? Input 0 to exit");
         int noOfSeats = scan.nextInt();
+
+        if (noOfSeats == 0){
+            dealbreaker = true;
+            return;
+        }
 
         //let user choose seats
         ArrayList<String> SeatsArray = choosingSeats(noOfSeats,showtimeToBook);
 
+        if (dealbreaker){
+            return;
+        }
 
         //update ticket price with no of seats booked
         float updatedTicketPrice = getTotalPriceByNoOfSeats(seatprice, noOfSeats, showtimeToBook, newDate);
 
-
+        if (dealbreaker){
+            return;
+        }
 
         System.out.println("Total price is: " + updatedTicketPrice);
 
@@ -47,6 +68,10 @@ public class UserBookingUI{
 
         //get user details
         String newUsername = userLogin();
+
+        if (dealbreaker){
+            return;
+        }
 
         // Generating transaction ID
         String txnID = new Transaction(showtimeToBook.getCinemaID()).getTransactionId();
@@ -74,16 +99,31 @@ public class UserBookingUI{
     }
 
     //return showtime object chosen
-    public static Showtimes chooseShowtimeByCineplex(){
+    public static Showtimes chooseShowtimeByCineplex() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose your cineplex: ");
+        int cineplexChoice = 0;
+        String intermediate;
         ArrayList<Cineplex> readCineplexes = new ArrayList<Cineplex>(CineplexManager.readAllCineplexes());
         for (int i = 0; i < readCineplexes.size(); i++) {
             System.out.println("[" + (i + 1) + "] " + readCineplexes.get(i).getCineplexName() + "\n");
         }
-        int cineplexChoice = scan.nextInt();
-        //error handling
-        if (cineplexChoice > readCineplexes.size() || cineplexChoice < 1) {
+        System.out.println("[0] Exit");
+        boolean isnumber = false;
+        while (!isnumber) {
+            intermediate = scan.nextLine();
+            try {
+                cineplexChoice = Integer.parseInt(intermediate);
+                isnumber = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Input is not valid, please input a valid number");
+            }
+        }
+        if (cineplexChoice == 0){
+            dealbreaker = true;
+            return null;
+        }
+        while (cineplexChoice > readCineplexes.size() || cineplexChoice < 1) {
             System.out.println("Invalid option, please choose again");
             cineplexChoice = scan.nextInt();
         }
@@ -95,19 +135,26 @@ public class UserBookingUI{
         for (int j = 0; j < movieIDs.size(); j++) {
             movies.add(MoviesManager.getMoviebyID(movieIDs.get(j)));
         }
-        ArrayList<Movie>filteredMovies = new ArrayList<Movie>();
-        filteredMovies=MoviesManager.filterByStatus(movies);
-        for(int i=0; i<filteredMovies.size();i++){
-            System.out.println("["+(i+1)+"]"+filteredMovies.get(i).getName());
+        ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
+        filteredMovies = MoviesManager.filterByStatus(movies);
+        for (int i = 0; i < filteredMovies.size(); i++) {
+            System.out.println("[" + (i + 1) + "]" + filteredMovies.get(i).getName());
         }
+        System.out.println("[0] Exit");
 
         int movieChoice = scan.nextInt();
+
+        if (movieChoice == 0){
+            dealbreaker = true;
+            return null;
+        }
+
         if (movieChoice > filteredMovies.size() || movieChoice < 1) {
             System.out.println("Invalid choice, please choose again");
             movieChoice = scan.nextInt();
         }
-        System.out.println("Your choice is: " + filteredMovies.get(movieChoice-1).getName());
-        String movieChosen = filteredMovies.get(movieChoice-1).getName();
+        System.out.println("Your choice is: " + filteredMovies.get(movieChoice - 1).getName());
+        String movieChosen = filteredMovies.get(movieChoice - 1).getName();
 
         ArrayList<Showtimes> showtimesAvailable = new ArrayList<Showtimes>(ShowtimesManager.showtimesByMovieAndCineplex(cineplexChoice, movieIDs.get(movieChoice - 1)));
         ArrayList<String> datesToSelect = new ArrayList<String>(ShowtimesManager.showtimeDates(showtimesAvailable));
@@ -116,7 +163,13 @@ public class UserBookingUI{
         for (int z = 0; z < datesToSelect.size(); z++) {
             System.out.println("[" + (z + 1) + "] " + datesToSelect.get(z) + "\n");
         }
+        System.out.println("[0] Exit");
         int dateChoice = scan.nextInt();
+
+        if (dateChoice == 0){
+            dealbreaker = true;
+            return null;
+        }
 
         System.out.println("What timings would you like to see this movie: ");
         for (int y = 0; y < showtimesAvailable.size(); y++) {
@@ -124,21 +177,36 @@ public class UserBookingUI{
                 System.out.println("[" + (y + 1) + "] " + showtimesAvailable.get(y).getShowtime().substring(11) + " || " + CinemaManager.getCinemabyID(showtimesAvailable.get(y).getCinemaID()).getType().toString());
             }
         }
+        System.out.println("[0] Exit");
         int showtimeChoice = scan.nextInt();
 
-        Showtimes showtimeOutput =  showtimesAvailable.get(showtimeChoice-1);
+        if (showtimeChoice == 0){
+            dealbreaker = true;
+            return null;
+        }
+
+        Showtimes showtimeOutput = showtimesAvailable.get(showtimeChoice - 1);
         return showtimeOutput;
 
     }
+
 
     public static String userLogin (){
         Scanner scan = new Scanner(System.in);
         System.out.println("Please Sign up or Log in to register your booking.");
         System.out.println("[1] Sign up");
         System.out.println("[2] Log in");
+        System.out.println("[0] Exit, please note that this is the last point of exit. " +
+                "Continuing with Log In/Sign Up will confirm your booking!");
         String newUsername = " ";
+
         int op = scan.nextInt();
         scan.nextLine();
+
+        if (op == 0){
+            dealbreaker = true;
+            return null;
+        }
         if (op == 1) {
             String name;
             int phoneNumber;
@@ -245,7 +313,14 @@ public class UserBookingUI{
                 if (!newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's movie of type movie
                     System.out.println("3. Senior Citizen");
                 }
+                System.out.println("0. Exit");
                 int selection = scan.nextInt();
+
+                if (selection == 0){
+                    dealbreaker = true;
+                    return -100;
+                }
+
                 if (selection == 1){
                     if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's date and time selected, pulled from showtimes available
                         seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard3D();
@@ -294,9 +369,15 @@ public class UserBookingUI{
         // asking for seats and saving it to an array
         for (int i = 0; i < noOfSeats; i++) {
             layout.displaySeatPlan();
-            System.out.println("input your desired row and column");
+            System.out.println("input your desired row and column, input 0 to exit");
             System.out.println("row (input number): ");
             row = scan.nextLine();
+
+            if (Objects.equals(row, "0")){
+                dealbreaker = true;
+                return null;
+            }
+
             if(row.length()==1){
                 String init="0";
                 row = init.concat(row);
