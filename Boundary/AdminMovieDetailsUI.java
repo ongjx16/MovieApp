@@ -8,7 +8,16 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
+/**
+ * User interface when admin chooses to edit movie details
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,DetailsInterface,EditUIInterface{
+    /**
+     * Contains functions admin can use to edit movies available
+     */
     public void AdminMovieFunctions(){
         Scanner scan = new Scanner(System.in);
         int choice = 0;
@@ -42,7 +51,11 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
         }
     }
 
-
+    /**
+     * Creates a new movie
+     * Implements CreateUIInterface
+     */
+    @Override
     public void createNewObject(){
         Scanner scan = new Scanner(System.in);
         String name;
@@ -124,6 +137,11 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
         System.out.println("Movie has been created!");
     }
 
+    /**
+     * Allows admin to edit specific movie
+     * Implements EditUIInterface
+     */
+    @Override
     public void editObjectUI(){
         Scanner scan = new Scanner(System.in);
         ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
@@ -169,6 +187,10 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
         }
     }
 
+    /**
+     * Displays all movies with movie details
+     * Implements DetailsInterface
+     */
     @Override
     public void display() {
         ArrayList<Movie> MoviesArray = new ArrayList<Movie>();
@@ -184,6 +206,10 @@ public class AdminMovieDetailsUI implements CreateUIInterface,DeleteUIInterface,
         }
     }
 
+    /**
+     * Deletes specific movie
+     * Implements DeleteUIInterface
+     */
     @Override
     public void deleteObject() {
         Scanner scan = new Scanner(System.in);

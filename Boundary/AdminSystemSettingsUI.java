@@ -11,8 +11,17 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * User interface when admin chooses to edit system settings
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class AdminSystemSettingsUI {
-
+    /**
+     * Allows admin to edit pricing of tickets based on price categories
+     * This includes special prices because of movie type, cinema type, type of ticket
+     */
     public static void editPricing() {
         Scanner scan = new Scanner(System.in);
         int mainPriceOption = 0;
@@ -125,6 +134,12 @@ public class AdminSystemSettingsUI {
         }
     }
 
+    /**
+     * Allows admin to edit holiday dates
+     * Functions include creating, editing and deleting specific holiday dates
+     * Uses library for formatting of date and time
+     */
+
     public static void editHolidayDates() {
         Scanner scan1 = new Scanner(System.in);
         int editChoice = 0;
@@ -205,6 +220,11 @@ public class AdminSystemSettingsUI {
         }
 
     }
+
+    /**
+     * Allows admin to see what top 5 movies are based on ratings and sales
+     * Allows admin to edit what top 5 rankings movie-goers can see
+     */
 
     public static void editTop5Filtering() {
         ListTop5MoviesUI listTop5 = new ListTop5MoviesUI();

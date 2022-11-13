@@ -6,17 +6,32 @@ import Entity.Movie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * User interface shown when movie-goer chooses to view movie details
+ */
 public class UserViewMovieDetailsUI implements DetailsInterface{
     private Movie movie;
 
+    /**
+     * Gets the movie the movie-goer chooses
+     * @return Movie object of movie chosen by movie-goer
+     */
     public Movie getMovie() {
         return movie;
     }
 
+    /**
+     * Sets the movie whose details we want to display
+     * @param movie Movie object of movie chosen by movie-goer
+     */
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
 
+    /**
+     * Displays details of the movie chosen
+     * Implements DetailsInterfaceUI
+     */
     public void display(){
 
         System.out.println("\nYou've chosen: " + movie.getName());

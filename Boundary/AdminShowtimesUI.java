@@ -13,7 +13,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * User interface when admin chooses to edit showtime details
+ * @author murong
+ * @version 1.0
+ * @since 2022-11-13
+ */
 public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,DetailsInterface,EditUIInterface{
+    /**
+     * Contains functions available for admin to edit showtimes available
+     */
+
     public void ShowtimeFunctions(){
         Scanner scan = new Scanner(System.in);
         int choice = 0;
@@ -44,6 +54,13 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         }
     }
 
+    /**
+     * Creates new showtime
+     * Implements CreateUIInterface
+     * Admin chooses Cineplex, enters desired date then chooses showtime and cinema
+     */
+
+    @Override
     public void createNewObject(){
         Scanner scan = new Scanner(System.in);
         int moviechoice;
@@ -152,6 +169,15 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         ShowtimesManager.createShowtimes(showtime, moviename, cinemasInChosenCineplex.get(cinemaChoice).getCinemaId());
         System.out.println("Showtime has been created!");
     }
+
+    /**
+     * Allows admin to edit specific showtime
+     * Implements EditUIInterface
+     * Admin can edit by movie or by cinema and cineplex ID
+     * Admin can edit showtime and cineplex ID
+     * Admin can save changes once done
+     */
+    @Override
     public void editObjectUI(){
         Scanner scan = new Scanner(System.in);
         int editByWhat =0;
@@ -278,6 +304,10 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
 
     }
 
+    /**
+     * Displays all showtimes with showtime details
+     * Implements DetailsUIInterface
+     */
     @Override
     public void display() {
         ArrayList<Showtimes> ShowtimesArray = ShowtimesManager.readAllShowtimes();
@@ -291,6 +321,10 @@ public class AdminShowtimesUI implements CreateUIInterface,DeleteUIInterface,Det
         }
     }
 
+    /**
+     * Allows admin to delete specific showtime
+     * Implements DeleteUIInterface
+     */
     @Override
     public void deleteObject() {
         Scanner scan = new Scanner(System.in);

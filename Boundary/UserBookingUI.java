@@ -8,8 +8,18 @@ import Utils.DateFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * User interface shown when movie-goer chooses to make booking
+ */
 public class UserBookingUI{
-
+    /**
+     * Functions available movie-goer to complete booking
+     * Main flow of booking process
+     * Movie-goer cineplex, movie and showtime using chooseShowtimeByCineplex
+     * Movie-goer then chooses seating plan using choosingSeats
+     * Tickets are printed, and login/signup prompted (using userLogin) to register booking
+     * Booking registered, seats updated, booking history updated
+     */
     public static void UserBookingFunction(){
         Scanner scan = new Scanner(System.in);
         Showtimes showtimeToBook = chooseShowtimeByCineplex();
@@ -74,6 +84,12 @@ public class UserBookingUI{
     }
 
     //return showtime object chosen
+
+    /**
+     * Allows movie-goer to choose cineplex, movie and showtime
+     * Displays options to movie-goer by reading from AllCineplexes.dat, Showtimes.dat and AllMovies.dat
+     * @return The showtime chosen by the movie-goer
+     */
     public static Showtimes chooseShowtimeByCineplex(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose your cineplex: ");
@@ -131,158 +147,14 @@ public class UserBookingUI{
 
     }
 
-    public static String userLogin (){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please Sign up or Log in to register your booking.");
-        System.out.println("[1] Sign up");
-        System.out.println("[2] Log in");
-        String newUsername = " ";
-        int op = scan.nextInt();
-        scan.nextLine();
-        if (op == 1) {
-            String name;
-            int phoneNumber;
-            String email;
-            String username;
-            String password;
-            int userId;
-            System.out.println("Please enter your name: ");
-            name = scan.nextLine();
-            System.out.println("Please enter your phone number: ");
-            phoneNumber = scan.nextInt();
-            scan.nextLine();
-            System.out.println("Please enter your email: ");
-            email = scan.nextLine();
-            System.out.println("Please enter your username: ");
-            username = scan.nextLine();
-            for(int x = 0; x< UsersManager.readAllUsers().size(); x++){
-                if(UsersManager.readAllUsers().get(x).getUsername().equals(username)){
-                    System.out.println("Sorry, username has been taken. \nPlease key in new username: ");
-                    username = scan.nextLine();
-                    break;
-                }
-            }
-            System.out.println("Please enter your password: ");
-            password = scan.nextLine();
-            UsersManager.createUser(username, password, name, phoneNumber, email);
-            newUsername = username;
-        } else if (op == 2) {
-            String usernameInput;
-            String passwordInput;
-            while (true) {
-                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
-                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
-                System.out.println("Please enter your username: ");
-                usernameInput = scan.nextLine();
-                UserLogin UserLogin = new UserLogin();
-                if (UserLogin.verifyUsername(usernameInput)) {
-                    System.out.println("Please enter your password: ");
-                    passwordInput = scan.nextLine();
-                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
-                        System.out.println("Invalid password, please try again. ");
-                        passwordInput = scan.nextLine();
-                    }
-                    System.out.println("Welcome back " + usernameInput);
-                    break;
-
-                } else {
-                    System.out.println("Username not found, please try again. ");
-                }
-            }
-            newUsername = usernameInput;
-        }
-        return newUsername;
-    }
-
-    public static float getPreliminaryPrice (DateFormatter newDate, Showtimes showtimeToBook, float seatprice){
-        // premium is always 25 so check on top
-        if (newDate.isBlockbuster(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-            seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
-        }
-
-        if (newDate.isPremium(CinemaManager.getCinemabyID(showtimeToBook.getCinemaID()))){ //include user's cinema of type cinema
-            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
-        }
-        else if (newDate.isHoliday(showtimeToBook.getShowtime().substring(0,10))){ //include user's timing selected, pulled from showtimes available
-            System.out.println("Holiday was implemented");
-            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
-            }
-            else{
-                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
-            }
-        }
-        else {
-            if (newDate.isFri6pm(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))){
-                if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
-                }
-                else{
-                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
-                }
-            }
-            // weekend means its either 2d or 3d so account first
-            if (newDate.isWeekend(newDate.DayConverter(showtimeToBook.getShowtime()))){ //include user's date and time selected, pulled from showtimes available
-                if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
-                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
-                }
-                else{
-                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
-                }
-            }
-        }
-        return seatprice;
-    }
-
-    public static float getTotalPriceByNoOfSeats(float seatprice, int noOfSeats, Showtimes showtimeToBook, DateFormatter newDate){
-        Scanner scan = new Scanner(System.in);
-        if (seatprice == 0f || seatprice == 1f){ // situation where your movie selection is not premium, holiday or weekend
-            seatprice = seatprice*noOfSeats;
-            for (int i = 0; i < noOfSeats; i++) {
-                System.out.println("What type of ticket are you looking for (ticket " + (i+1) + "):");
-                System.out.println("1. Student");
-                System.out.println("2. Adult");
-                if (!newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's movie of type movie
-                    System.out.println("3. Senior Citizen");
-                }
-                int selection = scan.nextInt();
-                if (selection == 1){
-                    if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's date and time selected, pulled from showtimes available
-                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard3D();
-                    } else{
-                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard2D();
-                    }
-                } else if (selection == 2) {
-                    if (newDate.isMonWed(newDate.DayConverter(showtimeToBook.getShowtime()))){//include user's date and time selected, pulled from showtimes available
-                        if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){//include user's date and time selected, pulled from showtimes available
-                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D();
-                        } else {
-                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D();
-                        }
-                    } else if (newDate.isThur(newDate.DayConverter(showtimeToBook.getShowtime()))) {//include user's date and time selected, pulled from showtimes available
-                        if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){//include user's date and time selected, pulled from showtimes available
-                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard3D();
-                        } else {
-                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard2D();
-                        }
-                    } else if (newDate.isFri(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))) {//include user's date and time selected, pulled from showtimes available
-                        if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){//include user's date and time selected, pulled from showtimes available
-                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard3D();
-                        } else {
-                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard2D();
-                        }
-                    }
-                } else if (selection == 3) {
-                    seatprice = seatprice + PricingManager.readAllPricing().get(0).getSeniorStandard2D();
-                }
-            }
-
-        }
-        else{
-            seatprice = seatprice*noOfSeats;
-        }
-        return seatprice;
-    }
+    /**
+     * Allows movie-goer to choose seats that he wants to book
+     * Seats already taken can be seen from layout displayed
+     * Seats are only booked when user completes the booking
+     * @param noOfSeats Number of seats movie-goer wants to book
+     * @param showtimeToBook Showtime chosen
+     * @return Array list of seat IDs that were chosen
+     */
 
     public static ArrayList<String> choosingSeats (int noOfSeats, Showtimes showtimeToBook){
         Scanner scan = new Scanner(System.in);
@@ -352,5 +224,183 @@ public class UserBookingUI{
         layout.displaySeatPlan();
         return SeatsArray;
     }
+
+
+    /**
+     * Prompts user for login/signup after booking has been made
+     * Allows movie-goer to register booking in booking history
+     * Checks if username and password input is available/valid by reading from AllUsers.dat
+     * @return Username input by the movie-goer
+     */
+    public static String userLogin (){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please Sign up or Log in to register your booking.");
+        System.out.println("[1] Sign up");
+        System.out.println("[2] Log in");
+        String newUsername = " ";
+        int op = scan.nextInt();
+        scan.nextLine();
+        if (op == 1) {
+            String name;
+            int phoneNumber;
+            String email;
+            String username;
+            String password;
+            int userId;
+            System.out.println("Please enter your name: ");
+            name = scan.nextLine();
+            System.out.println("Please enter your phone number: ");
+            phoneNumber = scan.nextInt();
+            scan.nextLine();
+            System.out.println("Please enter your email: ");
+            email = scan.nextLine();
+            System.out.println("Please enter your username: ");
+            username = scan.nextLine();
+            for(int x = 0; x< UsersManager.readAllUsers().size(); x++){
+                if(UsersManager.readAllUsers().get(x).getUsername().equals(username)){
+                    System.out.println("Sorry, username has been taken. \nPlease key in new username: ");
+                    username = scan.nextLine();
+                    break;
+                }
+            }
+            System.out.println("Please enter your password: ");
+            password = scan.nextLine();
+            UsersManager.createUser(username, password, name, phoneNumber, email);
+            newUsername = username;
+        } else if (op == 2) {
+            String usernameInput;
+            String passwordInput;
+            while (true) {
+                System.out.println(UsersManager.readAllUsers().get(0).getUsername());
+                System.out.println(UsersManager.readAllUsers().get(0).getPassword());
+                System.out.println("Please enter your username: ");
+                usernameInput = scan.nextLine();
+                UserLogin UserLogin = new UserLogin();
+                if (UserLogin.verifyUsername(usernameInput)) {
+                    System.out.println("Please enter your password: ");
+                    passwordInput = scan.nextLine();
+                    while (!UserLogin.verifyPassword(usernameInput, passwordInput)) {
+                        System.out.println("Invalid password, please try again. ");
+                        passwordInput = scan.nextLine();
+                    }
+                    System.out.println("Welcome back " + usernameInput);
+                    break;
+
+                } else {
+                    System.out.println("Username not found, please try again. ");
+                }
+            }
+            newUsername = usernameInput;
+        }
+        return newUsername;
+    }
+
+    /**
+     * Generates price based on type of cinema, type of movie and holiday dates
+     * Determines the need to ask the movie-goer for type of ticket or not
+     * @param newDate Date of the movie
+     * @param showtimeToBook Showtime chosen
+     * @param seatprice Base price of the seat
+     * @return Final price of the seat
+     */
+    public static float getPreliminaryPrice (DateFormatter newDate, Showtimes showtimeToBook, float seatprice){
+        // premium is always 25 so check on top
+        if (newDate.isBlockbuster(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+            seatprice = seatprice + PricingManager.readAllPricing().get(0).getBlockbuster();
+        }
+
+        if (newDate.isPremium(CinemaManager.getCinemabyID(showtimeToBook.getCinemaID()))){ //include user's cinema of type cinema
+            seatprice = PricingManager.readAllPricing().get(0).getPremium() + seatprice;
+        }
+        else if (newDate.isHoliday(showtimeToBook.getShowtime().substring(0,10))){ //include user's timing selected, pulled from showtimes available
+            System.out.println("Holiday was implemented");
+            if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+            }
+            else{
+                seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+            }
+        }
+        else {
+            if (newDate.isFri6pm(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))){
+                if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+                }
+                else{
+                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+                }
+            }
+            // weekend means its either 2d or 3d so account first
+            if (newDate.isWeekend(newDate.DayConverter(showtimeToBook.getShowtime()))){ //include user's date and time selected, pulled from showtimes available
+                if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){ //include user's movie of type movie
+                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard3D() + seatprice;
+                }
+                else{
+                    seatprice = PricingManager.readAllPricing().get(0).getAdultWeekendStandard2D() + seatprice;
+                }
+            }
+        }
+        return seatprice;
+    }
+
+    /**
+     * Generates total price of the booking based on no. of seats and type of ticket
+     * @param seatprice Seat price after going through getPreliminaryPrice
+     * @param noOfSeats Number of seats chosen
+     * @param showtimeToBook Showtime chosen
+     * @param newDate Date of movie
+     * @return Total price of booking
+     */
+
+    public static float getTotalPriceByNoOfSeats(float seatprice, int noOfSeats, Showtimes showtimeToBook, DateFormatter newDate){
+        Scanner scan = new Scanner(System.in);
+        if (seatprice == 0f || seatprice == 1f){ // situation where your movie selection is not premium, holiday or weekend
+            seatprice = seatprice*noOfSeats;
+            for (int i = 0; i < noOfSeats; i++) {
+                System.out.println("What type of ticket are you looking for (ticket " + (i+1) + "):");
+                System.out.println("1. Student");
+                System.out.println("2. Adult");
+                if (!newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's movie of type movie
+                    System.out.println("3. Senior Citizen");
+                }
+                int selection = scan.nextInt();
+                if (selection == 1){
+                    if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))) { //include user's date and time selected, pulled from showtimes available
+                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard3D();
+                    } else{
+                        seatprice = seatprice + PricingManager.readAllPricing().get(0).getStudentStandard2D();
+                    }
+                } else if (selection == 2) {
+                    if (newDate.isMonWed(newDate.DayConverter(showtimeToBook.getShowtime()))){//include user's date and time selected, pulled from showtimes available
+                        if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){//include user's date and time selected, pulled from showtimes available
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultMonWedStandard3D();
+                        } else {
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultMonWedStandard2D();
+                        }
+                    } else if (newDate.isThur(newDate.DayConverter(showtimeToBook.getShowtime()))) {//include user's date and time selected, pulled from showtimes available
+                        if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){//include user's date and time selected, pulled from showtimes available
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard3D();
+                        } else {
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultThursStandard2D();
+                        }
+                    } else if (newDate.isFri(newDate.DayConverter(showtimeToBook.getShowtime()), newDate.HourConverter(showtimeToBook.getShowtime()))) {//include user's date and time selected, pulled from showtimes available
+                        if (newDate.is3D(MoviesManager.getMoviebyID(showtimeToBook.getMovieID()))){//include user's date and time selected, pulled from showtimes available
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard3D();
+                        } else {
+                            seatprice = seatprice + PricingManager.readAllPricing().get(0).getAdultFriStandard2D();
+                        }
+                    }
+                } else if (selection == 3) {
+                    seatprice = seatprice + PricingManager.readAllPricing().get(0).getSeniorStandard2D();
+                }
+            }
+
+        }
+        else{
+            seatprice = seatprice*noOfSeats;
+        }
+        return seatprice;
+    }
+
 
 }

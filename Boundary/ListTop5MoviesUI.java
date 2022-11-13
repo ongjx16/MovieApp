@@ -5,6 +5,11 @@ import Entity.Movie;
 import Control.MoviesManager;
 import Utils.RatingFilterType;
 
+/**
+ * User interface when movie-goer chooses to ListTop5Movies
+ * Implements Details Interface
+ */
+
 public class ListTop5MoviesUI implements DetailsInterface{
     private ArrayList<Movie> moviesToDisplay;
     private RatingFilterType filterType;
@@ -13,6 +18,10 @@ public class ListTop5MoviesUI implements DetailsInterface{
         return moviesToDisplay;
     }
 
+    /**
+     * Changes array list of movies to display
+     * @param moviesToDisplay The array list of movies to display
+     */
     public void setMoviesToDisplay(ArrayList<Movie> moviesToDisplay) {
         this.moviesToDisplay = moviesToDisplay;
     }
@@ -21,9 +30,18 @@ public class ListTop5MoviesUI implements DetailsInterface{
         return filterType;
     }
 
+    /**
+     * Changes type of filter used for top5 movies
+     * @param filterType The type of filter used
+     */
     public void setFilterType(RatingFilterType filterType) {
         this.filterType = filterType;
     }
+
+    /**
+     * Sorts movies by average rating
+     * Displays movies in descending order of average ratings
+     */
 
     public void sortByRatings(){
         int i;
@@ -71,6 +89,10 @@ public class ListTop5MoviesUI implements DetailsInterface{
 
     }
 
+    /**
+     * Sorts movies by number of tickets sold
+     * Displays movies in descending order of number of tickets sold
+     */
 
     public void sortBySales(){
         int i;
@@ -118,6 +140,13 @@ public class ListTop5MoviesUI implements DetailsInterface{
         display();
 
         }
+
+    /**
+     * Checks if specific movie is already in an array list of movies
+     * @param movieToCompare The specific movie to check against
+     * @param array The array of movies to check if it contains the specific movie
+     * @return True if specific movie exists in the array list of movies
+     */
     public boolean isRepeat(Movie movieToCompare, ArrayList<Movie> array){
 
         for (int i = 0; i< array.size(); i++){
@@ -129,6 +158,10 @@ public class ListTop5MoviesUI implements DetailsInterface{
         return false;
     }
 
+    /**
+     * Displays the top5 movies
+     * Implements DetailsUIInterface
+     */
     @Override
     public void display() {
         if (filterType.equals(RatingFilterType.RATINGS)){

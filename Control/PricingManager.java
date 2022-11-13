@@ -163,7 +163,6 @@ public class PricingManager {
             //out.reset();
             fout.close();
             out.close();
-            System.out.println("pricing successfully adjusted");
         } catch (Exception e) {
         }
     }
