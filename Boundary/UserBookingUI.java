@@ -8,8 +8,7 @@ import Utils.DateFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserBookingUI {
-
+public class UserBookingUI{
 
     public static void UserBookingFunction(){
         Scanner scan = new Scanner(System.in);
@@ -346,8 +345,6 @@ public class UserBookingUI {
             System.out.println("This is your chosen seat: " + seatId);
 
             SeatsArray.add(seatyea);
-
-
 
         }
         layout.displaySeatPlan();
