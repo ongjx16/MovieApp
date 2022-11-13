@@ -49,9 +49,11 @@ public class AdminUI {
             choose = scan.nextInt();
 
             if (choose == 1) {
-                AdminMovieDetailsUI.AdminMovieFunctions();
+                AdminMovieDetailsUI movieDetails = new AdminMovieDetailsUI();
+                movieDetails.AdminMovieFunctions();
 
             } else if (choose == 2) {
+                AdminShowtimesUI AdminShowtimesUI = new AdminShowtimesUI();
                 AdminShowtimesUI.ShowtimeFunctions();
             }
             if (choose == 3) {
